@@ -1,0 +1,42 @@
+#btn-gestisciDocenti,
+#btn-gestisciCorsi,
+#btn-gestisciStudenti{
+  width:95%;
+  height:5.5em;
+}
+
+.card-content{
+  padding-left:5%;
+  padding-right:5%;
+  padding-bottom:5%
+}
+
+h3 .thin
+{
+  margin-top:5px;
+}
+
+.contatore{
+  font-size:150%;
+}
+
+.fill-width{
+  width:95%;
+}
+
+.c100{
+  margin-left:0.4em !important
+}
+
+#wait .progress{
+  width:70%;
+  margin:auto;
+}
+
+#wait .determinate{
+  width: 0%;
+}
+
+.container{
+  margin-top:3em;
+}

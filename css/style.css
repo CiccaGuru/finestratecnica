@@ -93,6 +93,11 @@ th,td{
   height:5em;
 }
 
+
+.nomargin{
+  margin:0px;
+}
+
 /*-----------------------------LOGIN-----------------------*/
 
 #login, #infos{

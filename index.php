@@ -78,8 +78,8 @@
         </div>
       </div>
     </div>
-
   </div>
+
   <footer class="light-blue z-depth-2 light">
     <div class="container center-align">
       Realizzato da Roberto Ciccarelli e Filippo Quattrocchi
