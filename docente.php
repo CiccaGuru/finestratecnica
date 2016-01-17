@@ -1,18 +1,4 @@
 <?php
-$ip = $_SERVER['REMOTE_ADDR'];
-/*
-if($ip == "79.20.167.81" || $ip=="84.223.115.87" || $ip=="5.90.202.248" || $ip=="5.90.202.248"){
-die("Hai fatto troppe connessioni, ti è stata momentaneamente segata via la connessione per permettere ad altri di iscriversi. Se pensi di essere un santarellino che non ha fatto nulla fammelo sapere a checcosalata@gmail.com che ti riabilito l'accesso");
-}*/
-
-/*
-$myfile = "ip/".$ip;
-file_put_contents($myfile,file_get_contents($myfile)+1);
-*/
-$myfile=fopen("ip.txt","a");
-fwrite($myfile, $ip."\n");
-
-
 include_once "include/funzioni.php";
 global $_CONFIG;
 $utente = check_login();
@@ -43,21 +29,27 @@ $db = database_connect();
 </head>
 
 <body id="body-userhome">
-	<nav id="intestaz" class="light-blue" style="top:0px; z-index:1001;">
-		<div class="nav-wrapper">
-			<a class="hide-on-small-only left" style="margin-left:2%;"><?php
-			$result = $db->query("SELECT username, nome, cognome, primoAccesso, passwordOriginale from utenti where id = '$utente'");
-			$dettagliUtente = $result->fetch_assoc();
-			echo $dettagliUtente["nome"]." ".$dettagliUtente["cognome"]." (".$dettagliUtente["username"].")";
-			?></a>
-			<a href="#" class="brand-logo center light">Settimana tecnica</a>
-			<ul id="nav-mobile" class="right hide-on-med-and-down">
-				<li><a href="logout.php" class="waves-effect waves-light">Logout</a></li>
-			</ul>
-		</div>
-	</nav>
+	<div class="navbar-fixed">
+		<nav id="intestaz" class="light-blue">
+			<div class="nav-wrapper">
+				<a class="hide-on-small-only left" style="margin-left:2%;">
+					<?php
+							$result = $db->query("SELECT 	username, nome, cognome, primoAccesso, passwordOriginale
+																		FROM 		utenti
+																		WHERE 	id = '$utente'");
+							$dettagliUtente = $result->fetch_assoc();
+							echo $dettagliUtente["nome"]." ".$dettagliUtente["cognome"]." (".$dettagliUtente["username"].")";
+					?>
+				</a>
+				<a href="#" class="brand-logo center light">Settimana tecnica</a>
+				<ul id="nav-mobile" class="right hide-on-med-and-down">
+					<li><a href="logout.php" class="waves-effect waves-light">Logout</a></li>
+				</ul>
+			</div>
+		</nav>
+	</div>
 
-	<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+	<div class="fixed-action-btn">
 		<a class="btn-floating btn-large red">
 			<i class="large material-icons">more_horiz</i>
 		</a>
@@ -71,8 +63,8 @@ $db = database_connect();
 	<div id="cont">
 		<div class="row">
 			<div class="col hide-on-large-only s12">
-				<div id="card-orario-gen-piccolo" style="display:auto; position:relative" class="card" style="margin-top:3em;">
-					<div class="card-content" style="padding-top:0px;">
+				<div id="card-orario-gen-piccolo" class="card">
+					<div class="card-content">
 						<div class="center valign-wrapper">
 							<div class="preloader-wrapper valign center big active">
 								<div class="spinner-layer spinner-red-only">
@@ -97,9 +89,9 @@ $db = database_connect();
 							while($dettagliCorso = $result->fetch_assoc()){
 								?>
 
-								<li id="collapsibleCorso<?php echo $dettagliCorso["id"]; ?>" >
+								<li class="collapsibleCorso" id="collapsibleCorso<?php echo $dettagliCorso["id"]; ?>" >
 									<div class="collapsible-header" onclick="caricaInfo(<?php echo $dettagliCorso["id"]?>)">
-										<div class="row" style="margin:0px;">
+										<div class="row">
 												<div class="col s2 bold truncate">
 													<?php echo $dettagliCorso["titolo"];?>
 												</div>
@@ -137,7 +129,7 @@ $db = database_connect();
 										</div>
 									</div>
 
-									<div class="collapsible-body" style="padding:1.2em;">
+									<div class="collapsible-body">
 										<div class="preloader-wrapper center big active">
 											<div class="spinner-layer center spinner-red-only">
 												<div class="circle-clipper right">
@@ -159,8 +151,8 @@ $db = database_connect();
 			</div>
 
 			<div class="col l5 hide-on-med-and-down s12">
-				<div id="card-orario-gen" class="card" style="margin-top 15%; overflow-y: auto; max-height: 95%; ">
-					<div class="card-content" style="padding-top:0px;">
+				<div id="card-orario-gen" class="card">
+					<div class="card-content">
 						<table id="orario" class="centered bordered">
 							<thead>
 								<th></th>
@@ -203,7 +195,7 @@ $db = database_connect();
 														$bgcolor = $_CONFIG["colori"][$index];
 														$fgcolor = $_CONFIG["colore-testo"][$index];
 												}
-												echo '<td style=" font-size:85%; cursor: pointer; background-color: '.$bgcolor.'; color: '.$fgcolor.'; padding:5px 0px;" onclick="$(\'#collapsible'.$iscrizione["idCorso"].'\').animatedScroll({easing: \'easeOutQuad\'});">'.$nomeCorso.'<span style="display:block; font-size:70%">Aula '.$aula.'</span></td>';
+												echo '<td class="orario-cell-normal" style="background-color: '.$bgcolor.'; color: '.$fgcolor.';" onclick="$(\'#collapsible'.$iscrizione["idCorso"].'\').animatedScroll({easing: \'easeOutQuad\'});">'.$nomeCorso.'<span>Aula '.$aula.'</span></td>';
 											}
 										}
 										else{
@@ -221,7 +213,7 @@ $db = database_connect();
 			</div>
 		</div>
 	</div>
-	<div id="modal-continuita" class="modal" style="marign-top:5em;">
+	<div id="modal-continuita" class="modal">
 		<div class="modal-content">
 
 		</div>
@@ -230,7 +222,7 @@ $db = database_connect();
 		</div>
 	</div>
 
-	<div id="modal-helpDo" class="modal modal-fixed-footer" style="marign-top:5em;">
+	<div id="modal-helpDo" class="modal modal-fixed-footer">
 		<div class="modal-content">
 			<h4 class="center light-blue-text light">Guida all'uso</h4>
 			<p>
@@ -261,10 +253,10 @@ $db = database_connect();
 			<a href="#!" class=" modal-action modal-close waves-effect waves-red red-text btn-flat">CHIUDI</a>
 		</div>
 	</div>
-	<div id="modal-scrivi" class="modal modal-fixed-footer" style="marign-top:5em;">
+	<div id="modal-scrivi" class="modal modal-fixed-footer" >
 			<form id="form-email">
 		<div class="modal-content">
-			<h3 class="light-blue-text thin center" style="margin-bottom:0.3em;">Ci scriva!</h3>
+			<h3 class="light-blue-text thin center">Ci scriva!</h3>
 
 				<div class="container">
 				<p>
@@ -273,17 +265,17 @@ $db = database_connect();
 				<p class="red-text">
 					Non ancora funzionante!
 				</p>
-				<div class="input-field valing-wrapper" style="width:100%;">
+				<div class="input-field valing-wrapper all-width">
 					 <i class="material-icons prefix valign">account_circle</i>
 					<input id="recapito" name="recapito" type="text" required class="validate valign">
 					<label for="recapito" class="valign">Nome e cognome</label>
 				</div>
-				<div class="input-field valing-wrapper" style="width:100%;">
+				<div class="input-field valing-wrapper all-width">
 					 <i class="material-icons prefix valign">email</i>
 					<input id="email" name="recapito" type="text" required class="validate valign">
 					<label for="email" class="valign">Email</label>
 				</div>
-				<div class="input-field col s6" style="height:1em;">
+				<div class="input-field col s6 all-width">
           <i class="material-icons prefix">mode_edit</i>
           <textarea id="testoEmail" required class="materialize-textarea"></textarea>
           <label for="testoEmail">Messaggio</label>
@@ -299,16 +291,16 @@ $db = database_connect();
 	<?php
 	if($dettagliUtente["passwordOriginale"]){
 		?>
-		<div class="modal-primoAccesso-trigger" style="display:none;" href="modal-primoAccesso">
+		<div class="modal-primoAccesso-trigger" href="modal-primoAccesso">
 
 		</div>
 
 
 		<div id="modal-primoAccesso" class="modal">
 			<div class="modal-content">
-				<h1 class="light-blue-text thin center" style="margin-bottom:0.3em;">Benvenuto!</h1>
-				<h4 class="light-blue-text thin center" style="margin-top:0px;">Cambi la sua password!</h4>
-				<div class="container" style="width:60%; margin-top:3em;">
+				<h1 class="light-blue-text thin center">Benvenuto!</h1>
+				<h4 class="light-blue-text thin center">Cambi la sua password!</h4>
+				<div class="container">
 					<div class="input-field col s4">
 						<i class="material-icons prefix">vpn_key</i>
 						<input id="cane" type="password" class="validate" required>
@@ -321,19 +313,14 @@ $db = database_connect();
 					</div>
 				</div>
 			</div>
-			<div class="center" style="padding:1em;">
-				<a href="#!" id="cambiaPassword" style="margin-bottom:1em;" class="center waves-effect waves-light red white-text btn-large">CONTINUA</a>
+			<div class="center">
+				<a href="#!" id="cambiaPassword" class="center waves-effect waves-light red white-text btn-large">CONTINUA</a>
 			</div>
 		</div>
 		<?php
 	}
 	?>
-	<!--
-	<footer class="light-blue z-depth-2 light" style="z-index:1001; padding:0.1em;position:fixed; bottom: 0px; left:0; width:100%;">
-	<div class="container center-align">
-	Realizzato da Roberto Ciccarelli e Filippo Quattrocchi
-</div>
-</footer>-->
+
 <!--  Scripts-->
 <script src="js/jquery-2.1.4.min.js"></script>
 <script src="js/materialize.js"></script>

@@ -316,3 +316,51 @@ footer{
 #cambiaPassword{
   margin-bottom:1em;
 }
+
+/*------------------------------------------------------------------------*/
+.collapsibleCorso .row{
+  margin:0px;
+}
+
+.collapsibleCorso .collapsible-body{
+  padding:1.2em;
+}
+
+.orario-cell-normal{
+  font-size:85%;
+  cursor: pointer;
+  padding:5px 0px;
+}
+
+.orario-cell-normal span{
+  display:block;
+  font-size:70%;
+}
+
+.modal-content h1{
+  margin-bottom:0.3em;
+}
+
+.modal-content h4{
+  margin-top:0px;
+}
+
+#modal-primoAccesso .container{
+  width:60%;
+  margin-top:3em;
+}
+
+#cambiaPassword{
+  margin-bottom:1em;
+}
+
+.all-width{
+  width:100%;
+}
+.modal-primoAccesso-trigger{
+  display:none;
+}
+
+.center < #cambiaPassword{
+  padding:1em;
+}
