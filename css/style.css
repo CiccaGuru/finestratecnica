@@ -318,7 +318,7 @@ footer{
 }
 
 /*------------------------------------------------------------------------*/
-.collapsibleCorso .row{
+.collapsibleCorso .collapsible-header > .row{
   margin:0px;
 }
 
