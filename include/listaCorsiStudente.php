@@ -143,7 +143,7 @@ if($result->num_rows == 0){
       <div class="truncate hide-on-small-only col l5 m4">
         <span><?php echo $dettagliCorso["descrizione"];?></span>
       </div>
-      <div class="col s3 m2">
+      <div class="col s3 m2 center">
         <?php
         $coincide = coincideCorso($idCorso, $db, $utente);
         $Tiscritti = troppiIscrittiCorso($idCorso, $continuita);
