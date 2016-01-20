@@ -120,11 +120,11 @@ th,td{
     left:80%;
 }
 
-#back{
-    display:none;
-}
-
-#infos{
+#back,
+.modal-primoAccesso-trigger,
+#infos,
+hide
+{
     display:none;
 }
 
@@ -140,6 +140,7 @@ th,td{
 #form-login .row{
   margin-bottom:0px;
 }
+
 #ok{
     display:none;
     z-index:100;
@@ -169,6 +170,7 @@ footer{
 
 .collapsible-header{
     transition: all 0.4s ease-out;
+    border-bottom:0px;
 }
 
 #wait{
@@ -296,10 +298,6 @@ footer{
   width:25em;
 }
 
-.modal-primoAccesso-trigger{
-  display:none;
-}
-
 #modal-primoAccesso h1{
   margin-bottom:0.3em;
 }
@@ -320,6 +318,19 @@ footer{
 /*------------------------------------------------------------------------*/
 .collapsibleCorso .collapsible-header > .row{
   margin:0px;
+}
+
+@media only screen and (max-width: 600px){
+.collapsibleCorso{
+    margin:0px !important;
+  }
+  #cont{
+    margin-right:0px;
+  }
+  .cont-dett{
+    margin-left:5px;
+    margin-right:5px;
+  }
 }
 
 .collapsibleCorso .collapsible-body{
@@ -357,10 +368,75 @@ footer{
 .all-width{
   width:100%;
 }
-.modal-primoAccesso-trigger{
-  display:none;
-}
+
 
 .center < #cambiaPassword{
   padding:1em;
+}
+
+.error-nessun-corso{
+  font-size:120%;
+}
+
+.collapsibleCorso{
+  border-bottom:0px;
+}
+
+.margin0{
+  margin-bottom:0px;
+}
+
+.chip{
+  z-index:1000;
+}
+
+.collapsible-body > div.center {
+  width:100%;
+  margin:1em;
+}
+
+.collapsible{
+  margin-top:1em;
+  margin-bottom:3em;
+}
+
+.coincidenzaTrigger{
+  cursor: pointer;
+  z-index:900;
+}
+
+#titoloOrario{
+  margin-top:0px;
+}
+
+#messaggioPocheOre{
+  font-size:120%;
+}
+
+.cellaOrario{
+  font-size:85%;
+  padding:5px 0px;
+}
+
+.cellaOrario span{
+  display:block;
+  font-size:70%
+}
+
+.pointerCursor{
+  cursor:pointer;
+}
+
+#lezioni_dettagli{
+  margin-top:1em;
+}
+
+#lezioni_dettagli .bold{
+  font-size:110%;
+  margin-bottom:0.5em;
+}
+
+.aulaDettagli{
+  display:block;
+  font-size:70%;
 }

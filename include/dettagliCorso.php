@@ -52,12 +52,12 @@ while($classe = $result->fetch_assoc()){
 
 <div class="cont-dett">
   <div class="row">
-    <div class="col s3 bold">Titolo:</div>
-    <div class="col s9"><?php echo $dettagliCorso["titolo"]?></div>
+    <div class="col m3 s12 bold">Titolo:</div>
+    <div class="col m9 s11 offset-s1"><?php echo $dettagliCorso["titolo"]?></div>
   </div>
   <div class="row">
-    <div class="col s3 bold">Prof:</div>
-    <div class="col s9">
+    <div class="col m3 s12 bold">Prof:</div>
+    <div class="col m9 s11 offset-s1">
       <?php
         if($dettagliCorso["iddocente"] == '0'){
           echo "<span class='italic'>Docenti vari</span>";
@@ -69,15 +69,15 @@ while($classe = $result->fetch_assoc()){
   </div>
   </div>
   <div class="row">
-    <div class="col s3 bold">Descrizione:</div>
-    <div class="col s9"><?php echo $dettagliCorso["descrizione"]?></div>
+    <div class="col m3 s12 bold">Descrizione:</div>
+    <div class="col m9 s11 offset-s1"><?php echo $dettagliCorso["descrizione"]?></div>
   </div>
   <div class="row">
-    <div class="col s3 bold">Classi:</div>
-    <div class="col s9"><?php echo $classiElenco;?></div>
+    <div class="col m3 s12 bold">Classi:</div>
+    <div class="col m9 s11 offset-s1"><?php echo $classiElenco;?></div>
   </div>
-  <div id="lezioni_dettagli" style="margin-top:1em;">
-    <div class="bold" style="font-size:110%">Dettaglio lezioni:</div>
+  <div id="lezioni_dettagli">
+    <div class="bold">Dettaglio lezioni:</div>
     <?php
     $ore=array();
     $ore_result = $db->query("SELECT id, aula, ora, maxiscritti, titolo from lezioni where idcorso='".$idCorso."' ORDER BY ora") or die('ERRORE: 4 ' . $db->error);
@@ -90,18 +90,18 @@ while($classe = $result->fetch_assoc()){
         <div class="col m3 s12 bold">
           Lezione <?php echo $cont;?>
         </div>
-        <div class="col m4 s6">
+        <div class="col m4 s11 offset-s1">
           <?php if($ora["titolo"] == "Nessuna descrizion")
                   echo "<span class='italic'>Nessuna descrizione</span>";
                   else echo $ora["titolo"];?>
         </div>
-        <div class="col m1 s3 <?php if($Tiscritti) echo "red-text"; else echo "teal-text";?> ">
+        <div class="col m1 s4 offset-s1 <?php if($Tiscritti) echo "red-text"; else echo "teal-text";?> ">
           <?php echo num_iscritti($ora["id"], $db).'\\'.$ora["maxiscritti"];?>
         </div>
-        <div class="col m2 s2">
+        <div class="col m2 s4">
           Aula <?php echo $ora["aula"];?>
         </div><?php if($continuita=='0'){?>
-          <div class="col s1">
+          <div class="col s2">
             <?php
             if(!in_array($ora["id"], $ore_utente) && $Tiscritti){
               ?>
@@ -150,7 +150,7 @@ while($classe = $result->fetch_assoc()){
                   }else{
                     $colore = "grey";
                   }
-                  echo  '<td class="'.$colore.'">'.$dettagliCorso["titolo"].'<span style="display:block; font-size:70%">Aula '.$aule_utente[$num].'</span></td>';
+                  echo  '<td class="'.$colore.'">'.$dettagliCorso["titolo"].'<span class="aulaDettagli">Aula '.$aule_utente[$num].'</span></td>';
                 }else {
                   echo '<td></td>';
                 }

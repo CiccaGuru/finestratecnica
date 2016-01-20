@@ -29,21 +29,21 @@ while($lezione = $result->fetch_assoc()){
       $dettagliCorso = $resultB->fetch_assoc();
       ?>
         <div class="row valign-wrapper">
-          <div class="col s6 m4 bold valign">
+          <div class="col m4 s12 bold valign">
             <?php echo $dettagliCorso["titolo"]."\n"; ?>
           </div>
-          <div class="col hide-on-small-only m4 valign">
+          <div class="col hide-on-small-only m4 s8 offset-s4 valign">
             <?php
               echo getStringaOra($lezioneCoincidente["ora"]);
             ?>
           </div>
           <?php
             if(in_array($dettagliCorso["id"], $corsi_obbligati)){?>
-              <div class="col s6 m4 valign">
+              <div class="col m4 s8 offset-s4 valign">
                 <a class="waves-effect disabled waves-light btn valign red">Obbligatorio</a>
               </div>
           <?php  }else {?>
-          <div class="col s6 m4 valign">
+          <div class="col m4 s8 offset-s4 valign">
             <a onclick="rimuoviCorso(<?php echo $dettagliCorso["id"]; ?>)" class="waves-effect waves-light btn valign red">Elimina corso</a>
           </div>
           <?php } ?>
