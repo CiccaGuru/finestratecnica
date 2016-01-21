@@ -107,7 +107,11 @@ if($result->num_rows == 0){
 }
   while($dettagliCorso = $result->fetch_assoc())
   {
+    $hide = 0;
+    $esaurito = 0;
     $idCorso = $dettagliCorso["id"];
+    $coincide = coincideCorso($idCorso, $db, $utente);
+    $Tiscritti = troppiIscrittiCorso($idCorso, $continuita);
     ?>
     <li id="collapsibleCorso<?php echo $idCorso; ?>" class="collapsibleCorso <?php
     if($active==$idCorso){
@@ -116,17 +120,24 @@ if($result->num_rows == 0){
     <div data-id="<?php echo $idCorso; ?>" class="collapsible-header  <?php
     if($active==$idCorso){
       echo "active";
+    } else if(!in_array($idCorso,$corsi_utente) && $Tiscritti){
+      echo " red white-text";
+      $esaurito = 1;
+      $hide = 1;
+    }else if(!($hide) && (!in_array($idCorso,$corsi_utente) && $coincide) || (in_array($idCorso, $corsi_particolari_uno) && sono_iscritto($corsi_particolari_uno) && !in_array($idCorso,$corsi_utente) || (in_array($idCorso, $corsi_particolari_due) && !(in_array($idCorso,$corsi_utente)) && sono_iscritto($corsi_particolari_due)))){
+      echo " amber";
+      $hide = 1;
     }
     if(in_array($idCorso,$corsi_utente)){
       echo ' light-blue lighten-2';
     }
+
     else{
       echo ' black-text';
     }?>" id="collapsible<?php echo $idCorso?>">
-    <span class="ink"></span>
     <div class="row margin0">
       <div class="truncate col l2 m3 s4">
-        <span class="bold" ><?php echo $dettagliCorso["titolo"];?></span>
+        <span class="bold" ><?php echo strtoupper($dettagliCorso["titolo"]);?></span>
       </div>
       <div class="truncate col l3 m3 s5">
         <span>
@@ -145,37 +156,27 @@ if($result->num_rows == 0){
       </div>
       <div class="col s3 m2 center">
         <?php
-        $coincide = coincideCorso($idCorso, $db, $utente);
-        $Tiscritti = troppiIscrittiCorso($idCorso, $continuita);
-
-        if(!in_array($idCorso,$corsi_utente) && $Tiscritti){
+        if($esaurito){
+          ?> <div class="white-text" >
+            ESAURITO
+          </div><?php
+        }else
+        if((!in_array($idCorso,$corsi_utente) && $coincide) || (in_array($idCorso, $corsi_particolari_uno) && sono_iscritto($corsi_particolari_uno) && !in_array($idCorso,$corsi_utente) || (in_array($idCorso, $corsi_particolari_due) && !(in_array($idCorso,$corsi_utente)) && sono_iscritto($corsi_particolari_due)))){
           ?>
-          <div class="chip light hide-on-small-only red white-text">
-            Esaurito
+          <div class="waves-effect waves-light hide-on-small-only coincidenzaTrigger" onclick="mostraCoincidenze(<?php echo $idCorso; ?>)">
+            COINCIDE
           </div>
-          <div class="red-text text-darken-1 hide-on-med-and-up">
-            Esaurito
-          </div>
-          <?php
-        } else if((!in_array($idCorso,$corsi_utente) && $coincide) || (in_array($idCorso, $corsi_particolari_uno) && sono_iscritto($corsi_particolari_uno) && !in_array($idCorso,$corsi_utente) || (in_array($idCorso, $corsi_particolari_due) && !(in_array($idCorso,$corsi_utente)) && sono_iscritto($corsi_particolari_due)))){
-          ?>
-          <div class="chip waves-effect hoverable waves-light amber darken-1 hide-on-small-only coincidenzaTrigger" onclick="mostraCoincidenze(<?php echo $idCorso; ?>)">
-            Coincide
-          </div>
-          <div class="amber-text text-darken-3 coincidenzaTrigger hide-on-med-and-up" onclick="mostraCoincidenze(<?php echo $idCorso; ?>)">
-            Coincide
+          <div class="waves-effect waves-light coincidenzaTrigger hide-on-med-and-up" onclick="mostraCoincidenze(<?php echo $idCorso; ?>)">
+            COINCIDE
           </div>
           <?php
         } else {
             if(in_array($idCorso, $corsi_obbligati) && in_array($idCorso, $corsi_utente)){
              ?>
-             <div class="chip green darken-1 hide-on-small-only" data-position="bottom">
-               Obbligatorio
-             </div>
-             <div class="green-text text-darken-1 hide-on-med-and-up">
-               Obbl.
+             <div class="green-text center text-darken-3">
+               OBBLIG.
              </div><?php
-           }else{
+           }else if(!$hide){
           ?>
           <div class="switch">
             <label for="iscriviCorso<?php echo $idCorso ?>">

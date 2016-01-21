@@ -77,14 +77,14 @@ else{
                   }
                   if((time()>$_CONFIG["chiusura_iscrizioni"]) && ($conta["conta"]>=$_CONFIG["soglia_minima"])){
                     if(($resultContr->num_rows > 0)){
-                      echo '<td class="cellaOrario" style="background-color: '.$bgcolor.'; color: '.$fgcolor.';" >'.$nomeCorso.'<span>Aula '.$aula.'</span></td>';
+                      echo '<td class="borderless cellaOrario" style="background-color: '.$bgcolor.'; color: '.$fgcolor.';" >'.$nomeCorso.'<span>Aula '.$aula.'</span></td>';
                     }
                   }else{
                     if(($resultContr->num_rows > 0)&& ($iscrizione["continuita"]==0)){
-                      echo '<td class="cellaOrario pointerCursor underline" style="background-color: '.$bgcolor.'; color: '.$fgcolor.'; " onclick="scegliQuale('.$num.')" >'.$nomeCorso.'<span>Aula '.$aula.'</span></td>';
+                      echo '<td class="borderless cellaOrario pointerCursor underline" style="background-color: '.$bgcolor.'; color: '.$fgcolor.'; " onclick="scegliQuale('.$num.')" >'.$nomeCorso.'<span>Aula '.$aula.'</span></td>';
                     }
                     else{
-                      echo '<td class="cellaOrario pointerCursor" style="background-color: '.$bgcolor.'; color: '.$fgcolor.';" onclick="$(\'#collapsible'.$iscrizione["idCorso"].'\').animatedScroll({easing: \'easeOutQuad\'});">'.$nomeCorso.'<span>Aula '.$aula.'</span></td>';
+                      echo '<td class="borderless cellaOrario pointerCursor" style="background-color: '.$bgcolor.'; color: '.$fgcolor.';" onclick="$(\'#collapsible'.$iscrizione["idCorso"].'\').animatedScroll({easing: \'easeOutQuad\'});">'.$nomeCorso.'<span>Aula '.$aula.'</span></td>';
                     }
                   }
                 }

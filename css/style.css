@@ -403,14 +403,15 @@ footer{
 .coincidenzaTrigger{
   cursor: pointer;
   z-index:900;
+  padding-left:5px;
+  padding-right:5px;
 }
-
+/*
 .coincidenzaTrigger:hover {
   transition: box-shadow .25s;
-/*  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);*/
     box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
 }
-
+*/
 #titoloOrario{
   margin-top:0px;
 }
@@ -445,4 +446,16 @@ footer{
 .aulaDettagli{
   display:block;
   font-size:70%;
+}
+
+.borderless{
+  border:0px !important;
+}
+
+tr{
+  border:none !important;
+}
+
+td{
+  border-bottom: 1px solid #d0d0d0 !important;
 }
