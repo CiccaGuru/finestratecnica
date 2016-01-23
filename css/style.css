@@ -423,6 +423,7 @@ footer{
   font-size:85%;
   padding:5px 0px;
   margin: 0px !important;
+  border-style: hidden !important;
 }
 
 .cellaBordo{
@@ -485,3 +486,7 @@ footer{
      of the button to still show through. */
       background-color: rgba(255, 160, 0, 0.55);
     }
+
+.waves-mod{
+    display: table-cell;
+}

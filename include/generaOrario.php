@@ -82,16 +82,16 @@ else{
                     }
                   }else{
                     if(($resultContr->num_rows > 0)&& ($iscrizione["continuita"]==0)){
-                      echo '<td class="cellaOrario condensed pointerCursor underline" style="background-color: '.$bgcolor.'; color: '.$fgcolor.'; " onclick="scegliQuale('.$num.')" >'.strtoupper($nomeCorso).'<span>Aula '.strtoupper($aula).'</span></td>';
+                      echo '<td class="cellaOrario waves-mod waves-effect waves-light condensed pointerCursor underline" style="background-color: '.$bgcolor.'; color: '.$fgcolor.'; " onclick="scegliQuale('.$num.')" >'.strtoupper($nomeCorso).'<span>Aula '.strtoupper($aula).'</span></td>';
                     }
                     else{
-                      echo '<td class="cellaOrario condensed pointerCursor" style="background-color: '.$bgcolor.'; color: '.$fgcolor.';" onclick="$(\'#collapsible'.$iscrizione["idCorso"].'\').animatedScroll({easing: \'easeOutQuad\'});">'.strtoupper($nomeCorso).'<span>Aula '.strtoupper($aula).'</span></td>';
+                      echo '<td class="cellaOrario waves-mod waves-effect waves-light condensed pointerCursor" style="background-color: '.$bgcolor.'; color: '.$fgcolor.';" onclick="$(\'#collapsible'.$iscrizione["idCorso"].'\').animatedScroll({easing: \'easeOutQuad\'});">'.strtoupper($nomeCorso).'<span>Aula '.strtoupper($aula).'</span></td>';
                     }
                   }
                 }
               }
               else{
-                echo "<td class='cellaBordo'></td>";
+                echo "<td class='cellaBordo waves-mod waves-effect' ></td>";
               }
 
             }
