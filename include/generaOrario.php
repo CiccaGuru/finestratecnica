@@ -17,7 +17,7 @@ else{
 
   ?>
 
-  <h4 class="thin light-blue-text center" id="titoloOrario">Il tuo orario</h3>
+  <h4 class="light condensed letter-spacing-1 light-blue-text center" id="titoloOrario">IL TUO ORARIO</h3>
 
     <?php
     $result = $db->query("SELECT id from iscrizioni WHERE idUtente = '$utente' AND partecipa = '1' ") or die($db->error);
@@ -28,12 +28,13 @@ else{
     }
 
     ?>
-    <table id="orario" class="centered bordered">
+    <table id="orario" class="centered">
       <thead>
         <th></th>
         <?php
         for($i =1; $i<=$_CONFIG["numero_giorni"]; $i++){
-          echo '<th>'.$_CONFIG["giorni"][$i].'</th>';
+          $giorno = str_replace("ì", "i'", $_CONFIG["giorni"][$i]);
+          echo '<th class="condensed letter-spacing-1">'.strtoupper($giorno).'</th>';
         }
         ?>
       </thead>
@@ -42,7 +43,7 @@ else{
         $colori = array();
         $r = 0;
         for($i = 1; $i<=$_CONFIG["ore_per_giorno"]; $i++){
-          echo '<tr><td>'.$i."</td>";
+          echo '<tr><td class="condensed">'.$i."</td>";
           for($j=1; $j<=$_CONFIG["numero_giorni"];$j++){
             $num = ($j-1)*$_CONFIG["ore_per_giorno"]+$i;
             $result = $db->query("SELECT  iscrizioni.idCorso as idCorso,
@@ -81,16 +82,16 @@ else{
                     }
                   }else{
                     if(($resultContr->num_rows > 0)&& ($iscrizione["continuita"]==0)){
-                      echo '<td class="cellaOrario pointerCursor underline" style="background-color: '.$bgcolor.'; color: '.$fgcolor.'; " onclick="scegliQuale('.$num.')" >'.$nomeCorso.'<span>Aula '.$aula.'</span></td>';
+                      echo '<td class="cellaOrario condensed pointerCursor underline" style="background-color: '.$bgcolor.'; color: '.$fgcolor.'; " onclick="scegliQuale('.$num.')" >'.strtoupper($nomeCorso).'<span>Aula '.strtoupper($aula).'</span></td>';
                     }
                     else{
-                      echo '<td class="cellaOrario pointerCursor" style="background-color: '.$bgcolor.'; color: '.$fgcolor.';" onclick="$(\'#collapsible'.$iscrizione["idCorso"].'\').animatedScroll({easing: \'easeOutQuad\'});">'.$nomeCorso.'<span>Aula '.$aula.'</span></td>';
+                      echo '<td class="cellaOrario condensed pointerCursor" style="background-color: '.$bgcolor.'; color: '.$fgcolor.';" onclick="$(\'#collapsible'.$iscrizione["idCorso"].'\').animatedScroll({easing: \'easeOutQuad\'});">'.strtoupper($nomeCorso).'<span>Aula '.strtoupper($aula).'</span></td>';
                     }
                   }
                 }
               }
               else{
-                echo "<td></td>";
+                echo "<td class='cellaBordo'></td>";
               }
 
             }

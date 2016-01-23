@@ -37,18 +37,18 @@ $db = database_connect();
 	<div class="navbar-fixed">
 		<nav id="intestaz" class="light-blue">
 			<div class="nav-wrapper">
-				<a class="hide-on-small-only left" style="margin-left:2%;">
+				<a class="hide-on-small-only left condensed letter-spacing-1" style="margin-left:2%;">
 					<?php
 							$result = $db->query("SELECT 	username, nome, cognome, primoAccesso, passwordOriginale
 																		FROM 		utenti
 																		WHERE 	id = '$utente'");
 							$dettagliUtente = $result->fetch_assoc();
-							echo $dettagliUtente["nome"]." ".$dettagliUtente["cognome"]." (".$dettagliUtente["username"].")";
+							echo strtoupper($dettagliUtente["nome"]." ".$dettagliUtente["cognome"]." (".$dettagliUtente["username"].")");
 					?>
 				</a>
 				<a href="#" class="brand-logo center light">Settimana tecnica</a>
 				<ul id="nav-mobile" class="right hide-on-med-and-down">
-					<li><a href="logout.php" class="waves-effect waves-light">Logout</a></li>
+					<li><a href="logout.php" class="waves-effect waves-light condensed">LOGOUT</a></li>
 				</ul>
 			</div>
 		</nav>
@@ -103,35 +103,35 @@ $db = database_connect();
 						<div class="card-content">
 							<div class="row">
 								<div class="valign-wrapper">
-								<div class="input-field valign col s12 m6" >
+								<div class="input-field valign col condensed s12 m6" >
 									<input id="filtro" type="text" class="validate">
 									<label for="filtro">Parola chiave</label>
 								</div>
 								<div class="col s6 m3 valign left-align">
-	                  <div class="row">
+	                  <div class="row condensed letter-spacing-1">
 												<p>
 	                        <input checked type="checkbox" name="concontinuita" id="concontinuitaCerca" />
-	                        <label for="concontinuitaCerca">Con cont.</label>
+	                        <label for="concontinuitaCerca">CON CONT.</label>
 	                    </p>
 	                  </div>
-	                  <div class="row">
+	                  <div class="row condensed">
 	                    <p>
 	                        <input checked type="checkbox" name="senzacontinuita" id="senzacontinuitaCerca" />
-	                        <label for="senzacontinuitaCerca">Senza cont.</label>
+	                        <label for="senzacontinuitaCerca">SENZA CONT.</label>
 	                    </p>
 	                  </div>
 	                </div>
 	                <div class="col s6 m2 valign left-align">
-	                  <div class="row">
+	                  <div class="row condensed">
 	                    <p>
 	                        <input checked type="checkbox" name="recupero" id="recuperoCerca" />
-	                        <label for="recuperoCerca">Recupero</label>
+	                        <label for="recuperoCerca">RECUPERO</label>
 	                    </p>
 	                  </div>
-	                  <div class="row">
+	                  <div class="row condensed">
 	                    <p>
 	                        <input checked type="checkbox" name="approfondimento" id="approfondimentoCerca" />
-	                        <label for="approfondimentoCerca">Approf.</label>
+	                        <label for="approfondimentoCerca">APPROF.</label>
 	                    </p>
 	                  </div>
 	                </div>

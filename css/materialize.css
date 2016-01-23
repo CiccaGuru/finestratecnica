@@ -7514,6 +7514,18 @@ nav .input-field label.active {
   font-weight: 700;
 }
 
+@font-face {
+  font-family: "Roboto-Condensed";
+  src: url("../font/roboto/RobotoCondensed-Light.ttf");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "Roboto-Condensed";
+  src: url("../font/roboto/RobotoCondensed-Regular.ttf");
+  font-weight: 400;
+}
+
 a {
   text-decoration: none;
 }
@@ -9373,7 +9385,7 @@ form p:last-child {
 }
 
 .switch label input[type=checkbox]:checked + .lever:after {
-  background-color: #B71C1C;
+  background-color: #D32F2F;
 }
 
 .switch label .lever {

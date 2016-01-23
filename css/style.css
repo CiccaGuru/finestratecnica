@@ -407,8 +407,8 @@ footer{
 
 .coincidenzaTrigger:hover {
   transition: box-shadow .25s;
-/*  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);*/
-    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  /*box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);*/
 }
 
 #titoloOrario{
@@ -422,6 +422,11 @@ footer{
 .cellaOrario{
   font-size:85%;
   padding:5px 0px;
+  margin: 0px !important;
+}
+
+.cellaBordo{
+  border-bottom: 1px solid #d0d0d0 !important;
 }
 
 .cellaOrario span{
@@ -434,15 +439,49 @@ footer{
 }
 
 #lezioni_dettagli{
-  margin-top:1em;
+  margin-top:2em;
 }
 
-#lezioni_dettagli .bold{
+#lezioni_dettagli > .bold{
   font-size:110%;
-  margin-bottom:0.5em;
+  margin-bottom:1em;
 }
 
 .aulaDettagli{
   display:block;
   font-size:70%;
 }
+
+.chipMio{
+  font-family:"Roboto-Condensed";
+  letter-spacing:1px;
+  display: inline-block;
+  height: 26px;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 26px;
+  padding: 0 10px;
+  border-radius: 2px;
+}
+
+@media only screen and (max-width: 600px){
+  .chipMio{
+    padding:0px !important;
+    letter-spacing:0.5px;
+  }
+}
+
+.condensed{
+  font-family:"Roboto-Condensed";
+}
+
+.letter-spacing-1{
+  letter-spacing:0.5px;
+  word-spacing:1.5px;
+}
+
+.waves-effect.waves-amber .waves-ripple {
+     /* The alpha value allows the text and background color
+     of the button to still show through. */
+      background-color: rgba(255, 160, 0, 0.55);
+    }

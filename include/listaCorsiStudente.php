@@ -118,14 +118,14 @@ if($result->num_rows == 0){
       echo "active";
     }
     if(in_array($idCorso,$corsi_utente)){
-      echo ' light-blue lighten-2';
+      echo ' light-blue lighten-3';
     }
     else{
       echo ' black-text';
     }?>" id="collapsible<?php echo $idCorso?>">
     <span class="ink"></span>
     <div class="row margin0">
-      <div class="truncate col l2 m3 s4">
+      <div class="truncate col l3 m3 s4">
         <span class="bold" ><?php echo $dettagliCorso["titolo"];?></span>
       </div>
       <div class="truncate col l3 m3 s5">
@@ -140,7 +140,7 @@ if($result->num_rows == 0){
           ?>
         </span>
       </div>
-      <div class="truncate hide-on-small-only col l5 m4">
+      <div class="truncate hide-on-small-only col l4 m4">
         <span><?php echo $dettagliCorso["descrizione"];?></span>
       </div>
       <div class="col s3 m2 center">
@@ -150,31 +150,32 @@ if($result->num_rows == 0){
 
         if(!in_array($idCorso,$corsi_utente) && $Tiscritti){
           ?>
-          <div class="chip light hide-on-small-only red white-text">
-            Esaurito
+          <div class="chipMio hide-on-small-only light center center-align red white-text white-text">
+            ESAURITO
           </div>
-          <div class="red-text text-darken-1 hide-on-med-and-up">
-            Esaurito
+          <div class="chipMio hide-on-med-and-up light center red-text center-align text-darken-2 white-text">
+            ESAURITO
           </div>
           <?php
         } else if((!in_array($idCorso,$corsi_utente) && $coincide) || (in_array($idCorso, $corsi_particolari_uno) && sono_iscritto($corsi_particolari_uno) && !in_array($idCorso,$corsi_utente) || (in_array($idCorso, $corsi_particolari_due) && !(in_array($idCorso,$corsi_utente)) && sono_iscritto($corsi_particolari_due)))){
           ?>
-          <div class="chip waves-effect hoverable waves-light amber darken-1 hide-on-small-only coincidenzaTrigger" onclick="mostraCoincidenze(<?php echo $idCorso; ?>)">
-            Coincide
+          <div class="chipMio hide-on-small-only center center-align waves-effect hoverable waves-light amber darken-2 white-text coincidenzaTrigger" onclick="mostraCoincidenze(<?php echo $idCorso; ?>)">
+            COINCIDE
           </div>
-          <div class="amber-text text-darken-3 coincidenzaTrigger hide-on-med-and-up" onclick="mostraCoincidenze(<?php echo $idCorso; ?>)">
-            Coincide
+          <div class="chipMio hide-on-med-and-up center center-align waves-effect hoverable waves-amber amber-text text-darken-4 coincidenzaTrigger" onclick="mostraCoincidenze(<?php echo $idCorso; ?>)">
+            COINCIDE
           </div>
           <?php
         } else {
             if(in_array($idCorso, $corsi_obbligati) && in_array($idCorso, $corsi_utente)){
              ?>
-             <div class="chip green darken-1 hide-on-small-only" data-position="bottom">
-               Obbligatorio
+             <div class="chipMio center center-align blue darken-2 white-text hide-on-small-only" data-position="bottom">
+               OBBLIG.
              </div>
-             <div class="green-text text-darken-1 hide-on-med-and-up">
-               Obbl.
-             </div><?php
+             <div class="chipMio light-blue center center-align lighten-3 hide-on-med-and-up blue-text text-darken-4" data-position="bottom">
+               OBBLIG.
+             </div>
+          <?php
            }else{
           ?>
           <div class="switch">
@@ -212,8 +213,8 @@ if($result->num_rows == 0){
 ?>
 
 <div>
-  <h4 class="thin light-blue-text center margin0"> Corsi di recupero</h4>
-  <h5 class="light light-blue-text center margin0">Senza continuità</h5>
+  <h4 class="light condensed letter-spacing-1 light-blue-text center margin0"> CORSI DI RECUPERO</h4>
+  <h5 class="light condensed letter-spacing-1 light-blue-text center margin0">Senza continuità</h5>
 </div>
 <ul class="collapsible popout" data-collapsible="accordion">
   <?php
@@ -221,7 +222,7 @@ if($result->num_rows == 0){
   ?>
 </ul>
 <div>
-  <h5 class="light light-blue-text center margin0">Con continuità</h5>
+  <h5 class="light condensed letter-spacing-1 light-blue-text center margin0">Con continuità</h5>
 </div>
 
 <ul class="collapsible popout" data-collapsible="accordion">
@@ -230,8 +231,8 @@ if($result->num_rows == 0){
   ?>
 </ul>
 <div>
-  <h4 class="thin light-blue-text center margin0">Corsi di approfondimento</h4>
-  <h5 class="light light-blue-text center margin0">Senza continuità</h5>
+  <h4 class="light condensed letter-spacing-1 light-blue-text center margin0">CORSI DI APPROFONDIMENTO</h4>
+  <h5 class="light condensed letter-spacing-1 light-blue-text center margin0">Senza continuità</h5>
 </div>
 <ul class="collapsible popout" data-collapsible="accordion">
   <?php
@@ -239,7 +240,7 @@ if($result->num_rows == 0){
   ?>
 </ul>
 <div>
-  <h5 class="light light-blue-text center margin0">Con continuità</h5>
+  <h5 class="light condensed letter-spacing-1 light-blue-text center margin0">Con continuità</h5>
 </div>
 <ul class="collapsible popout" data-collapsible="accordion">
   <?php
