@@ -48,17 +48,17 @@ else{
             $num = ($j-1)*$_CONFIG["ore_per_giorno"]+$i;
             $result = $db->query("SELECT  iscrizioni.idCorso as idCorso,
                                           iscrizioni.idLezione as idLezione,
-                                          iscrizioni.continuita as continuita,
+                                          corsi.continuita as continuita,
                                           corsi.titolo as titolo,
                                           lezioni.aula as aula
                                   FROM    iscrizioni, corsi, lezioni
                                   WHERE   iscrizioni.idUtente = '".$utente."'
-                                          AND iscrizioni.ora = '".$num."'
+                                          AND lezioni.ora = '".$num."'
                                           AND iscrizioni.partecipa = '1'
                                           AND corsi.id = iscrizioni.idCorso
                                           AND lezioni.id = iscrizioni.idLezione")
                             or die('ERRORE: ' . $db->error);
-              $resultContr = $db->query("SELECT id FROM iscrizioni WHERE ((idUtente = '".$utente."') AND (ora = '".$num."') AND (partecipa = '0'))") or die('ERRORE: ' . $db->error);
+              $resultContr = $db->query("SELECT iscrizioni.id FROM iscrizioni, lezioni WHERE iscrizioni.idUtente = '$utente' AND lezioni.ora = '$num' AND lezioni.id = iscrizioni.idLezione AND iscrizioni.partecipa = '0'") or die('ERRORE: ' . $db->error);
               if($result->num_rows ==1){
                 while($iscrizione = $result->fetch_assoc()){
                   $nomeCorso = $iscrizione["titolo"];

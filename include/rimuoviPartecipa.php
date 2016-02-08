@@ -17,7 +17,7 @@ $db = database_connect();
 $ora = $_POST["idOra"];
 $idCorso = $_POST["idCorso"];
 
-$db->query("UPDATE iscrizioni SET partecipa='0' WHERE ((ora = '$ora') AND (idUtente = '$utente') AND (continuita='0'))") or  die("RIM PART: ".$db->error);
+$db->query("UPDATE iscrizioni SET partecipa='0' WHERE (ora = '$ora' AND (idUtente = '$utente')") or  die("RIM PART: ".$db->error);
 $db->close();
 echo "SUCCESS";
 ?>

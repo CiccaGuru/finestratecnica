@@ -22,7 +22,13 @@ $idCorso = $_POST["idCorso"];
 $result = $db->query("SELECT * FROM lezioni WHERE idCorso = '$idCorso'") or die('ERRORE: coincidenze 19' . $db->error);
 $corsi_obbligati =array('190', '249', '391', '68', '230', '350', '69', '83', '67', '179');
 while($lezione = $result->fetch_assoc()){
-  $resultA =  $db->query("SELECT idCorso, ora FROM iscrizioni WHERE ora = '".$lezione["ora"]."' AND idUtente = '$utente' AND continuita='1' AND NOT idCorso = $idCorso") or die('ERRORE: coincidenze 21' . $db->error);
+  $resultA =  $db->query("SELECT  idCorso, ora
+                          FROM    iscrizioni, corsi
+                          WHERE   iscrizioni.ora = '".$lezione["ora"]."' AND
+                                  iscrizioni.idUtente = '$utente' AND
+                                  corsi.continuita='1' AND
+                                  NOT iscrizioni.idCorso = $idCorso AND
+                                  corsi.id = iscrizioni.idCorso") or die('ERRORE: coincidenze 21' . $db->error);
   if($resultA->num_rows>0){
     while($lezioneCoincidente = $resultA->fetch_assoc()){
       $resultB = $db->query("SELECT id, titolo FROM corsi WHERE id = '".$lezioneCoincidente["idCorso"]."'") or die ('ERRORE: coincidenze 24' . $db->error);;

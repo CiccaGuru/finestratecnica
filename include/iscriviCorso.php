@@ -17,9 +17,82 @@ else{
 
 $db = database_connect();
 $corso = $_POST["id_corso"];
+
 $result = $db->query("SELECT * FROM corsi WHERE id='$corso' ") or die($db->error);
 $dettagliCorso = $result->fetch_assoc();
+$result = $db->query("SELECT id from lezioni where idCorso = '$corso'");
 
+$conta = 0;
+$errori = 0;
+$giaIscritto = 0;
+$pieno = 0;
+$coincide = 0;
+
+while($lezione = $result->fetch_assoc()){
+  $conta ++;
+  $a = iscriviOra($lezione["id"], $corso, $db);
+  switch ($a) {
+    case 0:
+      break;
+    case 1:
+      $errori++;
+      $giaIscritto++;
+      break;
+    case 2:
+      $errori++;
+      $pieno++;
+      break;
+    case 3:
+      $errori++;
+      $coincide++;
+      break;
+    }
+}
+
+if($errori > 0){
+  if($dettagliCorso["continuita"]){
+    $result = $db->query("SELECT id FROM lezioni  WHERE idcorso='$corso' ") or die('ERRORE: ' . $db->error);
+    while($lezione = $result->fetch_assoc()){
+      rimuoviOra($lezione["id"], $corso, $db);
+    }
+    echo "Non posso iscriverti, si sono verificati degli errori.";
+  }
+  else{
+    if($errori < $conta){
+      echo "SOME";
+    }
+    else{
+      echo "Non posso iscriverti, si sono verificati degli errori.";
+    }
+  }
+}
+else{
+  echo "SUCCESS";
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 $posso = 1;
 if($dettagliCorso["continuita"]){
   $result = $db->query("SELECT id, ora FROM lezioni  WHERE idcorso='$corso'") or die('ERRORE: ' . $db->error);
@@ -44,7 +117,8 @@ if($posso = 1){
   }
     echo "SUCCESS";
 
-}
+}*/
+
 $db->close();
 }
 ?>

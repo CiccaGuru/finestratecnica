@@ -28,7 +28,9 @@ function aggiornaCorsi(idCorso){
   });
 }
 
-function inserisciOra(idOra, idCorso){
+
+
+function iscriviOra(idOra, idCorso){
   var posting = $.post(
     '../include/iscriviOra.php',
     {
@@ -37,9 +39,8 @@ function inserisciOra(idOra, idCorso){
     });
     posting.done(function( data ){
       if(data=="SUCCESS"){
-        Materialize.toast('Ti sto iscrivendo...', 2000);
+        Materialize.toast('Ti ho iscritto con successo! <a onclick="rimuoviOra('+idOra+', '+idCorso+'); disappearAllToasts(\'.iscrittoToast\');" class="btn-flat waves-effect waves-green condensed green-text" style="font-weight:500; margin-right:0px; margin-left:12px; padding-left:12px; padding-right:12px;">Annulla</a>', 4000, "iscrittoToast");
         $.cookie("scroll", $(window).scrollTop());
-        //  $("#elencoCorsiStudente").fadeOut();
         aggiornaCorsi(idCorso);
         aggiornaOrario();
       }
@@ -47,7 +48,7 @@ function inserisciOra(idOra, idCorso){
       window.location = "index.php";
     } else{
       console.log(data);
-      Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> '+data, 4000);
+      Materialize.toast(' '+data, 1200);
     }
     });
 
@@ -71,7 +72,6 @@ function aggiornaOrario(){
     }else{
       $("#"+div).html('<div class="card-content" style="padding-top:10px;">'+data+'</div>');
       $("#"+div+" table").animate({opacity:1});
-      Materialize.toast('Operazione completata!', 2000);
     }
   });
 }
@@ -86,14 +86,14 @@ function rimuoviOra(idOra, idCorso){
     posting.done(function( data ){
       if(data=="SUCCESS"){
         $.cookie("scroll", $(window).scrollTop());
-        Materialize.toast('Sto annullando l\'iscrizone...', 2000);
+        Materialize.toast('Iscrizione annullata con successo! <a onclick="iscriviOra('+idOra+', '+idCorso+'); disappearAllToasts(\'.rimossoToast\');" class="btn-flat waves-effect waves-red condensed red-text" style="font-weight:500; margin-right:0px; margin-left:12px; padding-left:12px; padding-right:12px;">Annulla</a>', 4000, "rimossoToast");
         aggiornaOrario();
         aggiornaCorsi(idCorso);
       }
       else if(data == "LOGINPROBLEM"){
         window.location = "index.php";
       }else{
-          Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> '+data, 4000);
+          Materialize.toast(' '+data, 1200);
           console.log(data);
       }
 
@@ -118,7 +118,7 @@ function scegliQuale(ora){
 }
 
 
-function inserisciCorso(idCorso){
+function iscriviCorso(idCorso){
   $("#collapsibleCorso"+idCorso+" .collapsible-header").addClass("light-blue");
   $("#collapsibleCorso"+idCorso+" .collapsible-header").addClass("lighten-2");
   var posting = $.post(
@@ -128,12 +128,17 @@ function inserisciCorso(idCorso){
     });
     posting.done(function( data ){
       if(data=="SUCCESS"){
-        Materialize.toast('Ti sto iscrivendo...', 2000);
+        Materialize.toast('Ti ho iscritto con successo! <a onclick="rimuoviCorso('+idCorso+'); disappearAllToasts(\'.iscrittoToast\');" class="btn-flat waves-effect waves-green condensed green-text" style="font-weight:500; margin-right:0px; margin-left:12px; padding-left:12px; padding-right:12px;">Annulla</a>', 4000, "iscrittoToast");
         $.cookie("scroll", $(window).scrollTop());
-        //  $("#elencoCorsiStudente").fadeOut();
         aggiornaOrario();
         aggiornaCorsi(idCorso);
       }
+    else if(data == "SOME"){
+      Materialize.toast('Ti ho iscritto solo ad alcune ore. Controlla i dettagli <a onclick="rimuoviCorso('+idCorso+'); disappearAllToasts(\'.iscrittoToast\');" class="btn-flat waves-effect waves-orange condensed orange-text" style="font-weight:500; margin-right:0px; margin-left:12px; padding-left:12px; padding-right:12px;">Annulla</a>', 4000, "iscrittoToast");
+      $.cookie("scroll", $(window).scrollTop());
+      aggiornaOrario();
+      aggiornaCorsi(idCorso);
+    }
     else if(data == "LOGINPROBLEM"){
       window.location = "index.php";
     }else{
@@ -141,7 +146,7 @@ function inserisciCorso(idCorso){
       $("#collapsibleCorso"+idCorso+" .collapsible-header").removeClass("light-blue");
       $("#collapsibleCorso"+idCorso+" .collapsible-header").removeClass("lighten-2");
       $('#iscriviCorso'+idCorso).attr('checked', false);
-      Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> '+data, 4000);
+      Materialize.toast(data, 1200);
     }
     });
 
@@ -159,7 +164,7 @@ function rimuoviCorso(idCorso){
     posting.done(function( data ){
       if(data=="SUCCESS"){
         $.cookie("scroll", $(window).scrollTop());
-        Materialize.toast('Sto annullando l\'iscrizone...', 2000);
+        Materialize.toast('Iscrizione annullata con successo! <a onclick="iscriviCorso('+idCorso+'); disappearAllToasts(\'.rimossoToast\');" class="btn-flat waves-effect waves-red condensed red-text" style="font-weight:500; margin-right:0px; margin-left:12px; padding-left:12px; padding-right:12px;">Annulla</a>', 4000, "rimossoToast");
         aggiornaOrario();
         aggiornaCorsi(idCorso);
       }
@@ -169,7 +174,7 @@ function rimuoviCorso(idCorso){
         $("#collapsibleCorso"+idCorso+" .collapsible-header").addClass("light-blue");
         $("#collapsibleCorso"+idCorso+" .collapsible-header").addClass("lighten-2");
         console.log(data);
-          Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Si è verificato un errore', 4000);
+          Materialize.toast(' Si è verificato un errore', 1200);
       }
 
     });
@@ -250,7 +255,7 @@ function caricaInfo(idCorso){
 
 function invia_mail(){
   alert("ENTRATO");
-  Materialize.toast('Sto inviando...', 1000);
+  Materialize.toast('Sto inviando...', 1200);
   var posting = $.post(
     '../include/mandaEmail.php',
     {
@@ -261,12 +266,12 @@ function invia_mail(){
   );
   posting.done(function(data){
     if(data=="SUCCESS"){
-        Materialize.toast('Email inviata!', 1000);
+        Materialize.toast('Email inviata!', 1200);
     }
     else if(data == "LOGINPROBLEM"){
       window.location = "index.php";
     }else{
-      Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Si è verificato un errore (5)', 4000);
+      Materialize.toast(' Si è verificato un errore (5)', 1200);
       console.log(data);
     }
   });
@@ -291,7 +296,7 @@ function invia_mail(){
       var idOra = $(el).data("id-ora");
       var idCorso = $(el).data("id-corso");
       if($(el).is(':checked')){
-        inserisciOra(idOra, idCorso);
+        iscriviOra(idOra, idCorso);
       }
       else{
         rimuoviOra(idOra, idCorso);
@@ -306,7 +311,7 @@ function invia_mail(){
         $("#miaomiao").openModal();
       }
       else{
-      Materialize.toast('Sto cercando...', 1000);
+      Materialize.toast('Sto cercando...', 1200);
       var approfondimentoVal, recuperoVal, concontinuitaVal, senzacontinuitaVal;
 
       if($("#approfondimentoCerca").is(":checked")){
@@ -356,7 +361,7 @@ function invia_mail(){
         $('.collapsible').collapsible({
           accordion : true
         });
-        Materialize.toast('Ricerca completata!', 1000);
+        Materialize.toast('Ricerca completata!', 1200);
       }
       });
     }
@@ -367,7 +372,7 @@ function invia_mail(){
 
     $("#formCercaP").submit( function(e){
       e.preventDefault();
-      Materialize.toast('Sto cercando...', 1000);
+      Materialize.toast('Sto cercando...', 1200);
       var approfondimentoVal, recuperoVal, concontinuitaVal, senzacontinuitaVal;
 
       if($("#approfondimentoCercaP").is(":checked")){
@@ -417,7 +422,7 @@ function invia_mail(){
         $('.collapsible').collapsible({
           accordion : true
         });
-        Materialize.toast('Ricerca completata!', 1000);
+        Materialize.toast('Ricerca completata!', 1200);
       }
       });
     });
@@ -451,21 +456,21 @@ function invia_mail(){
                window.location = "index.php";
              } else if(data == "SUCCESS"){
                $("#modal-primoAccesso").closeModal();
-               Materialize.toast('Password cambiata con successo!', 4000);
+               Materialize.toast('Password cambiata con successo!', 1200);
                $("#modal-help").openModal();
 
              }
              else {
-                Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i>  Si è verificato un problema.', 4000);
+                Materialize.toast('Si è verificato un problema.', 1200);
                  console.log(data);
                }
            });
        }
        else if(($("#cane").val() == "") || ($("#cane").val() == "")){
-         Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Prego, riempi i campi', 4000);
+         Materialize.toast(' Prego, riempi i campi', 1200);
        }
        else{
-         Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Le due password non sono uguali', 4000);
+         Materialize.toast('Le due password non sono uguali', 1200);
        }
 
      });
@@ -478,7 +483,9 @@ function invia_mail(){
       var el = "#"+e.target.id;
       var idCorso = $(el).data("id-corso");
       if($(el).is(':checked')){
-        setTimeout(function(){inserisciCorso(idCorso);}, 200);
+        setTimeout(function(){
+          iscriviCorso(idCorso);
+        }, 200);
 
       }
       else{

@@ -86,6 +86,7 @@ function num_iscritti($ora, $db){
 }
 
 function troppiIscritti($idLezione, $db){
+	$db = database_connect();
 	$result = $db->query("SELECT maxiscritti FROM lezioni where id = '$idLezione'") or die('ERRORE funzioni.php 93: ' . $db->error);
 	$lezione = $result->fetch_assoc();
 	if($lezione["maxiscritti"] <= num_iscritti($idLezione, $db)){
@@ -96,78 +97,49 @@ function troppiIscritti($idLezione, $db){
 	}
 }
 
-function iscrivi($utente, $idOra, $idCorso, $db){
-	$result = $db->query("SELECT ora FROM lezioni WHERE id = '".$idOra."'") or die('ERRORE: ' . $db->error);
-	$ora = $result->fetch_assoc();
-	$result = $db->query("SELECT continuita FROM corsi WHERE id = '".$idCorso."'") or die('ERRORE a: ' . $db->error);
-	$corso = $result->fetch_assoc();
-	$result = $db->query("INSERT INTO iscrizioni  (idUtente, idLezione, idCorso, partecipa, ora, continuita)  VALUES ('".$utente."', '".$idOra."', '".$idCorso."', '1', '".$ora["ora"]."', '".$corso["continuita"]."')") or die('ERRORE qzb: ' . $db->error);
-	return 1;
+function iscrivi($utente, $idOra, $idCorso, $partecipa, $db){
+	$a = 1;
+	$result = $db->query("INSERT INTO iscrizioni  (idUtente, idLezione, idCorso, partecipa)  VALUES ('$utente', '$idOra', '$idCorso', '$partecipa')") or $a = 0;
+	return $a;
 }
 
-function iscriviOra($idOra, $idCorso, $db){
+function iscriviOra($idLezione, $idCorso, $db){
 	$utente = check_login();
-	$result = $db->query("SELECT COUNT(*) as count FROM iscrizioni  WHERE idUtente='$utente'  AND idLezione='$idOra' AND idCorso='$idCorso'") or die('ERRORE p: ' . $db->error);
+	$result = $db->query("SELECT COUNT(*) as count FROM iscrizioni  WHERE idUtente='$utente'  AND idLezione='$idLezione'") or die('ERRORE p: ' . $db->error);
   $resultFetch = $result->fetch_assoc();
-	$a = 1;
-	if($resultFetch["count"] == 0){
-		$resultA = $db->query("SELECT ora FROM lezioni WHERE id = '".$idOra."'") or  die('ERRORE: ' . $db->error);
-		$dettagliOra = $resultA->fetch_assoc();
-		if(troppiIscritti($idOra, $db)){
-			die("Limite studenti superato.");
-		}
-		else{
-			$resultLezioniOra = $db->query("SELECT continuita, idLezione FROM iscrizioni  WHERE ((idUtente='$utente') AND (ora='".$dettagliOra["ora"]."') AND (partecipa = '1')) ") or die('ERRORE p: ' . $db->error);
-			if($resultLezioniOra->num_rows == 0){
-				$a = $a * iscrivi($utente, $idOra, $idCorso, $db);
+	if($resultFetch["count"]>0){
+		return 1; // già iscritto
+	}
+	if(troppiIscritti($idLezione)){
+		return 2; // troppi iscritti
+	}
+	$result = $db->query("SELECT idCorso, ora from lezioni where id = '$idLezione'");
+	$dettagliLezione = $result->fetch_assoc();
+
+			$result = $db->query("SELECT 	COUNT(*) as conta
+														from		iscrizioni, lezioni, corsi
+														where 	iscrizioni.idUtente = $utente AND
+														 				lezioni.ora = ".$dettagliLezione["ora"]." AND
+																		iscrizioni.idLezione = lezioni.id AND
+																		corsi.id = iscrizioni.idCorso AND
+																		corsi.continuita = 1");
+			$conta = $result->fetch_assoc();
+			if(($conta["conta"]>0) && ($dettagliLezione["continuita"])){
+				return 3;
+			}
+			if(($conta["conta"]>0) && !($dettagliLezione["continuita"])){
+				$partecipa = '0';
 			}
 			else{
-				$errore = 0;
-				while($riga = $resultLezioniOra->fetch_assoc()){
-					if(!$riga["continuita"]){
-						$db->query("UPDATE iscrizioni SET partecipa='0' WHERE (idUtente='$utente' AND idLezione = '".$riga["idLezione"]."')") or  die($db->error);
-					}
-					else{
-						if($dettagliOra["continuita"]==1){
-							echo "Errore: sovrapposizione di corsi. Contatta l'amministratore";
-							$errore=1;
-						}
-						else if ($errore != 1){
-							iscrivi($utente, $idOra, $idCorso, $db);
-							$db->query("UPDATE iscrizioni SET partecipa='0' WHERE (idUtente='$utente' AND idLezione = '".$idOra."')") or  die($db->error);
-							$errore=1;
-							return 1;
-						}
-					}
-				}
-				if(!$errore){
-					iscrivi($utente, $idOra, $idCorso, $db);
-					return 1;
-				}
-				else{
-					return 0;
-				}
+				$partecipa = '1';
+				$result = $db->query("UPDATE iscrizioni set partecipa = '0' where and idUtente = '$utente' AND (SELECT ora from lezioni where id = '$idLezione') = ".$dettagliLezione["ora"]." and (SELECT continuita from lezioni where id = '$idLezione')='0'");
 			}
-		}
-	}else{
-		echo "Risulti già iscritto, se così non è, contatta l'amministratore.";
-	}
+			$a = iscrivi($utente, $idLezione, $dettagliLezione["idCorso"], $partecipa, $db);
+		return $a? 0 : 1;
+
 }
 
 function troppiIscrittiCorso($idCorso, $continuita){
-  /*$resultCorso =  $db->query("SELECT continuita FROM corsi WHERE id='$idCorso'") or die("ERRORE funzioni.php 193: ".$db->error);
-	$dettagliCorso = $resultCorso->fetch_assoc();
-	if($dettagliCorso["continuita"]==0){
-		return 0;
-	}
-	$result = $db->query("SELECT id FROM lezioni WHERE idCorso='$idCorso'") or	die('ERRORE funzioni.php 163: ' . $db->error);
-	$oraACaso = $result->fetch_assoc();
-	if(troppiIscritti($oraACaso["id"], $db)){
-		return 1;
-	}
-	else{
-		return 0;
-	}*/
 	$db = database_connect();
 	$result = $db->query("SELECT 	COUNT(*) as conta
 												FROM 		lezioni
@@ -201,21 +173,33 @@ function troppiIscrittiCorso($idCorso, $continuita){
 
 function rimuoviOra($idOra, $idCorso, $db){
 	$utente = check_login();
-	$result = $db->query("SELECT * FROM iscrizioni WHERE ((idUtente='$utente') AND (idLezione='$idOra') AND (idCorso='$idCorso'))") or	die('ERRORE 1: ' . $db->error);
+	$result = $db->query("SELECT * FROM iscrizioni WHERE idUtente='$utente' AND idLezione='$idOra' AND idCorso='$idCorso'") or	die('ERRORE 1: ' . $db->error);
 	$dettagliIscrizione = $result->fetch_assoc();
 	if($dettagliIscrizione["partecipa"]=='1'){
-		$result = $db->query("SELECT * FROM iscrizioni WHERE ((idUtente='$utente') AND (ora='".$dettagliIscrizione['ora']."') AND NOT (id='".$dettagliIscrizione["id"]."'))") or	die('ERRORE 2: ' . $db->error);
+		$result = $db->query("SELECT 	*
+													FROM		iscrizioni, lezioni
+													WHERE 	iscrizioni.idUtente='$utente'
+																	AND lezioni.ora='".$dettagliIscrizione['ora']."' AND
+																	NOT iscrizioni.id='".$dettagliIscrizione["id"]."' AND
+																	iscrizioni.idLezione = lezioni.id") or	die('ERRORE 2: ' . $db->error);
 		if($result->num_rows>0){
 			$dett = $result->fetch_assoc();
-			$db->query("UPDATE iscrizioni SET partecipa='1' WHERE (id=".$dett["id"].")") or  die($db->error);
+			$db->query("UPDATE iscrizioni SET partecipa='1' WHERE id=".$dett["id"]) or  die($db->error);
 		}
 	}
-	$result = $db->query("DELETE FROM iscrizioni WHERE ((idUtente='$utente') AND (idLezione='$idOra') AND (idCorso='$idCorso'))") or	die('ERRORE 3: ' . $db->error);
+	$result = $db->query("DELETE FROM iscrizioni WHERE idUtente='$utente' AND idLezione='$idOra' AND idCorso='$idCorso'") or	die('ERRORE 3: ' . $db->error);
 	return 1;
 }
 
 function coincideOra($idLezione, $ora, $db, $utente){
-	$result = $db->query("SELECT COUNT(id) as count FROM iscrizioni where ora='$ora' AND continuita = '1' AND idUtente = '$utente' AND NOT idLezione = '$idLezione'") or die("ERRORE funzioni.php 178: ".$db->error);
+	$result = $db->query("SELECT 	COUNT(*) as count
+												FROM 		iscrizioni, lezioni, corsi
+												where 	lezioni.ora='$ora' AND
+																corsi.continuita = '1' AND
+																iscrizioni.idUtente = '$utente' AND
+																NOT iscrizioni.idLezione = '$idLezione' AND
+																lezioni.id = iscrizioni.idLezione AND
+																corsi.id = iscrizioni.idCorso") or die("ERRORE funzioni.php 178: ".$db->error);
 	$resultFetch = $result->fetch_assoc();
 	if($resultFetch["count"]==0){
 		return 0;

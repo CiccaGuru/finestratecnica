@@ -1846,6 +1846,16 @@ $(document).ready(function(){
     }, false);
 
 })(window);
+
+function disappearAllToasts(classe){
+  setTimeout(function(){
+    Vel($(classe), {"opacity": 0, marginTop: '-40px'}, { duration: 375,
+        easing: 'easeOutExpo',
+        queue: false,
+      });
+  }, 200);
+}
+
 ;Materialize.toast = function (message, displayLength, className, completeCallback) {
     className = className || "";
 
@@ -1860,8 +1870,10 @@ $(document).ready(function(){
     }
 
     // Select and append toast
-    var newToast = createToast(message);
 
+    $(".toast").addClass("oldToast");
+    var newToast = createToast(message);
+    disappearAllToasts(".oldToast");
     // only append toast if message is not undefined
     if(message){
         container.appendChild(newToast);
@@ -1890,25 +1902,28 @@ $(document).ready(function(){
 
       if (timeLeft <= 0) {
         // Animate toast out
-        Vel(newToast, {"opacity": 0, marginTop: '-40px'}, { duration: 375,
-            easing: 'easeOutExpo',
-            queue: false,
-            complete: function(){
-              // Call the optional callback
-              if(typeof(completeCallback) === "function")
-                completeCallback();
-              // Remove toast after it times out
-              this[0].parentNode.removeChild(this[0]);
-            }
-          });
-        window.clearInterval(counterInterval);
+        disappearToast(newToast);
       }
     }, 20);
+
+    function disappearToast(newToast){
+      Vel(newToast, {"opacity": 0, marginTop: '-40px'}, { duration: 375,
+          easing: 'easeOutExpo',
+          queue: false,
+          complete: function(){
+            // Call the optional callback
+            if(typeof(completeCallback) === "function")
+              completeCallback();
+            // Remove toast after it times out
+            this[0].parentNode.removeChild(this[0]);
+          }
+        });
+      window.clearInterval(counterInterval);
+    }
 
 
 
     function createToast(html) {
-
         // Create toast
         var toast = document.createElement('div');
         toast.classList.add('toast');
@@ -1978,6 +1993,8 @@ $(document).ready(function(){
 
           }
         });
+
+
 
         return toast;
     }
