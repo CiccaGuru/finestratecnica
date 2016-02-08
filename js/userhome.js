@@ -1,31 +1,40 @@
+var hoCercato = 0;
+
 function aggiornaCorsi(idCorso){
-  var act = 0;
-  console.log("AGGIORNO");
-  if($("#collapsible"+idCorso).hasClass("active")){
-    act = idCorso;
+  if(hoCercato){
+    cercaSubmit("");
   }
-  else {
-    act = -1;
+  else{
+    var act = 0;
+    console.log("AGGIORNO");
+    if($("#collapsible"+idCorso).hasClass("active")){
+      act = idCorso;
+    }
+    else {
+      act = -1;
+    }
+    var posting = $.post(
+      '../include/listaCorsiStudente.php',
+      {"active":act}
+    );
+    posting.done(function( data ){
+      if(data == "LOGINPROBLEM"){
+        window.location = "index.php";
+      }
+      else{
+        $("#elencoCorsiStudente").html(data);
+        $('.collapsible').collapsible({
+          accordion : true
+        });
+        caricaInfo(idCorso);
+        setTimeout(function(){
+          $(window).scrollTop($.cookie("scroll"));
+        }, 200);
+      }
+    });
+
   }
-  var posting = $.post(
-    '../include/listaCorsiStudente.php',
-    {"active":act}
-  );
-  posting.done(function( data ){
-    if(data == "LOGINPROBLEM"){
-      window.location = "index.php";
-    }
-    else{
-      $("#elencoCorsiStudente").html(data);
-      $('.collapsible').collapsible({
-        accordion : true
-      });
-      caricaInfo(idCorso);
-      setTimeout(function(){
-        $(window).scrollTop($.cookie("scroll"));
-      }, 200);
-    }
-  });
+
 }
 
 
@@ -277,6 +286,63 @@ function invia_mail(){
   });
 }
 
+function cercaSubmit(s){
+  hoCercato = 1;
+  Materialize.toast('Sto cercando...', 1200);
+  var approfondimentoVal, recuperoVal, concontinuitaVal, senzacontinuitaVal;
+
+  if($("#approfondimentoCerca"+s).is(":checked")){
+    approfondimentoVal = '1';
+  }
+  else {
+    approfondimentoVal = '0';
+  }
+
+  if($("#recuperoCerca"+s).is(":checked")){
+    recuperoVal = '1';
+  }
+  else {
+    recuperoVal = '0';
+  }
+
+  if($("#concontinuitaCerca"+s).is(":checked")){
+    concontinuitaVal = '1';
+  }
+  else {
+    concontinuitaVal = '0';
+  }
+
+  if($("#senzacontinuitaCerca"+s).is(":checked")){
+    senzacontinuitaVal = '1';
+  }
+  else {
+    senzacontinuitaVal = '0';
+  }
+
+  var posting = $.post(
+    '../include/listaCorsiStudente.php',
+    {
+      filtro: $("#filtro"+s).val(),
+      concontinuita: concontinuitaVal,
+      senzacontinuita: senzacontinuitaVal,
+      recupero: recuperoVal,
+      approfondimento: approfondimentoVal,
+      active: -1
+    }
+  );
+  posting.done(function(data){
+    if(data == "LOGINPROBLEM"){
+      window.location = "index.php";
+    } else {
+      $("#elencoCorsiStudente").html(data);
+      $('.collapsible').collapsible({
+        accordion : true
+      });
+      Materialize.toast('Ricerca completata!', 1200);
+    }
+  });
+}
+
 (function($){
   $(function(){
     aggiornaOrario();
@@ -305,129 +371,13 @@ function invia_mail(){
 
     $("#formCerca").submit( function(e){
         e.preventDefault();
-      if($("#filtro").val().toUpperCase() == "FLAVIO"){
-        $("#miao").openModal();
-      }else if($("#filtro").val().toUpperCase() == "BOSS"){
-        $("#miaomiao").openModal();
-      }
-      else{
-      Materialize.toast('Sto cercando...', 1200);
-      var approfondimentoVal, recuperoVal, concontinuitaVal, senzacontinuitaVal;
-
-      if($("#approfondimentoCerca").is(":checked")){
-        approfondimentoVal = '1';
-      }
-      else {
-        approfondimentoVal = '0';
-      }
-
-      if($("#recuperoCerca").is(":checked")){
-        recuperoVal = '1';
-      }
-      else {
-        recuperoVal = '0';
-      }
-
-      if($("#concontinuitaCerca").is(":checked")){
-        concontinuitaVal = '1';
-      }
-      else {
-        concontinuitaVal = '0';
-      }
-
-      if($("#senzacontinuitaCerca").is(":checked")){
-        senzacontinuitaVal = '1';
-      }
-      else {
-        senzacontinuitaVal = '0';
-      }
-
-      var posting = $.post(
-        '../include/listaCorsiStudente.php',
-        {
-          filtro: $("#filtro").val(),
-          concontinuita: concontinuitaVal,
-          senzacontinuita: senzacontinuitaVal,
-          recupero: recuperoVal,
-          approfondimento: approfondimentoVal,
-          active: -1
-        }
-      );
-      posting.done(function(data){
-        if(data == "LOGINPROBLEM"){
-          window.location = "index.php";
-        } else {
-        $("#elencoCorsiStudente").html(data);
-        $('.collapsible').collapsible({
-          accordion : true
-        });
-        Materialize.toast('Ricerca completata!', 1200);
-      }
-      });
-    }
+        cercaSubmit("");
     });
-
-
-
 
     $("#formCercaP").submit( function(e){
       e.preventDefault();
-      Materialize.toast('Sto cercando...', 1200);
-      var approfondimentoVal, recuperoVal, concontinuitaVal, senzacontinuitaVal;
-
-      if($("#approfondimentoCercaP").is(":checked")){
-        approfondimentoVal = '1';
-      }
-      else {
-        approfondimentoVal = '0';
-      }
-
-      if($("#recuperoCercaP").is(":checked")){
-        recuperoVal = '1';
-      }
-      else {
-        recuperoVal = '0';
-      }
-
-      if($("#concontinuitaCercaP").is(":checked")){
-        concontinuitaVal = '1';
-      }
-      else {
-        concontinuitaVal = '0';
-      }
-
-      if($("#senzacontinuitaCercaP").is(":checked")){
-        senzacontinuitaVal = '1';
-      }
-      else {
-        senzacontinuitaVal = '0';
-      }
-
-      var posting = $.post(
-        '../include/listaCorsiStudente.php',
-        {
-          filtro: $("#filtroP").val(),
-          concontinuita: concontinuitaVal,
-          senzacontinuita: senzacontinuitaVal,
-          recupero: recuperoVal,
-          approfondimento: approfondimentoVal,
-          active: -1
-        }
-      );
-      posting.done(function(data){
-        if(data == "LOGINPROBLEM"){
-          window.location = "index.php";
-        } else {
-        $("#elencoCorsiStudente").html(data);
-        $('.collapsible').collapsible({
-          accordion : true
-        });
-        Materialize.toast('Ricerca completata!', 1200);
-      }
-      });
+      cercaSubmit("P");
     });
-
-
 
     var lastWindowWidth;
     $(window).resize(function() {
