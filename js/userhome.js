@@ -2,7 +2,7 @@ var hoCercato = 0;
 
 function aggiornaCorsi(idCorso){
   if(hoCercato){
-    cercaSubmit("");
+    cercaSubmit("", 1);
   }
   else{
     var act = 0;
@@ -286,9 +286,11 @@ function invia_mail(){
   });
 }
 
-function cercaSubmit(s){
+function cercaSubmit(s, mute){
   hoCercato = 1;
-  Materialize.toast('Sto cercando...', 1200);
+  if(!mute){
+    Materialize.toast('Sto cercando...', 1200);
+  }
   var approfondimentoVal, recuperoVal, concontinuitaVal, senzacontinuitaVal;
 
   if($("#approfondimentoCerca"+s).is(":checked")){
@@ -338,7 +340,10 @@ function cercaSubmit(s){
       $('.collapsible').collapsible({
         accordion : true
       });
-      Materialize.toast('Ricerca completata!', 1200);
+      if(!mute){
+        Materialize.toast('Ricerca completata!', 1200);
+      }
+
     }
   });
 }

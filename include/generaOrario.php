@@ -90,8 +90,11 @@ else{
                   }
                 }
               }
-              else{
+              else if($result->num_rows == 0){
                 echo "<td class='cellaBordo waves-mod waves-effect' ></td>";
+              }
+              else{
+                echo "<td class='cellaBordo waves-mod waves-effect red-text condensed' style='font-weight:500;' >ERRORE</td>";
               }
 
             }

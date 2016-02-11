@@ -132,8 +132,14 @@ function iscriviOra($idLezione, $idCorso, $db){
 			}
 			else{
 				$partecipa = '1';
-				$result = $db->query("UPDATE iscrizioni set partecipa = '0' where and idUtente = '$utente' AND (SELECT ora from lezioni where id = '$idLezione') = ".$dettagliLezione["ora"]." and (SELECT continuita from lezioni where id = '$idLezione')='0'");
 			}
+			$result = $db->query("UPDATE 	iscrizioni, corsi, lezioni
+														set 		iscrizioni.partecipa = 0
+														where 	iscrizioni.idUtente = '$utente' AND
+																		lezioni.ora = ".$dettagliLezione["ora"]." AND
+																		corsi.continuita = 0 AND
+																		corsi.id = iscrizioni.idCorso AND
+																		lezioni.id = iscrizioni.idLezione");
 			$a = iscrivi($utente, $idLezione, $dettagliLezione["idCorso"], $partecipa, $db);
 		return $a? 0 : 1;
 
@@ -171,23 +177,36 @@ function troppiIscrittiCorso($idCorso, $continuita){
 	}
 }
 
-function rimuoviOra($idOra, $idCorso, $db){
+function rimuoviOra($idLezione, $idCorso, $db){
 	$utente = check_login();
-	$result = $db->query("SELECT * FROM iscrizioni WHERE idUtente='$utente' AND idLezione='$idOra' AND idCorso='$idCorso'") or	die('ERRORE 1: ' . $db->error);
+	$result = $db->query("SELECT ora FROM lezioni WHERE id = '$idLezione'") or die($db->error);
 	$dettagliIscrizione = $result->fetch_assoc();
-	if($dettagliIscrizione["partecipa"]=='1'){
-		$result = $db->query("SELECT 	*
-													FROM		iscrizioni, lezioni
-													WHERE 	iscrizioni.idUtente='$utente'
-																	AND lezioni.ora='".$dettagliIscrizione['ora']."' AND
-																	NOT iscrizioni.id='".$dettagliIscrizione["id"]."' AND
-																	iscrizioni.idLezione = lezioni.id") or	die('ERRORE 2: ' . $db->error);
-		if($result->num_rows>0){
-			$dett = $result->fetch_assoc();
-			$db->query("UPDATE iscrizioni SET partecipa='1' WHERE id=".$dett["id"]) or  die($db->error);
-		}
+	$ora = $dettagliIscrizione["ora"];
+	$result = $db->query("DELETE FROM iscrizioni WHERE idUtente='$utente' AND idLezione='$idLezione'") or	die('ERRORE 3: ' . $db->error);
+	$result = $db->query("SELECT COUNT(*) as conta
+													FROM iscrizioni, lezioni
+													WHERE
+														iscrizioni.idLezione = lezioni.id AND
+														iscrizioni.idUtente = '$utente' AND
+														iscrizioni.partecipa = '1' AND
+														lezioni.ora = '$ora'") or	die('ERRORE 2: ' . $db->error);
+	$conta = $result->fetch_assoc();
+
+	if($conta["conta"]==0){
+		$result = $db->query("SELECT iscrizioni.id as id
+														FROM iscrizioni, lezioni
+														WHERE
+															iscrizioni.idLezione = lezioni.id AND
+															iscrizioni.idUtente = '$utente' AND
+															lezioni.ora = '$ora'") or	die('ERRORE 22: ' . $db->error);
+		$idArray = $result->fetch_assoc();
+		$id = $idArray["id"];
+		$result = $db->query("UPDATE iscrizioni
+														SET partecipa = '1'
+														WHERE id = '$id'") or  die($db->error);
+
+		//echo $db->affected_rows;
 	}
-	$result = $db->query("DELETE FROM iscrizioni WHERE idUtente='$utente' AND idLezione='$idOra' AND idCorso='$idCorso'") or	die('ERRORE 3: ' . $db->error);
 	return 1;
 }
 
