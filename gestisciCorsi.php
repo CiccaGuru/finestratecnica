@@ -28,7 +28,7 @@ if(isset($_POST["max"])){
 else{
   $max = 30;
 }
-$condizione = "AND (";
+$condizione = "";
 if(isset($_POST["action"])){
   if(isset($_POST["concontinuita"]) and !(isset($_POST["senzacontinuita"]))){
       $condizione .= " corsi.continuita = '1' AND ";
@@ -63,8 +63,8 @@ if(isset($_POST["action"])){
   }
 }
 
-if($condizione=="AND("){
-  $condizione = "";
+if($condizione==""){
+  $condizione = "1";
 }else{
 
   $condizione.=")";
@@ -79,7 +79,6 @@ for($j=1;$j<=$_CONFIG['ore_per_giorno'];$j++){
 	$ore_elenco .= '<option value="'.$j.'">'.$j.'^a ora</option>';
 }
 $db = database_connect();
-
 
 $result = $db->query("SELECT  corsi.titolo as titolo,
                               corsi.descrizione as descrizione,
@@ -302,7 +301,7 @@ $result = $db->query("SELECT  corsi.titolo as titolo,
             <div class="input-field col s1">
               <select id="continuitaCorso<?php echo $dettagli["id"];?>">
                 <option value="1" <?php if($dettagli["continuita"]) echo "selected"?>>Con</option>
-                <option value="0"<?php if(!$dettagli["continuita"]) echo "selected"?>>Senza</option>
+                <option value="0" <?php if(!$dettagli["continuita"]) echo "selected"?>>Senza</option>
               </select>
               <label>Continuita</label>
             </div>
@@ -314,7 +313,7 @@ $result = $db->query("SELECT  corsi.titolo as titolo,
               <label>Tipo</label>
             </div>
             <div class="col s2 cente valign">
-              <p style="margin-bottom:5px;"><a onclick='modificaCorso(<?php echo $dettagli['id'];?>)' class="waves-effect waves-light btn red valign"style="width:98%;" >Modifica</a></p>
+              <p style="margin-bottom:5px;"><a onclick='modificaCorso(<?php echo $dettagli['id'];?>)' class="waves-effect waves-light btn red valign" style="width:98%;" >Modifica</a></p>
               <p style="margin-top:5px;"><a class="waves-effect waves-light btn red valign" onclick="mostraOreModifica(<?php echo $dettagli['id'];?>)" style="width:98%;">modifica ore</a></p>
             </div>
             </div>
@@ -323,7 +322,7 @@ $result = $db->query("SELECT  corsi.titolo as titolo,
 
         $resultConta = $db->query("SELECT  corsi.id as conta
                               FROM corsi, utenti
-                              WHERE (utenti.id = corsi.iddocente) $condizione") or die("AA: ".$db->error);
+                              WHERE (utenti.id = corsi.iddocente) AND $condizione") or die("BB: ".$db->error);
           if($resultConta->num_rows>($max-$min)){
             ?>
             <li class="collection-item row center valign-wrapper">

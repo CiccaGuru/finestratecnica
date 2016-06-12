@@ -141,6 +141,9 @@ hide
   margin-bottom:0px;
 }
 
+.small{
+  font-size:75%;
+}
 #ok{
     display:none;
     z-index:100;
@@ -489,4 +492,19 @@ footer{
 
 .waves-mod{
     display: table-cell;
+}
+
+.more-margin-bottom{
+  margin-bottom:3em;
+}
+
+.width-90{
+  width:90%
+}
+
+footer{
+  padding:0.5em;
+  font-size:115%;
+  z-index:-1;
+  letter-spacing:0.1px;
 }

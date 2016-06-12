@@ -80,8 +80,8 @@
     </div>
   </div>
 
-  <footer class="light-blue z-depth-2 light">
-    <div class="container center-align">
+  <footer>
+    <div class="center-align red-text condensed">
       Realizzato da Roberto Ciccarelli e Filippo Quattrocchi
     </div>
   </footer>

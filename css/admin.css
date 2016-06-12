@@ -1,8 +1,14 @@
-#btn-gestisciDocenti,
-#btn-gestisciCorsi,
-#btn-gestisciStudenti{
+.fake-button{
   width:95%;
-  height:5.5em;
+/*  height:5.5em;*/
+  text-align:center;
+/*  line-height:5.5em;*/
+  padding:1em;
+}
+
+.fake-button i{
+  margin-bottom:0.5em;
+  font-size:36px;
 }
 
 .card-content{
@@ -11,9 +17,10 @@
   padding-bottom:5%
 }
 
-h3 .thin
+h3
 {
-  margin-top:5px;
+  font-size:36px;
+  margin-bottom:1em;
 }
 
 .contatore{
@@ -28,6 +35,9 @@ h3 .thin
   margin-left:0.4em !important
 }
 
+h5{
+  margin-bottom:1em;
+}
 #wait .progress{
   width:70%;
   margin:auto;
