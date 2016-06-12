@@ -20,6 +20,7 @@ $corso = $_POST["id_corso"];
 
 $result = $db->query("SELECT * FROM corsi WHERE id='$corso' ") or die($db->error);
 $dettagliCorso = $result->fetch_assoc();
+
 $result = $db->query("SELECT id from lezioni where idCorso = '$corso'");
 
 $conta = 0;

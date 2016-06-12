@@ -99,7 +99,7 @@ function troppiIscritti($idLezione, $db){
 
 function iscrivi($utente, $idOra, $idCorso, $partecipa, $db){
 	$a = 1;
-	$result = $db->query("INSERT INTO iscrizioni  (idUtente, idLezione, idCorso, partecipa)  VALUES ('$utente', '$idOra', '$idCorso', '$partecipa')") or $a = 0;
+	$result = $db->query("INSERT INTO iscrizioni  (idUtente, idLezione, idCorso, partecipa)  VALUES ('$utente', '$idOra', '$idCorso', '$partecipa')") or die($db->error);
 	return $a;
 }
 
