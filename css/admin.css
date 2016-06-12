@@ -2,7 +2,7 @@
   width:95%;
 /*  height:5.5em;*/
   text-align:center;
-/*  line-height:5.5em;*/
+  height:auto;
   padding:1em;
 }
 
@@ -11,6 +11,9 @@
   font-size:36px;
 }
 
+.fake-button .row{
+  margin:0px !important;
+}
 .card-content{
   padding-left:5%;
   padding-right:5%;

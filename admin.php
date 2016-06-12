@@ -147,13 +147,13 @@ $db = database_connect();
 				<div class="container width-90">
 					<div class="row">
 						<div class="col s4 offset-s2">
-							<a class="fake-button red-text waves-effect waves-light fill-width valign-wrapper" onclick=" generaRegistrini();">
+							<a class="fake-button red-text waves-effect waves-red fill-width valign-wrapper" onclick=" generaRegistrini();">
 									<i class="material-icons">description</i><br/>
 									REGISTRINI
 							</a>
 						</div>
 						<div class="col s4">
-							<a class="fake-button red-text waves-effect valign-wrapper fill-width waves-light" onclick=" generaOreBuche();">
+							<a class="fake-button red-text waves-effect valign-wrapper fill-width waves-red" onclick=" generaOreBuche();">
 									<i class="material-icons">date_range</i><br/>
 									ORE BUCHE
 							</a>
@@ -162,7 +162,7 @@ $db = database_connect();
 
 					<div class="row">
 						<div class="col s3">
-							<a class="fake-button red-text waves-effect fill-width valign-wrapper waves-light" onclick="generaCorsiByDocenti();">
+							<a class="fake-button red-text waves-effect fill-width valign-wrapper waves-red" onclick="generaCorsiByDocenti();">
 								<div class="row">
 									<div class="col s4">
 											<i class="material-icons">school</i><br/>
@@ -174,7 +174,7 @@ $db = database_connect();
 							</a>
 						</div>
 						<div class="col s3">
-							<a class="fake-button red-text waves-effect valign-wrapper fill-width waves-light"  onclick="generaCorsiByOra();">
+							<a class="fake-button red-text waves-effect valign-wrapper fill-width waves-red"  onclick="generaCorsiByOra();">
 								<div class="row">
 									<div class="col s4">
 											<i class="material-icons">alarm</i><br/>
@@ -186,7 +186,7 @@ $db = database_connect();
 							</a>
 						</div>
 						<div class="col s3">
-							<a class="fake-button red-text waves-effect valign-wrapper fill-width waves-light" onclick="generaCorsiByAula();">
+							<a class="fake-button red-text waves-effect valign-wrapper fill-width waves-red" onclick="generaCorsiByAula();">
 								<div class="row">
 									<div class="col s4">
 											<i class="material-icons">home</i><br/>
@@ -198,7 +198,7 @@ $db = database_connect();
 							</a>
 						</div>
 						<div class="col s3">
-							<a class="fake-button red-text waves-effect valign-wrapper fill-width waves-light" onclick="generaCorsiByTitolo();">
+							<a class="fake-button red-text waves-effect valign-wrapper fill-width waves-red" onclick="generaCorsiByTitolo();">
 
 								<div class="row">
 									<div class="col s4">
