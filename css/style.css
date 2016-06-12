@@ -508,3 +508,16 @@ footer{
   z-index:-1;
   letter-spacing:0.1px;
 }
+
+#scegliCorso label{
+    color:black;
+}
+
+#modal-scegliquale .container{
+  width:97%;
+}
+
+.space-below{
+  margin-top:1em;
+  margin-bottom:2.5em;
+}

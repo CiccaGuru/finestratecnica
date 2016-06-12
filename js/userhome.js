@@ -209,12 +209,14 @@ function mostraCoincidenze(corso){
    if (evt.cancelBubble!=null) evt.cancelBubble = true;
 }
 
-function aggiungiPartecipa(idOra, idCorso){
+function aggiornaPartecipa(){
+  var lezioneId = $("input[name=group1]:checked").data("idlezione");
+  var ora = $("input[name=group1]:checked").data("ora");
   var posting = $.post(
-    '../include/aggiungiPartecipa.php',
+    '../include/aggiornaPartecipa.php',
     {
-      "idCorso":idCorso,
-      "idOra":idOra
+      "idLezione":lezioneId,
+      "ora":ora
     });
     posting.done(function( data ){
       if(data == "LOGINPROBLEM"){
@@ -222,29 +224,10 @@ function aggiungiPartecipa(idOra, idCorso){
       } else if(data!="SUCCESS"){
           console.log(data);
         }
+        aggiornaOrario();
+        aggiornaCorsi();
     });
-}
 
-function rimuoviPartecipa(idOra){
-  var posting = $.post(
-    '../include/rimuoviPartecipa.php',
-    {
-      "idOra":idOra
-    });
-    posting.done(function( data ){
-      if(data == "LOGINPROBLEM"){
-        window.location = "index.php";
-      } else if(!(data=="SUCCESS")){
-          console.log(data);
-        }
-    });
-}
-
-function cambiaModificaPartecipa(idCorso, idOra){
-    console.log("selezionato");
-    rimuoviPartecipa(idOra);
-    aggiungiPartecipa(idOra, idCorso);
-    aggiornaOrario();
 }
 
 function caricaInfo(idCorso){
