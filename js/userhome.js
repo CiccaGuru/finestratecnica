@@ -357,6 +357,17 @@ function cercaSubmit(s, mute){
       }
     });
 
+    $(document).on('click', '.iscriviOraModal', function (e){
+      var idOra = $(e.target).data("idora");
+      var idCorso = $(e.target).data("idcorso");
+      var id = $(e.target).attr("id");
+      iscriviOra(idOra, idCorso);
+      $(".iscriviOraModal").attr("disabled", "true");
+      $(".iscriviOraModal").removeClass("waves-effect").removeClass("red-text").css({ "color": "#9F9F9F !important"});
+      $("#"+id).removeClass("disabled").addClass("green-text").html("ISCRITTO!");
+
+    });
+
     $("#formCerca").submit( function(e){
         e.preventDefault();
         cercaSubmit("");

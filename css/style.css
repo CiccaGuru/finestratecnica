@@ -521,3 +521,28 @@ footer{
   margin-top:1em;
   margin-bottom:2.5em;
 }
+
+#pointsFAB i{
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;}
+
+#pointsFAB i:hover{
+  -webkit-transform: rotate(270deg);
+  transform: rotate(270deg);
+}
+
+.p-no-space p{
+  margin:0.1em;
+}
+
+.p-no-space p a{
+  margin-top:-0.4em;
+}
+
+.iscriviOraModal{
+  transition: all 0.2s ease;
+}
+
+.p-space-below .condensed{
+  font-size:250% !important;
+}

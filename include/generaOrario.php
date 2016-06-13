@@ -23,7 +23,7 @@ else{
     $result = $db->query("SELECT id from iscrizioni WHERE idUtente = '$utente' AND partecipa = '1' ") or die($db->error);
     if($result->num_rows<$_CONFIG["soglia_minima"]){
       ?>
-      <div class="center-align red-text" id="messaggioPocheOre">Attenzione! Devi coprire almeno 17 ore!</div>
+      <div class="center-align red-text condensed" id="messaggioPocheOre">ATTENZIONE! DEVI COPRIRE ALMENO 17 ORE!</div>
       <?php
     }
 
@@ -91,7 +91,7 @@ else{
                 }
               }
               else if($result->num_rows == 0){
-                echo "<td class='cellaBordo waves-mod waves-effect' ></td>";
+                echo "<td class='cellaBordo waves-mod waves-effect' onclick='scegliQuale(".$num.")' ></td>";
               }
               else{
                 echo "<td class='cellaBordo waves-mod waves-effect red-text condensed' style='font-weight:500;' >ERRORE</td>";
