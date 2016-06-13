@@ -3605,10 +3605,17 @@ function disappearAllToasts(classe){
     $(document).on('mouseenter.fixedActionBtn', '.fixed-action-btn:not(.click-to-toggle)', function(e) {
       var $this = $(this);
       openFABMenu($this);
+      console.log($(this).attr('id'));
+      if($(this).attr('id')=="pointsFAB"){
+        $(this).find("> .btn-floating i").addClass("rotate");
+      }
     });
     $(document).on('mouseleave.fixedActionBtn', '.fixed-action-btn:not(.click-to-toggle)', function(e) {
       var $this = $(this);
       closeFABMenu($this);
+      if($(this).attr('id')=="pointsFAB"){
+        $(this).find("> .btn-floating i").removeClass("rotate");
+      }
     });
 
     // Toggle-on-click behaviour.

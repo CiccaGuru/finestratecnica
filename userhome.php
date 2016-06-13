@@ -53,8 +53,8 @@ $db = database_connect();
 			</div>
 		</nav>
 	</div>
-	<div class="fixed-action-btn">
-		<a class="btn-floating btn-large red" id="pointsFAB">
+	<div class="fixed-action-btn" id="pointsFAB" >
+		<a class="btn-floating btn-large red">
 			<i class="large material-icons">more_horiz</i>
 		</a>
 		<ul>
