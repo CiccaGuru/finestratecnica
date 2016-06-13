@@ -350,7 +350,7 @@ $result = $db->query("SELECT  corsi.titolo as titolo,
       </div>
     </div>
 
-    <div id="modal-ore" class="modal modal-fixed-footer">
+  <div id="modal-ore" class="modal modal-fixed-footer bottom-sheet">
 
   </div>
 

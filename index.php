@@ -82,7 +82,7 @@
 
   <footer>
     <div class="center-align red-text condensed">
-      Realizzato da Roberto Ciccarelli e Filippo Quattrocchi
+      &copy 2016 Roberto Ciccarelli
     </div>
   </footer>
   <!--  Scripts-->
