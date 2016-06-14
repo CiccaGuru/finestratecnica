@@ -4,6 +4,7 @@
   text-align:center;
   height:auto;
   padding:1em;
+  border-radius: 2px; !important;
 }
 
 .fake-button i{

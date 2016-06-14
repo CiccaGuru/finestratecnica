@@ -28,6 +28,10 @@ $db = database_connect();
 </head>
 
 <body>
+	<ul id="utenti-dropDown" class="dropdown-content">
+  <li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciStudenti.php">STUDENTI</a></li>
+	<li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciDocenti.php">DOCENTI</a></li>
+</ul>
 	<div class="navbar-fixed">
 		<nav id="intestaz" class="light-blue">
 			<div class="nav-wrapper">
@@ -35,10 +39,9 @@ $db = database_connect();
 				<a href="#" class="brand-logo center light">Settimana tecnica</a>
 				<ul id="nav-mobile" class="right hide-on-med-and-down">
 					<li class="active"><a href="admin.php" class="waves-effect waves-light condensed">HOME</a></li>
-					<li><a href="gestisciDocenti.php" class="waves-effect waves-light condensed">DOCENTI</a></li>
 					<li><a href="gestisciCorsi.php" class="waves-effect waves-light condensed">CORSI</a></li>
-					<li><a href="gestisciStudenti.php" class="waves-effect waves-light condensed">STUDENTI</a></li>
-					<li><a href="logout.php" class="waves-effect waves-light condensed">LOGOUT</a></li>
+					<li><a href="#!" class="dropdown-button waves-effect waves-light condensed" data-activates="utenti-dropDown">UTENTI<i class="material-icons right">arrow_drop_down</i></a></li>
+					<li><a href="logout.php" class="waves-effect waves-light condensed"><i class="material-icons left">exit_to_app</i>LOGOUT</a></li>
 				</ul>
 			</div>
 		</nav>

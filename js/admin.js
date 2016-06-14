@@ -8,12 +8,48 @@ function aggiornaDocenti(){
 	});
 }
 
-function dettagliDocenti(){
+
+function modificaDocente(user_id, quanti, page, filtro){
+  if(($("#nome"+user_id).val()=="") || ($("#cognome"+user_id).val()=="") || ($("#username"+user_id).val()==""))
+    Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i>Dati non validi', 4000);
+  else{
+    var posting = $.post(
+      '../include/modificaUtente.php',
+      {
+        id:user_id,
+        nome:$("#nome"+user_id).val(),
+        cognome:$("#cognome"+user_id).val(),
+        username:$("#username"+user_id).val(),
+      }
+    );
+    posting.done(function( data ){
+      if(data=="SUCCESS"){
+        Materialize.toast('Utente modificato con succeso!', 4000);
+        dettagliDocenti(quanti, page, filtro);
+        aggiornaDocenti();
+      }
+      else {
+        Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Si è verificato un errore. Controlla la console', 4000);
+        console.log(data);
+      }
+    });
+  }
+}
+
+
+
+function dettagliDocenti(quantiN, pageN, filtro){
+	console.log(filtro);
 	var posting = $.post(
-		'../include/elencoUtenti.php', {"level":1}
+		'../include/elencoUtenti.php', {
+			"level":1,
+			"quanti":quantiN,
+			"page":pageN,
+			"username":filtro
+		}
 	);
 	posting.done(function( data ){
-		$("#dettagliDocenti").html('<li class="collection-header blue-text center"><h4 class="light">Elenco docenti</h4></li>'+data);
+		$("#dettagliDocenti").html(data);
 	});
 
 }
@@ -109,33 +145,6 @@ function aggiungiCorso(){
 		}
 	});
 
-}
-
-function modificaDocente(user_id){
-  if(($("#nome"+user_id).val()=="") || ($("#cognome"+user_id).val()=="") || ($("#username"+user_id).val()==""))
-    Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i>Dati non validi', 4000);
-  else{
-    var posting = $.post(
-      '../include/modificaUtente.php',
-      {
-        id:user_id,
-        nome:$("#nome"+user_id).val(),
-        cognome:$("#cognome"+user_id).val(),
-        username:$("#username"+user_id).val()
-      }
-    );
-    posting.done(function( data ){
-      if(data=="SUCCESS"){
-        Materialize.toast('Utente modificato con succeso!', 4000);
-        dettagliDocenti();
-        aggiornaDocenti();
-      }
-      else {
-        Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Si è verificato un errore. Controlla la console', 4000);
-        console.log(data);
-      }
-    });
-  }
 }
 
 function elencoNonAccessi(){

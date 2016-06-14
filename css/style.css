@@ -489,7 +489,11 @@ footer{
      of the button to still show through. */
       background-color: rgba(255, 160, 0, 0.55);
     }
-
+.waves-effect.waves-blue .waves-ripple {
+        /* The alpha value allows the text and background color
+        of the button to still show through. */
+         background-color: rgba(41, 182, 246, 0.50);
+       }
 .waves-mod{
     display: table-cell;
 }
@@ -545,4 +549,12 @@ footer{
 
 .p-space-below .condensed{
   font-size:250% !important;
+}
+
+.small-icon i{
+  font-size:180% !important;
+}
+
+.small-icon{
+  font-size:120%;
 }
