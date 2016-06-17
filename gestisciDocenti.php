@@ -66,7 +66,7 @@ $num = $resultAA->num_rows;
   				<ul id="nav-mobile" class="right hide-on-med-and-down">
   					<li><a href="admin.php" class="waves-effect waves-light condensed">HOME</a></li>
   					<li><a href="gestisciCorsi.php" class="waves-effect waves-light condensed">CORSI</a></li>
-  					<li class="active"><a href="#!" class="dropdown-button waves-effect waves-light condensed" data-activates="utenti-dropDown">UTENTI<i class="material-icons right">arrow_drop_down</i></a></li>
+  					<li class="active"><a href="#!" class="dropdown-button waves-effect waves-light condensed" data-beloworigin="true" data-hover="true" data-activates="utenti-dropDown">UTENTI<i class="material-icons right">arrow_drop_down</i></a></li>
   					<li><a href="logout.php" class="waves-effect waves-light condensed"><i class="material-icons left">exit_to_app</i>LOGOUT</a></li>
   				</ul>
   			</div>
@@ -124,12 +124,12 @@ $num = $resultAA->num_rows;
           </div>
 
           <div class="input-field col s4">
-            <input id="username" name="username" type="text" class="validate" value="<?php
+            <input id="usernameSearch" name="username" type="text" class="validate" value="<?php
                         if(isset($_POST["username"]) && ($_POST["username"]!="")){
                           echo $_POST["username"];
                         }
                         ?>">
-            <label for="username" class="condensed">Parola chiave</label>
+            <label for="usernameSearch" class="condensed">Parola chiave</label>
           </div>
           <div class="col s2 offset-s1" style="margin-top:0.6em;">
             <p class="condensed">
@@ -167,7 +167,11 @@ $num = $resultAA->num_rows;
           <label for="username<?php echo $row['id']; ?>">Username</label>
         </div>
         <div class="col s2 cente valign">
-          <p><a onclick="modificaDocente(<?php echo $row['id'];?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>')" class="waves-effect center-align waves-red btn-flat red-text valign" style="width:98%">Modifica</a></p>
+          <p>
+            <a onclick="modificaUtente(<?php echo $row['id'];?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>')" class="waves-effect center-align waves-red btn-flat red-text valign" style="width:98%">
+              Modifica
+            </a>
+          </p>
           <p><a class="waves-effect waves-red center-align btn-flat red-text valign" onclick="eliminaDocente(<?php echo $row['id'];?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>')" style="width:98%">Elimina</a></p>
         </div>
         <div class="col s2 center valign">

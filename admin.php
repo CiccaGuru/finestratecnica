@@ -40,7 +40,7 @@ $db = database_connect();
 				<ul id="nav-mobile" class="right hide-on-med-and-down">
 					<li class="active"><a href="admin.php" class="waves-effect waves-light condensed">HOME</a></li>
 					<li><a href="gestisciCorsi.php" class="waves-effect waves-light condensed">CORSI</a></li>
-					<li><a href="#!" class="dropdown-button waves-effect waves-light condensed" data-activates="utenti-dropDown">UTENTI<i class="material-icons right">arrow_drop_down</i></a></li>
+					<li><a href="#!" class="dropdown-button waves-effect waves-light condensed"  data-beloworigin="true" data-hover="true" data-activates="utenti-dropDown">UTENTI<i class="material-icons right">arrow_drop_down</i></a></li>
 					<li><a href="logout.php" class="waves-effect waves-light condensed"><i class="material-icons left">exit_to_app</i>LOGOUT</a></li>
 				</ul>
 			</div>
@@ -131,7 +131,7 @@ $db = database_connect();
 						</div>
 					</div>
 					<div class="col s9">
-						<h5 class="light-blue-text condensed light">ALUNNI NON ISCRITTI A ORE SUFFICIENTI:</h5>
+						<h5 class="light-blue-text condensed light">ALUNNI ISCRITTI A ORE SUFFICIENTI:</h5>
 						<div class="row nomargin">
 							<div class="col s7">
 								<span class="contatore red-text"><?php echo $sufficienti["conta"]."/".$accesso["conta"];?></span>

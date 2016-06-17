@@ -25,30 +25,32 @@ if($result->num_rows==0){
 }
 if($result->num_rows==1){
   $utenti = $result->fetch_assoc();
-  $resultOra = $db->query("SELECT idLezione, idCorso FROM iscrizioni WHERE ((idUtente = '".$utenti["id"]."') AND (ora = '".$ora."') AND (partecipa = '1'))") or die('ERRORE: ' . $db->error);
+  $resultOra = $db->query("SELECT idLezione, iscrizioni.idCorso FROM iscrizioni,lezioni WHERE ((idUtente = '".$utenti["id"]."') AND lezioni.id = iscrizioni.idLezione AND (lezioni.ora = '".$ora."') AND (partecipa = '1'))") or die('ERRORE: ' . $db->error);
   if($resultOra->num_rows == 0){
-    ?> Ora buca<?
+    ?> Ora buca<?php
   }
   else{
     $dettagliIscrizione = $resultOra->fetch_assoc();
-    $resultCorso = $db->query("SELECT titolo, iddocente FROM corsi WHERE id='".$dettagliIscrizione["idCorso"]."'") or die('ERRORE: ' . $db->error);
+    $resultCorso = $db->query("SELECT titolo, iddocente FROM corsi
+            WHERE id='".$dettagliIscrizione["idCorso"]."'") or die('ERRORE: ' . $db->error);
     $dettagliCorso = $resultCorso->fetch_assoc();
-    $resultLezione = $db->query("SELECT aula FROM lezioni WHERE id='".$dettagliIscrizione["idLezione"]."'") or die('ERRORE: ' . $db->error);
+    $resultLezione = $db->query("SELECT aula FROM lezioni
+                            WHERE id='".$dettagliIscrizione["idLezione"]."'") or die('ERRORE: ' . $db->error);
     $dettagliLezione = $resultLezione->fetch_assoc();
     ?>
     <div class="row">
-      <div class="col s4 bold"><? echo $dettagliCorso["titolo"];?>  </div>
-      <div class="col s4"><? echo getStringaOra($ora);?>  </div>
-      <div class="col s4">Aula: <? echo $dettagliLezione["aula"];?>  </div>
+      <div class="col s4 bold"><?php echo $dettagliCorso["titolo"];?>  </div>
+      <div class="col s4"><?php echo getStringaOra($ora);?>  </div>
+      <div class="col s4">Aula: <?php echo $dettagliLezione["aula"];?>  </div>
     </div>
-    <?
+    <?php
   }
 }
 else{
   while($utenti = $result->fetch_assoc()){
-    $resultOra = $db->query("SELECT idLezione, idCorso FROM iscrizioni WHERE ((idUtente = '".$utenti["id"]."') AND (ora = '".$ora."') AND (partecipa = '1'))") or die('ERRORE: ' . $db->error);
+    $resultOra = $db->query("SELECT iscrizioni.idLezione, iscrizioni.idCorso FROM iscrizioni, lezioni WHERE ((idUtente = '".$utenti["id"]."') AND (lezioni.ora = '".$ora."') AND lezioni.idLezione = lezioni.id AND (iscrizioni.partecipa = '1'))") or die('ERRORE: ' . $db->error);
     if($resultOra->num_rows == 0){
-      ?> Ora buca<?
+      ?> Ora buca<?php
     }
     else{
       $dettagliIscrizione = $resultOra->fetch_assoc();
@@ -58,11 +60,11 @@ else{
       $dettagliLezione = $resultLezione->fetch_assoc();
       ?>
       <div class="row">
-        <div class="col s4 bold"><? echo $dettagliCorso["titolo"];?>  </div>
-        <div class="col s4"><? echo getStringaOra($ora);?>  </div>
-        <div class="col s4">Aula: <? echo $dettagliLezione["aula"];?>  </div>
+        <div class="col s4 bold"><?php echo $dettagliCorso["titolo"];?>  </div>
+        <div class="col s4"><?php echo getStringaOra($ora);?>  </div>
+        <div class="col s4">Aula: <?php echo $dettagliLezione["aula"];?>  </div>
       </div>
-      <?
+      <?php
     }
   }
 }

@@ -8268,7 +8268,7 @@ button.btn-floating {
 }
 
 .dropdown-content li:hover, .dropdown-content li.active, .dropdown-content li.selected {
-  background-color: #e3f2fd  !important;
+  background-color: #e0e0e0/*#e3f2fd*/  !important;
 }
 
 .dropdown-content li.active.selected {

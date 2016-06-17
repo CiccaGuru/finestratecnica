@@ -1,4 +1,4 @@
-function aggiornaDocenti(){
+function aggiornaListaDocenti(){
 	var posting = $.post(
 		'../include/generaElencoDocenti.php', {1:1}
 	);
@@ -10,6 +10,7 @@ function aggiornaDocenti(){
 
 
 function modificaDocente(user_id, quanti, page, filtro){
+	 classe = classe || "6";
   if(($("#nome"+user_id).val()=="") || ($("#cognome"+user_id).val()=="") || ($("#username"+user_id).val()==""))
     Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i>Dati non validi', 4000);
   else{
@@ -25,8 +26,8 @@ function modificaDocente(user_id, quanti, page, filtro){
     posting.done(function( data ){
       if(data=="SUCCESS"){
         Materialize.toast('Utente modificato con succeso!', 4000);
-        dettagliDocenti(quanti, page, filtro);
-        aggiornaDocenti();
+        aggiornaDettagliUtenti(quanti, page, filtro);
+        aggiornaListaDocenti();
       }
       else {
         Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Si è verificato un errore. Controlla la console', 4000);
@@ -37,44 +38,64 @@ function modificaDocente(user_id, quanti, page, filtro){
 }
 
 
+function modificaStudente(user_id, quanti, page, filtro){
+  if(($("#nome"+user_id+"Studente").val()=="") || ($("#cognome"+user_id+"Studente").val()=="") || ($("#username"+user_id+"Studente").val()=="") || ($("#classeStudente"+user_id).val()))
+    Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i>Dati non validi', 4000);
+  else{
+    var posting = $.post(
+      '../include/modificaUtente.php',
+      {
+        id:user_id,
+        nome:$("#nome"+user_id+"Studente").val(),
+        cognome:$("#cognome"+user_id+"Studente").val(),
+        username:$("#username"+user_id+"Studente").val(),
+				classe:$("#classeStudente"+user_id).val()
+      }
+    );
+		posting.done(function( data ){
+			if(data=="SUCCESS"){
+				Materialize.toast('Utente modificato con succeso!', 4000);
+				aggiornaDettagliUtenti(quanti, page, filtro);
+				aggiornaListaDocenti();
+			}
+			else {
+				Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Si è verificato un errore. Controlla la console', 4000);
+				console.log(data);
+			}
+		});
+  }
+}
 
-function dettagliDocenti(quantiN, pageN, filtro){
+
+function aggiornaDettagliUtenti(quantiN, pageN, filtro, level){
 	console.log(filtro);
 	var posting = $.post(
 		'../include/elencoUtenti.php', {
-			"level":1,
+			"level":level,
 			"quanti":quantiN,
 			"page":pageN,
 			"username":filtro
 		}
 	);
 	posting.done(function( data ){
-		$("#dettagliDocenti").html(data);
+		if(level==0)
+			$("#dettagliStudenti").html(data);
+		if(level==1)
+		  $("#dettagliStudenti").html(data);
 	});
 
 }
 
-function dettagliStudenti(){
+function eliminaUtente(id, quanti, page, filtro){
 	var posting = $.post(
-		'../include/elencoUtenti.php', {"level":0}
-	);
-	posting.done(function( data ){
-		$("#dettagliStudenti").html('<li class="collection-header blue-text center"><h4 class="light">Elenco studenti</h4></li>'+data);
-		 $('select').material_select();
-	});
-
-}
-
-function eliminaDocente(id_docente){
-	var posting = $.post(
-		'../include/eliminaDocente.php',
-		{id:id_docente}
+		'../include/eliminaUtente.php',
+		{id:id}
 	);
 	posting.done(function( data ){
 		if(data=="SUCCESS"){
-			 Materialize.toast('Docente eliminato con successo!', 4000);
-			 dettagliDocenti();
-			 aggiornaDocenti();
+			 Materialize.toast('Utente eliminato con successo!', 4000);
+			 aggiornaDettagliUtenti(quanti,page,filtro);
+			 aggiornaListaDocenti();
 		}
 		else {
 			Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Si è verificato un errore. Controlla la console', 4000);
@@ -309,35 +330,9 @@ function mostraOrario(idUtente){
 		'../include/generaOrario.php',
 		{"id":idUtente});
 	posting.done(function(data){
-		$("#modal-orario .modal-content").html(data);
+		$("#modal-orario .modal-content").html("<div class='container'>"+data+"</div>");
 		$("#modal-orario").openModal();
 	});
-}
-
-function modificaStudente(user_id){
-  if(($("#nome"+user_id).val()=="") || ($("#cognome"+user_id).val()=="") || ($("#username"+user_id).val()==""))
-    Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i>Dati non validi', 4000);
-  else{
-    var posting = $.post(
-      '../include/modificaUtente.php',
-      {
-        id:user_id,
-        nome:$("#nome"+user_id+"Studente").val(),
-        cognome:$("#cognome"+user_id+"Studente").val(),
-        username:$("#username"+user_id+"Studente").val(),
-				classe:$("#classeStudente"+user_id).val()
-      }
-    );
-    posting.done(function( data ){
-      if(data=="SUCCESS"){
-        Materialize.toast('Studente modificato con succeso!', 4000);
-      }
-      else {
-        Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Si è verificato un errore. Controlla la console', 4000);
-        console.log(data);
-      }
-    });
-  }
 }
 
 function cercaStudente(){
@@ -425,7 +420,7 @@ function applicaModificaOre(idCorso){
 
 (function($){
 	$(function(){
-		aggiornaDocenti();
+		aggiornaListaDocenti();
 		$('.modal-trigger').leanModal();
 		$("#aggiungi-docente").submit(function(e){
 			e.preventDefault();
