@@ -168,7 +168,7 @@ $num = $resultAA->num_rows;
         </div>
         <div class="col s2 cente valign">
           <p>
-            <a onclick="modificaUtente(<?php echo $row['id'];?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>')" class="waves-effect center-align waves-red btn-flat red-text valign" style="width:98%">
+            <a onclick="modificaDocente(<?php echo $row['id'];?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>')" class="waves-effect center-align waves-red btn-flat red-text valign" style="width:98%">
               Modifica
             </a>
           </p>

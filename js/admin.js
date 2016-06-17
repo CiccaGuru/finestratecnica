@@ -10,7 +10,6 @@ function aggiornaListaDocenti(){
 
 
 function modificaDocente(user_id, quanti, page, filtro){
-	 classe = classe || "6";
   if(($("#nome"+user_id).val()=="") || ($("#cognome"+user_id).val()=="") || ($("#username"+user_id).val()==""))
     Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i>Dati non validi', 4000);
   else{
@@ -26,7 +25,7 @@ function modificaDocente(user_id, quanti, page, filtro){
     posting.done(function( data ){
       if(data=="SUCCESS"){
         Materialize.toast('Utente modificato con succeso!', 4000);
-        aggiornaDettagliUtenti(quanti, page, filtro);
+        aggiornaDettagliUtenti(quanti, page, filtro, 1);
         aggiornaListaDocenti();
       }
       else {
@@ -39,8 +38,13 @@ function modificaDocente(user_id, quanti, page, filtro){
 
 
 function modificaStudente(user_id, quanti, page, filtro){
-  if(($("#nome"+user_id+"Studente").val()=="") || ($("#cognome"+user_id+"Studente").val()=="") || ($("#username"+user_id+"Studente").val()=="") || ($("#classeStudente"+user_id).val()))
+  if(($("#nome"+user_id+"Studente").val()=="") ||
+			($("#cognome"+user_id+"Studente").val()=="") ||
+			($("#username"+user_id+"Studente").val()=="") ||
+			($("#classeStudente"+user_id).val() == "")){
     Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i>Dati non validi', 4000);
+		console.log($("#username"+user_id+"Studente").val());
+	}
   else{
     var posting = $.post(
       '../include/modificaUtente.php',
@@ -55,7 +59,7 @@ function modificaStudente(user_id, quanti, page, filtro){
 		posting.done(function( data ){
 			if(data=="SUCCESS"){
 				Materialize.toast('Utente modificato con succeso!', 4000);
-				aggiornaDettagliUtenti(quanti, page, filtro);
+				aggiornaDettagliUtenti(quanti, page, filtro, 0);
 				aggiornaListaDocenti();
 			}
 			else {
@@ -81,12 +85,12 @@ function aggiornaDettagliUtenti(quantiN, pageN, filtro, level){
 		if(level==0)
 			$("#dettagliStudenti").html(data);
 		if(level==1)
-		  $("#dettagliStudenti").html(data);
+		  $("#dettagliDocenti").html(data);
 	});
 
 }
 
-function eliminaUtente(id, quanti, page, filtro){
+function eliminaUtente(id, quanti, page, filtro, level){
 	var posting = $.post(
 		'../include/eliminaUtente.php',
 		{id:id}
@@ -94,7 +98,7 @@ function eliminaUtente(id, quanti, page, filtro){
 	posting.done(function( data ){
 		if(data=="SUCCESS"){
 			 Materialize.toast('Utente eliminato con successo!', 4000);
-			 aggiornaDettagliUtenti(quanti,page,filtro);
+			 aggiornaDettagliUtenti(quanti,page,filtro,level);
 			 aggiornaListaDocenti();
 		}
 		else {
