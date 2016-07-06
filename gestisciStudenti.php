@@ -212,6 +212,12 @@ $db = database_connect();
 
       <?php
 
+      if($result->num_rows==0){
+        ?>  <li class="collection-item">
+              <div class="red-text condensed center-align" style="font-size:150%; margin:1em;">Nessun risultato trovato</div>
+            </li>
+          <?php
+      }
 
 
       while($row = $result->fetch_assoc())
@@ -220,7 +226,7 @@ $db = database_connect();
 
         <li class="collection-item row valign-wrapper">
           <div class="col s1 red-text">
-              <i class="material-icons waves-effect waves-red waves-circle" style="border-radius:50%;" onclick="eliminaUtente(<?php echo $row["id"]?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>')">close</i>
+              <i class="material-icons waves-effect waves-red waves-circle" style="border-radius:50%;" onclick="eliminaUtente(<?php echo $row["id"]?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>', 0)">close</i>
           </div>
           <div class="col s1 bold">
             ID: <?php echo $row["id"];?>
@@ -254,7 +260,7 @@ $db = database_connect();
               </a>
             </p>
             <p style="margin-top:5px;">
-              <a class="waves-effect waves-red center-align btn-flat red-text valign" onclick="mostraOrario(<?php echo $row['id'];?>)" style="width:98%;">Orario</a>
+              <a class="waves-effect waves-red center-align btn-flat red-text valign" onclick="mostraOrarioStudente(<?php echo $row['id'];?>)" style="width:98%;">Orario</a>
             </p>
           </div>
           <div class="col s1 center valign" style="padding:0px;">

@@ -111,7 +111,7 @@ $num = $resultAA->num_rows;
     </form>
   </div>
 </div>
-<div class="container" style="width:75%">
+<div class="container" style="width:90%">
   <ul class="collection with-header z-depth-1" id="dettagliDocenti">
     <li class="collection-header blue-text center"><h4 class="condensed light">ELENCO DOCENTI</h4></li>
     <li class="collection-item center">
@@ -148,13 +148,22 @@ $num = $resultAA->num_rows;
       </form>
     </li>
   <?php
+  if($result->num_rows==0){
+    ?>  <li class="collection-item">
+          <div class="red-text condensed center-align" style="font-size:150%; margin:1em;">Nessun risultato trovato</div>
+        </li>
+      <?php
+  }
    while($row = $result->fetch_assoc())
     { ?>
       <li class="collection-item row valign-wrapper">
+        <div class="col s1 red-text">
+            <i class="material-icons waves-effect waves-red waves-circle" style="border-radius:50%;" onclick="eliminaUtente(<?php echo $row["id"]?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>', 1)">close</i>
+        </div>
         <div class="col s1 bold">
           ID: <?php echo $row["id"];?>
         </div>
-        <div class="input-field col s3 valign">
+        <div class="input-field col s2 valign">
           <input id="nome<?php echo $row['id']; ?>" type="text" class="validate valign" value="<?php echo $row['nome']; ?>" required>
             <label for="nome<?php echo $row['id']; ?>">Nome</label>
         </div>
@@ -172,7 +181,11 @@ $num = $resultAA->num_rows;
               Modifica
             </a>
           </p>
-          <p><a class="waves-effect waves-red center-align btn-flat red-text valign" onclick="eliminaDocente(<?php echo $row['id'];?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>')" style="width:98%">Elimina</a></p>
+          <p>
+            <a class="waves-effect waves-red center-align btn-flat red-text valign" onclick="alert('Non è ancora possibile mostrare l\'orario del docente')" style="width:98%">
+              Orario
+            </a>
+          </p>
         </div>
         <div class="col s2 center valign">
           <a onclick="passwordReset(<?php echo $row['id'];?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>')" class="waves-effect small-icon condensed waves-red fill-width fake-button valign red-text">

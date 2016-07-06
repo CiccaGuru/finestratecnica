@@ -65,13 +65,23 @@ if($level == 1){
     </form>
   </li>
 <?php
+if($result->num_rows==0){
+  ?>  <li class="collection-item">
+        <div class="red-text condensed center-align" style="font-size:150%; margin:1em;">Nessun risultato trovato</div>
+      </li>
+    <?php
+}
+
  while($row = $result->fetch_assoc())
   { ?>
     <li class="collection-item row valign-wrapper">
+      <div class="col s1 red-text">
+          <i class="material-icons waves-effect waves-red waves-circle" style="border-radius:50%;" onclick="eliminaUtente(<?php echo $row["id"]?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>', 1)">close</i>
+      </div>
       <div class="col s1 bold">
         ID: <?php echo $row["id"];?>
       </div>
-      <div class="input-field col s3 valign">
+      <div class="input-field col s2 valign">
         <input id="nome<?php echo $row['id']; ?>" type="text" class="validate valign" value="<?php echo $row['nome']; ?>" required>
           <label for="nome<?php echo $row['id']; ?>">Nome</label>
       </div>
@@ -199,6 +209,12 @@ else{
     </li>
 
     <?php
+    if($result->num_rows==0){
+      ?>  <li class="collection-item">
+            <div class="red-text condensed center-align" style="font-size:150%; margin:1em;">Nessun risultato trovato</div>
+          </li>
+        <?php
+    }
 
 
 
@@ -208,7 +224,7 @@ else{
 
       <li class="collection-item row valign-wrapper">
         <div class="col s1 red-text">
-            <i class="material-icons waves-effect waves-red waves-circle" style="border-radius:50%;" onclick="eliminaUtente(<?php echo $row["id"]?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>')">close</i>
+            <i class="material-icons waves-effect waves-red waves-circle" style="border-radius:50%;" onclick="eliminaUtente(<?php echo $row["id"]?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>', 0)">close</i>
         </div>
         <div class="col s1 bold">
           ID: <?php echo $row["id"];?>

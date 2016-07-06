@@ -329,7 +329,17 @@ function generaCorsiByDocenti(){
 		}
 
 
-function mostraOrario(idUtente){
+function mostraOrarioStudente(idUtente){
+	var posting = $.post(
+		'../include/generaOrario.php',
+		{"id":idUtente});
+	posting.done(function(data){
+		$("#modal-orario .modal-content").html("<div class='container'>"+data+"</div>");
+		$("#modal-orario").openModal();
+	});
+}
+
+function mostraOrarioDocente(idUtente){
 	var posting = $.post(
 		'../include/generaOrario.php',
 		{"id":idUtente});

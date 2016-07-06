@@ -330,7 +330,9 @@ $db = database_connect();
 <script src="js/init.js"></script>
 <script src="js/jquery.animatedscroll.min.js"></script>
 <!-- material-scrolltop button -->
-<button class="material-scrolltop" type="button"><i class="material-icons white-text">keyboard_arrow_up</i></button>
+<button class="material-scrolltop" type="button">
+	<i class="material-icons white-text">keyboard_arrow_up</i>
+</button>
 
 <!-- material-scrolltop plugin -->
 <script src="js/material-scrolltop.js"></script>
