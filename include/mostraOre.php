@@ -19,7 +19,7 @@ global $_CONFIG;
 ?>
 
 <div class="modal-content">
-  <h4 class="light-blue-text thin center">Modifica ore</h4>
+  <h4 class="blue-text light condensed center" style="margin-bottom:1.5em">Modifica ore</h4>
   <?php
   $result = $db->query("SELECT id, ora, titolo, aula, maxIscritti from lezioni  WHERE idCorso = $idCorso order by ora asc") or die($db->error);
   $i = 0;
@@ -66,24 +66,28 @@ global $_CONFIG;
     ?>
 
     <div class="row valign-wrapper" id="row<?php echo $i;?>" data-idCorso="<?php echo $idCorso;?>" data-idLezione="<?php echo $lezione["id"];?>">
-      <div class="col s1 bold valign valign-wrapper">
-        <span class="valign"><?php echo $lezione["id"];?>:</span>
+      <div class="col s1">
+        <i class="material-icons waves-effect right red-text waves-red waves-circle" style="border-radius:50%;">close</i>
       </div>
+      <div class="col s1">
+       <span class="valign bold condensed" style="display:inline;">   ID: <?php echo $lezione["id"];?></span>
+      </div>
+
       <div class="input-field col valign s3">
         <input id="titoloModificaOre<?php echo $i;?>" type="text" class="validate" value='<?php echo $titolo;?>' required>
-        <label class="active" for="titoloModificaOre<?php echo $lezione["id"];?>">Titolo</label>
+        <label class="active condensed" for="titoloModificaOre<?php echo $lezione["id"];?>">Titolo</label>
       </div>
       <div class="input-field col valign s1">
         <input disabled style="color:black" id="iscrittiModificaOre<?php echo $i;?>" type="text" class="validate" value="<?php echo $conta["count"];?>" required>
-        <label class="active" for="iscrittiModificaOre<?php echo $i;?>">Iscritti</label>
+        <label class="active condensed" for="iscrittiModificaOre<?php echo $i;?>">Iscritti</label>
       </div>
       <div class="input-field col valign s1">
         <input id="maxIscrittiModificaOre<?php echo $i;?>" type="text" class="validate" value="<?php echo $lezione["maxIscritti"];?>" required>
-        <label class="active" for="maxIscrittiModificaOre<?php echo $lezione["id"];?>">Max.</label>
+        <label class="active condensed" for="maxIscrittiModificaOre<?php echo $lezione["id"];?>">Alunni Max.</label>
       </div>
-      <div class="input-field col valign s2">
+      <div class="input-field col valign s1">
         <input id="aulaModificaOre<?php echo $i;?>" type="text" class="validate" value="<?php echo $lezione["aula"];?>" required>
-        <label class="active" for="aulaModificaOre<?php echo $lezione["id"];?>">Aula</label>
+        <label class="active condensed" for="aulaModificaOre<?php echo $lezione["id"];?>">Aula</label>
       </div>
       <div class="input-field col s2">
         <select id="selezionaGiornoModificaOre<?php echo $i?>">

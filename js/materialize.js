@@ -2902,6 +2902,7 @@ function disappearAllToasts(classe){
       var appendOptionWithIcon = function(select, option, type) {
         // Add disabled attr if disabled
         var disabledClass = (option.is(':disabled')) ? 'disabled ' : '';
+        console.log(disabledClass);
 
         // add icons
         var icon_url = option.data('icon');
@@ -2920,7 +2921,7 @@ function disappearAllToasts(classe){
         }
 
         // Check for multiple type.
-        if (type === 'multiple') {
+        if ((type === 'multiple')&&(!option.is(':disabled'))) {
           options.append($('<li class="' + disabledClass + '"><span><input type="checkbox"' + disabledClass + '/><label></label>' + option.html() + '</span></li>'));
         } else {
           options.append($('<li class="' + disabledClass + '"><span>' + option.html() + '</span></li>'));

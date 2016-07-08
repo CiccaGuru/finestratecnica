@@ -107,33 +107,40 @@ $result = $db->query("SELECT  corsi.titolo as titolo,
 <body>
 
   <nav class="light-blue">
-    <div class="nav-wrapper">
-      <a class="left light big" style="margin-left:2%">Amministratore</a>
-      <a href="#" class="brand-logo center light">Settimana tecnica</a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a href="admin.php" class="waves-effect waves-light">Home</a></li>
-        <li><a href="gestisciDocenti.php" class="waves-effect waves-light">Docenti</a></li>
-        <li class="active"><a href="gestisciCorsi.php" class="waves-effect waves-light">Corsi</a></li>
-        <li><a href="gestisciStudenti.php" class="waves-effect waves-light">Studenti</a></li>
-        <li><a href="logout.php" class="waves-effect waves-light">Logout</a></li>
-      </ul>
-    </div>
-  </nav>
+    <ul id="utenti-dropDown" class="dropdown-content">
+    <li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciStudenti.php">STUDENTI</a></li>
+  	<li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciDocenti.php">DOCENTI</a></li>
+  </ul>
+  	<div class="navbar-fixed">
+  		<nav id="intestaz" class="light-blue">
+  			<div class="nav-wrapper">
+  				<a class="hide-on-small-only left condensed letter-spacing-1" style="margin-left:2%;"> AMMINISTRATORE</a>
+  				<a href="#" class="brand-logo center light">Settimana tecnica</a>
+  				<ul id="nav-mobile" class="right hide-on-med-and-down">
+  					<li><a href="admin.php" class="waves-effect waves-light condensed">HOME</a></li>
+  					<li class="active"><a href="gestisciCorsi.php" class="waves-effect waves-light condensed">CORSI</a></li>
+  					<li><a href="#!" class="dropdown-button waves-effect waves-light condensed" data-beloworigin="true" data-hover="true" data-activates="utenti-dropDown">UTENTI<i class="material-icons right">arrow_drop_down</i></a></li>
+  					<li><a href="logout.php" class="waves-effect waves-light condensed"><i class="material-icons left">exit_to_app</i>LOGOUT</a></li>
+  				</ul>
+  			</div>
+  		</nav>
+  	</div>
+	</nav>
 
   <div class="container" id="ins-corso" style="margin-top:5em;">
     <div class="card">
       <div class="card-content" style="padding-left:5%; padding-right:5%; padding-bottom:5%">
-        <span class="card-title blue-text" style="text-align:center">Crea un nuovo corso</span>
-        <div class="row">
-          <div class="input-field col s3">
+        <span class="card-title"><h4 class="blue-text condensed light center-align">Nuovo corso</h4></span>
+        <div class="row" style="margin-top:1em">
+          <div class="input-field col s3 condensed">
             <input id="titolo" type="text" class="validate">
             <label for="titolo">Titolo</label>
           </div>
-          <div class="input-field col s5">
+          <div class="input-field col s5  condensed">
             <input id="descriz" type="text" class="validate">
             <label for="descriz">Descrizione</label>
           </div>
-          <div class="input-field col s4">
+          <div class="input-field col s4  condensed">
             <select id="selezionaDocenti">
               <option value="" disabled selected class="grey-text">Seleziona insegnante</option>
             </select>
@@ -141,17 +148,17 @@ $result = $db->query("SELECT  corsi.titolo as titolo,
           </div>
         </div>
         <div class="row valign-wrapper">
-          <div class="col s2">
+          <div class="col s3  condensed">
             <p>
               <input name="tipo" value="0" type="radio" id="recupero" checked/>
               <label class="black-text" for="recupero">Recupero</label>
             </p>
             <p>
               <input name="tipo" value="1" type="radio" id="approfondimento" />
-              <label class="black-text" for="approfondimento">Approf.</label>
+              <label class="black-text" for="approfondimento">Approfondimento</label>
             </p>
           </div>
-          <div class="col s3">
+          <div class="col s3  condensed">
             <p>
               <input name="continuita" value="1" type="radio" id="con_continuita" checked/>
               <label class="black-text" for="con_continuita">Con continuità</label>
@@ -161,8 +168,9 @@ $result = $db->query("SELECT  corsi.titolo as titolo,
               <label class="black-text" for="senza_continuita">Senza continuità</label>
             </p>
           </div>
-          <div class="input-field col s2">
+          <div class="input-field col s2 condensed">
             <select id="selezionaClassi" multiple>
+              <option value="" disabled selected>Scegli classi</option>
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -171,29 +179,33 @@ $result = $db->query("SELECT  corsi.titolo as titolo,
             </select>
             <label>Classi</label>
           </div>
-          <div class="input-field col s2 valign">
+          <div class="input-field col s2 valign condensed">
             <input id="ore" type="text" class="validate">
-            <label for="ore">Ore</label>
+            <label for="ore">N° Ore</label>
           </div>
-          <div class="col s3 center">
-            <a id="inserisciOre" class="waves-effect btn waves-light red">Inserisci ore</a>
+          <div class="col s2 center">
+            <a id="inserisciOre" class="waves-effect condensed btn waves-light red">Procedi</a>
           </div>
         </div>
         <div id="ore_future">
         </div>
         <div class="center">
-          <a onclick="aggiungiCorso()" class="waves-effect waves-light btn-large red">Aggiungi</a>
+          <a onclick="aggiungiCorso()" id="aggiungiCorso" class="waves-effect waves-light btn-large condensed red disabled">  <i class="material-icons left">add_alert</i>CREA CORSO</a>
         </div>
       </div>
 </div>
 </div>
 <div class="container" style="margin-top:3em; width:97%">
       <ul class="collection with-header z-depth-1" id="dettagliStudenti">
-          <li class="collection-header blue-text center"><h4 class="light">Elenco corsi</h4></li>
+          <li class="collection-header blue-text center"><h4 class="light condensed">ELENCO CORSI</h4></li>
           <li class="collection-item">
             <form  action="gestisciCorsi.php" method="POST">
-              <div class="row ">
-
+              <div class="row condensed">
+                <div class="col s2" style="font-size:120%; margin-top:0.8em">
+                  <p class="condensed red-text">
+                    <i class="material-icons left">search</i>Cerca
+                  </p>
+                </div>
               <div class="col s2 valign">
                   <div class="row" style="margin-bottom:5px;">
                     <p>
@@ -201,7 +213,7 @@ $result = $db->query("SELECT  corsi.titolo as titolo,
                           if((isset($_POST["concontinuita"])) || (!(isset($_POST["concontinuita"])) && !(isset($_POST["senzacontinuita"])))){
                             echo "checked";
                           }
-                        ?> type="checkbox" name="concontinuita" id="concontinuita" />
+                        ?> type="checkbox" class="filled-in" name="concontinuita" id="concontinuita" />
                         <label for="concontinuita">Con continuità</label>
                     </p>
                   </div>
@@ -211,20 +223,20 @@ $result = $db->query("SELECT  corsi.titolo as titolo,
                           if((isset($_POST["senzacontinuita"])) || (!(isset($_POST["concontinuita"])) && !(isset($_POST["senzacontinuita"])))){
                             echo "checked";
                           }
-                        ?> type="checkbox" name="senzacontinuita" id="senzacontinuita" />
+                        ?> type="checkbox" class="filled-in" name="senzacontinuita" id="senzacontinuita" />
                         <label for="senzacontinuita">Senza continuità</label>
                     </p>
                   </div>
                 </div>
 
-                <div class="col s1 valign">
+                <div class="col s2 valign">
                   <div class="row" style="margin-bottom:5px;">
                     <p>
                         <input <?php
                           if((isset($_POST["recupero"])) || (!(isset($_POST["approfondimento"])) && !(isset($_POST["recupero"])))){
                             echo "checked";
                           }
-                        ?> type="checkbox" name="recupero" id="recuperoCerca" />
+                        ?> type="checkbox" class="filled-in" name="recupero" id="recuperoCerca" />
                         <label for="recuperoCerca">Recupero</label>
                     </p>
                   </div>
@@ -234,40 +246,30 @@ $result = $db->query("SELECT  corsi.titolo as titolo,
                           if((isset($_POST["approfondimento"])) || (!(isset($_POST["approfondimento"])) && !(isset($_POST["recupero"])))){
                             echo "checked";
                           }
-                        ?> type="checkbox" name="approfondimento" id="approfondimentoCerca" />
-                        <label for="approfondimentoCerca">Approf.</label>
+                        ?> type="checkbox" class="filled-in" name="approfondimento" id="approfondimentoCerca" />
+                        <label for="approfondimentoCerca">Approfondimento</label>
                     </p>
                   </div>
                 </div>
 
-                <div class="input-field col s2 valign">
-                  <input id="professore" name="professore" type="text"  value="<?php echo $_POST["professore"]?>" class="validate valign">
-                  <label for="professore">Professore</label>
+                <div class="input-field col s3 valign">
+                  <input id="parolaChiave" name="titolo" type="text" value="<?php echo $_POST["titolo"]?>" class="validate valign">
+                  <label for="parolaChiave">Parola chiave</label>
                 </div>
-
-                <div class="input-field col s2 valign">
-                  <input id="titoloCerca" name="titolo" type="text" value="<?php echo $_POST["titolo"]?>" class="validate valign">
-                  <label for="titoloCerca">Titolo - descrizione</label>
-                </div>
-                <div class="col s1 valign-wrapper" style="font-size:120%;">
-                  <p class="valign">
+                <div class="col s1 right-align" style="margin-top:0.6em;">
+                  <p class="right-align">
                     Mostra
                   </p>
                 </div>
 
                 <div class="input-field col s1 valign">
                   <input id="min" name="min" type="text" class="validate valign" value="<?php echo $min?>" required>
-                  <label for="min">Da:</label>
-                </div>
 
-                <div class="input-field col s1 valign">
-                  <input id="max" name="max" type="text" class="validate valign" value="<?php echo $max?>" required>
-                  <label for="max">A:</label>
                 </div>
                 <div class="col s1">
                   <div class="input-field">
-                    <button class="btn waves-effect waves-light red white-text" type="submit" name="action">Aggiorna
-                      <i class="material-icons right">send</i>
+                    <button class="btn-floating btn-large center waves-effect waves-light red condensed white-text" type="submit" name="action">
+                      <i class="material-icons">search</i>
                     </button>
                   </div>
                 </div>
@@ -284,26 +286,27 @@ $result = $db->query("SELECT  corsi.titolo as titolo,
             <div class="row valign-wrapper" style="margin-bottom:0px;">
 
             <div class="col s1 valign bold">
-              ID: <?php echo $dettagli["id"];?>
+              <i class="material-icons waves-effect waves-red red-text waves-circle" style="border-radius:50%; display:inline; margin:0em;">close</i>
+              <span class="condensed" style="margin-left:0.5em;">ID: <?php echo $dettagli["id"];?></span>
             </div>
             <div class="input-field col valign s2">
               <input id="titoloCorso<?php echo $dettagli["id"];?>" type="text" class="validate" value="<?php echo $dettagli["titolo"];?>" required>
-              <label for="titoloCorso<?php echo $dettagli["id"];?>">Titolo</label>
+              <label class="condensed" for="titoloCorso<?php echo $dettagli["id"];?>">Titolo</label>
             </div>
             <div class="input-field col valign s3">
               <input id="descrizioneCorso<?php echo $dettagli["id"];?>" type="text" class="validate" value="<?php echo $dettagli["descrizione"];?>" required>
-              <label for="descrizioneCorso<?php echo $dettagli["id"];?>">Descrizione</label>
+              <label class="condensed" for="descrizioneCorso<?php echo $dettagli["id"];?>">Descrizione</label>
             </div>
             <div class="input-field col valign s2">
               <input id="professoreCorso<?php echo $dettagli["id"];?>" type="text" class="validate" style="color: black" disabled value="<?php echo $dettagli["nome"][0].". ".$dettagli["cognome"];?>" required>
-              <label for="professoreCorso<?php echo $dettagli["id"];?>">Professore</label>
+              <label class="condensed" for="professoreCorso<?php echo $dettagli["id"];?>">Professore</label>
             </div>
             <div class="input-field col s1">
               <select id="continuitaCorso<?php echo $dettagli["id"];?>">
                 <option value="1" <?php if($dettagli["continuita"]) echo "selected"?>>Con</option>
                 <option value="0" <?php if(!$dettagli["continuita"]) echo "selected"?>>Senza</option>
               </select>
-              <label>Continuita</label>
+              <label class="condensed">Continuita</label>
             </div>
             <div class="input-field col s1">
               <select id="tipoCorso<?php echo $dettagli["id"];?>">
@@ -312,9 +315,9 @@ $result = $db->query("SELECT  corsi.titolo as titolo,
               </select>
               <label>Tipo</label>
             </div>
-            <div class="col s2 cente valign">
-              <p style="margin-bottom:5px;"><a onclick='modificaCorso(<?php echo $dettagli['id'];?>)' class="waves-effect waves-light btn red valign" style="width:98%;" >Modifica</a></p>
-              <p style="margin-top:5px;"><a class="waves-effect waves-light btn red valign" onclick="mostraOreModifica(<?php echo $dettagli['id'];?>)" style="width:98%;">modifica ore</a></p>
+            <div class="col s2 center valign condensed">
+              <a onclick='modificaCorso(<?php echo $dettagli['id'];?>)' class="waves-effect waves-red center-align btn-flat red-text valign" style="width:98%;" >Modifica</a>
+              <a class="waves-effect waves-red center-align btn-flat red-text valign" onclick="mostraOreModifica(<?php echo $dettagli['id'];?>)" style="width:98%;">MOstra lezioni</a>
             </div>
             </div>
           </li><?php

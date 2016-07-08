@@ -516,6 +516,7 @@ function applicaModificaOre(idCorso){
 					$('#ore_future').show().css("opacity:0");
 					$("#elenco_ore").fadeIn();
 					$('select').material_select();
+					$("#aggiungiCorso").removeClass("disabled");
 					$("#wait").fadeOut();
 				});
 

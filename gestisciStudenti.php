@@ -153,7 +153,8 @@ $db = database_connect();
             </div>
             <div class="input-field col s2">
               <select id="selezionaClasseStudente">
-                <option value="1" selected>1</option>
+                <option value="" disabled selected>Scegli</option>
+                <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
