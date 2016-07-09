@@ -17,9 +17,46 @@ $idCorso = $_POST["idCorso"];
 $ore=$_POST["ore"];
 global $_CONFIG;
 ?>
+  <?php
+  $result = $db->query("SELECT  corsi.titolo AS titolo,
+                                corsi.descrizione AS descrizione,
+                                corsi.iddocente AS iddocente,
+                                corsi.id as id,
+                                corsi.continuita as continuita,
+                                corsi.tipo as tipo,
+                                utenti.nome as nome,
+                                utenti.cognome as cognome
+                        FROM    corsi, utenti
+                        WHERE   (utenti.id = corsi.iddocente) AND
+                                corsi.id = '$idCorso'") or die($db->error);
+  $dettagliCorso=$result->fetch_assoc();
+  ?>
+  <div class="modal-content">
+    <h4 class="blue-text light condensed center" style="margin-bottom:1.5em">Dettagli corso</h4>
+    <div id="dettagliCorsoAdmin">
+      <div class="row valign-wrapper">
+        <div class="col s1 valign bold condensed letter-spacing-1">TITOLO:</div>
+        <div class="input-field valign col s4">
+          <input value="<?php echo $dettagliCorso["titolo"]?>" id="titoloCorso" type="text">
+        </div>
+        <div class="col s1 offset-s1 bold valign condensed letter-spacing-1">PROF:</div>
+        <div class="col s2 valign">
+          <select id="selezionaDocentiCorso">
+            <option value="" disabled selected class="grey-text">Seleziona insegnante</option>
+          </select>
+        </div>
+        <div class="col s3 valign condensed letter-spacing-1">
+          <?php if(!$dettagliCorso["tipo"]) echo "Recupero"; else echo "Approfondimento";?> - <?php if($dettagliCorso["continuita"]) echo "Con continuità"; else echo "Senza continuità";?>
+        </div>
+      </div>
+      <div class="row valign-wrapper">
+        <div class="col s2 bold  valign condensed letter-spacing-1">DESCRIZIONE:</div>
+        <div class="col s10 valign">
+          <textarea id="descrizioneCorso" class="materialize-textarea"><?php echo $dettagliCorso["descrizione"]?></textarea>
+        </div>
+      </div>
+    </div>
 
-<div class="modal-content">
-  <h4 class="blue-text light condensed center" style="margin-bottom:1.5em">Modifica ore</h4>
   <?php
   $result = $db->query("SELECT id, ora, titolo, aula, maxIscritti from lezioni  WHERE idCorso = $idCorso order by ora asc") or die($db->error);
   $i = 0;
@@ -50,7 +87,6 @@ global $_CONFIG;
       else{
         $giorni .= '<option value="'.$num.'" >'.$nome.'</option>';
       }
-
     }
 
     for($j=1;$j<=$_CONFIG['ore_per_giorno'];$j++){

@@ -366,7 +366,7 @@ function cercaStudente(){
 
 }
 
-function mostraOreModifica(id){
+function mostraModalDettagli(id, idDocente){
 	var posting = $.post(
 		'../include/mostraOre.php',
 		{
@@ -376,6 +376,13 @@ function mostraOreModifica(id){
 	posting.done(function(data){
 		$("#modal-ore").html(data);
 		$('select').material_select();
+		var posting = $.post(
+			'../include/generaElencoDocenti.php', {"idDocente":idDocente}
+		);
+		posting.done(function( data ){
+			$("#selezionaDocentiCorso").html('<option value="" disabled selected class="grey-text">Seleziona insegnante</option>'+data);
+			$('select').material_select();
+		});
 		$("#modal-ore").openModal();
 	});
 }

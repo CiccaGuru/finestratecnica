@@ -39,6 +39,10 @@ h3
   margin-left:0.4em !important
 }
 
+.capitalize{
+  text-transform: uppercase;
+}
+
 h5{
   margin-bottom:1em;
 }

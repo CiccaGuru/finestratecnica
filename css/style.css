@@ -558,3 +558,13 @@ footer{
 .small-icon{
   font-size:120%;
 }
+
+
+
+.small-icon-corsi i{
+  font-size:180% !important;
+}
+
+.small-icon-corsi{
+  font-size:100%;
+}
