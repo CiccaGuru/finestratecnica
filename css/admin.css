@@ -25,6 +25,10 @@
   padding-bottom:5%
 }
 
+.animateButtom{
+  transition: all 1 ease;
+}
+
 h3
 {
   font-size:36px;

@@ -105,7 +105,45 @@ global $_CONFIG;
           </p>
         </div>
       </div>
-    </div>
+      <div class="row">
+        <div class="col s2 bold condensed letter-spacing-1">
+          OBBLIGATORIO PER:
+        </div>
+        <div class="col s3 valign">
+          <div class="chip">
+            1 Adl
+            <i class="material-icons">close</i>
+          </div>
+          <a class="waves-effect animateButton row valign-wrapper small-icon-corsi condensed waves-red fill-width fake-button valign red-text" onclick="mostraModalDettagli(<?php echo $dettagli['id'];?>, <?php echo $dettagli["idDocente"];?>)" style="width:98%;">
+            <div class="col s2 offset-s1 valign">
+              <i class="material-icons" style="margin:0px;">add</i>
+            </div>
+            <div class="col s7 valign center-align" style="margin-top:4px;">
+              AGGIUNGI CLASSE
+            </div>
+          </a>
+        </div>
+        <div class="col s2 bold offset-s1 condensed letter-spacing-1">
+          INCOMPATIBILE CON:
+        </div>
+        <div class="col s3 valign">
+          <div class="chip">
+            Italiano 15
+            <i class="material-icons">close</i>
+          </div>
+          <a class="waves-effect animateButton row valign-wrapper small-icon-corsi condensed waves-red fill-width fake-button valign red-text" onclick="mostraModalDettagli(<?php echo $dettagli['id'];?>, <?php echo $dettagli["idDocente"];?>)" style="width:98%;">
+            <div class="col s2 offset-s1 valign">
+              <i class="material-icons" style="margin:0px;">add</i>
+            </div>
+            <div class="col s7 valign center-align" style="margin-top:4px;">
+              AGGIUNGI CORSO
+            </div>
+          </a>
+        </div>
+        </div>
+      </div>
+
+
  <div class="divider" style="margin-bottom:3em;"></div>
   <?php
   $result = $db->query("SELECT id, ora, titolo, aula, maxIscritti from lezioni  WHERE idCorso = $idCorso order by ora asc") or die($db->error);
