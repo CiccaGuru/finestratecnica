@@ -28,24 +28,27 @@ $db = database_connect();
 </head>
 
 <body>
-	<ul id="utenti-dropDown" class="dropdown-content">
-  <li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciStudenti.php">STUDENTI</a></li>
-	<li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciDocenti.php">DOCENTI</a></li>
-</ul>
-	<div class="navbar-fixed">
-		<nav id="intestaz" class="light-blue">
-			<div class="nav-wrapper">
-				<a class="hide-on-small-only left condensed letter-spacing-1" style="margin-left:2%;"> AMMINISTRATORE</a>
-				<a href="#" class="brand-logo center light">Settimana tecnica</a>
-				<ul id="nav-mobile" class="right hide-on-med-and-down">
-					<li class="active"><a href="admin.php" class="waves-effect waves-light condensed">HOME</a></li>
-					<li><a href="gestisciCorsi.php" class="waves-effect waves-light condensed">CORSI</a></li>
-					<li><a href="#!" class="dropdown-button waves-effect waves-light condensed"  data-beloworigin="true" data-hover="true" data-activates="utenti-dropDown">UTENTI<i class="material-icons right">arrow_drop_down</i></a></li>
-					<li><a href="logout.php" class="waves-effect waves-light condensed"><i class="material-icons left">exit_to_app</i>LOGOUT</a></li>
-				</ul>
-			</div>
-		</nav>
-	</div>
+	<nav class="light-blue">
+    <ul id="utenti-dropDown" class="dropdown-content">
+    <li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciStudenti.php">STUDENTI</a></li>
+  	<li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciDocenti.php">DOCENTI</a></li>
+    <li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciCorsi.php">CORSI</a></li>
+    <li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciClassi.php">CLASSI</a></li>
+  </ul>
+  	<div class="navbar-fixed">
+  		<nav id="intestaz" class="light-blue">
+  			<div class="nav-wrapper">
+  				<a class="hide-on-small-only left condensed letter-spacing-1" style="margin-left:2%;"> AMMINISTRATORE</a>
+  				<a href="#" class="brand-logo center light">Settimana tecnica</a>
+  				<ul id="nav-mobile" class="right hide-on-med-and-down">
+  					<li class="active"><a href="admin.php" class="waves-effect waves-light condensed">HOME</a></li>
+  					<li><a href="#!" class="dropdown-button waves-effect active waves-light condensed" data-beloworigin="true" data-hover="true" data-activates="utenti-dropDown">GESTISCI<i class="material-icons right">arrow_drop_down</i></a></li>
+  					<li><a href="logout.php" class="waves-effect waves-light condensed"><i class="material-icons left">exit_to_app</i>LOGOUT</a></li>
+  				</ul>
+  			</div>
+  		</nav>
+  	</div>
+	</nav>
 
 <div class="container">
 	<div class="row more-margin-bottom">

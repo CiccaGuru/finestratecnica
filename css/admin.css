@@ -12,6 +12,10 @@
   font-size:36px;
 }
 
+.littlemargin{
+  margin:5px;
+}
+
 .fake-button .row{
   margin:0px !important;
 }
