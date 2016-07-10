@@ -104,6 +104,7 @@ $result = $db->query("SELECT  corsi.titolo as titolo,
   <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen"/>
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen"/>
   <link href="css/admin.css" type="text/css" rel="stylesheet" media="screen"/>
+  <link rel="stylesheet" href="css/material-scrolltop.css">
 </head>
 
 <body>
@@ -366,8 +367,21 @@ $result = $db->query("SELECT  corsi.titolo as titolo,
         </div>
       </div>
     </div>
+  </div>
     <script src="js/jquery-2.1.4.min.js"></script>
     <script src="js/materialize.js"></script>
     <script src="js/init.js"></script>
     <script src="js/admin.js"></script>
+
+    <button class="material-scrolltop" type="button"><i class="material-icons white-text">keyboard_arrow_up</i></button>
+
+    <!-- material-scrolltop plugin -->
+    <script src="js/material-scrolltop.js"></script>
+
+    <!-- Initialize material-scrolltop with (minimal) -->
+    <script>
+      $('body').materialScrollTop();
+    </script>
 </body>
+<?php
+$db->close(); ?>
