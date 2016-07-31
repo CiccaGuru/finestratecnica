@@ -133,21 +133,23 @@ function aggiungiCorso() {
             "classi[]": $("#selezionaClassi").val()
         }
     );
+    idCorso = -1;
     posting_corso.done(function(data) {
         if (isNaN(data)) {
             Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Si è verificato un errore (1). Controlla la console', 4000);
             console.log(data);
         } else {
+            idCorso = data
             res = 1;
             $(".ora_da_inserire").each(function(i) {
                 console.log("ORA");
                 var ora = (parseInt($("#selezionaGiorno" + i).val()) - 1) * 6 + parseInt($("#selezionaOra" + i).val());
                 var posting = $.post(
                     '../include/aggiungiOra.php', {
-                        idcorso: data,
-                        titolo: $("#nomeOra" + i).val(),
-                        ora: ora,
-                        idAula: $("#selezionaAula" + i).val()
+                        "idcorso": idCorso,
+                        "titolo": $("#nomeOra" + i).val(),
+                        "ora": ora,
+                        "idAula": $("#selezionaAula" + i).val()
                     });
                 posting.done(function(data) {
                     if (!(data == "SUCCESS INSERT ORA")) {
@@ -158,8 +160,12 @@ function aggiungiCorso() {
                     }
                 });
             });
-            if (res == 1)
+            if (res == 1){
                 Materialize.toast('<i class="material-icons green-text style="margin-right:0.25em">done</i> Corso aggiunto con successo!', 4000);
+                aggiornaListaCorsi();
+            }else{
+              eliminaCorso(idCorso);
+            }
         }
     });
 
@@ -387,26 +393,21 @@ function mostraModalDettagli(id, idDocente) {
             }
         );
         posting.done(function(data) {
-            $("#selezionaDocentiCorso").html('<option value="" disabled selected class="grey-text">Seleziona insegnante</option>' + data);
+            $("#docenteCorsoModifica").html('<option value="" disabled selected class="grey-text">Seleziona insegnante</option>' + data);
             $('select').material_select();
         });
         $("#modal-ore").openModal();
     });
 }
 
-function modificaCorso(id) {
-    var posting = $.post(
-        '../include/modificaCorsi.php', {
-            idCorso: id,
-            titolo: $("#titoloCorso" + id).val(),
-            descrizione: $("#descrizioneCorso" + id).val(),
-            continuita: $("#continuitaCorso" + id).val(),
-            tipo: $("#tipoCorso" + id).val()
-        }
-    );
+function eliminaCorso(id){
+    console.log("cane");
+    var posting = $.post("../include/eliminaCorso.php", {
+      "id":id
+    });
     posting.done(function(data) {
         if (data == "SUCCESS") {
-            Materialize.toast('Corso modificato con successo!', 4000);
+            aggiornaListaCorsi();
         } else {
             Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Si è verificato un errore. Controlla la console', 4000);
             console.log(data);
@@ -428,6 +429,13 @@ function eliminaClasse(id) {
     });
 }
 
+function aggiornaListaCorsi(){
+  var posting = $.post('../include/elencoCorsi.php');
+  posting.done(function(data) {
+      $("#dettagliCorsi").html(data);
+  });
+}
+
 function aggiornaListaSezioni() {
     var posting = $.post('../include/elencoSezioni.php', {
         1: 1
@@ -439,6 +447,22 @@ function aggiornaListaSezioni() {
 
 function applicaModificaOre(idCorso) {
     console.log("CIAO");
+    var posting = $.post(
+      '../include/modificaCorso.php',
+      {
+          "id":idCorso,
+          "titolo":$("#titoloCorsoModifica").val(),
+          "idDocente":$("#docenteCorsoModifica").val(),
+          "tipo": $("input[name=tipoCorsoModifica]:checked").val(),
+          "continuita": $("input[name=continuitaCorsoModifica]:checked").val(),
+          "descrizione":$("#descrizioneCorsoModifica").val(),
+          "classi[]":$("#classiCorsoModifica").val()
+      }
+    );
+    posting.done(function(data){
+      console.log(data);
+    });
+/*
     $("#modal-ore .row").each(function(i) {
         var ora = (parseInt($("#selezionaGiornoModificaOre" + i).val()) - 1) * 6 + parseInt($("#selezionaOraModificaOre" + i).val());
         var posting = $.post(
@@ -459,10 +483,10 @@ function applicaModificaOre(idCorso) {
             } else {
                 Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Si è verificato un errore (3). Controlla la console', 4000);
                 console.log(data);
-
             }
         });
     });
+    */
 }
 
 
@@ -470,6 +494,7 @@ function applicaModificaOre(idCorso) {
     $(function() {
         aggiornaListaDocenti();
         aggiornaListaSezioni();
+        aggiornaListaCorsi();
         $('.modal-trigger').leanModal();
         $("#aggiungi-docente").submit(function(e) {
             e.preventDefault();
