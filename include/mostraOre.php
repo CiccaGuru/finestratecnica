@@ -17,9 +17,134 @@ $idCorso = $_POST["idCorso"];
 $ore=$_POST["ore"];
 global $_CONFIG;
 ?>
+  <?php
+  $result = $db->query("SELECT  corsi.titolo AS titolo,
+                                corsi.descrizione AS descrizione,
+                                corsi.iddocente AS iddocente,
+                                corsi.id as id,
+                                corsi.continuita as continuita,
+                                corsi.tipo as tipo,
+                                utenti.nome as nome,
+                                utenti.cognome as cognome
+                        FROM    corsi, utenti
+                        WHERE   (utenti.id = corsi.iddocente) AND
+                                corsi.id = '$idCorso'") or die($db->error);
+  $dettagliCorso=$result->fetch_assoc();
+  ?>
+  <div class="modal-content">
+    <h4 class="blue-text light condensed center" style="margin-bottom:1.5em">Dettagli corso</h4>
+    <div id="dettagliCorsoAdmin">
+      <div class="row valign-wrapper">
+        <div class="col s1 valign bold condensed letter-spacing-1">TITOLO:</div>
+        <div class="input-field valign col s4">
+          <input value="<?php echo $dettagliCorso["titolo"]?>" id="titoloCorso" type="text">
+        </div>
+        <div class="col s1 bold valign condensed letter-spacing-1">PROF:</div>
+        <div class="col s2 valign">
+          <select id="selezionaDocentiCorso">
+            <option value="" disabled selected class="grey-text">Seleziona insegnante</option>
+          </select>
+        </div>
+        <div class="col s2 condensed">
+          <p>
+            <input name="tipo" value="0" type="radio" id="recupero" <?php if(!$dettagliCorso["tipo"]) echo "checked";?>/>
+            <label class="black-text" for="recupero">Recupero</label>
+          </p>
+          <p>
+            <input name="tipo" value="1" type="radio" id="approfondimento" <?php if($dettagliCorso["tipo"]) echo "checked";?>/>
+            <label class="black-text" for="approfondimento">Approfondimento</label>
+          </p>
+         </div>
+        <div class="col s2  condensed">
+          <p>
+            <input name="continuita" value="1" type="radio" id="con_continuita" <?php if($dettagliCorso["tipo"]) echo "checked";?>/>
+            <label class="black-text" for="con_continuita">Con continuità</label>
+          </p>
+          <p>
+            <input name="continuita" value="0" type="radio" id="senza_continuita" <?php if(!$dettagliCorso["tipo"]) echo "checked";?>/>
+            <label class="black-text" for="senza_continuita">Senza continuità</label>
+          </p>
+        </div>
+      </div>
+      <div class="row valign-wrapper">
+        <div class="col s2 bold  valign condensed letter-spacing-1">DESCRIZIONE:</div>
+        <div class="col s7 valign">
+          <textarea id="descrizioneCorso" class="materialize-textarea"><?php echo $dettagliCorso["descrizione"]?></textarea>
+        </div>
+        <div class="col s1 offset-s1 bold valign condensed letter-spacing-1">CLASSI: </div>
+        <div class="col s2">
 
-<div class="modal-content">
-  <h4 class="blue-text light condensed center" style="margin-bottom:1.5em">Modifica ore</h4>
+          <?php
+            $resultClassi = $db->query("SELECT classe from corsi_classi where id_corso = '$idCorso'") or die($db->error);
+            while($classe = $resultClassi->fetch_assoc()){
+              $elencoClassi[]=$classe["classe"];
+            }
+
+          ?>
+          <p class="littlemargin">
+            <input type="checkbox" class="filled-in" id="prime" <?php if(in_array(1, $elencoClassi)) echo "checked";?> />
+            <label for="prime">Prime</label>
+          </p>
+          <p class="littlemargin">
+            <input type="checkbox" class="filled-in" id="seconde" <?php if(in_array(2, $elencoClassi)) echo "checked";?>/>
+            <label for="seconde">Seconde</label>
+          </p>
+          <p class="littlemargin">
+            <input type="checkbox" class="filled-in" id="terze" <?php if(in_array(3, $elencoClassi)) echo "checked";?> />
+            <label for="terze">Terze</label>
+          </p>
+        </div>
+        <div class="col s2">
+          <p class="littlemargin">
+            <input type="checkbox" class="filled-in" id="quarte" <?php if(in_array(4, $elencoClassi)) echo "checked";?>/>
+            <label for="quarte">Quarte</label>
+          </p>
+          <p class="littlemargin">
+            <input type="checkbox" class="filled-in" id="quinte" <?php if(in_array(5, $elencoClassi)) echo "checked";?> />
+            <label for="quinte">Quinte</label>
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s2 bold condensed letter-spacing-1">
+          OBBLIGATORIO PER:
+        </div>
+        <div class="col s3 valign">
+          <div class="chip">
+            1 Adl
+            <i class="material-icons">close</i>
+          </div>
+          <a class="waves-effect animateButton row valign-wrapper small-icon-corsi condensed waves-red fill-width fake-button valign red-text" onclick="mostraModalDettagli(<?php echo $dettagli['id'];?>, <?php echo $dettagli["idDocente"];?>)" style="width:98%;">
+            <div class="col s2 offset-s1 valign">
+              <i class="material-icons" style="margin:0px;">add</i>
+            </div>
+            <div class="col s7 valign center-align" style="margin-top:4px;">
+              AGGIUNGI CLASSE
+            </div>
+          </a>
+        </div>
+        <div class="col s2 bold offset-s1 condensed letter-spacing-1">
+          INCOMPATIBILE CON:
+        </div>
+        <div class="col s3 valign">
+          <div class="chip">
+            Italiano 15
+            <i class="material-icons">close</i>
+          </div>
+          <a class="waves-effect animateButton row valign-wrapper small-icon-corsi condensed waves-red fill-width fake-button valign red-text" onclick="mostraModalDettagli(<?php echo $dettagli['id'];?>, <?php echo $dettagli["idDocente"];?>)" style="width:98%;">
+            <div class="col s2 offset-s1 valign">
+              <i class="material-icons" style="margin:0px;">add</i>
+            </div>
+            <div class="col s7 valign center-align" style="margin-top:4px;">
+              AGGIUNGI CORSO
+            </div>
+          </a>
+        </div>
+        </div>
+      </div>
+
+
+ <div class="divider" style="margin-bottom:3em;"></div>
   <?php
   $result = $db->query("SELECT id, ora, titolo, aula, maxIscritti from lezioni  WHERE idCorso = $idCorso order by ora asc") or die($db->error);
   $i = 0;
@@ -50,7 +175,6 @@ global $_CONFIG;
       else{
         $giorni .= '<option value="'.$num.'" >'.$nome.'</option>';
       }
-
     }
 
     for($j=1;$j<=$_CONFIG['ore_per_giorno'];$j++){

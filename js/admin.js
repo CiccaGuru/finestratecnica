@@ -374,17 +374,25 @@ function cercaStudente() {
 
 }
 
-function mostraOreModifica(id) {
-    var posting = $.post(
-        '../include/mostraOre.php', {
-            idCorso: id
-        }
-    );
-    posting.done(function(data) {
-        $("#modal-ore").html(data);
-        $('select').material_select();
-        $("#modal-ore").openModal();
-    });
+function mostraModalDettagli(id, idDocente){
+	var posting = $.post(
+		'../include/mostraOre.php',
+		{
+			idCorso:id
+		}
+	);
+	posting.done(function(data){
+		$("#modal-ore").html(data);
+		$('select').material_select();
+		var posting = $.post(
+			'../include/generaElencoDocenti.php', {"idDocente":idDocente}
+		);
+		posting.done(function( data ){
+			$("#selezionaDocentiCorso").html('<option value="" disabled selected class="grey-text">Seleziona insegnante</option>'+data);
+			$('select').material_select();
+		});
+		$("#modal-ore").openModal();
+	});
 }
 
 function modificaCorso(id) {
@@ -404,34 +412,6 @@ function modificaCorso(id) {
             Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Si è verificato un errore. Controlla la console', 4000);
             console.log(data);
         }
-    });
-}
-
-function applicaModificaOre(idCorso) {
-    console.log("CIAO");
-    $("#modal-ore .row").each(function(i) {
-        var ora = (parseInt($("#selezionaGiornoModificaOre" + i).val()) - 1) * 6 + parseInt($("#selezionaOraModificaOre" + i).val());
-        var posting = $.post(
-            '../include/modificaOra.php', {
-                idLezione: $("#row" + i).data("idlezione"),
-                titolo: $("#titoloModificaOre" + i).val(),
-                ora: ora,
-                aula: $("#aulaModificaOre" + i).val(),
-                maxIscritti: $("#maxIscrittiModificaOre" + i).val()
-            });
-        posting.done(function(data) {
-            if (data == "SUCCESS") {
-                Materialize.toast('Modifica effettuata con successo', 4000);
-            } else if (data == "MAXISCRITTI_ERROR") {
-                Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Numero massimo di iscritti inferiore agli iscritti!', 4000);
-            } else if (data == "DOMENICA_ERROR") {
-                Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Non è possibile modificare l\'ora: ci sono studenti iscritti.', 4000);
-            } else {
-                Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Si è verificato un errore (3). Controlla la console', 4000);
-                console.log(data);
-
-            }
-        });
     });
 }
 
@@ -498,26 +478,6 @@ function applicaModificaOre(idCorso) {
             }
         });
 
-        $("#aggiungi-aula").submit(function(e) {
-            e.preventDefault();
-						var posting = $.post(
-								'../include/aggiungiAula.php', {
-										submit: 1,
-										nomeAula: $("#nomeAula").val(),
-										maxStudenti: $("#maxStudenti").val()
-								});
-						posting.done(function(data) {
-								if (data == "SUCCESS") {
-										Materialize.toast('Aula aggiunto con successo!', 4000);
-								} else if (data == "EXISTS") {
-										Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Aula già esistente', 4000);
-										console.log(data);
-								} else {
-										Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Si è verificato un errore, controlla la console', 4000);
-										console.log(data);
-								}
-						});
-        });
 
         $("#inserisciOre").on("click", function() {
             var val = $("#ore").val();
@@ -546,4 +506,186 @@ function applicaModificaOre(idCorso) {
             }
         });
     });
+
+function eliminaClasse(id){
+	var posting = $.post('../include/eliminaClasse.php',{"id":id});
+	posting.done(function(data){
+		if(data == "SUCCESS"){
+			aggiornaListaSezioni();
+		}
+		else{
+			Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Si è verificato un errore. Controlla la console', 4000);
+			console.log(data);
+		}
+	});
+}
+function aggiornaListaSezioni(){
+	var posting = $.post('../include/elencoSezioni.php',{1:1});
+	posting.done(function(data){
+		$("#dettagliSezioni").html('	<li class="collection-header blue-text center"><h4 class="condensed light">ELENCO SEZIONI</h4></li>'+data);
+	});
+}
+
+function applicaModificaOre(idCorso) {
+    console.log("CIAO");
+    $("#modal-ore .row").each(function(i) {
+        var ora = (parseInt($("#selezionaGiornoModificaOre" + i).val()) - 1) * 6 + parseInt($("#selezionaOraModificaOre" + i).val());
+        var posting = $.post(
+            '../include/modificaOra.php', {
+                idLezione: $("#row" + i).data("idlezione"),
+                titolo: $("#titoloModificaOre" + i).val(),
+                ora: ora,
+                aula: $("#aulaModificaOre" + i).val(),
+                maxIscritti: $("#maxIscrittiModificaOre" + i).val()
+            });
+        posting.done(function(data) {
+            if (data == "SUCCESS") {
+                Materialize.toast('Modifica effettuata con successo', 4000);
+            } else if (data == "MAXISCRITTI_ERROR") {
+                Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Numero massimo di iscritti inferiore agli iscritti!', 4000);
+            } else if (data == "DOMENICA_ERROR") {
+                Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Non è possibile modificare l\'ora: ci sono studenti iscritti.', 4000);
+            } else {
+                Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Si è verificato un errore (3). Controlla la console', 4000);
+                console.log(data);
+
+            }
+        });
+    });
+}
+
+(function($){
+	$(function(){
+		aggiornaListaDocenti();
+		aggiornaListaSezioni();
+		$('.modal-trigger').leanModal();
+		$("#aggiungi-docente").submit(function(e){
+			e.preventDefault();
+			if($("#password").val() !=$("#ripeti_password").val())
+				 Materialize.toast('Le due password non coincidono!', 4000);
+			else{
+				var posting = $.post(
+					'../include/aggiungiDocente.php',
+					{submit: 1, username: $("#username").val(), password: $("#password").val(), nome: $("#nome").val(), cognome: $("#cognome").val()}
+				);
+				posting.done(function( data ){
+					if(data=="SUCCESS"){
+						 Materialize.toast('Docente aggiunto con successo!', 4000);
+					}
+					else if (data=="EXISTS")
+					{
+						Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Nome utente già esistente', 4000);
+						console.log(data);
+					}
+					else{
+						 Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Si è verificato un errore, controlla la console', 4000);
+						console.log(data);
+					}
+
+				});
+			}
+		});
+
+		$("#aggiungiClasse").on("click", function(){
+			var posting = $.post(
+				'../include/creaClasse.php',
+				{
+					"classe":$("#selezionaClasseStudente").val(),
+					"sezione":$("#sezione").val()
+				}
+			);
+			posting.done(function(data){
+				if(data == "SUCCESS"){
+					 Materialize.toast('Classe creata con successo!', 4000);
+					 aggiornaListaSezioni();
+				}
+				else{
+					 Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Si è verificato un errore, controlla la console', 4000);
+					 console.log(data);
+				}
+			});
+		});
+
+		$("#aggiungi-studente").submit(function(e){
+			e.preventDefault();
+			if($("#passwordStudente").val() !=$("#ripeti_passwordStudente").val())
+				 Materialize.toast('Le due password non coincidono!', 4000);
+			else{
+				var posting = $.post(
+					'../include/aggiungiStudente.php',
+					{
+						submit: 1,
+						username: $("#usernameStudente").val(),
+						classe: $("#selezionaClasseStudente").val(),
+						password: $("#passwordStudente").val(),
+						nome: $("#nomeStudente").val(),
+						cognome: $("#cognomeStudente").val()}
+				);
+				posting.done(function( data ){
+					if(data=="SUCCESS"){
+						 Materialize.toast('Studente aggiunto con successo!', 4000);
+					}
+					else if (data=="EXISTS")
+					{
+						Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Nome utente già esistente', 4000);
+						console.log(data);
+					}
+					else{
+						 Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Si è verificato un errore, controlla la console', 4000);
+						console.log(data);
+					}
+
+				});
+			}
+		});
+
+		$("#inserisciOre").on("click", function(){
+			var val = $("#ore").val();
+			$("#ore_future").hide();
+			if(val == "" || isNaN(val))
+				Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Numero di ore non valido', 4000);
+			else if(val>20)
+				Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Numero di ore troppo alto, massimo 20', 4000);
+			else{
+				$("#wait").css("height:100%");
+				$("#wait").fadeIn();
+				var posting = $.post(
+					'../include/creaOre.php',
+					{ore: val}
+				);
+				posting.done(function( data ){
+					$("#ore_future").html('<ul id="elenco_ore">'+data+'</ul> ');
+					$("#elenco_ore").css("opacity: 0");
+					$('#ore_future').show().css("opacity:0");
+					$("#elenco_ore").fadeIn();
+					$('select').material_select();
+					$("#aggiungiCorso").removeClass("disabled");
+					$("#wait").fadeOut();
+				});
+
+			}
+		});
+
+		        $("#aggiungi-aula").submit(function(e) {
+		            e.preventDefault();
+								var posting = $.post(
+										'../include/aggiungiAula.php', {
+												submit: 1,
+												nomeAula: $("#nomeAula").val(),
+												maxStudenti: $("#maxStudenti").val()
+										});
+								posting.done(function(data) {
+										if (data == "SUCCESS") {
+												Materialize.toast('Aula aggiunto con successo!', 4000);
+										} else if (data == "EXISTS") {
+												Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Aula già esistente', 4000);
+												console.log(data);
+										} else {
+												Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Si è verificato un errore, controlla la console', 4000);
+												console.log(data);
+										}
+								});
+		        });
+
+	  });
 })(jQuery);

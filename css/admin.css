@@ -12,6 +12,10 @@
   font-size:36px;
 }
 
+.littlemargin{
+  margin:5px;
+}
+
 .fake-button .row{
   margin:0px !important;
 }
@@ -19,6 +23,10 @@
   padding-left:5%;
   padding-right:5%;
   padding-bottom:5%
+}
+
+.animateButtom{
+  transition: all 1 ease;
 }
 
 h3
@@ -37,6 +45,10 @@ h3
 
 .c100{
   margin-left:0.4em !important
+}
+
+.capitalize{
+  text-transform: uppercase;
 }
 
 h5{

@@ -86,6 +86,7 @@ $result = $db->query("SELECT  corsi.titolo as titolo,
                               corsi.tipo as tipo,
                               utenti.nome as nome,
                               utenti.cognome as cognome,
+                              utenti.id as idDocente,
                               corsi.id as id
                       FROM corsi,utenti
                       WHERE (utenti.id = corsi.iddocente) AND ($condizione)
@@ -102,6 +103,18 @@ $result = $db->query("SELECT  corsi.titolo as titolo,
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen"/>
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen"/>
+  <link href="css/admin.css" type="text/css" rel="stylesheet" media="screen"/>
+  <link rel="stylesheet" href="css/material-scrolltop.css">
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="/img/favicons/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/img/favicons/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="/img/favicons/manifest.json">
+<link rel="mask-icon" href="/img/favicons/safari-pinned-tab.svg" color="#f44336">
+<link rel="shortcut icon" href="/img/favicons/favicon.ico">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="msapplication-TileImage" content="/img/favicons/mstile-144x144.png">
+<meta name="msapplication-config" content="/img/favicons/browserconfig.xml">
+<meta name="theme-color" content="#03a9f4">
 </head>
 
 <body>
@@ -110,6 +123,8 @@ $result = $db->query("SELECT  corsi.titolo as titolo,
     <ul id="utenti-dropDown" class="dropdown-content">
     <li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciStudenti.php">STUDENTI</a></li>
   	<li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciDocenti.php">DOCENTI</a></li>
+    <li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciCorsi.php">CORSI</a></li>
+    <li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciClassi.php">CLASSI</a></li>
   </ul>
   	<div class="navbar-fixed">
   		<nav id="intestaz" class="light-blue">
@@ -118,8 +133,7 @@ $result = $db->query("SELECT  corsi.titolo as titolo,
   				<a href="#" class="brand-logo center light">Settimana tecnica</a>
   				<ul id="nav-mobile" class="right hide-on-med-and-down">
   					<li><a href="admin.php" class="waves-effect waves-light condensed">HOME</a></li>
-  					<li class="active"><a href="gestisciCorsi.php" class="waves-effect waves-light condensed">CORSI</a></li>
-  					<li><a href="#!" class="dropdown-button waves-effect waves-light condensed" data-beloworigin="true" data-hover="true" data-activates="utenti-dropDown">UTENTI<i class="material-icons right">arrow_drop_down</i></a></li>
+  					<li class="active"><a href="#!" class="dropdown-button waves-effect active waves-light condensed" data-beloworigin="true" data-hover="true" data-activates="utenti-dropDown">GESTISCI<i class="material-icons right">arrow_drop_down</i></a></li>
   					<li><a href="logout.php" class="waves-effect waves-light condensed"><i class="material-icons left">exit_to_app</i>LOGOUT</a></li>
   				</ul>
   			</div>
@@ -278,47 +292,43 @@ $result = $db->query("SELECT  corsi.titolo as titolo,
               </form>
           </li>
           <?php
-
-
-          while($dettagli = $result->fetch_assoc()){
+            while($dettagli = $result->fetch_assoc()){
           ?>
           <li class="collection-item">
             <div class="row valign-wrapper" style="margin-bottom:0px;">
-
-            <div class="col s1 valign bold">
-              <i class="material-icons waves-effect waves-red red-text waves-circle" style="border-radius:50%; display:inline; margin:0em;">close</i>
-              <span class="condensed" style="margin-left:0.5em;">ID: <?php echo $dettagli["id"];?></span>
-            </div>
-            <div class="input-field col valign s2">
-              <input id="titoloCorso<?php echo $dettagli["id"];?>" type="text" class="validate" value="<?php echo $dettagli["titolo"];?>" required>
-              <label class="condensed" for="titoloCorso<?php echo $dettagli["id"];?>">Titolo</label>
-            </div>
-            <div class="input-field col valign s3">
-              <input id="descrizioneCorso<?php echo $dettagli["id"];?>" type="text" class="validate" value="<?php echo $dettagli["descrizione"];?>" required>
-              <label class="condensed" for="descrizioneCorso<?php echo $dettagli["id"];?>">Descrizione</label>
-            </div>
-            <div class="input-field col valign s2">
-              <input id="professoreCorso<?php echo $dettagli["id"];?>" type="text" class="validate" style="color: black" disabled value="<?php echo $dettagli["nome"][0].". ".$dettagli["cognome"];?>" required>
-              <label class="condensed" for="professoreCorso<?php echo $dettagli["id"];?>">Professore</label>
-            </div>
-            <div class="input-field col s1">
-              <select id="continuitaCorso<?php echo $dettagli["id"];?>">
-                <option value="1" <?php if($dettagli["continuita"]) echo "selected"?>>Con</option>
-                <option value="0" <?php if(!$dettagli["continuita"]) echo "selected"?>>Senza</option>
-              </select>
-              <label class="condensed">Continuita</label>
-            </div>
-            <div class="input-field col s1">
-              <select id="tipoCorso<?php echo $dettagli["id"];?>">
-                <option value="0" <?php if(!$dettagli["tipo"]) echo "selected"?>>Recupero</option>
-                <option value="1" <?php if($dettagli["tipo"]) echo "selected"?>>Approf.</option>
-              </select>
-              <label>Tipo</label>
-            </div>
-            <div class="col s2 center valign condensed">
-              <a onclick='modificaCorso(<?php echo $dettagli['id'];?>)' class="waves-effect waves-red center-align btn-flat red-text valign" style="width:98%;" >Modifica</a>
-              <a class="waves-effect waves-red center-align btn-flat red-text valign" onclick="mostraOreModifica(<?php echo $dettagli['id'];?>)" style="width:98%;">MOstra lezioni</a>
-            </div>
+              <div class="col s1 valign bold">
+                <i class="material-icons waves-effect waves-red red-text waves-circle" style="border-radius:50%; display:inline; margin:0em;">close</i>
+                <span class="condensed" style="margin-left:0.5em;">ID: <?php echo $dettagli["id"];?></span>
+              </div>
+              <div class="col s2 valign center-align bold condensed capitalize" style="font-size:105%";>
+                <?php echo $dettagli["titolo"];?>
+              </div>
+              <div class="col s3 valign">
+                <?php echo $dettagli["descrizione"];?>
+              </div>
+              <div class="col s2 valign center-align condensed bold">
+                <?php
+                  if($dettagliCorso["iddocente"] == '0'){
+                    echo "<span class='italic'>Docenti vari</span>";
+                  }
+                  else {
+                    echo $dettagli["nome"][0].'. '.$dettagli["cognome"];
+                  }
+              ?>
+              </div>
+              <div class="col s2 valign center-align capitalize condensed">
+                <p style="margin: 0.4em;">
+                  <?php if(!$dettagli["tipo"]) echo "Recupero"; else echo "Approfondimento";?>
+                </p>
+                <p style="margin:0.4em;">
+                  <?php if($dettagli["continuita"]) echo "Con continuità"; else echo "Senza continuità";?>
+                </p>
+              </div>
+              <div class="col s2 center valign condensed">
+                <a class="waves-effect small-icon-corsi condensed waves-red fill-width fake-button valign red-text" onclick="mostraModalDettagli(<?php echo $dettagli['id'];?>, <?php echo $dettagli["idDocente"];?>)" style="width:98%;">
+                  <i class="material-icons">more_horiz</i> <br/>DETTAGLI
+                </a>
+              </div>
             </div>
           </li><?php
         }
@@ -353,7 +363,7 @@ $result = $db->query("SELECT  corsi.titolo as titolo,
       </div>
     </div>
 
-  <div id="modal-ore" class="modal modal-fixed-footer bottom-sheet">
+  <div id="modal-ore" class="modal modal-fixed-footer bottom-sheet" style="height:87%;">
 
   </div>
 
@@ -367,8 +377,21 @@ $result = $db->query("SELECT  corsi.titolo as titolo,
         </div>
       </div>
     </div>
+  </div>
     <script src="js/jquery-2.1.4.min.js"></script>
     <script src="js/materialize.js"></script>
     <script src="js/init.js"></script>
     <script src="js/admin.js"></script>
+
+    <button class="material-scrolltop" type="button"><i class="material-icons white-text">keyboard_arrow_up</i></button>
+
+    <!-- material-scrolltop plugin -->
+    <script src="js/material-scrolltop.js"></script>
+
+    <!-- Initialize material-scrolltop with (minimal) -->
+    <script>
+      $('body').materialScrollTop();
+    </script>
 </body>
+<?php
+$db->close(); ?>
