@@ -34,7 +34,7 @@ if(isset($_POST["username"]) && ($_POST["username"]!="")){
   $resultAA = $db->query("SELECT id FROM utenti WHERE (username LIKE '".$_POST["username"]."' or nome like  '".$_POST["username"]."' or cognome like '".$_POST["username"]."') and level = '0'") or  die('ERRORE: B' . $db->error);
 }
 else{
-  $result = $db->query("SELECT * FROM utenti WHERE level='0' ORDER BY cognome, nome LIMIT ".(($page-1)*$quanti+1).", ".$quanti) or  die('ERRORE: SDR' . $db->error);
+  $result = $db->query("SELECT * FROM utenti WHERE level='0' ORDER BY cognome, nome LIMIT ".(($page-1)*$quanti).", ".$quanti) or  die('ERRORE: SDR' . $db->error);
   $resultAA = $db->query("SELECT * FROM utenti WHERE level='0'") or  die('ERRORE: ' . $db->error);
 }
 

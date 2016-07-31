@@ -27,17 +27,8 @@ else{
 }
 $db = database_connect();
 
-if(isset($_POST["username"]) && ($_POST["username"]!="")){
-  $filtro = $_POST["username"];
-  $result = $db->query("SELECT * FROM utenti WHERE (username LIKE '$filtro' or nome like  '$filtro' or cognome like '$filtro') and level = '1'  ORDER BY cognome,nome LIMIT ".(($page-1)*$quanti).", ".$quanti) or  die('ERRORE: ' . $db->error);
-  $resultAA = $db->query("SELECT id FROM utenti WHERE (username LIKE '".$_POST["username"]."' or nome like  '".$_POST["username"]."' or cognome like '".$_POST["username"]."') and level = '1'") or  die('ERRORE: ' . $db->error);
-}
-else{
-  $result = $db->query("SELECT * FROM utenti WHERE level='1' ORDER BY cognome, nome LIMIT ".(($page-1)*$quanti).", ".$quanti) or  die('ERRORE: R' . $db->error);
-  $resultAA = $db->query("SELECT * FROM utenti WHERE level='1'") or  die('ERRORE: ' . $db->error);
-}
+$result = $db->query("SELECT * FROM aule");
 
-$num = $resultAA->num_rows;
 ?>
 
 <!DOCTYPE html>
@@ -45,7 +36,7 @@ $num = $resultAA->num_rows;
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-  <title>Admin - Docenti</title>
+  <title>Admin - Aule</title>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen"/>
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen"/>
@@ -65,8 +56,9 @@ $num = $resultAA->num_rows;
   				<a href="#" class="brand-logo center light">Settimana tecnica</a>
   				<ul id="nav-mobile" class="right hide-on-med-and-down">
   					<li><a href="admin.php" class="waves-effect waves-light condensed">HOME</a></li>
+            <li class="active"><a href="gestisciAule.php" class="waves-effect waves-light condensed">AULE</a></li>
   					<li><a href="gestisciCorsi.php" class="waves-effect waves-light condensed">CORSI</a></li>
-  					<li class="active"><a href="#!" class="dropdown-button waves-effect waves-light condensed" data-beloworigin="true" data-hover="true" data-activates="utenti-dropDown">UTENTI<i class="material-icons right">arrow_drop_down</i></a></li>
+  					<li><a href="#!" class="dropdown-button waves-effect waves-light condensed" data-beloworigin="true" data-hover="true" data-activates="utenti-dropDown">UTENTI<i class="material-icons right">arrow_drop_down</i></a></li>
   					<li><a href="logout.php" class="waves-effect waves-light condensed"><i class="material-icons left">exit_to_app</i>LOGOUT</a></li>
   				</ul>
   			</div>
@@ -76,46 +68,33 @@ $num = $resultAA->num_rows;
 
   <div class="container"  style="margin-top:3em;">
   <div class="card">
-    <form id="aggiungi-docente">
+    <form id="aggiungi-aula">
       <div class="card-content center-align"  style="padding-left:5%; padding-right:5%; padding-bottom:5%">
-        <span class="card-title blue-text center-align condensed">Aggiungi un nuovo docente</span>
-        <div class="row">
-          <div class="input-field col s4">
-            <input id="nome" type="text" class="validate" required>
-            <label class="condensed" for="last_name">Nome</label>
+        <div class="card-title blue-text center-align condensed" style="margin-bottom:1em;">Aggiungi una nuova aula</div>
+        <div class="row valign-wrapper">
+          <div class="input-field col s4 offset-s1 valign">
+            <input id="nomeAula" type="text" class="validate" required>
+            <label class="condensed" for="nomeAula">Nome aula</label>
           </div>
-          <div class="input-field col s4">
-            <input id="cognome" type="text" class="validate" required>
-            <label class="condensed" for="last_name">Cognome</label>
+          <div class="input-field col s3 valign">
+            <input id="maxStudenti" type="text" class="validate" required>
+            <label class="condensed" for="maxStudenti">Numero studenti</label>
           </div>
-          <div class="input-field col s4">
-            <input id="username" type="text" class="validate" required>
-            <label class="condensed" for="last_name">Nome utente</label>
-          </div>
+          <div class="col s3 valign">
+          <button type="submit" class="waves-effect waves-light btn-large red condensed">
+            <i class="material-icons left">add_location</i>Aggiungi
+          </button>
         </div>
-        <div class="row">
-          <div class="input-field col s4">
-            <input id="password" type="password" class="validate" required>
-            <label class="condensed" for="last_name">Password</label>
-          </div>
-          <div class="input-field col s4">
-            <input id="ripeti_password" type="password" class="validate" required>
-            <label class="condensed" for="last_name">Ripeti password</label>
-          </div>
-          <div class="col s4 center">
-            <button type="submit" class="waves-effect waves-light btn-large red condensed">
-              <i class="material-icons left">person_add</i>Aggiungi</button>
-          </div>
         </div>
       </div>
     </form>
   </div>
 </div>
-<div class="container" style="width:90%">
-  <ul class="collection with-header z-depth-1" id="dettagliDocenti">
-    <li class="collection-header blue-text center"><h4 class="condensed light">ELENCO DOCENTI</h4></li>
+<div class="container" style="width:70%">
+  <ul class="collection with-header z-depth-1" id="dettagliAule">
+    <li class="collection-header blue-text center"><h4 class="condensed light">ELENCO AULE</h4></li>
     <li class="collection-item center">
-      <form  action="gestisciDocenti.php" method="POST">
+      <form  action="gestisciAule.php" method="POST">
         <div class="row">
           <div class="col s2" style="font-size:120%; margin-top:0.5em">
             <p class="condensed red-text">
@@ -150,7 +129,7 @@ $num = $resultAA->num_rows;
   <?php
   if($result->num_rows==0){
     ?>  <li class="collection-item">
-          <div class="red-text condensed center-align" style="font-size:150%; margin:1em;">Nessun risultato trovato</div>
+          <div class="red-text condensed center-align" style="font-size:150%; margin:1em;">Nessuna aula</div>
         </li>
       <?php
   }
@@ -158,38 +137,22 @@ $num = $resultAA->num_rows;
     { ?>
       <li class="collection-item row valign-wrapper">
         <div class="col s1 red-text">
-            <i class="material-icons waves-effect waves-red waves-circle" style="border-radius:50%;" onclick="eliminaUtente(<?php echo $row["id"]?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>', 1)">close</i>
+            <i class="material-icons waves-effect waves-red waves-circle" style="border-radius:50%;" onclick="eliminaAula(<?php echo $row["id"]?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>', 1)">close</i>
         </div>
-        <div class="col s1 bold">
+        <div class="col s2 bold">
           ID: <?php echo $row["id"];?>
         </div>
-        <div class="input-field col s2 valign">
-          <input id="nome<?php echo $row['id']; ?>" type="text" class="validate valign" value="<?php echo $row['nome']; ?>" required>
-            <label for="nome<?php echo $row['id']; ?>">Nome</label>
+        <div class="input-field col s3 valign">
+          <input id="nomeAula<?php echo $row['id']; ?>" type="text" class="validate valign" value="<?php echo $row['nomeAula']; ?>" required>
+            <label for="nomeAula<?php echo $row['id']; ?>">Nome aula</label>
         </div>
-        <div class="input-field col s2 valign">
-          <input id="cognome<?php echo $row['id']; ?>" type="text" class="validate valign" value="<?php echo $row['cognome']; ?>" required>
-          <label for="cognome<?php echo $row['id']; ?>">Cognome</label>
+        <div class="input-field col s3 valign">
+          <input id="maxStudenti<?php echo $row['id']; ?>" type="text" class="validate valign" value="<?php echo $row['maxStudenti']; ?>" required>
+          <label for="maxStudenti<?php echo $row['id']; ?>">N° studenti</label>
         </div>
-        <div class="input-field col s2 valign">
-          <input id="username<?php echo $row['id']; ?>" type="text" class="validatevalign" value="<?php echo $row['username']; ?>" required>
-          <label for="username<?php echo $row['id']; ?>">Username</label>
-        </div>
-        <div class="col s2 cente valign">
-          <p>
-            <a onclick="modificaDocente(<?php echo $row['id'];?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>')" class="waves-effect center-align waves-red btn-flat red-text valign" style="width:98%">
-              Modifica
-            </a>
-          </p>
-          <p>
-            <a class="waves-effect waves-red center-align btn-flat red-text valign" onclick="alert('Non è ancora possibile mostrare l\'orario del docente')" style="width:98%">
-              Orario
-            </a>
-          </p>
-        </div>
-        <div class="col s2 center valign">
-          <a onclick="passwordReset(<?php echo $row['id'];?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>')" class="waves-effect small-icon condensed waves-red fill-width fake-button valign red-text">
-            	<i class="material-icons ">refresh</i> <br/>RESET
+        <div class="col s3 center valign">
+          <a onclick="modficaAula(<?php echo $row['id'];?>)" class="waves-effect small-icon condensed waves-red fill-width fake-button valign red-text">
+            	<i class="material-icons ">create</i> <br/>MODIFICA
           </a>
         </div>
       </li>
@@ -232,7 +195,6 @@ $num = $resultAA->num_rows;
                         $i++;
                     }
                 ?>
-
                 <li <?php if($page==($i-1)) echo 'class="disabled"'?>class="waves-effect">
                   <form action="gestisciDocenti.php" id="paginaAvanti" method="post">
                     <input type="hidden" name="page" value="<?php echo ($page +1)?>">
