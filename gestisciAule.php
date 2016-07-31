@@ -48,6 +48,9 @@ $result = $db->query("SELECT * FROM aule");
     <ul id="utenti-dropDown" class="dropdown-content">
     <li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciStudenti.php">STUDENTI</a></li>
   	<li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciDocenti.php">DOCENTI</a></li>
+    <li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciCorsi.php">CORSI</a></li>
+    <li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciClassi.php">CLASSI</a></li>
+    <li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciAule.php">AULE</a></li>
   </ul>
   	<div class="navbar-fixed">
   		<nav id="intestaz" class="light-blue">
@@ -56,16 +59,13 @@ $result = $db->query("SELECT * FROM aule");
   				<a href="#" class="brand-logo center light">Settimana tecnica</a>
   				<ul id="nav-mobile" class="right hide-on-med-and-down">
   					<li><a href="admin.php" class="waves-effect waves-light condensed">HOME</a></li>
-            <li class="active"><a href="gestisciAule.php" class="waves-effect waves-light condensed">AULE</a></li>
-  					<li><a href="gestisciCorsi.php" class="waves-effect waves-light condensed">CORSI</a></li>
-  					<li><a href="#!" class="dropdown-button waves-effect waves-light condensed" data-beloworigin="true" data-hover="true" data-activates="utenti-dropDown">UTENTI<i class="material-icons right">arrow_drop_down</i></a></li>
+  					<li class="active"><a href="#!" class="dropdown-button waves-effect active waves-light condensed" data-beloworigin="true" data-hover="true" data-activates="utenti-dropDown">GESTISCI<i class="material-icons right">arrow_drop_down</i></a></li>
   					<li><a href="logout.php" class="waves-effect waves-light condensed"><i class="material-icons left">exit_to_app</i>LOGOUT</a></li>
   				</ul>
   			</div>
   		</nav>
   	</div>
 	</nav>
-
   <div class="container"  style="margin-top:3em;">
   <div class="card">
     <form id="aggiungi-aula">

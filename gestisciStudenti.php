@@ -82,6 +82,7 @@ $db = database_connect();
   	<li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciDocenti.php">DOCENTI</a></li>
     <li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciCorsi.php">CORSI</a></li>
     <li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciClassi.php">CLASSI</a></li>
+    <li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciAule.php">AULE</a></li>
   </ul>
   	<div class="navbar-fixed">
   		<nav id="intestaz" class="light-blue">
