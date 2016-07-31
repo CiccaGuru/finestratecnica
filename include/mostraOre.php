@@ -75,7 +75,7 @@ global $_CONFIG;
         <div class="col s2">
 
           <?php
-            $resultClassi = $db->query("SELECT classe from corsi_classi where id_corso = '$idCorso'") or die($db->error);
+            $resultClassi = $db->query("SELECT classe from corsi_classi where idCorso = '$idCorso'") or die($db->error);
             while($classe = $resultClassi->fetch_assoc()){
               $elencoClassi[]=$classe["classe"];
             }

@@ -50,7 +50,7 @@ $resultTmp = $db->query("SELECT * from
                                 FROM corsi, lezioni, utenti, corsi_classi
                                 WHERE lezioni.ora = '$ora' AND corsi.id = lezioni.idCorso
                                   and utenti.id = corsi.idDocente and corsi.continuita = '0'
-                                  and corsi.id = corsi_classi.id_corso AND
+                                  and corsi.id = corsi_classi.idCorso AND
                                   corsi_classi.classe = '".$dettagliUtente["classe"]."')
                           as sub where contaTable < maxIscritti");
   while($lezione = $resultTmp->fetch_assoc()){

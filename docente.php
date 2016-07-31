@@ -111,7 +111,7 @@ $db = database_connect();
 												<div class="col s2 truncate">
 													<?php
 														$classi = "";
-														$resultClassi = $db->query("SELECT classe from corsi_classi where id_corso = '".$dettagliCorso["id"]."' GROUP BY classe");
+														$resultClassi = $db->query("SELECT classe from corsi_classi where idCorso = '".$dettagliCorso["id"]."' GROUP BY classe");
 														while($classe = $resultClassi->fetch_assoc()){
 															$classi .= $classe["classe"]." ";
 														}
