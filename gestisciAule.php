@@ -150,9 +150,9 @@ $result = $db->query("SELECT * FROM aule");
           <input id="maxStudenti<?php echo $row['id']; ?>" type="text" class="validate valign" value="<?php echo $row['maxStudenti']; ?>" required>
           <label for="maxStudenti<?php echo $row['id']; ?>">N° studenti</label>
         </div>
-        <div class="col s3 center valign">
-          <a onclick="modficaAula(<?php echo $row['id'];?>)" class="waves-effect small-icon condensed waves-red fill-width fake-button valign red-text">
-            	<i class="material-icons ">create</i> <br/>MODIFICA
+        <div class="col s2 offset-s1 center valign">
+          <a onclick="modficaAula(<?php echo $row['id'];?>)" class="waves-effect small-icon condensed waves-red fill-width btn-flat valign red-text">
+            	MODIFICA
           </a>
         </div>
       </li>

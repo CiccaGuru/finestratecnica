@@ -127,8 +127,8 @@ function aggiungiCorso() {
         '../include/aggiungiCorso.php', {
             titolo: $("#titolo").val(),
             descriz: $("#descriz").val(),
-            tipo: $("#gestioneCorsi input[name=tipo]:checked").val(),
-            continuita: $("#gestioneCorsi input[name=continuita]:checked").val(),
+            tipo: $("#ins-corso input[name=tipo]:checked").val(),
+            continuita: $("#ins-corso input[name=continuita]:checked").val(),
             iddocente: $("#selezionaDocenti").val(),
             "classi[]": $("#selezionaClassi").val()
         }
@@ -147,8 +147,7 @@ function aggiungiCorso() {
                         idcorso: data,
                         titolo: $("#nomeOra" + i).val(),
                         ora: ora,
-                        aula: $("#aulaOra" + i).val(),
-                        maxIscritti: $("#maxIscrittiOra" + i).val()
+                        idAula: $("#selezionaAula" + i).val()
                     });
                 posting.done(function(data) {
                     if (!(data == "SUCCESS INSERT ORA")) {
