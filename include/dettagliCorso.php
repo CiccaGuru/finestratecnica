@@ -38,7 +38,7 @@ while($ora_el = $result->fetch_assoc()){
   $ore_utente[]=$ora_el["idLezione"];
 }
 $classiElenco = "";
-$result = $db->query("SELECT classe from corsi_classi where id_corso = '".$idCorso."' ");
+$result = $db->query("SELECT classe from corsi_classi where idCorso = '".$idCorso."' ");
 while($classe = $result->fetch_assoc()){
   if($classe["classe"]==$dettagliUtente["classe"]){
     $classiElenco .= "<b class='underline'>".$classe["classe"]."</b>";

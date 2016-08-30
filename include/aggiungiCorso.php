@@ -12,7 +12,7 @@ $result = $db->query("INSERT INTO corsi (titolo, iddocente, descrizione, continu
 
 $id_corso= $db->insert_id;
 foreach($classi as $classe){
-  $result = $db->query("INSERT INTO corsi_classi (id_corso, classe, continuita, tipo) VALUES ('$id_corso', '$classe', '$continuita', '$tipo') ") or  die('ERRORE: 15' . $db->error);
+  $result = $db->query("INSERT INTO corsi_classi (idCorso, classe) VALUES ('$id_corso', '$classe') ") or  die('ERRORE: 15' . $db->error);
 }
 $db->close();
 echo $id_corso;

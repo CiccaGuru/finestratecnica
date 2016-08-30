@@ -58,7 +58,7 @@ $code .= "<br/><table style='border:0px;'>
   <td style='border:none;'>
   ";
     $classi = "";
-    $resultClassi = $db->query("SELECT classe from corsi_classi where id_corso = '".$dettagliLezione["idCorso"]."' GROUP BY classe");
+    $resultClassi = $db->query("SELECT classe from corsi_classi where idCorso = '".$dettagliLezione["idCorso"]."' GROUP BY classe");
     while($classe = $resultClassi->fetch_assoc()){
       $classi .= $classe["classe"]." ";
     }
