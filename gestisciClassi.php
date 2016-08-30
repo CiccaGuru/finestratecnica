@@ -118,6 +118,6 @@ $db = database_connect();
 		<script src="js/jquery-2.1.4.min.js"></script>
 		<script src="js/materialize.js"></script>
 		<script src="js/init.js"></script>
-		<script src="js/admin.js"></script>
+		<script src="js/gestisciClassi.js"></script>
 	</body>
 	</html>
