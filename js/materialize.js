@@ -2902,7 +2902,7 @@ function disappearAllToasts(classe){
       var appendOptionWithIcon = function(select, option, type) {
         // Add disabled attr if disabled
         var disabledClass = (option.is(':disabled')) ? 'disabled ' : '';
-
+        
 
         // add icons
         var icon_url = option.data('icon');

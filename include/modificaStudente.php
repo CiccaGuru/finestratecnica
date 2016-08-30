@@ -18,9 +18,9 @@ else{
   $id = $_POST["id"];
   $cognome = $_POST["cognome"];
   $username = $_POST["username"];
-	$classe = $_POST["classe"];
+	$ckasse = $_POST["classe"];
   $db = database_connect();
-if(isset($_POST["classe"]))
+if(isset($_POST["classe"])){
   $classe = $_POST["classe"];
   $result = $db->query("UPDATE utenti SET nome='$nome', cognome='$cognome', username='$username', classe='$classe' WHERE id='$id'") or die('ERRORE: ' . $db->error);
 }

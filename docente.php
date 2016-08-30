@@ -26,16 +26,6 @@ $db = database_connect();
 	<link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 	<link href="css/style.css" type="text/css" rel="stylesheet" media="screen"/>
 	<link rel="stylesheet" href="css/material-scrolltop.css">
-	<link rel="apple-touch-icon" sizes="180x180" href="/img/favicons/apple-touch-icon.png">
-<link rel="icon" type="image/png" href="/img/favicons/favicon-32x32.png" sizes="32x32">
-<link rel="icon" type="image/png" href="/img/favicons/favicon-16x16.png" sizes="16x16">
-<link rel="manifest" href="/img/favicons/manifest.json">
-<link rel="mask-icon" href="/img/favicons/safari-pinned-tab.svg" color="#f44336">
-<link rel="shortcut icon" href="/img/favicons/favicon.ico">
-<meta name="msapplication-TileColor" content="#2d89ef">
-<meta name="msapplication-TileImage" content="/img/favicons/mstile-144x144.png">
-<meta name="msapplication-config" content="/img/favicons/browserconfig.xml">
-<meta name="theme-color" content="#03a9f4">
 </head>
 
 <body id="body-userhome">
@@ -111,7 +101,7 @@ $db = database_connect();
 												<div class="col s2 truncate">
 													<?php
 														$classi = "";
-														$resultClassi = $db->query("SELECT classe from corsi_classi where idCorso = '".$dettagliCorso["id"]."' GROUP BY classe");
+														$resultClassi = $db->query("SELECT classe from corsi_classi where id_corso = '".$dettagliCorso["id"]."' GROUP BY classe");
 														while($classe = $resultClassi->fetch_assoc()){
 															$classi .= $classe["classe"]." ";
 														}

@@ -1,9 +1,9 @@
 <?php
 
 	$_CONFIG['db_host'] = "localhost";
-	$_CONFIG['db_user'] = "mysql";
-	$_CONFIG['db_password'] =  "mysqlPassword";
-	$_CONFIG['db_name'] = "finestratecnica";
+	$_CONFIG['db_user'] = "root";
+	$_CONFIG['db_password'] =  "finestratecnica";
+	$_CONFIG['db_name'] = "finestra_tecnica";
 
 	$_CONFIG['numero_giorni'] = 4;
 	$_CONFIG['ore_per_giorno'] = 6;

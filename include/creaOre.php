@@ -1,6 +1,5 @@
 <?php
 include_once("config.php");
-include_once("funzioni.php");
 
 $ore=$_POST["ore"];
 global $_CONFIG;
@@ -12,12 +11,6 @@ foreach($_CONFIG['giorni'] as $num=>$nome){
 
 for($j=1;$j<=$_CONFIG['ore_per_giorno'];$j++){
 	$ore_elenco .= '<option value="'.$j.'">'.$j.'^a ora</option>';
-}
-$db=database_connect();
-$aule = "";
-$resultAule = $db->query("SELECT * from aule") or die("Error: ".$db->error);
-while($aula = $resultAule->fetch_assoc()){
-	$aule .= '<option value="'.$aula["id"].'">Aula '.$aula["nomeAula"].', '.$aula["maxStudenti"].' alunni</option>';
 }
 
 for($i=0;$i<$ore;$i++){
@@ -39,12 +32,14 @@ for($i=0;$i<$ore;$i++){
 				<label>Ora</label>
 			</div>
 		</div>
-			<div class="input-field col s3">
-				 <select id="selezionaAula<?php echo $i;?>">
-				  <?php echo $aule; ?>
-				</select>
-				<label>Aula</label>
-			</div>
+		<div class="input-field col s2 valign">
+			<input id="aulaOra<?php echo $i;?>" type="text" class="validate" required/>
+			<label for="aulaOra<?php echo $i;?>">Aula</label>
+		</div>
+		<div class="input-field col s1 valign">
+			<input id="maxIscrittiOra<?php echo $i;?>" type="text" class="validate" required/>
+			<label for="maxIscrittiOra<?php echo $i;?>">Alunni</label>
+		</div>
 		<div class="input-field col s4 valign">
 			<input id="nomeOra<?php echo $i;?>" type="text" class="validate">
 			<label for="nomeOra<?php echo $i;?>">Titolo lezione (fac.)</label>

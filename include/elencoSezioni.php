@@ -14,7 +14,7 @@ else{
 
 $db = database_connect();
 
-$result = $db->query("SELECT * from sezioni") or die($db->error);
+$result = $db->query("SELECT id, classe, sezione from sezioni");
 while($sezione=$result->fetch_assoc()){
 ?>
   <li class="collection-item row valign-wrapper">
@@ -38,7 +38,7 @@ while($sezione=$result->fetch_assoc()){
 		</div>
 		<div class="col s2 condensed">
 				<?php
-					$contaR = $db->query("SELECT COUNT(id) as conta from utenti where idClasse = '".$sezione["id"]."'") or die("E:".$db->error);
+					$contaR = $db->query("SELECT COUNT(id) as conta from utenti where classe = '".$sezione["classe"]."' and sezione = '".$sezione["sezione"]."'");
 					$conta = $contaR->fetch_assoc();
 					echo $conta["conta"];
 				?>

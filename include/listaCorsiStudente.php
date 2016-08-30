@@ -94,7 +94,7 @@ function generaLista($tipo, $continuita){
                                 utenti.cognome as cognome
                         FROM    corsi, utenti, corsi_classi
                         WHERE   (utenti.id = corsi.iddocente) AND
-                                corsi.id = corsi_classi.idCorso AND
+                                corsi.id = corsi_classi.id_corso AND
                                 corsi_classi.classe = '".$dettagliUtente["classe"]."' AND
                                 corsi.tipo = '$tipo' AND
                                 corsi.continuita = '$continuita' AND

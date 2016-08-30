@@ -33,7 +33,7 @@ if(isset($_POST["username"]) && ($_POST["username"]!="")){
   $resultAA = $db->query("SELECT id FROM utenti WHERE (username LIKE '".$_POST["username"]."' or nome like  '".$_POST["username"]."' or cognome like '".$_POST["username"]."') and level = '1'") or  die('ERRORE: ' . $db->error);
 }
 else{
-  $result = $db->query("SELECT * FROM utenti WHERE level='1' ORDER BY cognome, nome LIMIT ".(($page-1)*$quanti).", ".$quanti) or  die('ERRORE: R' . $db->error);
+  $result = $db->query("SELECT * FROM utenti WHERE level='1' ORDER BY cognome, nome LIMIT ".(($page-1)*$quanti+1).", ".$quanti) or  die('ERRORE: R' . $db->error);
   $resultAA = $db->query("SELECT * FROM utenti WHERE level='1'") or  die('ERRORE: ' . $db->error);
 }
 
@@ -51,16 +51,6 @@ $num = $resultAA->num_rows;
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen"/>
   <link href="css/admin.css" type="text/css" rel="stylesheet" media="screen"/>
   <link rel="stylesheet" href="css/material-scrolltop.css">
-  <link rel="apple-touch-icon" sizes="180x180" href="/img/favicons/apple-touch-icon.png">
-<link rel="icon" type="image/png" href="/img/favicons/favicon-32x32.png" sizes="32x32">
-<link rel="icon" type="image/png" href="/img/favicons/favicon-16x16.png" sizes="16x16">
-<link rel="manifest" href="/img/favicons/manifest.json">
-<link rel="mask-icon" href="/img/favicons/safari-pinned-tab.svg" color="#f44336">
-<link rel="shortcut icon" href="/img/favicons/favicon.ico">
-<meta name="msapplication-TileColor" content="#2d89ef">
-<meta name="msapplication-TileImage" content="/img/favicons/mstile-144x144.png">
-<meta name="msapplication-config" content="/img/favicons/browserconfig.xml">
-<meta name="theme-color" content="#03a9f4">
 </head>
 <body>
   <nav class="light-blue">
@@ -69,7 +59,6 @@ $num = $resultAA->num_rows;
     <li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciDocenti.php">DOCENTI</a></li>
     <li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciCorsi.php">CORSI</a></li>
     <li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciClassi.php">CLASSI</a></li>
-    <li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciAule.php">AULE</a></li>
   </ul>
     <div class="navbar-fixed">
       <nav id="intestaz" class="light-blue">
@@ -274,7 +263,7 @@ $num = $resultAA->num_rows;
 <script src="js/jquery-2.1.4.min.js"></script>
 <script src="js/materialize.js"></script>
 <script src="js/init.js"></script>
-<script src="js/gestisciUtenti.js"></script>
+<script src="js/admin.js"></script>
 <!-- material-scrolltop button -->
 <button class="material-scrolltop" type="button"><i class="material-icons white-text">keyboard_arrow_up</i></button>
 
