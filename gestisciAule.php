@@ -137,7 +137,7 @@ $result = $db->query("SELECT * FROM aule");
     { ?>
       <li class="collection-item row valign-wrapper">
         <div class="col s1 red-text">
-            <i class="material-icons waves-effect waves-red waves-circle" style="border-radius:50%;" onclick="eliminaAula(<?php echo $row["id"]?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>', 1)">close</i>
+            <i class="material-icons waves-effect waves-red waves-circle" style="border-radius:50%;" onclick="eliminaAula(<?php echo $row["id"]?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>')">close</i>
         </div>
         <div class="col s2 bold">
           ID: <?php echo $row["id"];?>
