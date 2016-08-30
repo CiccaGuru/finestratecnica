@@ -274,7 +274,7 @@ $num = $resultAA->num_rows;
 <script src="js/jquery-2.1.4.min.js"></script>
 <script src="js/materialize.js"></script>
 <script src="js/init.js"></script>
-<script src="js/admin.js"></script>
+<script src="js/gestisciUtenti.js"></script>
 <!-- material-scrolltop button -->
 <button class="material-scrolltop" type="button"><i class="material-icons white-text">keyboard_arrow_up</i></button>
 

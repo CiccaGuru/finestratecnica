@@ -220,7 +220,7 @@ $result = $db->query("SELECT * FROM aule");
   <script src="js/jquery-2.1.4.min.js"></script>
   <script src="js/materialize.js"></script>
   <script src="js/init.js"></script>
-  <script src="js/admin.js"></script>
+  <script src="js/gestisciAule.js"></script>
   <!-- material-scrolltop button -->
 
 </div>
