@@ -118,15 +118,14 @@ global $_CONFIG;
           INCOMPATIBILE CON:
         </div>
         <div class="col s3 valign">
-          <div class="chip">
-            Italiano 15
-            <i class="material-icons">close</i>
+          <div id="ChipsIncompatibili">
+
           </div>
-          <a class="waves-effect animateButton row valign-wrapper small-icon-corsi condensed waves-red fill-width fake-button valign red-text" onclick="mostraModalDettagli(<?php echo $dettagli['id'];?>, <?php echo $dettagli['idDocente'];?>)" style="width:98%;">
+          <a class="waves-effect animateButton row valign-wrapper small-icon-corsi condensed waves-red fill-width fake-button valign red-text" onclick="mostraModalCorsiIncompatibili(<?php echo $dettagliCorso["id"]; ?>)">
             <div class="col s2 offset-s1 valign">
               <i class="material-icons" style="margin:0px;">add</i>
             </div>
-            <div class="col s7 valign center-align" style="margin-top:4px;">
+            <div class="col s7 valign center-align " style="margin-top:4px;" >
               AGGIUNGI CORSO
             </div>
           </a>
@@ -136,7 +135,7 @@ global $_CONFIG;
 
 
  <div class="divider" style="margin-bottom:3em;"></div>
-
+<div id="idCorsoIncompatibile" data-idcorso="<?php echo $dettagliCorso["id"]; ?>" style="display:none;"></div>
  <div id="listaOreModifica">
 
  </div>

@@ -66,3 +66,16 @@ h5{
 .container{
   margin-top:3em;
 }
+
+.modal-piccolo{
+  max-height: 70%;
+  width: 25%;
+  border-radius:3px;
+}
+
+#collectionCorsiIncompatibili .collection-item{
+  display:block !important;
+}
+#collectionCorsiIncompatibili .collection-item.hover:hover{
+  background-color: #ddd;
+}

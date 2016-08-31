@@ -20,7 +20,7 @@ function modificaDocente(user_id, quanti, page, filtro) {
                 id: user_id,
                 nome: $("#nome" + user_id).val(),
                 cognome: $("#cognome" + user_id).val(),
-                username: $("#username" + user_id).val(),
+                username: $("#username" + user_id).val(),d
             }
         );
         posting.done(function(data) {

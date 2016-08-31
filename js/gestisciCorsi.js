@@ -48,6 +48,38 @@ function aggiungiCorso() {
 
 }
 
+function aggiornaListaDocenti() {
+    var posting = $.post(
+        '../include/generaElencoDocenti.php', {
+            1: 1
+        }
+    );
+    posting.done(function(data) {
+        $("#selezionaDocenti").html('<option value="" disabled selected class="grey-text">Seleziona insegnante</option>' + data);
+        $('select').material_select();
+    });
+}
+
+function aggiornaListaCorsiIncompatibili(){
+  idCorso = $("#idCorsoIncompatibile").data("idcorso");
+  keyword = $("#cercaCorsiIncompatibili").val();
+  console.log(keyword);
+  var posting = $.post(
+      '../include/elencoCorsiIncompatibili.php', {
+          "keyword": keyword,
+          "id": idCorso
+      }
+  );
+  posting.done(function(data) {
+    $("#elencoCorsiIncompatibili").html (data);
+  });
+}
+
+function mostraModalCorsiIncompatibili(id){
+  aggiornaListaCorsiIncompatibili(id);
+  $('#modalCorsiIncompatibili').openModal();
+}
+
 function mostraModalDettagli(id, idDocente) {
     var posting = $.post(
         '../include/mostraOre.php', {
@@ -67,6 +99,7 @@ function mostraModalDettagli(id, idDocente) {
             $('select').material_select();
         });
         aggiornaListaOre(id);
+        aggiornaChipsIncompatibili(id);
         $("#modal-ore").openModal();
     });
 }
@@ -124,10 +157,61 @@ function applicaModificaOre(idCorso) {
     });
 }
 
+function aggiornaChipsIncompatibili(idCorso){
+  console.log("aggiorno");
+  var   posting = $.post(
+      "../include/mostraChipsIncompatibili.php",
+      {
+        "idCorso": idCorso
+      });
+      posting.done(function(data){
+        $("#ChipsIncompatibili").html(data);
+      });
+}
+
+function aggiungiCorsoIncompatibile(idCorso1, idCorso2){
+  var   posting = $.post(
+      "../include/aggiungiCorsoIncompatibile.php",
+      {
+        "idCorso1": idCorso1,
+        "idCorso2": idCorso2
+      });
+  posting.done(function(data){
+    if(data=="SUCCESS"){
+      Materialize.toast("Incompatibilità aggiunta con successo!", 2000);
+      $("#modalCorsiIncompatibili").closeModal();
+      aggiornaChipsIncompatibili(idCorso1);
+    }
+    else{
+      Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Si è verificato un errore. Controlla la console', 4000);
+      console.log(data);
+    }
+  });
+}
+
+function eliminaIncompatibilita(idCorso1, idCorso2){
+  var   posting = $.post(
+      "../include/rimuoviCorsoIncompatibile.php",
+      {
+        "idCorso1": idCorso1,
+        "idCorso2": idCorso2
+      });
+  posting.done(function(data){
+    if(data=="SUCCESS"){
+      Materialize.toast("Incompatibilità rimossa con successo!", 2000);
+      aggiornaChipsIncompatibili(idCorso1);
+    }
+    else{
+      Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Si è verificato un errore. Controlla la console', 4000);
+      console.log(data);
+    }
+  });
+}
 
 (function($) {
     $(function() {
         aggiornaListaCorsi();
+        aggiornaListaDocenti();
         $('.modal-trigger').leanModal();
 
         $("#inserisciOre").on("click", function() {
@@ -156,6 +240,10 @@ function applicaModificaOre(idCorso) {
                 });
 
             }
+        });
+
+        $("#cercaCorsiIncompatibili").keyup(function(){
+          aggiornaListaCorsiIncompatibili();
         });
 
         $("#aggiungi-aula").submit(function(e) {
