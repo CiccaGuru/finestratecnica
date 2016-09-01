@@ -73,9 +73,11 @@ h5{
   border-radius:3px;
 }
 
-#collectionCorsiIncompatibili .collection-item{
+#collectionCorsiIncompatibili .collection-item,
+#collectionCorsiObbligatori .collection-item{
   display:block !important;
 }
-#collectionCorsiIncompatibili .collection-item.hover:hover{
+#collectionCorsiIncompatibili .collection-item.hover:hover,
+#collectionCorsiObbligatori .collection-item.hover:hover{
   background-color: #ddd;
 }

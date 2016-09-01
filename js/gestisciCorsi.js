@@ -61,7 +61,7 @@ function aggiornaListaDocenti() {
 }
 
 function aggiornaListaCorsiIncompatibili(){
-  idCorso = $("#idCorsoIncompatibile").data("idcorso");
+  idCorso = $("#idCorsoAttuale").data("idcorso");
   keyword = $("#cercaCorsiIncompatibili").val();
   console.log(keyword);
   var posting = $.post(
@@ -75,9 +75,29 @@ function aggiornaListaCorsiIncompatibili(){
   });
 }
 
+function aggiornaListaCorsiObbligatori(){
+  idCorso = $("#idCorsoAttuale").data("idcorso");
+  keyword = $("#cercaCorsiObbligatori").val();
+  console.log(keyword);
+  var posting = $.post(
+      '../include/elencoCorsiObbligatori.php', {
+          "keyword": keyword,
+          "id": idCorso
+      }
+  );
+  posting.done(function(data) {
+    $("#elencoCorsiObbligatori").html (data);
+  });
+}
+
 function mostraModalCorsiIncompatibili(id){
   aggiornaListaCorsiIncompatibili(id);
   $('#modalCorsiIncompatibili').openModal();
+}
+
+function mostraModalCorsiObbligatori(id){
+  aggiornaListaCorsiObbligatori(id);
+  $('#modalCorsiObbligatori').openModal();
 }
 
 function mostraModalDettagli(id, idDocente) {
@@ -100,6 +120,7 @@ function mostraModalDettagli(id, idDocente) {
         });
         aggiornaListaOre(id);
         aggiornaChipsIncompatibili(id);
+        aggiornaChipsObbligatori(id);
         $("#modal-ore").openModal();
     });
 }
@@ -169,6 +190,19 @@ function aggiornaChipsIncompatibili(idCorso){
       });
 }
 
+
+function aggiornaChipsObbligatori(idCorso){
+  console.log("aggiorno");
+  var   posting = $.post(
+      "../include/mostraChipsObbligatori.php",
+      {
+        "idCorso": idCorso
+      });
+      posting.done(function(data){
+        $("#ChipsObbligatori").html(data);
+      });
+}
+
 function aggiungiCorsoIncompatibile(idCorso1, idCorso2){
   var   posting = $.post(
       "../include/aggiungiCorsoIncompatibile.php",
@@ -178,9 +212,9 @@ function aggiungiCorsoIncompatibile(idCorso1, idCorso2){
       });
   posting.done(function(data){
     if(data=="SUCCESS"){
-      Materialize.toast("Incompatibilità aggiunta con successo!", 2000);
       $("#modalCorsiIncompatibili").closeModal();
       aggiornaChipsIncompatibili(idCorso1);
+      Materialize.toast("Incompatibilità aggiunta con successo!", 2000);
     }
     else{
       Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Si è verificato un errore. Controlla la console', 4000);
@@ -188,6 +222,28 @@ function aggiungiCorsoIncompatibile(idCorso1, idCorso2){
     }
   });
 }
+
+
+function aggiungiCorsoObbligatorio(idCorso, idClasse){
+  var   posting = $.post(
+      "../include/aggiungiCorsoObbligatorio.php",
+      {
+        "idClasse": idClasse,
+        "idCorso": idCorso
+      });
+  posting.done(function(data){
+    if(data=="SUCCESS"){
+      $("#modalCorsiObbligatori").closeModal();
+      aggiornaChipsObbligatori(idCorso);
+      Materialize.toast("Corso obbligatorio aggiunto con successo!", 2000);
+    }
+    else{
+      Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Si è verificato un errore. Controlla la console', 4000);
+      console.log(data);
+    }
+  });
+}
+
 
 function eliminaIncompatibilita(idCorso1, idCorso2){
   var   posting = $.post(
@@ -200,6 +256,25 @@ function eliminaIncompatibilita(idCorso1, idCorso2){
     if(data=="SUCCESS"){
       Materialize.toast("Incompatibilità rimossa con successo!", 2000);
       aggiornaChipsIncompatibili(idCorso1);
+    }
+    else{
+      Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Si è verificato un errore. Controlla la console', 4000);
+      console.log(data);
+    }
+  });
+}
+
+function eliminaObbligatori(idClasse, idCorso){
+  var   posting = $.post(
+      "../include/rimuoviCorsoObbligatorio.php",
+      {
+        "idClasse": idClasse,
+        "idCorso": idCorso
+      });
+  posting.done(function(data){
+    if(data=="SUCCESS"){
+      Materialize.toast("Corso obbligatorio rimosso con successo!", 2000);
+      aggiornaChipsObbligatori(idCorso);
     }
     else{
       Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Si è verificato un errore. Controlla la console', 4000);
@@ -244,6 +319,10 @@ function eliminaIncompatibilita(idCorso1, idCorso2){
 
         $("#cercaCorsiIncompatibili").keyup(function(){
           aggiornaListaCorsiIncompatibili();
+        });
+
+        $("#cercaCorsiObbligatori").keyup(function(){
+          aggiornaListaCorsiObbligatori();
         });
 
         $("#aggiungi-aula").submit(function(e) {

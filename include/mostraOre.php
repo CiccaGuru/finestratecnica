@@ -101,11 +101,10 @@ global $_CONFIG;
           OBBLIGATORIO PER:
         </div>
         <div class="col s3 valign">
-          <div class="chip">
-            1 Adl
-            <i class="material-icons">close</i>
-          </div>
-          <a class="waves-effect animateButton row valign-wrapper small-icon-corsi condensed waves-red fill-width fake-button valign red-text" onclick="mostraModalDettagli(<?php echo $dettagli['id'];?>, <?php echo $dettagli['idDocente'];?>)" style="width:98%;">
+            <div id="ChipsObbligatori">
+
+            </div>
+          <a class="waves-effect animateButton row valign-wrapper small-icon-corsi condensed waves-red fill-width fake-button valign red-text" onclick="mostraModalCorsiObbligatori(<?php echo $dettagliCorso['id'];?>)">
             <div class="col s2 offset-s1 valign">
               <i class="material-icons" style="margin:0px;">add</i>
             </div>
@@ -135,7 +134,7 @@ global $_CONFIG;
 
 
  <div class="divider" style="margin-bottom:3em;"></div>
-<div id="idCorsoIncompatibile" data-idcorso="<?php echo $dettagliCorso["id"]; ?>" style="display:none;"></div>
+<div id="idCorsoAttuale" data-idcorso="<?php echo $dettagliCorso["id"]; ?>" style="display:none;"></div>
  <div id="listaOreModifica">
 
  </div>

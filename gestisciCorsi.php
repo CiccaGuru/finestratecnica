@@ -167,6 +167,25 @@ else{
     </div>
   </div>
 
+  <div id="modalCorsiObbligatori" class="modal modal-piccolo modal-fixed-footer" style="marign-top:5em;">
+    <div class="modal-content">
+      <h4 class="light-blue-text light condensed center">Scegli classe</h4>
+      <div class="row" style="margin-top:-1.8em; margin-bottom:0.2em;">
+      <div class="col s2" style="font-size:120%; margin-top:0.8em">
+        <p class="condensed red-text">
+          <i class="material-icons left">search</i>
+        </p>
+      </div>
+        <div class="input-field col s10 valign">
+          <input id="cercaCorsiObbligatori" name="corsoObbligatorio" type="text" value="" class="valign">
+        </div>
+    </div>
+    <div id="elencoCorsiObbligatori">
+
+    </div>
+  </div>
+</div>
+
     <div id="modal-ore" class="modal modal-fixed-footer bottom-sheet" style="height:87%;">
 
     </div>
