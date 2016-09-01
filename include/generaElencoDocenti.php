@@ -13,10 +13,10 @@ $result = $db->query("SELECT id, nome, cognome FROM utenti WHERE level=1 order b
 }
 if(isset($_POST["idDocente"]) && ($_POST["idDocente"]=="0"))
 {
-   echo '<option value="0" selected>Docenti vari</option>';
+   echo '<option value="-1" selected>Docenti vari</option>';
 }
 else{
-    echo '<option value="0">Docenti vari</option>';
+    echo '<option value="-1">Docenti vari</option>';
 }
 $db->close()
 ?>

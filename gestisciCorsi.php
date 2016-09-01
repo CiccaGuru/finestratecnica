@@ -78,11 +78,20 @@ else{
             <input id="descriz" type="text" class="validate">
             <label for="descriz">Descrizione</label>
           </div>
-          <div class="input-field col s4  condensed">
-            <select id="selezionaDocenti">
-              <option value="" disabled selected class="grey-text">Seleziona insegnante</option>
+          <div class="input-field col s2 condensed">
+            <select id="selezionaClassi" multiple>
+              <option value="" disabled selected>Scegli classi</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
             </select>
-            <label>Scegli l'insegnante</label>
+            <label>Classi</label>
+          </div>
+          <div class="input-field col s2 valign condensed">
+            <input id="ore" type="text" class="validate">
+            <label for="ore">N° Ore</label>
           </div>
         </div>
         <div class="row valign-wrapper">
@@ -106,22 +115,16 @@ else{
               <label class="black-text" for="senza_continuita">Senza continuità</label>
             </p>
           </div>
-          <div class="input-field col s2 condensed">
-            <select id="selezionaClassi" multiple>
-              <option value="" disabled selected>Scegli classi</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
+
+          <div class="input-field col s6  condensed">
+            <select id="selezionaDocenti">
+              <option value="" disabled selected class="grey-text">Seleziona insegnante</option>
             </select>
-            <label>Classi</label>
+            <label>Scegli l'insegnante</label>
           </div>
-          <div class="input-field col s2 valign condensed">
-            <input id="ore" type="text" class="validate">
-            <label for="ore">N° Ore</label>
-          </div>
-          <div class="col s2 center">
+        </div>
+        <div class="row">
+          <div class="col s2 offset-s5 center">
             <a id="inserisciOre" class="waves-effect condensed btn waves-light red">Procedi</a>
           </div>
         </div>

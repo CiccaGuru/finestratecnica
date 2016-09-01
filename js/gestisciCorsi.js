@@ -6,7 +6,6 @@ function aggiungiCorso() {
             descriz: $("#descriz").val(),
             tipo: $("#ins-corso input[name=tipo]:checked").val(),
             continuita: $("#ins-corso input[name=continuita]:checked").val(),
-            iddocente: $("#selezionaDocenti").val(),
             "classi[]": $("#selezionaClassi").val()
         }
     );
@@ -18,6 +17,20 @@ function aggiungiCorso() {
         } else {
             idCorso = data
             res = 1;
+
+            var idDocente = $("#selezionaDocenti").val()
+            if(idDocente == -1){
+              var docenti = scegliDocentiMultipli()
+            }else{
+              docenti = [idDocente]
+            }
+
+            docenti.forEach(function{item, index});
+
+            var postingDoc = $.post(function(data){
+                '../include/assegnaCorsoDocente.php', {}
+            });
+
             $(".ora_da_inserire").each(function(i) {
                 console.log("ORA");
                 var ora = (parseInt($("#selezionaGiorno" + i).val()) - 1) * 6 + parseInt($("#selezionaOra" + i).val());
