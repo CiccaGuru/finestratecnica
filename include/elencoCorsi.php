@@ -13,56 +13,30 @@ if ($utente == -1) {
   }
 }
 
-if (isset($_POST['min'])) {
-  $min = $_POST['min'];
-} else {
-  $min = 0;
-}
+$keyword = $_POST["keyword"];
+$quanti = $_POST['mostra'];
+$pagina = $_POST["pagina"];
 
-if (isset($_POST['max'])) {
-  $max = $_POST['max'];
-} else {
-  $max = 30;
-}
 $condizione = '';
-if (isset($_POST['action'])) {
-  if (isset($_POST['concontinuita']) and !(isset($_POST['senzacontinuita']))) {
-    $condizione .= " corsi.continuita = '1' AND ";
-  }
-  if (isset($_POST['senzacontinuita']) and !(isset($_POST['concontinuita']))) {
-    $condizione .= " corsi.continuita = '0' AND ";
-  }
-  if (isset($_POST['recupero']) and !(isset($_POST['approfondimento']))) {
-    $condizione .= " corsi.tipo = '0' AND ";
-  }
-  if (isset($_POST['approfondimento']) and !(isset($_POST['recupero']))) {
-    $condizione .= " corsi.tipo = '1' AND ";
-  }
-  if (!($_POST['professore'] == '')) {
-    $professore = str_replace('à', '&agrave', $_POST['professore']);
-    $professore = str_replace('è', '&egrave', $professore);
-    $professore = str_replace('ì', '&igrave', $professore);
-    $professore = str_replace('ò', '&ograve', $professore);
-    $professore = str_replace('é', '&eacuto', $professore);
-    $condizione .= "(utenti.nome LIKE '$professore' OR utenti.cognome LIKE '$professore') AND ";
-  }
-  if (!($_POST['titolo'] == '')) {
-    $titolo = str_replace('à', '&agrave', $_POST['titolo']);
-    $titolo = str_replace('è', '&egrave', $titolo);
-    $titolo = str_replace('ì', '&igrave', $titolo);
-    $titolo = str_replace('ò', '&ograve', $titolo);
-    $titolo = str_replace('é', '&eacuto', $titolo);
-    $condizione .= "(corsi.titolo LIKE '%$titolo%' OR corsi.descrizione LIKE '%$titolo%')";
-  } else {
-    $condizione .= '1';
-  }
+if ($_POST["senzacontinuita"]=='0') {
+  $condizione .= " corsi.continuita = '1' AND ";
+}
+if ($_POST['concontinuita'] == '0') {
+  $condizione .= " corsi.continuita = '0' AND ";
+}
+if ($_POST['approfondimento']== '0') {
+  $condizione .= " corsi.tipo = '0' AND ";
+}
+if ($_POST['recupero'] == '0') {
+  $condizione .= " corsi.tipo = '1' AND ";
+}
+if($keyword == ""){
+  $condizione .= "1";
+}
+else{
+  $condizione .= "(utenti.nome LIKE '%$keyword%' OR utenti.cognome LIKE '%$keyword%' OR corsi.titolo LIKE '%$keyword%' OR corsi.descrizione LIKE '%$keyword%')";
 }
 
-if ($condizione == '') {
-  $condizione = '1';
-} else {
-  $condizione .= ')';
-}
 $giorni = '';
 $ore_elenco = '';
 foreach ($_CONFIG['giorni'] as $num => $nome) {
@@ -74,7 +48,7 @@ for ($j = 1;$j <= $_CONFIG['ore_per_giorno'];++$j) {
 }
 $db = database_connect();
 
-$result = $db->query("SELECT  corsi.titolo as titolo,
+$query = "SELECT  corsi.titolo as titolo,
   corsi.descrizione as descrizione,
   corsi.continuita as continuita,
   corsi.tipo as tipo,
@@ -83,91 +57,21 @@ $result = $db->query("SELECT  corsi.titolo as titolo,
   utenti.id as idDocente,
   corsi.id as id
   FROM corsi,utenti
-  WHERE (utenti.id = corsi.iddocente) AND ($condizione)
-  ORDER BY corsi.titolo
-  LIMIT $min, ".($max - $min)) or die('AA: '.$db->error);
-  ?>
-  <li class="collection-header blue-text center"><h4 class="light condensed">ELENCO CORSI</h4></li>
-  <li class="collection-item">
-    <form  action="gestisciCorsi.php" method="POST">
-      <div class="row condensed">
-        <div class="col s2" style="font-size:120%; margin-top:0.8em">
-          <p class="condensed red-text">
-            <i class="material-icons left">search</i>Cerca
-          </p>
-        </div>
-        <div class="col s2 valign">
-          <div class="row" style="margin-bottom:5px;">
-            <p>
-              <input <?php
-              if ((isset($_POST['concontinuita'])) || (!(isset($_POST['concontinuita'])) && !(isset($_POST['senzacontinuita'])))) {
-                echo 'checked';
-              }
-              ?> type="checkbox" class="filled-in" name="concontinuita" id="concontinuita" />
-              <label for="concontinuita">Con continuità</label>
-            </p>
-          </div>
-          <div class="row" style="margin-bottom:5px;">
-            <p>
-              <input  <?php
-              if ((isset($_POST['senzacontinuita'])) || (!(isset($_POST['concontinuita'])) && !(isset($_POST['senzacontinuita'])))) {
-                echo 'checked';
-              }
-              ?> type="checkbox" class="filled-in" name="senzacontinuita" id="senzacontinuita" />
-              <label for="senzacontinuita">Senza continuità</label>
-            </p>
-          </div>
-        </div>
+  WHERE (utenti.id = corsi.iddocente) AND $condizione
+  ORDER BY corsi.titolo";
 
-        <div class="col s2 valign">
-          <div class="row" style="margin-bottom:5px;">
-            <p>
-              <input <?php
-              if ((isset($_POST['recupero'])) || (!(isset($_POST['approfondimento'])) && !(isset($_POST['recupero'])))) {
-                echo 'checked';
-              }
-              ?> type="checkbox" class="filled-in" name="recupero" id="recuperoCerca" />
-              <label for="recuperoCerca">Recupero</label>
-            </p>
-          </div>
-          <div class="row" style="margin-bottom:5px;">
-            <p>
-              <input <?php
-              if ((isset($_POST['approfondimento'])) || (!(isset($_POST['approfondimento'])) && !(isset($_POST['recupero'])))) {
-                echo 'checked';
-              }
-              ?> type="checkbox" class="filled-in" name="approfondimento" id="approfondimentoCerca" />
-              <label for="approfondimentoCerca">Approfondimento</label>
-            </p>
-          </div>
-        </div>
+  //die($query);
+$result = $db->query($query." LIMIT ".(($pagina-1)*$quanti).", ".$quanti) or die('AA: '.$db->error);
+$resultAA = $db->query($query);
+$numRisultato = $resultAA->num_rows;
 
-        <div class="input-field col s3 valign">
-          <input id="parolaChiave" name="titolo" type="text" value="<?php echo $_POST['titolo']?>" class="validate valign">
-          <label for="parolaChiave">Parola chiave</label>
-        </div>
-        <div class="col s1 right-align" style="margin-top:0.6em;">
-          <p class="right-align">
-            Mostra
-          </p>
-        </div>
-
-        <div class="input-field col s1 valign">
-          <input id="min" name="min" type="text" class="validate valign" value="<?php echo $min?>" required>
-
-        </div>
-        <div class="col s1">
-          <div class="input-field">
-            <button class="btn-floating btn-large center waves-effect waves-light red condensed white-text" type="submit" name="action">
-              <i class="material-icons">search</i>
-            </button>
-          </div>
-        </div>
-
-      </div>
-    </form>
-  </li>
-  <?php
+ if($result->num_rows == 0){
+   ?>
+   <li class="collection-item">
+         <div class="red-text condensed center-align" style="font-size:150%; margin:1em;">Nessun risultato trovato</div>
+       </li>
+   <?php
+ }
   while ($dettagli = $result->fetch_assoc()) {
     ?>
     <li class="collection-item">
@@ -213,25 +117,41 @@ $result = $db->query("SELECT  corsi.titolo as titolo,
         </div>
       </div>
     </li>
-<?php
+    <?php
   }
 
-  $resultConta = $db->query("SELECT  corsi.id as conta
-    FROM corsi, utenti
-    WHERE (utenti.id = corsi.iddocente) AND $condizione") or die('BB: '.$db->error);
-    if ($resultConta->num_rows > ($max - $min)) {
+    if($numRisultato>$quanti){
       ?>
-      <li class="collection-item row center valign-wrapper">
-        <div class"center center-text">
-          <form action = "gestisciCorsi.php" method="post">
-            <input type="hidden" name = "min" value="<?php echo $max?>"></input>
-            <input type="hidden" name = "max" value="<?php echo $max + $max - $min?>"></input>
-            <button class="btn center-text waves-effect waves-light red white-text" type="submit" name="action">Avanti
-            </button>
-          </div>
-        </form>
+      <li class="collection-item row center">
+        <div class"center">
+          <ul class="pagination center">
+              <li <?php if($pagina==1) echo 'class="disabled"'?>class="waves-effect">
+                  <a onclick="vaiPagina(<?php echo $pagina - 1;?>)">
+                    <i class="material-icons">chevron_left</i>
+                  </a>
+              </li>
+              <?php
+                 $i = 1;
+                 $numPagine = ceil($numRisultato/$quanti);
+                  while($i<=$numPagine){
+                      ?>
+                        <li class="waves-effect waves-red <?php if($i==$pagina) echo "active"?>">
+                              <a onclick="vaiPagina(<?php echo $i;?>)">
+                                <?php echo $i; ?>
+                              <a/>
+                        </li>
+                    <?php
+                      $i++;
+                  }
+                  ?>
+                  <li <?php if($pagina==$numPagine) echo 'class="disabled"'?>class="waves-effect">
+                      <a onclick="vaiPagina(<?php echo $pagina+1;?>)">
+                        <i class="material-icons">chevron_right</i>
+                      </a>
+                  </li>
+          </ul>
+        </div>
       </li>
       <?php
-
     }
     ?>

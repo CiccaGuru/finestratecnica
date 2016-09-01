@@ -152,10 +152,30 @@ function aggiornaListaOre(id){
     });
 }
 
+function vaiPagina(pagina){
+  console.log(pagina);
+  var paginaMax = $("#paginaMax").html();
+  if(pagina>paginaMax){
+    pagina = paginaMax;
+  }
+  if(pagina<1){
+    pagina = 1;
+  }
+  $("#pagina").html(pagina);
+  aggiornaListaCorsi();
+}
 function aggiornaListaCorsi(){
-  var posting = $.post('../include/elencoCorsi.php');
+  var posting = $.post('../include/elencoCorsi.php', {
+    "mostra": $("#mostra").val(),
+    "concontinuita": $("#concontinuita:checked").length,
+    "senzacontinuita": $("#senzacontinuita:checked").length,
+    "recupero": $("#recuperoCerca:checked").length,
+    "approfondimento": $("#approfondimentoCerca:checked").length,
+    "keyword": $("#parolaChiave").val(),
+    "pagina": $("#pagina").html()
+  });
   posting.done(function(data) {
-      $("#dettagliCorsi").html(data);
+      $("#dettagliCorsiContenuto").html(data);
   });
 }
 
@@ -315,6 +335,12 @@ function eliminaObbligatori(idClasse, idCorso){
                 });
 
             }
+        });
+
+        $("#formCercaCorsi").submit(function(e){
+            e.preventDefault();
+            aggiornaListaCorsi();
+            Materialize.toast("Ricerca completata", 2000);
         });
 
         $("#cercaCorsiIncompatibili").keyup(function(){
