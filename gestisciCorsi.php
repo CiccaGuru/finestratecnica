@@ -115,23 +115,31 @@ else{
               <label class="black-text" for="senza_continuita">Senza continuità</label>
             </p>
           </div>
+          <div class="col s1 condensed bold">
+            DOCENTI
+          </div>
+          <div class="col valign s4 offset-s1">
+            <span class="valign">
+          <div id="ChipsDocenti">
 
-          <div class="input-field col s6  condensed">
-            <select id="selezionaDocenti">
-              <option value="" disabled selected class="grey-text">Seleziona insegnante</option>
-            </select>
-            <label>Scegli l'insegnante</label>
           </div>
+          <a class="waves-effect animateButton row valign-wrapper small-icon-corsi condensed waves-red fill-width fake-button valign red-text" style="margin-bottom:0px;" onclick="mostraModalScegliDocenti()">
+            <div class="col s1 offset-s1 valign ">
+              <i class="material-icons valign" style="margin:0px;">add</i>
+            </div>
+            <div class="col s8 offset-s1 condensed valign center-align " style="margin-top:4px;" >
+              AGGIUNGI DOCENTE
+            </div>
+          </a>
+        </span>
+</div>
         </div>
-        <div class="row">
-          <div class="col s2 offset-s5 center">
-            <a id="inserisciOre" class="waves-effect condensed btn waves-light red">Procedi</a>
-          </div>
-        </div>
+        <div class="center-align condensed bold" style="font-size:130%; margin-top:1em;">ELENCO ORE</div>
         <div id="ore_future">
+          <div class="center-align italic" style="margin:2em;">Scegliere un numero di ore</div>
         </div>
         <div class="center">
-          <a onclick="aggiungiCorso()" id="aggiungiCorso" class="waves-effect waves-light btn-large condensed red disabled">  <i class="material-icons left">add_alert</i>CREA CORSO</a>
+          <a id="aggiungiCorso" class="waves-effect waves-light btn-large condensed red disabled">  <i class="material-icons left">add_alert</i>CREA CORSO</a>
         </div>
       </div>
     </div>
@@ -244,6 +252,44 @@ else{
         </div>
       </div>
       <div id="elencoCorsiObbligatori">
+
+      </div>
+    </div>
+  </div>
+
+  <div id="modalScegliDocenti" class="modal modal-piccolo modal-fixed-footer" style="marign-top:5em;">
+    <div class="modal-content">
+      <h4 class="light-blue-text light condensed center">Scegli docenti</h4>
+      <div class="row" style="margin-top:-1.8em; margin-bottom:0.2em;">
+        <div class="col s2" style="font-size:120%; margin-top:0.8em">
+          <p class="condensed red-text">
+            <i class="material-icons left">search</i>
+          </p>
+        </div>
+        <div class="input-field col s10 valign">
+          <input id="cercaScegliDocenti" name="corsoObbligatorio" type="text" value="" class="valign">
+        </div>
+      </div>
+      <div id="elencoScegliDocenti">
+
+      </div>
+    </div>
+  </div>
+
+  <div id="modalScegliDocentiDettagli" class="modal modal-piccolo modal-fixed-footer" style="marign-top:5em;">
+    <div class="modal-content">
+      <h4 class="light-blue-text light condensed center">Scegli docenti</h4>
+      <div class="row" style="margin-top:-1.8em; margin-bottom:0.2em;">
+        <div class="col s2" style="font-size:120%; margin-top:0.8em">
+          <p class="condensed red-text">
+            <i class="material-icons left">search</i>
+          </p>
+        </div>
+        <div class="input-field col s10 valign">
+          <input id="cercaScegliDocenti" name="corsoObbligatorio" type="text" value="" class="valign">
+        </div>
+      </div>
+      <div id="elencoScegliDocenti">
 
       </div>
     </div>

@@ -54,10 +54,12 @@ $query = "SELECT  corsi.titolo as titolo,
   corsi.tipo as tipo,
   utenti.nome as nome,
   utenti.cognome as cognome,
-  utenti.id as idDocente,
-  corsi.id as id
-  FROM corsi,utenti
-  WHERE (utenti.id = corsi.iddocente) AND $condizione
+  corsi_docenti.idDocente as idDocente,
+  corsi.id as id,
+  COUNT(corsi_docenti.idCorso) as quantiDocenti
+  FROM corsi,utenti,corsi_docenti
+  WHERE (utenti.id = corsi_docenti.idDocente) AND (corsi.id = corsi_docenti.idCorso) AND $condizione
+  GROUP BY corsi.id
   ORDER BY corsi.titolo";
 
   //die($query);
@@ -73,6 +75,7 @@ $numRisultato = $resultAA->num_rows;
    <?php
  }
   while ($dettagli = $result->fetch_assoc()) {
+    $quantiDocenti = $dettagli["quantiDocenti"];
     ?>
     <li class="collection-item">
       <div class="row valign-wrapper" style="margin-bottom:0px;">
@@ -88,7 +91,7 @@ $numRisultato = $resultAA->num_rows;
         </div>
         <div class="col s2 valign center-align condensed bold">
           <?php
-          if ($dettagliCorso['iddocente'] == '0') {
+          if ($quantiDocenti > 1) {
             echo "<span class='italic'>Docenti vari</span>";
           } else {
             echo $dettagli['nome'][0].'. '.$dettagli['cognome'];

@@ -3530,9 +3530,9 @@ function disappearAllToasts(classe){
 }( jQuery ));;(function ($) {
   $(document).ready(function() {
 
-    /*$(document).on('click.chip', '.chip .material-icons', function (e) {
+    $(document).on('click.chip', '.chip:not(chip-persist) .material-icons', function (e) {
       $(this).parent().remove();
-    });*/
+    });
 
   });
 }( jQuery ));;(function ($) {

@@ -17,7 +17,6 @@ if ($utente == -1) {
 $db = database_connect();
 $id = secure($_POST['id']);
 $titolo = secure($_POST['titolo']);
-$idDocente = secure($_POST['idDocente']);
 $tipo = secure($_POST['tipo']);
 $continuita = secure($_POST['continuita']);
 $descrizione = secure($_POST['descrizione']);
@@ -27,8 +26,7 @@ $result = $db->query("UPDATE corsi
                       SET titolo = '$titolo',
                           descrizione = '$descrizione',
                           continuita = '$continuita',
-                          tipo = '$tipo',
-													idDocente = '$idDocente'
+                          tipo = '$tipo'
                       WHERE id = $id") or die($db->error);
 
 $result = $db->query("DELETE from corsi_classi where idCorso = $id");

@@ -6,6 +6,7 @@ $ore=$_POST["ore"];
 global $_CONFIG;
 $giorni="<option value='' disabled selected>Scegli giorno</option>";
 $ore_elenco="<option value='' disabled selected>Scegli ora</option>";
+$aule = "<option value='' disabled selected>Scegli aula</option>";
 foreach($_CONFIG['giorni'] as $num=>$nome){
 		$giorni .= '<option value="'.$num.'">'.$nome.'</option>';
 }
@@ -14,8 +15,8 @@ for($j=1;$j<=$_CONFIG['ore_per_giorno'];$j++){
 	$ore_elenco .= '<option value="'.$j.'">'.$j.'^a ora</option>';
 }
 $db=database_connect();
-$aule = "";
 $resultAule = $db->query("SELECT * from aule") or die("Error: ".$db->error);
+
 while($aula = $resultAule->fetch_assoc()){
 	$aule .= '<option value="'.$aula["id"].'">Aula '.$aula["nomeAula"].', '.$aula["maxStudenti"].' alunni</option>';
 }

@@ -1,75 +1,101 @@
 function aggiungiCorso() {
-    var res = 1;
-    var posting_corso = $.post(
-        '../include/aggiungiCorso.php', {
-            titolo: $("#titolo").val(),
-            descriz: $("#descriz").val(),
-            tipo: $("#ins-corso input[name=tipo]:checked").val(),
-            continuita: $("#ins-corso input[name=continuita]:checked").val(),
-            "classi[]": $("#selezionaClassi").val()
-        }
-    );
-    idCorso = -1;
-    posting_corso.done(function(data) {
-        if (isNaN(data)) {
-            Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Si è verificato un errore (1). Controlla la console', 4000);
-            console.log(data);
-        } else {
-            idCorso = data
-            res = 1;
-
-            var idDocente = $("#selezionaDocenti").val()
-            if(idDocente == -1){
-              var docenti = scegliDocentiMultipli()
-            }else{
-              docenti = [idDocente]
-            }
-
-            docenti.forEach(function{item, index});
-
-            var postingDoc = $.post(function(data){
-                '../include/assegnaCorsoDocente.php', {}
-            });
-
-            $(".ora_da_inserire").each(function(i) {
-                console.log("ORA");
-                var ora = (parseInt($("#selezionaGiorno" + i).val()) - 1) * 6 + parseInt($("#selezionaOra" + i).val());
-                var posting = $.post(
-                    '../include/aggiungiOra.php', {
-                        "idcorso": idCorso,
-                        "titolo": $("#nomeOra" + i).val(),
-                        "ora": ora,
-                        "idAula": $("#selezionaAula" + i).val()
-                    });
-                posting.done(function(data) {
-                    if (!(data == "SUCCESS INSERT ORA")) {
-                        Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Si è verificato un errore (2). Controlla la console', 4000);
-                        console.log(data);
-                        res = 0;
-                        return false;
-                    }
-                });
-            });
-            if (res == 1){
-                Materialize.toast('<i class="material-icons green-text style="margin-right:0.25em">done</i> Corso aggiunto con successo!', 4000);
-                aggiornaListaCorsi();
-            }else{
-              eliminaCorso(idCorso);
-            }
-        }
+  if(!$("#aggiungiCorso").hasClass("disabled")){
+    if(($("#titolo").val()=="")||($("#descriz").val()=="")||($("#selezionaClassi").val().length==0)||($("#ChipsDocenti .chip").length==0)){
+      Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Completare tutti i campi nei dettagli corso!', 4000);
+      eliminaCorso(idCorso);
+      return false;
+    }
+    $(".ora_da_inserire").each(function(i){
+      if(($("#selezionaGiorno"+i).val=="")||($("#selezionaOra"+i).val()=="")||($("selezionaAula"+i).val()=="")){
+        Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Completare tutti i campi nei dettagli ore!', 4000);
+        eliminaCorso(idCorso);
+        return false;
+      }
     });
+    $.post('../include/aggiungiCorso.php',
+    {
+      titolo: $("#titolo").val(),
+      descriz: $("#descriz").val(),
+      tipo: $("#ins-corso input[name=tipo]:checked").val(),
+      continuita: $("#ins-corso input[name=continuita]:checked").val(),
+      "classi[]": $("#selezionaClassi").val()
+    }).done(function(data) {
+      if (isNaN(data)) {
+        console.log(data);
+        eliminaCorso(idCorso);
+        return false;
+      }
+      var idCorso = data;
+      console.log("TUTTO OK");
+      var docenti = listaDocentiCorso();
+      $.post('../include/assegnaCorsoDocenti.php',
+        {
+          "idCorso":idCorso,
+          "docenti":docenti
+        }).done(function(data){
+        if(data != "SUCCESS"){
+          Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Si è verificato un errore (1). Controlla la console', 4000);
+          eliminaCorso(idCorso);
+          return false;
+        }
+      });
 
+      $(".ora_da_inserire").each(function(i) {
+        var ora = (parseInt($("#selezionaGiorno" + i).val()) - 1) * 6 + parseInt($("#selezionaOra" + i).val());
+        $.post(
+          '../include/aggiungiOra.php', {
+            "idcorso": idCorso,
+            "titolo": $("#nomeOra" + i).val(),
+            "ora": ora,
+            "idAula": $("#selezionaAula" + i).val()
+          }).done(function(data) {
+            if (data != "SUCCESS INSERT ORA") {
+              Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Si è verificato un errore (2). Controlla la console', 4000);
+              console.log(data);
+              eliminaCorso(idCorso);
+              return false;
+            }
+          });
+        });
+        Materialize.toast('<i class="material-icons green-text style="margin-right:0.25em">done</i> Corso aggiunto con successo!', 4000);
+        aggiornaListaCorsi();
+      });
+    }
+  }
+
+function listaDocentiCorso(){
+  listaDocenti = []
+  $("#ChipsDocenti .chip").each(function(){
+    listaDocenti.push($(this).data("iddocente"));
+  });
+  return listaDocenti;
+}
+
+function listaDocentiCorsoDettagli(){
+  listaDocenti = []
+  $("#ChipsDocentiDettagli .chip").each(function(){
+    listaDocenti.push($(this).data("iddocente"));
+    console.log($(this).data("iddocente"));
+  });
+  return listaDocenti;
 }
 
 function aggiornaListaDocenti() {
-    var posting = $.post(
-        '../include/generaElencoDocenti.php', {
-            1: 1
+  keyword = $("#cercaScegliDocenti").val();
+  if($("#modal-ore").css("opacity")== "0"){
+    listaDocenti = listaDocentiCorso();
+  }
+  else{
+    listaDocenti = listaDocentiCorsoDettagli();
+  }
+
+  $.post(
+        '../include/elencoScegliDocenti.php', {
+            "keyword": keyword,
+            "listaDocenti": listaDocenti
         }
-    );
-    posting.done(function(data) {
-        $("#selezionaDocenti").html('<option value="" disabled selected class="grey-text">Seleziona insegnante</option>' + data);
-        $('select').material_select();
+    ).done(function(data) {
+        $("#elencoScegliDocenti").html(data);
     });
 }
 
@@ -108,6 +134,11 @@ function mostraModalCorsiIncompatibili(id){
   $('#modalCorsiIncompatibili').openModal();
 }
 
+function mostraModalScegliDocenti(){
+  aggiornaListaDocenti();
+  $('#modalScegliDocenti').openModal();
+}
+
 function mostraModalCorsiObbligatori(id){
   aggiornaListaCorsiObbligatori(id);
   $('#modalCorsiObbligatori').openModal();
@@ -122,18 +153,11 @@ function mostraModalDettagli(id, idDocente) {
     posting.done(function(data) {
         $("#modal-ore").html(data);
         $('select').material_select();
-        var posting = $.post(
-            '../include/generaElencoDocenti.php', {
-                "idDocente": idDocente
-            }
-        );
-        posting.done(function(data) {
-            $("#docenteCorsoModifica").html('<option value="" disabled selected class="grey-text">Seleziona insegnante</option>' + data);
-            $('select').material_select();
-        });
+
         aggiornaListaOre(id);
         aggiornaChipsIncompatibili(id);
         aggiornaChipsObbligatori(id);
+        aggiornaChipsDocentiDettagli(id);
         $("#modal-ore").openModal();
     });
 }
@@ -177,6 +201,8 @@ function vaiPagina(pagina){
   $("#pagina").html(pagina);
   aggiornaListaCorsi();
 }
+
+
 function aggiornaListaCorsi(){
   var posting = $.post('../include/elencoCorsi.php', {
     "mostra": $("#mostra").val(),
@@ -193,26 +219,70 @@ function aggiornaListaCorsi(){
 }
 
 function applicaModificaOre(idCorso) {
-    console.log("CIAO");
-    var posting = $.post(
-      '../include/modificaCorso.php',
+  $(".oraLista").each(function(i){
+    var ora = (parseInt($("#selezionaGiornoModificaOre" + i).val()) - 1) * 6 + parseInt($("#selezionaOraModifcaOre" + i).val());
+    $.post(
+      '../include/modificaOra.php',
       {
-          "id":idCorso,
-          "titolo":$("#titoloCorsoModifica").val(),
-          "idDocente":$("#docenteCorsoModifica").val(),
-          "tipo": $("input[name=tipoCorsoModifica]:checked").val(),
-          "continuita": $("input[name=continuitaCorsoModifica]:checked").val(),
-          "descrizione":$("#descrizioneCorsoModifica").val(),
-          "classi[]":$("#classiCorsoModifica").val()
+        "idOra":$(this).data("idLezione"),
+        "titolo":$("#titoloModificaOre"+i).val(),
+        "aula":$("selezionaAulaModificaOre"+i).val(),
+        "giorno": $("selezionaGiornoModificaOre"+i).val(),
+        "ora": ora
       }
-    );
-    posting.done(function(data){
-      console.log(data);
+    ).done(function(data){
+      if(data!="SUCCESS"){
+        console.log(data);
+        Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Si è verificato un errore. Controlla la console', 4000);
+        return false;
+      }
     });
+  });
+  $.post(
+    '../include/modificaCorso.php',
+    {
+      "id":idCorso,
+      "titolo":$("#titoloCorsoModifica").val(),
+      "idDocente":$("#docenteCorsoModifica").val(),
+      "tipo": $("input[name=tipoCorsoModifica]:checked").val(),
+      "continuita": $("input[name=continuitaCorsoModifica]:checked").val(),
+      "descrizione":$("#descrizioneCorsoModifica").val(),
+      "classi[]":$("#classiCorsoModifica").val()
+    }
+  ).done(function(data){
+    if(data!="SUCCESS"){
+      console.log(data);
+      Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Si è verificato un errore. Controlla la console', 4000);
+      return false;
+    }
+  });
+  var listaDocenti = listaDocentiCorsoDettagli();
+  if(listaDocenti.length==0){
+    Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> E\' necessario scegiere almeno un docente.', 4000);
+    return false;
+  }else{
+  $.post(
+    '../include/modificaDocentiCorso.php',
+    {
+      "idCorso":idCorso,
+      "docenti[]":listaDocenti
+    }
+  ).done(function(data){
+    if(data!="SUCCESS"){
+      console.log(data);
+      Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Si è verificato un errore. Controlla la console', 4000);
+      return false;
+    }
+    else{
+      Materialize.toast('Corso modificato con successo.', 4000);
+    }
+  });
+}
+aggiornaListaCorsi();
 }
 
+
 function aggiornaChipsIncompatibili(idCorso){
-  console.log("aggiorno");
   var   posting = $.post(
       "../include/mostraChipsIncompatibili.php",
       {
@@ -223,9 +293,19 @@ function aggiornaChipsIncompatibili(idCorso){
       });
 }
 
+function aggiornaChipsDocentiDettagli(idCorso){
+  var   posting = $.post(
+      "../include/mostraChipsDocentiDettagli.php",
+      {
+        "idCorso": idCorso
+      });
+      posting.done(function(data){
+        $("#ChipsDocentiDettagli").html(data);
+      });
+}
+
 
 function aggiornaChipsObbligatori(idCorso){
-  console.log("aggiorno");
   var   posting = $.post(
       "../include/mostraChipsObbligatori.php",
       {
@@ -234,6 +314,16 @@ function aggiornaChipsObbligatori(idCorso){
       posting.done(function(data){
         $("#ChipsObbligatori").html(data);
       });
+}
+
+function aggiungiScegliDocenti(idDocente, nomeDocente){
+  if($("#modal-ore").css("opacity") == "0"){
+    $("#ChipsDocenti").append('<div class="chip" data-iddocente = "'+idDocente+'">'+nomeDocente+'<i class="material-icons">close</i></div>');
+  }
+  else{
+    $("#ChipsDocentiDettagli").append('<div class="chip" data-iddocente = "'+idDocente+'">'+nomeDocente+'<i class="material-icons">close</i></div>');
+  }
+  $("#modalScegliDocenti").closeModal();
 }
 
 function aggiungiCorsoIncompatibile(idCorso1, idCorso2){
@@ -322,16 +412,22 @@ function eliminaObbligatori(idClasse, idCorso){
         aggiornaListaDocenti();
         $('.modal-trigger').leanModal();
 
-        $("#inserisciOre").on("click", function() {
+        $("#ore").keyup(function() {
             var val = $("#ore").val();
-            $("#ore_future").hide();
-            if (val == "" || isNaN(val))
+            if((val == "") || (val == 0)){
+                $("#ore_future").html('<div class="center-align italic" style="margin:2em;">Scegliere un numero di ore</div>');
+                $("#aggiungiCorso").addClass("disabled");
+            }
+            else if (isNaN(val)){
                 Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Numero di ore non valido', 4000);
-            else if (val > 20)
-                Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Numero di ore troppo alto, massimo 20', 4000);
+                $("#aggiungiCorso").addClass("disabled");
+            }
             else {
-                $("#wait").css("height:100%");
-                $("#wait").fadeIn();
+              if (val > 20){
+                  Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Numero di ore troppo alto, massimo 20', 4000);
+                  $("#ore").val(20);
+                  val = 20;
+                }
                 var posting = $.post(
                     '../include/creaOre.php', {
                         ore: val
@@ -344,7 +440,7 @@ function eliminaObbligatori(idClasse, idCorso){
                     $("#elenco_ore").fadeIn();
                     $('select').material_select();
                     $("#aggiungiCorso").removeClass("disabled");
-                    $("#wait").fadeOut();
+                    //$("#wait").fadeOut();
                 });
 
             }
@@ -360,8 +456,18 @@ function eliminaObbligatori(idClasse, idCorso){
           aggiornaListaCorsiIncompatibili();
         });
 
+        $("#cercaScegliDocenti").keyup(function(){
+          aggiornaListaDocenti();
+        });
+
+
         $("#cercaCorsiObbligatori").keyup(function(){
           aggiornaListaCorsiObbligatori();
+        });
+
+
+        $("#aggiungiCorso").click(function(){
+          aggiungiCorso();
         });
 
         $("#aggiungi-aula").submit(function(e) {

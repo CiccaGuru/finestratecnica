@@ -28,8 +28,7 @@ if($result->num_rows == 0){
 else{
 while($corso = $result->fetch_assoc()){
 ?>
-
-          <div class="chip">
+          <div class="chip chip-persist">
             <?php echo $corso["titolo"];?>
             <i class="material-icons" onclick="eliminaIncompatibilita(<?php echo $idCorso.", ".$corso["idCorso2"];?>)">close</i>
           </div>
