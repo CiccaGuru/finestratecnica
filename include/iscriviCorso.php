@@ -16,9 +16,9 @@ else{
 
 
 $db = database_connect();
-$corso = $_POST["id_corso"];
+$corso = $_POST["idCorso"];
 
-$result = $db->query("SELECT * FROM corsi WHERE id='$corso' ") or die($db->error);
+$result = $db->query("SELECT * FROM corsi WHERE id='$corso'") or die($db->error);
 $dettagliCorso = $result->fetch_assoc();
 
 $result = $db->query("SELECT id from lezioni where idCorso = '$corso'");
@@ -31,8 +31,8 @@ $coincide = 0;
 
 while($lezione = $result->fetch_assoc()){
   $conta ++;
-  $a = iscriviOra($lezione["id"], $corso, $db);
-  switch ($a) {
+  $risultato = iscriviOra($lezione["id"], $corso, $db);
+  switch ($risultato) {
     case 0:
       break;
     case 1:
@@ -56,70 +56,20 @@ if($errori > 0){
     while($lezione = $result->fetch_assoc()){
       rimuoviOra($lezione["id"], $corso, $db);
     }
-    echo "Non posso iscriverti, si sono verificati degli errori.";
+    echo "Non posso iscriverti, si sono verificati degli errori. (1)";
   }
   else{
     if($errori < $conta){
       echo "SOME";
     }
     else{
-      echo "Non posso iscriverti, si sono verificati degli errori.";
+      echo "Non posso iscriverti, si sono verificati degli errori. (2)";
     }
   }
 }
 else{
   echo "SUCCESS";
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-$posso = 1;
-if($dettagliCorso["continuita"]){
-  $result = $db->query("SELECT id, ora FROM lezioni  WHERE idcorso='$corso'") or die('ERRORE: ' . $db->error);
-  while($lezione = $result->fetch_assoc()){
-    $resultA = $db->query("SELECT * FROM iscrizioni  WHERE ((idUtente='$utente')   AND (continuita = '1') AND (ora='".$lezione["ora"]."'))") or die('ERRORE ASD: ' . $db->error);
-    if(($resultA->num_rows)>0){
-      $posso = 0;
-      die("Corso coincidente");
-    }
-    if((troppiIscritti($lezione["id"], $db))){
-      $posso = 0;
-      die("Corso con troppi iscritti");
-    }
-  }
-}
-
-if($posso = 1){
-  $a = 1;
-  $result = $db->query("SELECT * FROM lezioni  WHERE idcorso='$corso'") or die('ERRORE: ' . $db->error);
-  while($lezione = $result->fetch_assoc()){
-    $a = $a * iscriviOra($lezione["id"], $corso, $db);
-  }
-    echo "SUCCESS";
-
-}*/
-
 $db->close();
 }
 ?>

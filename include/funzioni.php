@@ -79,17 +79,17 @@ function iscritto($lezione, $utente){
 	}
 }
 
-function num_iscritti($ora, $db){
-	$result = $db->query("SELECT COUNT(id) AS count FROM iscrizioni WHERE idLezione='$ora' AND partecipa='1'") or	die('ERRORE: ' . $db->error);
+function num_iscritti($idLezione, $db){
+	$result = $db->query("SELECT COUNT(*) AS count FROM iscrizioni WHERE idLezione='$idLezione' AND partecipa=1") or	die('ERRORE: ' . $db->error);
 	$resultFetch = $result->fetch_assoc();
 	return $resultFetch["count"];
 }
 
-function troppiIscritti($idLezione, $db){
+function troppiIscritti($idLezione){
 	$db = database_connect();
-	$result = $db->query("SELECT maxiscritti FROM lezioni where id = '$idLezione'") or die('ERRORE funzioni.php 93: ' . $db->error);
+	$result = $db->query("SELECT aule.maxStudenti as maxStudenti FROM aule, lezioni where lezioni.id = '$idLezione' AND lezioni.idAula = aule.id") or die('ERRORE funzioni.php 93: ' . $db->error);
 	$lezione = $result->fetch_assoc();
-	if($lezione["maxiscritti"] <= num_iscritti($idLezione, $db)){
+	if(intval($lezione["maxStudenti"]) <= num_iscritti($idLezione, $db)){
 		return 1;
 	}
 	else{
@@ -97,63 +97,56 @@ function troppiIscritti($idLezione, $db){
 	}
 }
 
-function iscrivi($utente, $idOra, $idCorso, $partecipa, $db){
-	$a = 1;
-	$result = $db->query("INSERT INTO iscrizioni  (idUtente, idLezione, idCorso, partecipa)  VALUES ('$utente', '$idOra', '$idCorso', '$partecipa')") or die($db->error);
-	return $a;
-}
-
 function iscriviOra($idLezione, $idCorso, $db){
 	$utente = check_login();
-	$result = $db->query("SELECT COUNT(*) as count FROM iscrizioni  WHERE idUtente='$utente'  AND idLezione='$idLezione'") or die('ERRORE p: ' . $db->error);
-  $resultFetch = $result->fetch_assoc();
+	$result = $db->query("SELECT COUNT(*) as count FROM iscrizioni
+												WHERE idUtente='$utente'  AND idLezione='$idLezione'") or die('ERRORE p: ' . $db->error);
+	$resultFetch = $result->fetch_assoc();
 	if($resultFetch["count"]>0){
 		return 1; // già iscritto
 	}
 	if(troppiIscritti($idLezione)){
+		//echo "ID: ".$idLezione." - ";
 		return 2; // troppi iscritti
 	}
-	$result = $db->query("SELECT idCorso, ora from lezioni where id = '$idLezione'");
+
+	$result = $db->query("SELECT ora from lezioni where lezioni.id = '$idLezione'");
 	$dettagliLezione = $result->fetch_assoc();
+	$ora = $dettagliLezione["ora"];
 
-			$result = $db->query("SELECT 	COUNT(*) as conta
-														from		iscrizioni, lezioni, corsi
-														where 	iscrizioni.idUtente = $utente AND
-														 				lezioni.ora = ".$dettagliLezione["ora"]." AND
-																		iscrizioni.idLezione = lezioni.id AND
-																		corsi.id = iscrizioni.idCorso AND
-																		corsi.continuita = 1");
-			$conta = $result->fetch_assoc();
-			if(($conta["conta"]>0) && ($dettagliLezione["continuita"])){
-				return 3;
-			}
-			if(($conta["conta"]>0) && !($dettagliLezione["continuita"])){
-				$partecipa = '0';
-			}
-			else{
-				$partecipa = '1';
-			}
-			$result = $db->query("UPDATE 	iscrizioni, corsi, lezioni
-														set 		iscrizioni.partecipa = 0
-														where 	iscrizioni.idUtente = '$utente' AND
-																		lezioni.ora = ".$dettagliLezione["ora"]." AND
-																		corsi.continuita = 0 AND
-																		corsi.id = iscrizioni.idCorso AND
-																		lezioni.id = iscrizioni.idLezione");
-			$a = iscrivi($utente, $idLezione, $dettagliLezione["idCorso"], $partecipa, $db);
-		return $a? 0 : 1;
+	$result = $db->query("SELECT 	COUNT(*) as conta
+												from		iscrizioni, corsi, lezioni
+												where 	iscrizioni.idUtente = '$utente' AND
+																corsi.continuita = '1' AND
+																iscrizioni.idCorso = corsi.id AND
+																lezioni.id = iscrizioni.idLezione AND
+																lezioni.ora = $ora");
+	$resultFetch = $result->fetch_assoc();
+	$conta = $resultFetch["conta"];
 
-}
+	if($conta > 0){
+			return 3;   //sono già iscritto a un'ora ed è un corso con continuità
+	}
+	$result = $db->query("UPDATE 	iscrizioni, corsi, lezioni
+												SET 		iscrizioni.partecipa = 0
+												WHERE 	iscrizioni.idUtente = '$utente' AND
+																lezioni.ora = '$ora' AND
+																lezioni.id = iscrizioni.idLezione");
+	$result = $db->query("INSERT 	INTO iscrizioni  (idUtente, idLezione, idCorso, partecipa)
+																VALUES ('$utente', '$idLezione', '$idCorso', '1')") or die($db->error);
+	return 0;
+
+	}
 
 function troppiIscrittiCorso($idCorso, $continuita){
 	$db = database_connect();
 	$result = $db->query("SELECT 	COUNT(*) as conta
-												FROM 		lezioni
+												FROM 		lezioni, aule
 												WHERE 	(	SELECT COUNT(*)
 																	FROM iscrizioni
 																	WHERE iscrizioni.idLezione=lezioni.id AND iscrizioni.partecipa='1')
-																>=lezioni.maxiscritti AND
-																lezioni.idcorso='$idCorso'");
+																>=aule.maxStudenti AND
+																lezioni.idcorso='$idCorso' and aule.id = lezioni.idAula") or die ($db->error);
 	$resultFetch = $result->fetch_assoc();
 	if($continuita == 0){
 			$resultB = $db->query("SELECT COUNT(*) as conta from lezioni where lezioni.idCorso = '$idCorso'");

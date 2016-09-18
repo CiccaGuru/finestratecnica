@@ -2,13 +2,11 @@ function aggiungiCorso() {
   if(!$("#aggiungiCorso").hasClass("disabled")){
     if(($("#titolo").val()=="")||($("#descriz").val()=="")||($("#selezionaClassi").val().length==0)||($("#ChipsDocenti .chip").length==0)){
       Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Completare tutti i campi nei dettagli corso!', 4000);
-      eliminaCorso(idCorso);
       return false;
     }
     $(".ora_da_inserire").each(function(i){
       if(($("#selezionaGiorno"+i).val=="")||($("#selezionaOra"+i).val()=="")||($("selezionaAula"+i).val()=="")){
         Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Completare tutti i campi nei dettagli ore!', 4000);
-        eliminaCorso(idCorso);
         return false;
       }
     });
@@ -22,11 +20,9 @@ function aggiungiCorso() {
     }).done(function(data) {
       if (isNaN(data)) {
         console.log(data);
-        eliminaCorso(idCorso);
         return false;
       }
       var idCorso = data;
-      console.log("TUTTO OK");
       var docenti = listaDocentiCorso();
       $.post('../include/assegnaCorsoDocenti.php',
         {
@@ -80,9 +76,13 @@ function listaDocentiCorsoDettagli(){
   return listaDocenti;
 }
 
+function qualeListaChipDocenti(){ // 1 se è aggiunta corso, 0 se è modifica corso
+  return $("#modal-ore").css("opacity")== "0" || $("#modal-ore").css("display")== "none";
+}
+
 function aggiornaListaDocenti() {
   keyword = $("#cercaScegliDocenti").val();
-  if($("#modal-ore").css("opacity")== "0"){
+  if(qualeListaChipDocenti()) {
     listaDocenti = listaDocentiCorso();
   }
   else{
@@ -317,7 +317,7 @@ function aggiornaChipsObbligatori(idCorso){
 }
 
 function aggiungiScegliDocenti(idDocente, nomeDocente){
-  if($("#modal-ore").css("opacity") == "0"){
+  if(qualeListaChipDocenti()){
     $("#ChipsDocenti").append('<div class="chip" data-iddocente = "'+idDocente+'">'+nomeDocente+'<i class="material-icons">close</i></div>');
   }
   else{

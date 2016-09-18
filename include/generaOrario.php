@@ -50,13 +50,15 @@ else{
                                           iscrizioni.idLezione as idLezione,
                                           corsi.continuita as continuita,
                                           corsi.titolo as titolo,
-                                          lezioni.aula as aula
-                                  FROM    iscrizioni, corsi, lezioni
-                                  WHERE   iscrizioni.idUtente = '".$utente."'
-                                          AND lezioni.ora = '".$num."'
+                                          lezioni.idAula,
+                                          aule.nomeAula as aula
+                                  FROM    iscrizioni, corsi, lezioni, aule
+                                  WHERE   iscrizioni.idUtente = '$utente'
+                                          AND lezioni.ora = '$num'
                                           AND iscrizioni.partecipa = '1'
                                           AND corsi.id = iscrizioni.idCorso
-                                          AND lezioni.id = iscrizioni.idLezione")
+                                          AND lezioni.id = iscrizioni.idLezione
+                                          AND lezioni.idAula = aule.id")
                             or die('ERRORE: ' . $db->error);
               $resultContr = $db->query("SELECT iscrizioni.id FROM iscrizioni, lezioni WHERE iscrizioni.idUtente = '$utente' AND lezioni.ora = '$num' AND lezioni.id = iscrizioni.idLezione AND iscrizioni.partecipa = '0'") or die('ERRORE: ' . $db->error);
               if($result->num_rows ==1){

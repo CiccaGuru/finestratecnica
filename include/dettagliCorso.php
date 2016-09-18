@@ -22,14 +22,10 @@ $result = $db->query("SELECT classe FROM utenti where id = '$utente'");
 $dettagliUtente = $result->fetch_assoc();
 $result = $db->query("SELECT  corsi.titolo AS titolo,
                               corsi.descrizione AS descrizione,
-                              corsi.iddocente AS iddocente,
                               corsi.id as id,
-                              corsi.continuita as continuita,
-                              utenti.nome as nome,
-                              utenti.cognome as cognome
-                      FROM    corsi, utenti
-                      WHERE   (utenti.id = corsi.iddocente) AND
-                              corsi.id = '$idCorso'") or die($db->error);
+                              corsi.continuita as continuita
+                      FROM    corsi
+                      WHERE   corsi.id = '$idCorso'") or die($db->error);
 $dettagliCorso=$result->fetch_assoc();
 $continuita = $dettagliCorso["continuita"];
 $ore_utente = array();
@@ -59,12 +55,16 @@ while($classe = $result->fetch_assoc()){
     <div class="col m3 s12 bold condensed letter-spacing-1">PROF:</div>
     <div class="col m9 s11 offset-s1">
       <?php
-        if($dettagliCorso["iddocente"] == '0'){
-          echo "<span class='italic'>Docenti vari</span>";
-        }
-        else {
-          echo $dettagliCorso["nome"][0].'. '.$dettagliCorso["cognome"];
-        }
+        $result = $db->query("SELECT  corsi_docenti.idDocente AS iddocente,
+                                        utenti.nome as nome,
+                                        utenti.cognome as cognome
+                                FROM    utenti, corsi_docenti
+                                WHERE   utenti.id = corsi_docenti.idDocente AND
+                                        corsi_docenti.idCorso = '$idCorso'") or die($db->error);
+          while($docente = $result->fetch_assoc()){
+            $listaDocenti[]=$docente["nome"][0].". ".$docente["cognome"];
+          }
+          echo implode(" - ", $listaDocenti);
     ?>
   </div>
   </div>
@@ -80,7 +80,15 @@ while($classe = $result->fetch_assoc()){
     <div class="bold condensed letter-spacing-1">DETTAGLI LEZIONI:</div>
     <?php
     $ore=array();
-    $ore_result = $db->query("SELECT id, aula, ora, maxiscritti, titolo from lezioni where idcorso='".$idCorso."' ORDER BY ora") or die('ERRORE: 4 ' . $db->error);
+    $ore_result = $db->query("SELECT  lezioni.id as id,
+                                      lezioni.idAula as idAula,
+                                      aule.nomeAula as aula,
+                                      lezioni.ora as ora,
+                                      aule.maxStudenti as maxStudenti,
+                                      lezioni.titolo as titolo
+                              from    lezioni, aule
+                              where   lezioni.idCorso='$idCorso' AND
+                                      lezioni.idAula = aule.id ORDER BY ora") or die('ERRORE: 4 ' . $db->error);
     $cont=1;
     while($ora=$ore_result->fetch_assoc()){
       $Tiscritti = troppiIscritti($ora["id"], $db);
@@ -96,7 +104,7 @@ while($classe = $result->fetch_assoc()){
                   else echo $ora["titolo"];?>
         </div>
         <div class="col m1 s4 offset-s1 <?php if($Tiscritti) echo "red-text"; else echo "teal-text";?> ">
-          <?php echo num_iscritti($ora["id"], $db).'\\'.$ora["maxiscritti"];?>
+          <?php echo num_iscritti($ora["id"], $db).'\\'.$ora["maxStudenti"];?>
         </div>
         <div class="col m3 s4">
           Aula <?php echo $ora["aula"];?>

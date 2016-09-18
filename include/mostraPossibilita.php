@@ -16,13 +16,22 @@ else{
 
   $db = database_connect();
 
-  $result = $db->query("SELECT corsi.id as idcorso, lezioni.id as idlezione,
-                                iscrizioni.partecipa, corsi.titolo, corsi.descrizione,
-                                utenti.nome, utenti.cognome
-                          from corsi, utenti, iscrizioni, lezioni
-                          where iscrizioni.idUtente = '$utente' and lezioni.ora = '$ora' and
-                          lezioni.id = iscrizioni.idLezione and corsi.id = iscrizioni.idCorso
-                          and utenti.id = corsi.iddocente") or die($db->error);
+  $result = $db->query("SELECT  corsi.id as idcorso,
+                                lezioni.id as idlezione,
+                                iscrizioni.partecipa,
+                                corsi.titolo,
+                                corsi.descrizione,
+                                utenti.nome,
+                                utenti.cognome,
+                                COUNT(corsi_docenti.idCorso) as quantiDocenti
+                          from  corsi, utenti, iscrizioni, lezioni, corsi_docenti
+                          where iscrizioni.idUtente = '$utente' and
+                                lezioni.ora = '$ora' and
+                                lezioni.id = iscrizioni.idLezione and
+                                corsi.id = iscrizioni.idCorso AND
+                                utenti.id = corsi_docenti.idDocente AND
+                                corsi.id = corsi_docenti.idCorso
+                          GROUP BY corsi_docenti.idCorso") or die($db->error);
 
   if($result->num_rows==0){
 ?>
@@ -39,20 +48,31 @@ $resultUtente = $db->query("SELECT 	classe
                       FROM 		utenti
                       WHERE 	id = '$utente'");
 $dettagliUtente = $resultUtente->fetch_assoc();
+$classe = $dettagliUtente["classe"];
 $resultTmp = $db->query("SELECT * from
                               (SELECT lezioni.idCorso,
-                                      lezioni.id, lezioni.maxIscritti,
+                                      lezioni.id,
+                                      aule.maxStudenti,
                                       corsi.titolo,
-                                      utenti.nome, utenti.cognome, corsi.descrizione,corsi_classi.classe,
+                                      utenti.nome,
+                                      utenti.cognome,
+                                      corsi.descrizione,
+                                      corsi_classi.classe,
+                                      COUNT(corsi_docenti.idCorso) as quantiDocenti,
                                       (SELECT COUNT(id) AS count FROM iscrizioni
                                           WHERE idLezione=lezioni.id AND partecipa='1')
                                       as contaTable
-                                FROM corsi, lezioni, utenti, corsi_classi
-                                WHERE lezioni.ora = '$ora' AND corsi.id = lezioni.idCorso
-                                  and utenti.id = corsi.idDocente and corsi.continuita = '0'
-                                  and corsi.id = corsi_classi.idCorso AND
-                                  corsi_classi.classe = '".$dettagliUtente["classe"]."')
-                          as sub where contaTable < maxIscritti");
+                                FROM corsi, lezioni, utenti, corsi_classi, aule, corsi_docenti
+                                WHERE lezioni.ora = '$ora' AND
+                                      corsi.id = lezioni.idCorso and
+                                      utenti.id = corsi_docenti.idDocente AND
+                                      corsi.id = corsi_docenti.idCorso and
+                                      corsi.continuita = '0' and
+                                      corsi.id = corsi_classi.idCorso AND
+                                      lezioni.idAula = aule.id AND
+                                      corsi_classi.classe = '$classe'
+                                GROUP BY corsi_docenti.idCorso) as sub
+                          WHERE contaTable < maxStudenti") or die($db->error);
   while($lezione = $resultTmp->fetch_assoc()){
     ?>
       <div class="row p-no-space">
@@ -63,7 +83,10 @@ $resultTmp = $db->query("SELECT * from
         </div>
         <div class="col s2 valign-wrapper">
           <p class="valign truncate">
-            <?php echo $lezione["nome"][0].". ".$lezione["cognome"]?>
+          <?php  if($lezione["quantiDocenti"]>1){
+            ?> <span class="italic">Docenti vari</span> <?php
+          } else
+             echo $lezione["nome"][0].". ".$lezione["cognome"]?>
           </p>
         </div>
         <div class="col s5 valign-wrapper">
@@ -100,7 +123,10 @@ $resultTmp = $db->query("SELECT * from
         </div>
         <div class="col s6 m3">
           <p>
-            <?php echo $lezione["nome"][0].". ".$lezione["cognome"]?>
+            <?php  if($lezione["quantiDocenti"]>1){
+              ?> <span class="italic">Docenti vari</span> <?php
+            } else
+               echo $lezione["nome"][0].". ".$lezione["cognome"]?>
           </p>
         </div>
         <div class="col m6 hide-on-small-only truncate">

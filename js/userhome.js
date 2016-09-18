@@ -133,8 +133,9 @@ function iscriviCorso(idCorso){
   var posting = $.post(
     '../include/iscriviCorso.php',
     {
-      "id_corso":idCorso
+      "idCorso":idCorso
     });
+
     posting.done(function( data ){
       if(data=="SUCCESS"){
         Materialize.toast('Ti ho iscritto con successo! <a onclick="rimuoviCorso('+idCorso+'); disappearAllToasts(\'.iscrittoToast\');" class="btn-flat waves-effect waves-green condensed green-text" style="font-weight:500; margin-right:0px; margin-left:12px; padding-left:12px; padding-right:12px;">Annulla</a>', 4000, "iscrittoToast");
@@ -432,10 +433,7 @@ function cercaSubmit(s, mute){
       var el = "#"+e.target.id;
       var idCorso = $(el).data("id-corso");
       if($(el).is(':checked')){
-        setTimeout(function(){
-          iscriviCorso(idCorso);
-        }, 200);
-
+        setTimeout(iscriviCorso(idCorso), 200);
       }
       else{
         rimuoviCorso(idCorso);

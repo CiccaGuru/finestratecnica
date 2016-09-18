@@ -83,22 +83,27 @@ function generaLista($tipo, $continuita){
   global $db;
   global $condizione;
   global $dettagliUtente;
+  $classe = $dettagliUtente["classe"];
   $corsi_particolari_uno = array('275', '391', '392');
   $corsi_particolari_due = array('113', '114', '115');
   $corsi_obbligati = array('190', '249',  '68', '230', '350', '69', '83', '67', '179');
   $result = $db->query("SELECT  corsi.titolo AS titolo,
                                 corsi.descrizione AS descrizione,
-                                corsi.iddocente AS iddocente,
+                                corsi_docenti.idDocente AS iddocente,
                                 corsi.id as id,
                                 utenti.nome as nome,
-                                utenti.cognome as cognome
-                        FROM    corsi, utenti, corsi_classi
-                        WHERE   (utenti.id = corsi.iddocente) AND
+                                utenti.cognome as cognome,
+                                COUNT(corsi_docenti.idDocente) as quantiDocenti
+                        FROM    corsi, utenti, corsi_classi, corsi_docenti
+                        WHERE   (utenti.id = corsi_docenti.idDocente) AND
                                 corsi.id = corsi_classi.idCorso AND
-                                corsi_classi.classe = '".$dettagliUtente["classe"]."' AND
+                                corsi.id = corsi_docenti.idCorso AND
+                                corsi_classi.classe = '$classe' AND
                                 corsi.tipo = '$tipo' AND
                                 corsi.continuita = '$continuita' AND
-                                $condizione") or die($db->error);
+                                $condizione
+                        GROUP BY corsi_docenti.idCorso
+                        ORDER BY corsi.titolo") or die($db->error);
 
 if($result->num_rows == 0){
   ?>
@@ -131,7 +136,7 @@ if($result->num_rows == 0){
       <div class="truncate col l3 m3 s5">
         <span>
           <?php
-            if($dettagliCorso["iddocente"] == '0'){
+            if($dettagliCorso["quantiDocenti"] > 1){
               echo "<span class='italic'>Docenti vari</span>";
             }
             else {
