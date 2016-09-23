@@ -42,13 +42,13 @@ $db = database_connect();
 	<div class="navbar-fixed">
 		<nav id="intestaz" class="light-blue">
 			<div class="nav-wrapper">
-				<a class="hide-on-small-only left" style="margin-left:2%;">
+				<a class="hide-on-small-only left condensed letter-spacing-1" style="margin-left:2%;">
 					<?php
 							$result = $db->query("SELECT 	username, nome, cognome, primoAccesso, passwordOriginale
 																		FROM 		utenti
 																		WHERE 	id = '$utente'");
 							$dettagliUtente = $result->fetch_assoc();
-							echo $dettagliUtente["nome"]." ".$dettagliUtente["cognome"]." (".$dettagliUtente["username"].")";
+							echo strtoupper($dettagliUtente["nome"]." ".$dettagliUtente["cognome"]." (".$dettagliUtente["username"].")");
 					?>
 				</a>
 				<a href="#" class="brand-logo center light">Settimana tecnica</a>
@@ -95,7 +95,14 @@ $db = database_connect();
 						<ul class="collapsible popout" data-collapsible="accordion">
 							<?php
 
-							$result = $db->query("SELECT id, titolo, descrizione, continuita, tipo from corsi where iddocente = '$utente'");
+							$result = $db->query("SELECT corsi.id,
+																					 corsi.titolo,
+																					 corsi.descrizione,
+																					 corsi.continuita,
+																					 corsi.tipo
+																		from corsi, corsi_docenti
+																		where corsi_docenti.idCorso = corsi.id and
+																				  corsi_docenti.idDocente= '$utente'");
 							while($dettagliCorso = $result->fetch_assoc()){
 								?>
 
@@ -183,10 +190,12 @@ $db = database_connect();
 										$result = $db->query("SELECT  lezioni.idCorso as idCorso,
 																									corsi.continuita as continuita,
 																									corsi.titolo as titolo,
-																									lezioni.aula as aula
-																					FROM    corsi, lezioni
-																					WHERE   corsi.idDocente = '".$utente."'
-																									AND lezioni.idCorso = corsi.id AND
+																									aule.nomeAula as aula
+																					FROM    corsi, lezioni, aule, corsi_docenti
+																					WHERE   corsi_docenti.idDocente = '$utente' AND
+																									corsi.id = corsi_docenti.idCorso AND
+																									lezioni.idAula = aule.id AND
+																									lezioni.idCorso = corsi.id AND
 																									lezioni.ora = '$num'")
 															or die('ERRORE: ' . $db->error);
 										if($result->num_rows>0){

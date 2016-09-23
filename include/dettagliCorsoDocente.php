@@ -41,10 +41,11 @@ $dettagliCorso = $result->fetch_assoc();
 <?php
 $result = $db->query("SELECT  lezioni.titolo,
                               lezioni.ora,
-                              lezioni.maxIscritti,
+                              aule.maxStudenti as maxIscritti,
                               lezioni.id
-                      FROM    lezioni
-                      WHERE   lezioni.idCorso = '$idCorso'
+                      FROM    lezioni, aule
+                      WHERE   lezioni.idCorso = '$idCorso' AND
+                              lezioni.idAula = aule.id
                       ORDER BY ora ")
               or die($db->error);
 
