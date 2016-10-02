@@ -1,0 +1,20 @@
+#cont .row{
+  display: flex;
+}
+
+#elencoContainer{
+  order:1;
+}
+
+#orarioContainer{
+  order:-1;
+}
+
+#dett-doc .row{
+  margin-bottom:7px;
+  margin-top:7px;
+}
+
+.space-above{
+  margin-top:0.5em;
+}

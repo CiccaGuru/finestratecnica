@@ -40,19 +40,6 @@ function getElenco(idLezione){
     }
     $('.tooltipped').tooltip({delay: 50});
 
-    var lastWindowWidth;
-    $(window).resize(function() {
-       var windowWidth = $(window).width();
-       if((lastWindowWidth < 993) && (windowWidth >= 993)){
-               lastWindowWidth = windowWidth;
-               $("#card-orario-gen").html($("#card-orario-gen-piccolo").html());
-       }
-       if((lastWindowWidth > 993) && (windowWidth <= 993)){
-               lastWindowWidth = windowWidth;
-               $("#card-orario-gen-piccolo").html($("#card-orario-gen").html());
-       }
-       lastWindowWidth = windowWidth;
-     });
 
      $("#cambiaPassword").click(function (){
        if(($("#cane").val()==$("#ripeti").val()) && ($("#cane").val()!="")){
@@ -81,7 +68,7 @@ function getElenco(idLezione){
        }
        else{
          Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Le due password non sono uguali', 4000);
-("#modal-primoAccesso").openModal();
+        $("#modal-primoAccesso").openModal();
        }
 
      });

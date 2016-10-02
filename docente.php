@@ -25,6 +25,7 @@ $db = database_connect();
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 	<link href="css/style.css" type="text/css" rel="stylesheet" media="screen"/>
+	<link href="css/docente.css" type="text/css" rel="stylesheet" media="screen"/>
 	<link rel="stylesheet" href="css/material-scrolltop.css">
 	<link rel="apple-touch-icon" sizes="180x180" href="/img/favicons/apple-touch-icon.png">
 <link rel="icon" type="image/png" href="/img/favicons/favicon-32x32.png" sizes="32x32">
@@ -48,12 +49,12 @@ $db = database_connect();
 																		FROM 		utenti
 																		WHERE 	id = '$utente'");
 							$dettagliUtente = $result->fetch_assoc();
-							echo strtoupper($dettagliUtente["nome"]." ".$dettagliUtente["cognome"]." (".$dettagliUtente["username"].")");
+							echo mb_strtoupper($dettagliUtente["nome"]." ".$dettagliUtente["cognome"]." (".$dettagliUtente["username"].")");
 					?>
 				</a>
 				<a href="#" class="brand-logo center light">Settimana tecnica</a>
 				<ul id="nav-mobile" class="right hide-on-med-and-down">
-					<li><a href="logout.php" class="waves-effect waves-light">Logout</a></li>
+					<li><a href="logout.php" class="waves-effect waves-light condensed"><i class="material-icons left">exit_to_app</i>LOGOUT</a></li>
 				</ul>
 			</div>
 		</nav>
@@ -72,22 +73,7 @@ $db = database_connect();
 
 	<div id="cont">
 		<div class="row">
-			<div class="col hide-on-large-only s12">
-				<div id="card-orario-gen-piccolo" class="card">
-					<div class="card-content">
-						<div class="center valign-wrapper">
-							<div class="preloader-wrapper valign center big active">
-								<div class="spinner-layer spinner-red-only">
-									<div class="circle-clipper right">
-										<div class="circle"></div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col l7 s12 center" id="elencoCorsiContainer">
+			<div class="col l7 center" id="elencoCorsiContainer">
 
 
 				<div id="elencoCorsiDocente" class="left-align">
@@ -109,23 +95,13 @@ $db = database_connect();
 								<li class="collapsibleCorso" id="collapsibleCorso<?php echo $dettagliCorso["id"]; ?>" >
 									<div class="collapsible-header" onclick="caricaInfo(<?php echo $dettagliCorso["id"]?>)">
 										<div class="row">
-												<div class="col s2 bold truncate">
+												<div class="col s2 bold truncate condensed">
 													<?php echo $dettagliCorso["titolo"];?>
 												</div>
-												<div class="col s4 truncate">
+												<div class="col s6 truncate">
 													<?php echo $dettagliCorso["descrizione"]?>
 												</div>
-												<div class="col s2 truncate">
-													<?php
-														$classi = "";
-														$resultClassi = $db->query("SELECT classe from corsi_classi where idCorso = '".$dettagliCorso["id"]."' GROUP BY classe");
-														while($classe = $resultClassi->fetch_assoc()){
-															$classi .= $classe["classe"]." ";
-														}
-														echo $classi;
-														?>
-												</div>
-												<div class="col s2 truncate">
+												<div class="col s2 truncate condensed bold">
 													<?php
 														if($dettagliCorso["tipo"]=='0'){
 															echo "Recupero";
@@ -134,7 +110,7 @@ $db = database_connect();
 															echo "Approf.";
 														}
 												?></div>
-												<div class="col s2 truncate">
+												<div class="col s2 truncate condensed bold">
 													<?php	if($dettagliCorso["continuita"]=='0'){
 															echo " Senza cont.";
 														}
@@ -147,6 +123,8 @@ $db = database_connect();
 									</div>
 
 									<div class="collapsible-body">
+										<div class="center">
+
 										<div class="preloader-wrapper center big active">
 											<div class="spinner-layer center spinner-red-only">
 												<div class="circle-clipper right">
@@ -154,6 +132,7 @@ $db = database_connect();
 												</div>
 											</div>
 										</div>
+									</div>
 									</div>
 								</li>
 
@@ -167,7 +146,7 @@ $db = database_connect();
 				</div>
 			</div>
 
-			<div class="col l5 hide-on-med-and-down s12">
+			<div class="col l5">
 				<div id="card-orario-gen" class="card">
 					<div class="card-content">
 						<table id="orario" class="centered bordered">
@@ -175,7 +154,7 @@ $db = database_connect();
 								<th></th>
 								<?php
 								for($i =1; $i<=$_CONFIG["numero_giorni"]; $i++){
-									echo '<th>'.$_CONFIG["giorni"][$i].'</th>';
+									echo '<th class="condensed">'.strtoupper($_CONFIG["giorni"][$i]).'</th>';
 								}
 							?>
 						</thead>
@@ -184,7 +163,7 @@ $db = database_connect();
 								$colori = array();
 								$r = 0;
 								for($i = 1; $i<=$_CONFIG["ore_per_giorno"]; $i++){
-									echo '<tr><td>'.$i."</td>";
+									echo '<tr><td class="condensed">'.$i."</td>";
 									for($j=1; $j<=$_CONFIG["numero_giorni"];$j++){
 										$num = ($j-1)*$_CONFIG["ore_per_giorno"]+$i;
 										$result = $db->query("SELECT  lezioni.idCorso as idCorso,
@@ -214,7 +193,7 @@ $db = database_connect();
 														$bgcolor = $_CONFIG["colori"][$index];
 														$fgcolor = $_CONFIG["colore-testo"][$index];
 												}
-												echo '<td class="orario-cell-normal" style="background-color: '.$bgcolor.'; color: '.$fgcolor.';" onclick="$(\'#collapsible'.$iscrizione["idCorso"].'\').animatedScroll({easing: \'easeOutQuad\'});">'.$nomeCorso.'<span>Aula '.$aula.'</span></td>';
+												echo '<td class="orario-cell-normal condensed" style="background-color: '.$bgcolor.'; color: '.$fgcolor.';" onclick="$(\'#collapsible'.$iscrizione["idCorso"].'\').animatedScroll({easing: \'easeOutQuad\'});">'.$nomeCorso.'<span>Aula '.$aula.'</span></td>';
 											}
 										}
 										else{
