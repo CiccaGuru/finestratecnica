@@ -6,7 +6,7 @@
   <title>Settimana tecnica</title>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen"/>
-  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen"/>
+  <link href="css/style.php" type="text/css" rel="stylesheet" media="screen"/>
   <link rel="apple-touch-icon" sizes="180x180" href="/img/favicons/apple-touch-icon.png">
 <link rel="icon" type="image/png" href="/img/favicons/favicon-32x32.png" sizes="32x32">
 <link rel="icon" type="image/png" href="/img/favicons/favicon-16x16.png" sizes="16x16">
@@ -20,68 +20,42 @@
 </head>
 
 <body id="index">
-  <nav class="light-blue">
-    <div class="nav-wrapper">
-      <a href="#" class="brand-logo center light">Settimana tecnica</a>
-    </div>
-  </nav>
-  <div id="help" class="right hide-on-small-only">
-    <a class="btn-floating btn-large waves-effect waves-light red">
-      <i id="back" class="material-icons">arrow_back</i>
-      <i id="first" class="material-icons">more_horiz</i>
-    </a>
-  </div>
 
-  <div class="container">
-    <div class="hide-on-med-and-down h-5em"></div>
-    <div class="row">
-      <div class="col s12 m6 offset-m3 center-align">
-        <div id="login" class="card">
+    <div class="row" style="margin-top:auto; margin-bottom:auto">
+      <div class="col s12 m8 l4 offset-l4 offset-m2">
+        <div id="login" class="card z-depth-4">
+            <div id="titoloLogin" class="condensed light primary lighten-1 white-text"> Settimana tecnica</div>
           <div class="card-content">
-            <span class="card-title blue-text">Login</span>
             <form id="form-login" method="post">
-              <div class="row">
+              <div class="row row-margin">
                 <div class="input-field col s12">
                   <i class="material-icons prefix">account_circle</i>
                   <input name="username" id="username" type="text" class="validate">
                   <label for="username">Username</label>
                 </div>
               </div>
-              <div class="row">
+              <div class="row row-margin">
                 <div class="input-field col s12">
                   <i class="material-icons prefix">vpn_key</i>
                   <input name="password" id="password" type="password" class="validate">
                   <label for="password">Password</label>
                 </div>
               </div>
-              <div class="center-align">
-                <button id="send" name="submit" class="btn-floating btn-large waves-effect waves-light center-align red">
-                  <i class="material-icons">send</i>
+              <div class="right-align">
+                <button id="send" name="submit" style="font-size:120%;" class=" condensed primary-text waves-effect waves-primary btn-flat">
+                  LOGIN
                 </button>
               </div>
             </form>
           </div>
         </div>
-        <div id="infos" class="card hoverable">
-          <div class="card-content">
-            <span class="card-title blue-text">Informazioni</span><br/><br/>
-            <b>Iscrizioni ai corsi</b><br/>
-            <p class="left-align">
-              E' possibile effettuare l'accesso usando le credenziali inviate per email.<br/>
-              In caso di problemi, contattate Roberto Ciccarelli (robyciccarelli.rc@gmail.com) o Filippo Quattrocchi (quattrocchifilippo@gmail.com).
-              <br/><br/>
-              Realizzato da Roberto Ciccarelli.
-            </p>
-          </div>
-        </div>
       </div>
     </div>
-  </div>
 
   <div id="wait" class="center-align valign-wrapper">
     <div id="contenitore-cerchio" class="valign">
       <div class="preloader-wrapper big active">
-        <div class="spinner-layer spinner-blue-only">
+        <div class="spinner-layer spinner-primary-only">
           <div class="circle-clipper right">
             <div class="circle"></div>
           </div>
@@ -91,7 +65,7 @@
   </div>
 
   <footer>
-    <div class="center-align red-text condensed">
+    <div class="center-align accent-text condensed">
       &copy 2016 Roberto Ciccarelli
     </div>
   </footer>

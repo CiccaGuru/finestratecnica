@@ -29,8 +29,8 @@ $db = database_connect();
 	<title>Settimana tecnica</title>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen"/>
-	<link href="css/style.css" type="text/css" rel="stylesheet" media="screen"/>
 	<link rel="stylesheet" href="css/material-scrolltop.css">
+	<link href="css/style.php" type="text/css" rel="stylesheet" media="screen"/>
 	<link rel="apple-touch-icon" sizes="180x180" href="/img/favicons/apple-touch-icon.png">
 <link rel="icon" type="image/png" href="/img/favicons/favicon-32x32.png" sizes="32x32">
 <link rel="icon" type="image/png" href="/img/favicons/favicon-16x16.png" sizes="16x16">
@@ -45,7 +45,7 @@ $db = database_connect();
 
 <body id="body-userhome">
 	<div class="navbar-fixed">
-		<nav id="intestaz" class="light-blue">
+		<nav id="intestaz" class="primary">
 			<div class="nav-wrapper">
 				<a class="hide-on-small-only left condensed letter-spacing-1" style="margin-left:2%;">
 					<?php
@@ -56,15 +56,15 @@ $db = database_connect();
 							echo strtoupper($dettagliUtente["nome"]." ".$dettagliUtente["cognome"]." (".$dettagliUtente["username"].")");
 					?>
 				</a>
-				<a href="#" class="brand-logo center light">Settimana tecnica</a>
+				<a href="#" class="brand-logo center condensed light">Settimana tecnica</a>
 				<ul id="nav-mobile" class="right hide-on-med-and-down">
-					<li><a href="logout.php" class="waves-effect waves-light condensed">LOGOUT</a></li>
+					<li><a href="include/logout.php" class="waves-effect waves-light condensed">LOGOUT</a></li>
 				</ul>
 			</div>
 		</nav>
 	</div>
 	<div class="fixed-action-btn" id="pointsFAB">
-		<a class="btn-floating btn-large red">
+		<a class="btn-floating btn-large accent">
 			<i class="large material-icons">more_horiz</i>
 		</a>
 		<ul>
@@ -98,11 +98,11 @@ $db = database_connect();
 						if((time()>$_CONFIG["chiusura_iscrizioni"]) && ($conta["conta"]>=17) && !($posso == "44")){
 					?>
 
-					<h3 class="red-text center light">Iscrizioni chiuse</h3>
+					<h3 class="accent-text center light">Iscrizioni chiuse</h3>
 					<div class="center">
 							Le iscrizioni sono chiuse. Puoi solo visualizzare il tuo orario. Se noti qualche problema, contattaci
 					</div>
-					<a href = "stampabile.php" class="btn-flat red-text waves-effect waves-red center">Orario stampabile</a>
+					<a href = "stampabile.php" class="btn-flat accent-text waves-effect waves-red center">Orario stampabile</a>
 					<div class="center">
 						<img src="img/imggif.gif" alt="Nancy Cat">
 					</div>
@@ -120,13 +120,13 @@ $db = database_connect();
 								<div class="col s6 m3 valign left-align">
 	                  <div class="row condensed letter-spacing-1">
 												<p>
-	                        <input checked type="checkbox" name="concontinuita" id="concontinuitaCerca" />
+	                        <input checked type="checkbox" class="filled-in" name="concontinuita" id="concontinuitaCerca" />
 	                        <label for="concontinuitaCerca">CON CONT.</label>
 	                    </p>
 	                  </div>
 	                  <div class="row condensed">
 	                    <p>
-	                        <input checked type="checkbox" name="senzacontinuita" id="senzacontinuitaCerca" />
+	                        <input checked type="checkbox" class="filled-in" name="senzacontinuita" id="senzacontinuitaCerca" />
 	                        <label for="senzacontinuitaCerca">SENZA CONT.</label>
 	                    </p>
 	                  </div>
@@ -134,13 +134,13 @@ $db = database_connect();
 	                <div class="col s6 m2 valign left-align">
 	                  <div class="row condensed">
 	                    <p>
-	                        <input checked type="checkbox" name="recupero" id="recuperoCerca" />
+	                        <input checked type="checkbox" class="filled-in" name="recupero" id="recuperoCerca" />
 	                        <label for="recuperoCerca">RECUPERO</label>
 	                    </p>
 	                  </div>
 	                  <div class="row condensed">
 	                    <p>
-	                        <input checked type="checkbox" name="approfondimento" id="approfondimentoCerca" />
+	                        <input checked type="checkbox" class="filled-in" name="approfondimento" id="approfondimentoCerca" />
 	                        <label for="approfondimentoCerca">APPROF.</label>
 	                    </p>
 	                  </div>
@@ -204,7 +204,7 @@ $db = database_connect();
 
 <?php  if(time()>$_CONFIG["chiusura_iscrizioni"] ){
 	?>
-	<h3 class="red-text center light">Iscrizioni chiuse</h3>
+	<h3 class="accent-text center light">Iscrizioni chiuse</h3>
 	<div class="center">
 		Le iscrizioni sono chiuse ma, visto che il tuo orario non è completo, potrai completarlo.
 		<br/>Appena raggiungerai 17 ore sarà bloccato.
@@ -238,18 +238,18 @@ $db = database_connect();
 
 		</div>
 		<div class="modal-footer">
-			<a href="#!" class=" modal-action modal-close waves-effect waves-red red-text btn-flat">CHIUDI</a>
+			<a href="#!" class=" modal-action modal-close waves-effect waves-red accent-text btn-flat">CHIUDI</a>
 		</div>
 	</div>
 
 	<div id="modal-help" class="modal modal-fixed-footer">
 		<div class="modal-content">
-				<h4 class="center light-blue-text light">Guida all'uso</h4>
+				<h4 class="center primary-text light">Guida all'uso</h4>
 				<p>
 					Questo sito permette l'iscrizione ai corsi della "Finestra tecnica" che si terrà dal 13 al 16 gennaio.
 
 				</p>
-				<h5 class="light-blue-text light">Interfaccia utente</h5>
+				<h5 class="primary-text light">Interfaccia utente</h5>
 				<p>
 					L'interfaccia è composta da due colonne principali: sulla sinistra l'elenco dei corsi disponibili per
 					la tua classe, a destra il tuo orario.<br/>
@@ -260,14 +260,14 @@ $db = database_connect();
 					informazioni (icona con la i).
 
 				</p>
-				<h5 class="light-blue-text light">Iscrizione</h5>
+				<h5 class="primary-text light">Iscrizione</h5>
 				<p>
 					Per iscriversi al corso desiderato basta fare click sull'interruttore a destra del nome del corso. Verrà
 					aggiornato l'orario e anche la lista dei corsi. L'interruttore rosso indica un corso a cui ci si è iscritti,
 					quello grigio un corso a cui ci si può iscrivere. <br/> Per annullare l'iscrizione, fare nuovamente click
 					sull'interruttore.
 				</p>
-				<h5 class="light-blue-text light">Visualizzare dettagli dei corsi</h5>
+				<h5 class="primary-text light">Visualizzare dettagli dei corsi</h5>
 				<p>
 					Facendo click sulla riga di un corso si apre una <span class="italic">card</span> che contiene informazioni
 					aggiuntive. Ad esempio, se il nome del corso o la descrizione sono molto lunghi, verranno tagliati nella
@@ -275,26 +275,26 @@ $db = database_connect();
 					lezioni, con la possibilità di iscriversi a una singola ora dei corsi senza continuità. Viene mostrato anche l'orario
 					del corso: le ore a cui si è iscritti sono blu, le altre grigie.
 				</p>
-				<h5 class="light-blue-text light">Orario</h5>
+				<h5 class="primary-text light">Orario</h5>
 				<p>
 					Nell'orario vengono visualizzate tutte le ore a cui sei iscritto. Alcune ore sono sottolineate: se fai click, puoi
 					scegliere a quale corso disponibile in quell'ora partecipare (senza continuità, vedi più avanti).
 				</p>
-				<h5 class="light-blue-text light">Corsi con continuità</h5>
+				<h5 class="primary-text light">Corsi con continuità</h5>
 				<p>
 					L'iscrizione a un corso con continuità comporta la partecipazione a tutte le ore. Per questo motivo, quando anche una
 					sola ora di un corso con continuità si sovrappone a un'ora di un corso con continuità a cui sei iscritti, il corso
 					viene marcato come coincidente e ti viene vietata l'iscrizione. Cliccando sul badge "Coincide" puoi avere più informazioni.
 					Sono marcati come coincidenti anche alcuni corsi che offrono più "repliche", quando si può partecipare solo ad una.
 				</p>
-				<h5 class="light-blue-text light">Corsi senza continuità</h5>
+				<h5 class="primary-text light">Corsi senza continuità</h5>
 				<p>
 					L'iscrizione a un corso con continuità non comporta la partecipazione a tutte le ore. Per questo motivo, i corsi
 					senza continuità vengono sovrascritti dai corsi senza continuità
 				</p>
 		</div>
 		<div class="modal-footer">
-			<a href="#!" class=" modal-action modal-close waves-effect waves-red red-text btn-flat">CHIUDI</a>
+			<a href="#!" class=" modal-action modal-close waves-effect waves-red accent-text btn-flat">CHIUDI</a>
 		</div>
 	</div>
 
@@ -302,7 +302,7 @@ $db = database_connect();
 	<div id="modal-scrivi" class="modal modal-fixed-footer">
 			<form id="form-email">
 		<div class="modal-content">
-			<h3 class="light-blue-text thin center">Scrivici</h3>
+			<h3 class="primary-text thin center">Scrivici</h3>
 
 				<div class="container">
 				<p>
@@ -330,7 +330,7 @@ $db = database_connect();
 		</div>
 		<div class="modal-footer">
 			<a class="waves-effect disabled waves-light red white-text btn">INVIA</a>
-			<a href="#!" class=" modal-action modal-close waves-effect waves-red red-text btn-flat">CHIUDI</a>
+			<a href="#!" class=" modal-action modal-close waves-effect waves-red accent-text btn-flat">CHIUDI</a>
 		</div>
 	</form>
 	</div>
@@ -340,7 +340,7 @@ $db = database_connect();
 
 		</div>
 		<div class="modal-footer">
-			<a href="#!" class="modal-action modal-close waves-effect waves-red red-text btn-flat">CHIUDI</a>
+			<a href="#!" class="modal-action modal-close waves-effect waves-red accent-text btn-flat">CHIUDI</a>
 		</div>
 	</div>
 
@@ -364,8 +364,8 @@ $db = database_connect();
 
 		<div id="modal-primoAccesso" class="modal">
 			<div class="modal-content">
-				<h1 class="light-blue-text thin center">Benvenuto!</h1>
-				<h4 class="light-blue-text thin center">Cambia la tua password!</h4>
+				<h1 class="primary-text thin center">Benvenuto!</h1>
+				<h4 class="primary-text thin center">Cambia la tua password!</h4>
 				<div class="container">
 					<div class="input-field col s4">
 						<i class="material-icons prefix">vpn_key</i>

@@ -145,11 +145,11 @@ while($lezione = $result->fetch_assoc()){
         <?php if($lezione["titolo"]=="") echo "<span class='italic'>Nessuna descrizione</span>";
                 else echo $lezione["titolo"]?>
       </div>
-        <div class="col valign-wrapper m2 s3 <?php if(troppiIscritti($lezione["id"], $db)) echo "red-text"; else echo "teal-text";?> ">
+        <div class="col valign-wrapper m2 s3 <?php if(troppiIscritti($lezione["id"], $db)) echo "accent-text"; else echo "teal-text";?> ">
           <?php echo (num_iscritti($lezione["id"], $db)).'\\'.$lezione["maxIscritti"];?>
         </div>
         <div class="col valign s12 m3">
-          <a class="btn red valign white-text waves-effect waves-light" onclick="getElenco(<?php echo $lezione["id"];?>)">Elenco studenti</a>
+          <a class="btn accent valign white-text waves-effect waves-light" onclick="getElenco(<?php echo $lezione["id"];?>)">Elenco studenti</a>
         </div>
     </div>
       <?php

@@ -35,42 +35,52 @@ $result = $db->query("SELECT * FROM aule");
 <html lang="it">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-  <title>Admin - Aule</title>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen"/>
-  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen"/>
-  <link href="css/admin.css" type="text/css" rel="stylesheet" media="screen"/>
-  <link rel="stylesheet" href="css/material-scrolltop.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+	<title>Admin - Aule</title>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen"/>
+	<link href="css/admin.css" type="text/css" rel="stylesheet" media="screen"/>
+	<link href="css/style.php" type="text/css" rel="stylesheet" media="screen"/>
+	<link rel="stylesheet" href="css/circle.css">
+	<link rel="apple-touch-icon" sizes="180x180" href="/img/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="/img/favicons/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/img/favicons/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="/img/favicons/manifest.json">
+<link rel="mask-icon" href="/img/favicons/safari-pinned-tab.svg" color="#f44336">
+<link rel="shortcut icon" href="/img/favicons/favicon.ico">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="msapplication-TileImage" content="/img/favicons/mstile-144x144.png">
+<meta name="msapplication-config" content="/img/favicons/browserconfig.xml">
+<meta name="theme-color" content="#03a9f4">
 </head>
 <body>
-  <nav class="light-blue">
-    <ul id="utenti-dropDown" class="dropdown-content">
-    <li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciStudenti.php">STUDENTI</a></li>
-  	<li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciDocenti.php">DOCENTI</a></li>
-    <li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciCorsi.php">CORSI</a></li>
-    <li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciClassi.php">CLASSI</a></li>
-    <li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciAule.php">AULE</a></li>
-  </ul>
-  	<div class="navbar-fixed">
-  		<nav id="intestaz" class="light-blue">
-  			<div class="nav-wrapper">
-  				<a class="hide-on-small-only left condensed letter-spacing-1" style="margin-left:2%;"> AMMINISTRATORE</a>
-  				<a href="#" class="brand-logo center light">Settimana tecnica</a>
-  				<ul id="nav-mobile" class="right hide-on-med-and-down">
-  					<li><a href="admin.php" class="waves-effect waves-light condensed">HOME</a></li>
-  					<li class="active"><a href="#!" class="dropdown-button waves-effect active waves-light condensed" data-beloworigin="true" data-hover="true" data-activates="utenti-dropDown">GESTISCI<i class="material-icons right">arrow_drop_down</i></a></li>
-  					<li><a href="logout.php" class="waves-effect waves-light condensed"><i class="material-icons left">exit_to_app</i>LOGOUT</a></li>
-  				</ul>
-  			</div>
-  		</nav>
-  	</div>
+  <nav class="primary">
+		<ul id="utenti-dropDown" class="dropdown-content">
+			<li><a class="waves-effect waves-primary condensed primary-text" href="gestisciStudenti.php">STUDENTI</a></li>
+			<li><a class="waves-effect waves-primary condensed primary-text" href="gestisciDocenti.php">DOCENTI</a></li>
+			<li><a class="waves-effect waves-primary condensed primary-text" href="gestisciCorsi.php">CORSI</a></li>
+			<li><a class="waves-effect waves-primary condensed primary-text" href="gestisciClassi.php">CLASSI</a></li>
+			<li><a class="waves-effect waves-primary condensed primary-text" href="gestisciAule.php">AULE</a></li>
+		</ul>
+		<div class="navbar-fixed">
+			<nav id="intestaz" class="primary">
+				<div class="nav-wrapper">
+					<a class="hide-on-small-only left condensed letter-spacing-1" style="margin-left:2%;"> AMMINISTRATORE</a>
+					<a href="#" class="brand-logo center condensed light">Settimana tecnica</a>
+					<ul id="nav-mobile" class="right hide-on-med-and-down">
+						<li class="active"><a href="admin.php" class="waves-effect waves-light condensed">HOME</a></li>
+						<li><a href="#!" class="dropdown-button waves-effect active waves-light condensed" data-beloworigin="true" data-hover="true" data-activates="utenti-dropDown">GESTISCI<i class="material-icons right">arrow_drop_down</i></a></li>
+						<li><a href="include/logout.php" class="waves-effect waves-light condensed"><i class="material-icons left">exit_to_app</i>LOGOUT</a></li>
+					</ul>
+				</div>
+			</nav>
+		</div>
 	</nav>
   <div class="container"  style="margin-top:3em;">
   <div class="card">
     <form id="aggiungi-aula">
       <div class="card-content center-align"  style="padding-left:5%; padding-right:5%; padding-bottom:5%">
-        <div class="card-title blue-text center-align condensed" style="margin-bottom:1em;">Aggiungi una nuova aula</div>
+        <div class="card-title primary-text center-align condensed" style="margin-bottom:1em;">Aggiungi una nuova aula</div>
         <div class="row valign-wrapper">
           <div class="input-field col s4 offset-s1 valign">
             <input id="nomeAula" type="text" class="validate" required>
@@ -81,7 +91,7 @@ $result = $db->query("SELECT * FROM aule");
             <label class="condensed" for="maxStudenti">Numero studenti</label>
           </div>
           <div class="col s3 valign">
-          <button type="submit" class="waves-effect waves-light btn-large red condensed">
+          <button type="submit" class="waves-effect waves-light btn-large accent condensed">
             <i class="material-icons left">add_location</i>Aggiungi
           </button>
         </div>
@@ -92,12 +102,12 @@ $result = $db->query("SELECT * FROM aule");
 </div>
 <div class="container" style="width:70%">
   <ul class="collection with-header z-depth-1" id="dettagliAule">
-    <li class="collection-header blue-text center"><h4 class="condensed light">ELENCO AULE</h4></li>
+    <li class="collection-header primary-text center"><h4 class="condensed light">ELENCO AULE</h4></li>
     <li class="collection-item center">
       <form  action="gestisciAule.php" method="POST">
         <div class="row">
           <div class="col s2" style="font-size:120%; margin-top:0.5em">
-            <p class="condensed red-text">
+            <p class="condensed accent-text">
               <i class="material-icons left">search</i>Cerca
             </p>
           </div>
@@ -119,7 +129,7 @@ $result = $db->query("SELECT * FROM aule");
             <input id="min" name="quanti" type="text" class="validate" value="<?php echo $quanti?>" required>
           </div>
           <div class="input-field col s1 right">
-            <button class="btn-floating btn-large waves-effect waves-light red condensed white-text" type="submit" name="action">
+            <button class="btn-floating btn-large waves-effect waves-light accent condensed white-text" type="submit" name="action">
               <i class="material-icons">search</i>
             </button>
           </div>
@@ -129,15 +139,15 @@ $result = $db->query("SELECT * FROM aule");
   <?php
   if($result->num_rows==0){
     ?>  <li class="collection-item">
-          <div class="red-text condensed center-align" style="font-size:150%; margin:1em;">Nessuna aula</div>
+          <div class="accent-text condensed center-align" style="font-size:150%; margin:1em;">Nessuna aula</div>
         </li>
       <?php
   }
    while($row = $result->fetch_assoc())
     { ?>
       <li class="collection-item row valign-wrapper">
-        <div class="col s1 red-text">
-            <i class="material-icons waves-effect waves-red waves-circle" style="border-radius:50%;" onclick="eliminaAula(<?php echo $row["id"]?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>')">close</i>
+        <div class="col s1 accent-text">
+            <i class="material-icons waves-effect waves-accent waves-circle" style="border-radius:50%;" onclick="eliminaAula(<?php echo $row["id"]?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>')">close</i>
         </div>
         <div class="col s2 bold">
           ID: <?php echo $row["id"];?>
@@ -151,7 +161,7 @@ $result = $db->query("SELECT * FROM aule");
           <label for="maxStudenti<?php echo $row['id']; ?>">N° studenti</label>
         </div>
         <div class="col s2 offset-s1 center valign">
-          <a onclick="modficaAula(<?php echo $row['id'];?>)" class="waves-effect small-icon condensed waves-red fill-width btn-flat valign red-text">
+          <a onclick="modficaAula(<?php echo $row['id'];?>)" class="waves-effect small-icon condensed waves-accent fill-width btn-flat valign accent-text">
             	MODIFICA
           </a>
         </div>
@@ -180,7 +190,7 @@ $result = $db->query("SELECT * FROM aule");
                     while($i*$quanti<=$num){
                         ?>
                       <form action="gestisciDocenti.php" id="pagina<?php echo $i; ?>" method="post" style="display:inline;">
-                        <li class="waves-effect waves-red <?php if($i==$page) echo "active"?>">
+                        <li class="waves-effect waves-accent <?php if($i==$page) echo "active"?>">
                               <input type="hidden" name="page" value="<?php echo $i?>">
                               <input type="hidden" name="quanti" value="<?php echo $quanti?>">
                               <?php if(isset($_POST["username"])){?>

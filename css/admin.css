@@ -1,24 +1,3 @@
-.fake-button{
-  width:95%;
-/*  height:5.5em;*/
-  text-align:center;
-  height:auto;
-  padding:1em;
-  border-radius: 2px; !important;
-}
-
-.fake-button i{
-  margin-bottom:0.5em;
-  font-size:36px;
-}
-
-.littlemargin{
-  margin:5px;
-}
-
-.fake-button .row{
-  margin:0px !important;
-}
 .card-content{
   padding-left:5%;
   padding-right:5%;

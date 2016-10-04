@@ -30,12 +30,12 @@ $numRisultato = $resultAA->num_rows;
 
 if($level == 1){
 ?>
-  <li class="collection-header blue-text center"><h4 class="condensed light">ELENCO DOCENTI</h4></li>
+  <li class="collection-header primary-text center"><h4 class="condensed light">ELENCO DOCENTI</h4></li>
   <li class="collection-item center">
     <form  action="gestisciDocenti.php" method="POST">
       <div class="row">
         <div class="col s2" style="font-size:120%; margin-top:0.5em">
-          <p class="condensed red-text">
+          <p class="condensed accent-text">
             <i class="material-icons left">search</i>Cerca
           </p>
         </div>
@@ -57,7 +57,7 @@ if($level == 1){
           <input id="min" name="quanti" type="text" class="validate" value="<?php echo $quanti?>" required>
         </div>
         <div class="input-field col s1 right">
-          <button class="btn-floating btn-large waves-effect waves-light red condensed white-text" type="submit" name="action">
+          <button class="btn-floating btn-large waves-effect waves-light accent condensed white-text" type="submit" name="action">
             <i class="material-icons">search</i>
           </button>
         </div>
@@ -67,7 +67,7 @@ if($level == 1){
 <?php
 if($result->num_rows==0){
   ?>  <li class="collection-item">
-        <div class="red-text condensed center-align" style="font-size:150%; margin:1em;">Nessun risultato trovato</div>
+        <div class="accent-text condensed center-align" style="font-size:150%; margin:1em;">Nessun risultato trovato</div>
       </li>
     <?php
 }
@@ -75,8 +75,8 @@ if($result->num_rows==0){
  while($row = $result->fetch_assoc())
   { ?>
     <li class="collection-item row valign-wrapper">
-      <div class="col s1 red-text">
-          <i class="material-icons waves-effect waves-red waves-circle" style="border-radius:50%;" onclick="eliminaUtente(<?php echo $row["id"]?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>', 1)">close</i>
+      <div class="col s1 accent-text">
+          <i class="material-icons waves-effect waves-accent waves-circle" style="border-radius:50%;" onclick="eliminaUtente(<?php echo $row["id"]?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>', 1)">close</i>
       </div>
       <div class="col s1 bold">
         ID: <?php echo $row["id"];?>
@@ -94,11 +94,11 @@ if($result->num_rows==0){
         <label for="username<?php echo $row['id']; ?>">Username</label>
       </div>
       <div class="col s2 cente valign">
-        <p><a onclick="modificaDocente(<?php echo $row['id'];?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>')" class="waves-effect center-align waves-red btn-flat red-text valign" style="width:98%">Modifica</a></p>
-        <p><a class="waves-effect waves-red center-align btn-flat red-text valign" onclick="eliminaDocente(<?php echo $row['id'];?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>')" style="width:98%">Elimina</a></p>
+        <p><a onclick="modificaDocente(<?php echo $row['id'];?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>')" class="waves-effect center-align waves-accent btn-flat accent-text valign" style="width:98%">Modifica</a></p>
+        <p><a class="waves-effect waves-accent center-align btn-flat accent-text valign" onclick="eliminaDocente(<?php echo $row['id'];?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>')" style="width:98%">Elimina</a></p>
       </div>
       <div class="col s2 center valign">
-        <a onclick="passwordReset(<?php echo $row['id'];?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>')" class="waves-effect small-icon condensed waves-red fill-width fake-button valign red-text">
+        <a onclick="passwordReset(<?php echo $row['id'];?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>')" class="waves-effect small-icon condensed waves-accent fill-width fake-button valign accent-text">
             <i class="material-icons ">refresh</i> <br/>RESET
         </a>
       </div>
@@ -127,7 +127,7 @@ if($result->num_rows==0){
                   while($i*$quanti<=$numRisultato){
                       ?>
                     <form action="gestisciDocenti.php" id="pagina<?php echo $i; ?>" method="post" style="display:inline;">
-                      <li class="waves-effect waves-red <?php if($i==$page) echo "active"?>">
+                      <li class="waves-effect waves-accent <?php if($i==$page) echo "active"?>">
                             <input type="hidden" name="page" value="<?php echo $i?>">
                             <input type="hidden" name="quanti" value="<?php echo $quanti?>">
                             <?php if(isset($_POST["username"])){?>
@@ -172,12 +172,12 @@ else{
 
     ?>
 
-    <li class="collection-header blue-text center"><h4 class="condensed light">ELENCO STUDENTI</h4></li>
+    <li class="collection-header primary-text center"><h4 class="condensed light">ELENCO STUDENTI</h4></li>
     <li class="collection-item center">
       <form  action="gestisciStudenti.php" method="POST">
         <div class="row">
           <div class="col s2" style="font-size:120%; margin-top:0.5em">
-            <p class="condensed red-text">
+            <p class="condensed accent-text">
               <i class="material-icons left">search</i>Cerca
             </p>
           </div>
@@ -199,7 +199,7 @@ else{
             <input id="min" name="quanti" type="text" class="validate" value="<?php echo $quanti?>" required>
           </div>
           <div class="input-field col s1 right">
-            <button class="btn-floating btn-large waves-effect waves-light red condensed white-text" type="submit" name="action">
+            <button class="btn-floating btn-large waves-effect waves-light accent condensed white-text" type="submit" name="action">
               <i class="material-icons">search</i>
             </button>
           </div>
@@ -211,7 +211,7 @@ else{
     <?php
     if($result->num_rows==0){
       ?>  <li class="collection-item">
-            <div class="red-text condensed center-align" style="font-size:150%; margin:1em;">Nessun risultato trovato</div>
+            <div class="accent-text condensed center-align" style="font-size:150%; margin:1em;">Nessun risultato trovato</div>
           </li>
         <?php
     }
@@ -223,8 +223,8 @@ else{
       ?>
 
       <li class="collection-item row valign-wrapper">
-        <div class="col s1 red-text">
-            <i class="material-icons waves-effect waves-red waves-circle" style="border-radius:50%;" onclick="eliminaUtente(<?php echo $row["id"]?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>', 0)">close</i>
+        <div class="col s1 accent-text">
+            <i class="material-icons waves-effect waves-accent waves-circle" style="border-radius:50%;" onclick="eliminaUtente(<?php echo $row["id"]?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>', 0)">close</i>
         </div>
         <div class="col s1 bold">
           ID: <?php echo $row["id"];?>
@@ -253,16 +253,16 @@ else{
         </div>
         <div class="col s2 cente valign">
           <p style="margin-bottom:5px;">
-            <a onclick="modificaStudente(<?php echo $row['id'];?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>')" class="waves-effect center-align waves-red btn-flat red-text valign" style="width:98%">
+            <a onclick="modificaStudente(<?php echo $row['id'];?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>')" class="waves-effect center-align waves-accent btn-flat accent-text valign" style="width:98%">
               Modifica
             </a>
           </p>
           <p style="margin-top:5px;">
-            <a class="waves-effect waves-red center-align btn-flat red-text valign" onclick="mostraOrario(<?php echo $row['id'];?>)" style="width:98%;">Orario</a>
+            <a class="waves-effect waves-accent center-align btn-flat accent-text valign" onclick="mostraOrario(<?php echo $row['id'];?>)" style="width:98%;">Orario</a>
           </p>
         </div>
         <div class="col s1 center valign" style="padding:0px;">
-          <a class="waves-effect small-icon condensed waves-red fill-width fake-button valign red-text" onclick="passwordReset(<?php echo $row['id'];?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>')" >
+          <a class="waves-effect small-icon condensed waves-accent fill-width fake-button valign accent-text" onclick="passwordReset(<?php echo $row['id'];?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>')" >
               <i class="material-icons ">refresh</i> <br/>RESET
           </a>
         </div>
@@ -293,7 +293,7 @@ else{
                   while($i*$quanti<=$numRisultato){
                       ?>
                     <form action="gestisciStudenti.php" id="pagina<?php echo $i; ?>" method="post" style="display:inline;">
-                      <li class="waves-effect waves-red <?php if($i==$page) echo "active"?>">
+                      <li class="waves-effect waves-accent <?php if($i==$page) echo "active"?>">
                             <input type="hidden" name="page" value="<?php echo $i?>">
                             <input type="hidden" name="quanti" value="<?php echo $quanti?>">
                             <?php if(isset($_POST["username"])){?>

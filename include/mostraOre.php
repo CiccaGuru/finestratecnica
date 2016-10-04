@@ -38,7 +38,7 @@ $result = $db->query("SELECT  corsi.titolo as titolo,
   }
   ?>
   <div class="modal-content">
-    <h4 class="blue-text light condensed center" style="margin-bottom:1.5em">Dettagli corso</h4>
+    <h4 class="primary-text light condensed center" style="margin-bottom:1.5em">Dettagli corso</h4>
     <div id="dettagliCorsoAdmin">
       <div class="row valign-wrapper">
         <div class="col s1 valign bold condensed letter-spacing-1">TITOLO:</div>
@@ -89,7 +89,7 @@ $result = $db->query("SELECT  corsi.titolo as titolo,
           <div id="ChipsDocentiDettagli">
 
           </div>
-          <a class="waves-effect animateButton row valign-wrapper small-icon-corsi condensed waves-red fill-width fake-button valign red-text" onclick="mostraModalScegliDocenti(<?php echo $dettagliCorso['id'];?>)">
+          <a class="waves-effect animateButton row valign-wrapper small-icon-corsi condensed waves-accent fill-width fake-button valign accent-text" onclick="mostraModalScegliDocenti(<?php echo $dettagliCorso['id'];?>)">
             <div class="col s2 offset-s1 valign">
               <i class="material-icons" style="margin:0px;">add</i>
             </div>
@@ -107,7 +107,7 @@ $result = $db->query("SELECT  corsi.titolo as titolo,
           <div id="ChipsObbligatori">
 
           </div>
-          <a class="waves-effect animateButton row valign-wrapper small-icon-corsi condensed waves-red fill-width fake-button valign red-text" onclick="mostraModalCorsiObbligatori(<?php echo $dettagliCorso['id'];?>)">
+          <a class="waves-effect animateButton row valign-wrapper small-icon-corsi condensed waves-accent fill-width fake-button valign accent-text" onclick="mostraModalCorsiObbligatori(<?php echo $dettagliCorso['id'];?>)">
             <div class="col s2 offset-s1 valign">
               <i class="material-icons" style="margin:0px;">add</i>
             </div>
@@ -123,7 +123,7 @@ $result = $db->query("SELECT  corsi.titolo as titolo,
           <div id="ChipsIncompatibili">
 
           </div>
-          <a class="waves-effect animateButton row valign-wrapper small-icon-corsi condensed waves-red fill-width fake-button valign red-text" onclick="mostraModalCorsiIncompatibili(<?php echo $dettagliCorso["id"]; ?>)">
+          <a class="waves-effect animateButton row valign-wrapper small-icon-corsi condensed waves-accent fill-width fake-button valign accent-text" onclick="mostraModalCorsiIncompatibili(<?php echo $dettagliCorso["id"]; ?>)">
             <div class="col s2 offset-s1 valign">
               <i class="material-icons" style="margin:0px;">add</i>
             </div>
@@ -143,10 +143,10 @@ $result = $db->query("SELECT  corsi.titolo as titolo,
     </div>
   </div>
   <div class="modal-footer">
-    <a href="#!" class="waves-effect waves-light white-text red btn"  onclick="applicaModificaOre(<?php echo $idCorso;?>)">
+    <a href="#!" class="waves-effect waves-light white-text accent btn"  onclick="applicaModificaOre(<?php echo $idCorso;?>)">
       Applica
     </a>
-    <a href="#!" class="modal-action modal-close waves-effect waves-red red-text btn-flat ">
+    <a href="#!" class="modal-action modal-close waves-effect waves-accent accent-text btn-flat ">
       Chiudi
     </a>
   </div>

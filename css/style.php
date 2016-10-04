@@ -1,5 +1,72 @@
+<?php
+    header("Content-type: text/css; charset: UTF-8");
+    $primaryColor = "#2196f3";
+    $primaryColorDark = "#1e88e5";
+    $primaryColorLight = "#64b5f6";
+    $accentColor = "#f44336";
+    $accentColorLight = "#e57373";
+    $primaryText = "#fafafa";
+    $primaryDarkText = "#fafafa";
+    $primaryLightText = "black";
+    $accentText = "#fafafa";
+?>
+
 @.icon-block {
     padding: 0 15px;
+}
+
+@font-face {
+  font-family: "Roboto-Condensed";
+  src: url("../fonts/roboto/RobotoCondensed-Light.ttf");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "Roboto-Condensed";
+  src: url("../fonts/roboto/RobotoCondensed-Regular.ttf");
+  font-weight: 400;
+}
+
+
+.primary-light{
+  background-color: <?php echo $primaryColorLight; ?> !important;
+  color: <?php echo $primaryLightText; ?> !important;
+}
+
+.primary{
+  background-color: <?php echo $primaryColor; ?> !important;
+  color: <?php echo $primaryText; ?> !important;
+}
+
+.primary-dark{
+  background-color: <?php echo $primaryColorDark; ?>  !important;
+  color: <?php echo $primaryDarkText; ?> !important;
+}
+
+.accent{
+  background-color: <?php echo $accentColor; ?> !important;
+  color: <?php echo $accentText; ?> !important;
+}
+
+.primary-text{
+  color: <?php echo $primaryColor; ?> !important;
+}
+
+.primary-dark-text{
+  color: <?php echo $primaryColorDark; ?> !important;
+}
+
+.accent-text{
+  color: <?php echo $accentColor; ?> !important;
+}
+
+
+.switch label input[type=checkbox]:checked + .lever {
+  background-color: <?php echo $accentColorLight; ?>;
+}
+
+.switch label input[type=checkbox]:checked + .lever:after {
+  background-color: <?php echo $accentColor; ?>;
 }
 
 .icon-block .material-icons {
@@ -10,32 +77,43 @@
     color: #000;
 }
 
+.cont-dett [type="checkbox"]:checked + label:before {
+	  border-right: 2px solid #26a69a;
+	  border-bottom: 2px solid #26a69a;
+}
+
+
+
 /* label focus color */
 .input-field input[type=text]:focus + label,
 .input-field input[type=password]:focus + label {
-    color: #03a9f4;
+    color: <?php echo $primaryColorDark ?>;
 }
 /* label underline focus color */
 .input-field input[type=text]:focus,
 .input-field input[type=password]:focus {
-    border-bottom: 1px solid #03a9f4;
-    box-shadow: 0 1px 0 0 #03a9f4;
+    border-bottom: 1px solid <?php echo $primaryColorDark ?>;
+    box-shadow: 0 1px 0 0 <?php echo $primaryColorDark ?>;
 }
 /* valid color */
 .input-field input[type=text].valid
 .input-field input[type=password].valid {
-    border-bottom: 1px solid #03a9f4;
-    box-shadow: 0 1px 0 0 #03a9f4;
+    border-bottom: 1px solid <?php echo $primaryColorDark ?>;
+    box-shadow: 0 1px 0 0 <?php echo $primaryColorDark ?>;
 }
 /* invalid color */
 .input-field input[type=text].invalid
 .input-field input[type=password].invalid  {
-    border-bottom: 1px solid #03a9f4;
-    box-shadow: 0 1px 0 0 #03a9f4;
+    border-bottom: 1px solid <?php echo $primaryColorDark ?>;
+    box-shadow: 0 1px 0 0 <?php echo $primaryColorDark ?>;
 }
 /* icon prefix focus color */
 .input-field .prefix.active {
-    color: #03a9f4;
+    color: <?php echo $primaryColorDark ?>;
+}
+
+a, .dropdown-content li > span {
+  color: <?php echo $primaryColorDark;?>;
 }
 
 body{
@@ -68,8 +146,8 @@ table{
 }
 
 input[type="radio"]:checked+label:after{
-	border-color: #f44336;
-	background-color: #f44336;
+	border-color: <?php echo $accentColor; ?>;
+	background-color: <?php echo $accentColor; ?>;
 }
 
 tr td:first-child,
@@ -98,12 +176,61 @@ th,td{
   margin:0px;
 }
 
+.fake-button{
+  width:95%;
+/*  height:5.5em;*/
+  text-align:center;
+  height:auto;
+  padding:1em;
+  border-radius: 2px; !important;
+}
+
+.row-margin{
+  margin-bottom:1em;
+}
+
+.fake-button i{
+  margin-bottom:0.5em;
+  font-size:36px;
+}
+
+.littlemargin{
+  margin:5px;
+}
+
+.fake-button .row{
+  margin:0px !important;
+}
+
+[type="checkbox"].filled-in:checked + label:after {
+  top: 0;
+  width: 20px;
+  height: 20px;
+  border: 2px solid <?php echo $accentColor ?>;
+  background-color: <?php echo $accentColor ?>;
+  z-index: 0;
+}
+
+[type="checkbox"].filled-in.tabbed:checked:focus + label:after {
+  border-radius: 2px;
+  background-color: <?php echo $accentColor ?>;
+  border-color: <?php echo $accentColor ?>;
+}
+
+
 /*-----------------------------LOGIN-----------------------*/
 
 #login, #infos{
-	position:relative;
-  top:15%;
-  nimation:background, 0.4s;
+  margin-top:21%;
+  height:50%;
+  display:block;
+    animation:background, 0.4s;
+}
+
+#titoloLogin{
+  width:100%;
+  padding:1em;
+  font-size:200%;
 }
 
 #login .card-content{
@@ -137,9 +264,6 @@ hide
   padding-bottom:1.5em;
 }
 
-#form-login .row{
-  margin-bottom:0px;
-}
 
 .small{
   font-size:75%;
@@ -218,6 +342,7 @@ footer{
   bottom: 45px;
   right: 24px;
 }
+
 
 /*--------------------------USERHOME----------------------*/
 
@@ -484,16 +609,19 @@ footer{
   word-spacing:1.5px;
 }
 
+
 .waves-effect.waves-amber .waves-ripple {
-     /* The alpha value allows the text and background color
-     of the button to still show through. */
       background-color: rgba(255, 160, 0, 0.55);
-    }
-.waves-effect.waves-blue .waves-ripple {
-        /* The alpha value allows the text and background color
-        of the button to still show through. */
-         background-color: rgba(41, 182, 246, 0.50);
-       }
+}
+
+.waves-effect.waves-primary .waves-ripple {
+         background-color: <?php echo $primaryColorLight; ?> !important;
+}
+
+.waves-effect.waves-accent .waves-ripple {
+         background-color: <?php echo $accentColorf; ?> !important;
+}
+
 .waves-mod{
     display: table-cell;
 }
@@ -565,4 +693,8 @@ footer{
 
 .small-icon-corsi{
   font-size:100%;
+}
+
+label{
+  text-align: left !important;
 }

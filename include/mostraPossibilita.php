@@ -36,10 +36,10 @@ else{
   if($result->num_rows==0){
 ?>
 <div class="container">
-  <h3 class="condensed red-text thin center">Scegli il corso</h3>
+  <h3 class="condensed accent-text thin center">Scegli il corso</h3>
 <p class="space-below center-align">
   In quest'ora non sei iscritto a nessun corso. Scegli a quale corso vuoi partecipare.<br/>
-  <span class="condensed red-text">ATTENZIONE! Vengono mostrati solo i corsi senza continuità. Verrai iscritto solo alla singola ora.</span>
+  <span class="condensed accent-text">ATTENZIONE! Vengono mostrati solo i corsi senza continuità. Verrai iscritto solo alla singola ora.</span>
 </p>
 
 
@@ -96,7 +96,7 @@ $resultTmp = $db->query("SELECT * from
         </div>
         <div class="col s3 valign-wrapper">
           <p class="valign">
-            <a disabled id="trigger<?php echo $lezione["id"]?>" class="waves-effect waves-red btn-flat red-text iscriviOraModal" data-idora="<?php echo $lezione["id"]?>" data-idcorso="<?php echo $lezione["idCorso"]?>">ISCRIVITI</a>
+            <a disabled id="trigger<?php echo $lezione["id"]?>" class="waves-effect waves-accent btn-flat accent-text iscriviOraModal" data-idora="<?php echo $lezione["id"]?>" data-idcorso="<?php echo $lezione["idCorso"]?>">ISCRIVITI</a>
           </p>
         </div>
       </div>
@@ -107,7 +107,7 @@ $resultTmp = $db->query("SELECT * from
   else{
     ?>
     <div class="container">
-      <h3 class="condensed red-text thin center">Scegli il corso</h3>
+      <h3 class="condensed accent-text thin center">Scegli il corso</h3>
     <p class="space-below center-align">
       In quest'ora sei iscritto a più di un corso senza continuità. Scegli a quale partecipare.
     </p>

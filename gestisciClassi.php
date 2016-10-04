@@ -25,9 +25,9 @@ $db = database_connect();
 	<title>Admin - Classi</title>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen"/>
-	<link href="css/style.css" type="text/css" rel="stylesheet" media="screen"/>
 	<link href="css/admin.css" type="text/css" rel="stylesheet" media="screen"/>
 	<link rel="stylesheet" href="css/material-scrolltop.css">
+	<link href="css/style.php" type="text/css" rel="stylesheet" media="screen"/>
 	<link rel="apple-touch-icon" sizes="180x180" href="/img/favicons/apple-touch-icon.png">
 <link rel="icon" type="image/png" href="/img/favicons/favicon-32x32.png" sizes="32x32">
 <link rel="icon" type="image/png" href="/img/favicons/favicon-16x16.png" sizes="16x16">
@@ -41,23 +41,23 @@ $db = database_connect();
 </head>
 
 <body>
-	<nav class="light-blue">
+	<nav class="primary">
 		<ul id="utenti-dropDown" class="dropdown-content">
-		<li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciStudenti.php">STUDENTI</a></li>
-		<li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciDocenti.php">DOCENTI</a></li>
-		<li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciCorsi.php">CORSI</a></li>
-		<li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciClassi.php">CLASSI</a></li>
-		<li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciAule.php">AULE</a></li>
-	</ul>
+			<li><a class="waves-effect waves-primary condensed primary-text" href="gestisciStudenti.php">STUDENTI</a></li>
+			<li><a class="waves-effect waves-primary condensed primary-text" href="gestisciDocenti.php">DOCENTI</a></li>
+			<li><a class="waves-effect waves-primary condensed primary-text" href="gestisciCorsi.php">CORSI</a></li>
+			<li><a class="waves-effect waves-primary condensed primary-text" href="gestisciClassi.php">CLASSI</a></li>
+			<li><a class="waves-effect waves-primary condensed primary-text" href="gestisciAule.php">AULE</a></li>
+		</ul>
 		<div class="navbar-fixed">
-			<nav id="intestaz" class="light-blue">
+			<nav id="intestaz" class="primary">
 				<div class="nav-wrapper">
 					<a class="hide-on-small-only left condensed letter-spacing-1" style="margin-left:2%;"> AMMINISTRATORE</a>
-					<a href="#" class="brand-logo center light">Settimana tecnica</a>
+					<a href="#" class="brand-logo center condensed light">Settimana tecnica</a>
 					<ul id="nav-mobile" class="right hide-on-med-and-down">
-						<li><a href="admin.php" class="waves-effect waves-light condensed">HOME</a></li>
-						<li class="active"><a href="#!" class="dropdown-button waves-effect active waves-light condensed" data-beloworigin="true" data-hover="true" data-activates="utenti-dropDown">GESTISCI<i class="material-icons right">arrow_drop_down</i></a></li>
-						<li><a href="logout.php" class="waves-effect waves-light condensed"><i class="material-icons left">exit_to_app</i>LOGOUT</a></li>
+						<li class="active"><a href="admin.php" class="waves-effect waves-light condensed">HOME</a></li>
+						<li><a href="#!" class="dropdown-button waves-effect active waves-light condensed" data-beloworigin="true" data-hover="true" data-activates="utenti-dropDown">GESTISCI<i class="material-icons right">arrow_drop_down</i></a></li>
+						<li><a href="include/logout.php" class="waves-effect waves-light condensed"><i class="material-icons left">exit_to_app</i>LOGOUT</a></li>
 					</ul>
 				</div>
 			</nav>
@@ -66,7 +66,7 @@ $db = database_connect();
 	<div class="container" id="ins-classe" style="margin-top:5em;">
 		<div class="card">
 			<div class="card-content" style="padding-left:5%; padding-right:5%; padding-bottom:5%">
-				<h4 class="center-align condensed blue-text light">Crea classe</h4>
+				<h4 class="center-align condensed primary-text light">Crea classe</h4>
 				<div class="row valign-wrapper">
 					<div class="col s1 bold valign condensed">
 						ANNO:
@@ -89,7 +89,7 @@ $db = database_connect();
 						<label for="sezione">Sezione</label>
 					</div>
 					<div class="col valign  s3 offset-s1">
-						<a id="aggiungiClasse" class="waves-effect waves-light btn-large condensed red">  <i class="material-icons left">group_add</i>CREA CLASSE</a>
+						<a id="aggiungiClasse" class="waves-effect waves-light btn-large condensed accent">  <i class="material-icons left">group_add</i>CREA CLASSE</a>
 					</div>
 				</div>
 			</div>
@@ -98,10 +98,10 @@ $db = database_connect();
 
 	<div class="container">
 		<ul class="collection with-header z-depth-1" id="dettagliSezioni">
-			<li class="collection-header blue-text center"><h4 class="condensed light">ELENCO SEZIONI</h4></li>
+			<li class="collection-header center"><h4 class="condensed primary-text">ELENCO SEZIONI</h4></li>
 			<li class="collection-item center">
 				<div class="preloader-wrapper big active" style="margin:2em;">
-					<div class="spinner-layer spinner-blue-only">
+					<div class="spinner-layer spinner-primary-only">
 						<div class="circle-clipper left">
 							<div class="circle"></div>
 						</div><div class="gap-patch">

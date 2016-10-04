@@ -123,7 +123,7 @@ if($result->num_rows == 0){
       echo "active";
     }
     if(in_array($idCorso,$corsi_utente)){
-      echo ' light-blue lighten-3';
+      echo ' primary-light lighten-3';
     }
     else{
       echo ' black-text';
@@ -174,10 +174,10 @@ if($result->num_rows == 0){
         } else {
             if(in_array($idCorso, $corsi_obbligati) && in_array($idCorso, $corsi_utente)){
              ?>
-             <div class="chipMio center center-align blue darken-2 white-text hide-on-small-only" data-position="bottom">
+             <div class="chipMio center center-align primary darken-2 white-text hide-on-small-only" data-position="bottom">
                OBBLIG.
              </div>
-             <div class="chipMio light-blue center center-align lighten-3 hide-on-med-and-up blue-text text-darken-4" data-position="bottom">
+             <div class="chipMio primary-light center center-align lighten-3 hide-on-med-and-up primary-text text-darken-4" data-position="bottom">
                OBBLIG.
              </div>
           <?php
@@ -218,8 +218,8 @@ if($result->num_rows == 0){
 ?>
 
 <div>
-  <h4 class="light condensed letter-spacing-1 light-blue-text center margin0"> CORSI DI RECUPERO</h4>
-  <h5 class="light condensed letter-spacing-1 light-blue-text center margin0">Senza continuità</h5>
+  <h4 class="light condensed letter-spacing-1 primary-text center margin0"> CORSI DI RECUPERO</h4>
+  <h5 class="light condensed letter-spacing-1 primary-text center margin0">Senza continuità</h5>
 </div>
 <ul class="collapsible popout" data-collapsible="accordion">
   <?php
@@ -227,7 +227,7 @@ if($result->num_rows == 0){
   ?>
 </ul>
 <div>
-  <h5 class="light condensed letter-spacing-1 light-blue-text center margin0">Con continuità</h5>
+  <h5 class="light condensed letter-spacing-1 primary-text center margin0">Con continuità</h5>
 </div>
 
 <ul class="collapsible popout" data-collapsible="accordion">
@@ -236,8 +236,8 @@ if($result->num_rows == 0){
   ?>
 </ul>
 <div>
-  <h4 class="light condensed letter-spacing-1 light-blue-text center margin0">CORSI DI APPROFONDIMENTO</h4>
-  <h5 class="light condensed letter-spacing-1 light-blue-text center margin0">Senza continuità</h5>
+  <h4 class="light condensed letter-spacing-1 primary-text center margin0">CORSI DI APPROFONDIMENTO</h4>
+  <h5 class="light condensed letter-spacing-1 primary-text center margin0">Senza continuità</h5>
 </div>
 <ul class="collapsible popout" data-collapsible="accordion">
   <?php
@@ -245,7 +245,7 @@ if($result->num_rows == 0){
   ?>
 </ul>
 <div>
-  <h5 class="light condensed letter-spacing-1 light-blue-text center margin0">Con continuità</h5>
+  <h5 class="light condensed letter-spacing-1 primary-text center margin0">Con continuità</h5>
 </div>
 <ul class="collapsible popout" data-collapsible="accordion">
   <?php

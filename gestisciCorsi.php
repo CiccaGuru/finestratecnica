@@ -14,7 +14,6 @@ else{
   if($user_level == 1)
   header('Location: docente.php');
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -25,9 +24,9 @@ else{
   <title>Admin - Corsi</title>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen"/>
-  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen"/>
   <link href="css/admin.css" type="text/css" rel="stylesheet" media="screen"/>
   <link rel="stylesheet" href="css/material-scrolltop.css">
+  <link href="css/style.php" type="text/css" rel="stylesheet" media="screen"/>
   <link rel="apple-touch-icon" sizes="180x180" href="/img/favicons/apple-touch-icon.png">
   <link rel="icon" type="image/png" href="/img/favicons/favicon-32x32.png" sizes="32x32">
   <link rel="icon" type="image/png" href="/img/favicons/favicon-16x16.png" sizes="16x16">
@@ -42,33 +41,33 @@ else{
 
 <body>
   <div id="pagina" style="display:none;">1</div>
-  <nav class="light-blue">
-    <ul id="utenti-dropDown" class="dropdown-content">
-      <li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciStudenti.php">STUDENTI</a></li>
-      <li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciDocenti.php">DOCENTI</a></li>
-      <li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciCorsi.php">CORSI</a></li>
-      <li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciClassi.php">CLASSI</a></li>
-      <li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciAule.php">AULE</a></li>
-    </ul>
-    <div class="navbar-fixed">
-      <nav id="intestaz" class="light-blue">
-        <div class="nav-wrapper">
-          <a class="hide-on-small-only left condensed letter-spacing-1" style="margin-left:2%;"> AMMINISTRATORE</a>
-          <a href="#" class="brand-logo center light">Settimana tecnica</a>
-          <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="admin.php" class="waves-effect waves-light condensed">HOME</a></li>
-            <li class="active"><a href="#!" class="dropdown-button waves-effect active waves-light condensed" data-beloworigin="true" data-hover="true" data-activates="utenti-dropDown">GESTISCI<i class="material-icons right">arrow_drop_down</i></a></li>
-            <li><a href="logout.php" class="waves-effect waves-light condensed"><i class="material-icons left">exit_to_app</i>LOGOUT</a></li>
-          </ul>
-        </div>
-      </nav>
-    </div>
-  </nav>
+  <nav class="primary">
+		<ul id="utenti-dropDown" class="dropdown-content">
+			<li><a class="waves-effect waves-primary condensed primary-text" href="gestisciStudenti.php">STUDENTI</a></li>
+			<li><a class="waves-effect waves-primary condensed primary-text" href="gestisciDocenti.php">DOCENTI</a></li>
+			<li><a class="waves-effect waves-primary condensed primary-text" href="gestisciCorsi.php">CORSI</a></li>
+			<li><a class="waves-effect waves-primary condensed primary-text" href="gestisciClassi.php">CLASSI</a></li>
+			<li><a class="waves-effect waves-primary condensed primary-text" href="gestisciAule.php">AULE</a></li>
+		</ul>
+		<div class="navbar-fixed">
+			<nav id="intestaz" class="primary">
+				<div class="nav-wrapper">
+					<a class="hide-on-small-only left condensed letter-spacing-1" style="margin-left:2%;"> AMMINISTRATORE</a>
+					<a href="#" class="brand-logo center condensed light">Settimana tecnica</a>
+					<ul id="nav-mobile" class="right hide-on-med-and-down">
+						<li class="active"><a href="admin.php" class="waves-effect waves-light condensed">HOME</a></li>
+						<li><a href="#!" class="dropdown-button waves-effect active waves-light condensed" data-beloworigin="true" data-hover="true" data-activates="utenti-dropDown">GESTISCI<i class="material-icons right">arrow_drop_down</i></a></li>
+						<li><a href="include/logout.php" class="waves-effect waves-light condensed"><i class="material-icons left">exit_to_app</i>LOGOUT</a></li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+	</nav>
 
   <div class="container" id="ins-corso" style="margin-top:5em;">
     <div class="card">
       <div class="card-content" style="padding-left:5%; padding-right:5%; padding-bottom:5%">
-        <span class="card-title"><h4 class="blue-text condensed light center-align">Nuovo corso</h4></span>
+        <span class="card-title"><h4 class="primary-text condensed light center-align">Nuovo corso</h4></span>
         <div class="row" style="margin-top:1em">
           <div class="input-field col s3 condensed">
             <input id="titolo" type="text" class="validate">
@@ -123,7 +122,7 @@ else{
           <div id="ChipsDocenti">
 
           </div>
-          <a class="waves-effect animateButton row valign-wrapper small-icon-corsi condensed waves-red fill-width fake-button valign red-text" style="margin-bottom:0px;" onclick="mostraModalScegliDocenti()">
+          <a class="waves-effect animateButton row valign-wrapper small-icon-corsi condensed waves-accent fill-width fake-button valign accent-text" style="margin-bottom:0px;" onclick="mostraModalScegliDocenti()">
             <div class="col s1 offset-s1 valign ">
               <i class="material-icons valign" style="margin:0px;">add</i>
             </div>
@@ -139,19 +138,19 @@ else{
           <div class="center-align italic" style="margin:2em;">Scegliere un numero di ore</div>
         </div>
         <div class="center">
-          <a id="aggiungiCorso" class="waves-effect waves-light btn-large condensed red disabled">  <i class="material-icons left">add_alert</i>CREA CORSO</a>
+          <a id="aggiungiCorso" class="waves-effect waves-light btn-large condensed accent disabled">  <i class="material-icons left">add_alert</i>CREA CORSO</a>
         </div>
       </div>
     </div>
   </div>
   <div class="container" style="margin-top:3em; width:97%">
     <ul class="collection with-header z-depth-1" id="dettagliCorsi">
-      <li class="collection-header blue-text center"><h4 class="light condensed">ELENCO CORSI</h4></li>
+      <li class="collection-header primary-text center"><h4 class="light condensed">ELENCO CORSI</h4></li>
       <li class="collection-item">
         <form method="post" action="gestisciCorsi.php" id="formCercaCorsi">
         <div class="row condensed" style="margin-bottom:0px;">
           <div class="col s2" style="font-size:120%; margin-top:0.8em">
-            <p class="condensed red-text">
+            <p class="condensed accent-text">
               <i class="material-icons left">search</i>Cerca
             </p>
           </div>
@@ -193,11 +192,11 @@ else{
             </p>
           </div>
           <div class="input-field col s1 valign">
-            <input id="mostra" type="text" class="validate valign" value="10" required>
+            <input id="mostra" type="text" class="validate valign" value="10" requiaccent>
           </div>
           <div class="col s1">
             <div class="input-field">
-              <button id="cercaCorsi" type="submit" class="btn-floating btn-large center waves-effect waves-light red condensed white-text">
+              <button id="cercaCorsi" type="submit" class="btn-floating btn-large center waves-effect waves-light accent condensed white-text">
                 <i class="material-icons">search</i>
               </button>
             </div>
@@ -212,19 +211,19 @@ else{
 
   <div id="modal-orario" class="modal modal-fixed-footer" style="marign-top:5em;">
     <div class="modal-content">
-      <h1 class="light-blue-text thin center" style="margin-bottom:0.3em;">Orario</h1>
+      <h1 class="primary-text thin center" style="margin-bottom:0.3em;">Orario</h1>
     </div>
     <div class="modal-footer">
-      <a href="#!" style="margin-bottom:1em;" class="modal-action modal-close waves-effect waves-red red-text btn-flat">CHIUDI</a>
+      <a href="#!" style="margin-bottom:1em;" class="modal-action modal-close waves-effect waves-accent accent-text btn-flat">CHIUDI</a>
     </div>
   </div>
 
   <div id="modalCorsiIncompatibili" class="modal modal-piccolo modal-fixed-footer" style="marign-top:5em;">
     <div class="modal-content">
-      <h4 class="light-blue-text light condensed center">Scegli corso</h4>
+      <h4 class="primary-text light condensed center">Scegli corso</h4>
       <div class="row" style="margin-top:-1.8em; margin-bottom:0.2em;">
         <div class="col s2" style="font-size:120%; margin-top:0.8em">
-          <p class="condensed red-text">
+          <p class="condensed accent-text">
             <i class="material-icons left">search</i>
           </p>
         </div>
@@ -240,10 +239,10 @@ else{
 
   <div id="modalCorsiObbligatori" class="modal modal-piccolo modal-fixed-footer" style="marign-top:5em;">
     <div class="modal-content">
-      <h4 class="light-blue-text light condensed center">Scegli classe</h4>
+      <h4 class="primary-text light condensed center">Scegli classe</h4>
       <div class="row" style="margin-top:-1.8em; margin-bottom:0.2em;">
         <div class="col s2" style="font-size:120%; margin-top:0.8em">
-          <p class="condensed red-text">
+          <p class="condensed accent-text">
             <i class="material-icons left">search</i>
           </p>
         </div>
@@ -259,10 +258,10 @@ else{
 
   <div id="modalScegliDocenti" class="modal modal-piccolo modal-fixed-footer" style="marign-top:5em;">
     <div class="modal-content">
-      <h4 class="light-blue-text light condensed center">Scegli docenti</h4>
+      <h4 class="primary-text light condensed center">Scegli docenti</h4>
       <div class="row" style="margin-top:-1.8em; margin-bottom:0.2em;">
         <div class="col s2" style="font-size:120%; margin-top:0.8em">
-          <p class="condensed red-text">
+          <p class="condensed accent-text">
             <i class="material-icons left">search</i>
           </p>
         </div>
@@ -278,10 +277,10 @@ else{
 
   <div id="modalScegliDocentiDettagli" class="modal modal-piccolo modal-fixed-footer" style="marign-top:5em;">
     <div class="modal-content">
-      <h4 class="light-blue-text light condensed center">Scegli docenti</h4>
+      <h4 class="primary-text light condensed center">Scegli docenti</h4>
       <div class="row" style="margin-top:-1.8em; margin-bottom:0.2em;">
         <div class="col s2" style="font-size:120%; margin-top:0.8em">
-          <p class="condensed red-text">
+          <p class="condensed accent-text">
             <i class="material-icons left">search</i>
           </p>
         </div>

@@ -70,7 +70,7 @@ $numRisultato = $resultAA->num_rows;
  if($result->num_rows == 0){
    ?>
    <li class="collection-item">
-         <div class="red-text condensed center-align" style="font-size:150%; margin:1em;">Nessun risultato trovato</div>
+         <div class="accent-text condensed center-align" style="font-size:150%; margin:1em;">Nessun risultato trovato</div>
        </li>
    <?php
  }
@@ -80,7 +80,7 @@ $numRisultato = $resultAA->num_rows;
     <li class="collection-item">
       <div class="row valign-wrapper" style="margin-bottom:0px;">
         <div class="col s1 valign bold">
-          <i onclick="eliminaCorso(<?php echo $dettagli['id']; ?>)" class="material-icons waves-effect waves-red red-text waves-circle" style="border-radius:50%; display:inline; margin:0em;">close</i>
+          <i onclick="eliminaCorso(<?php echo $dettagli['id']; ?>)" class="material-icons waves-effect waves-accent accent-text waves-circle" style="border-radius:50%; display:inline; margin:0em;">close</i>
           <span class="condensed" style="margin-left:0.5em;">ID: <?php echo $dettagli['id']; ?></span>
         </div>
         <div class="col s2 valign center-align bold condensed capitalize" style="font-size:105%";>
@@ -114,7 +114,7 @@ $numRisultato = $resultAA->num_rows;
           </p>
         </div>
         <div class="col s2 center valign condensed">
-          <a class="waves-effect small-icon-corsi condensed waves-red fill-width fake-button valign red-text" onclick="mostraModalDettagli(<?php echo $dettagli['id']; ?>, <?php echo $dettagli['idDocente']; ?>)" style="width:98%;">
+          <a class="waves-effect small-icon-corsi condensed waves-accent fill-width fake-button valign accent-text" onclick="mostraModalDettagli(<?php echo $dettagli['id']; ?>, <?php echo $dettagli['idDocente']; ?>)" style="width:98%;">
             <i class="material-icons">more_horiz</i> <br/>DETTAGLI
           </a>
         </div>
@@ -138,7 +138,7 @@ $numRisultato = $resultAA->num_rows;
                  $numPagine = ceil($numRisultato/$quanti);
                   while($i<=$numPagine){
                       ?>
-                        <li class="waves-effect waves-red <?php if($i==$pagina) echo "active"?>">
+                        <li class="waves-effect waves-accent <?php if($i==$pagina) echo "active"?>">
                               <a onclick="vaiPagina(<?php echo $i;?>)">
                                 <?php echo $i; ?>
                               <a/>

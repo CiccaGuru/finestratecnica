@@ -24,9 +24,9 @@ $db = database_connect();
 	<title>Settimana tecnica</title>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-	<link href="css/style.css" type="text/css" rel="stylesheet" media="screen"/>
 	<link href="css/docente.css" type="text/css" rel="stylesheet" media="screen"/>
 	<link rel="stylesheet" href="css/material-scrolltop.css">
+	<link href="css/style.php" type="text/css" rel="stylesheet" media="screen"/>
 	<link rel="apple-touch-icon" sizes="180x180" href="/img/favicons/apple-touch-icon.png">
 <link rel="icon" type="image/png" href="/img/favicons/favicon-32x32.png" sizes="32x32">
 <link rel="icon" type="image/png" href="/img/favicons/favicon-16x16.png" sizes="16x16">
@@ -41,7 +41,7 @@ $db = database_connect();
 
 <body id="body-userhome">
 	<div class="navbar-fixed">
-		<nav id="intestaz" class="light-blue">
+		<nav id="intestaz" class="blue lighten-1">
 			<div class="nav-wrapper">
 				<a class="hide-on-small-only left condensed letter-spacing-1" style="margin-left:2%;">
 					<?php
@@ -52,9 +52,9 @@ $db = database_connect();
 							echo mb_strtoupper($dettagliUtente["nome"]." ".$dettagliUtente["cognome"]." (".$dettagliUtente["username"].")");
 					?>
 				</a>
-				<a href="#" class="brand-logo center light">Settimana tecnica</a>
+				<a href="#" class="brand-logo center light condensed">Settimana tecnica</a>
 				<ul id="nav-mobile" class="right hide-on-med-and-down">
-					<li><a href="logout.php" class="waves-effect waves-light condensed"><i class="material-icons left">exit_to_app</i>LOGOUT</a></li>
+					<li><a href="include/logout.php" class="waves-effect waves-light condensed"><i class="material-icons left">exit_to_app</i>LOGOUT</a></li>
 				</ul>
 			</div>
 		</nav>

@@ -1,6 +1,4 @@
 <?php
-
-
 require_once('include/funzioni.php'); // Includes Login Script
 $utente = check_login();
 if($utente==-1){
@@ -60,7 +58,7 @@ $db = database_connect();
   <title>Admin - Studenti</title>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen"/>
-  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen"/>
+  <link href="css/style.php" type="text/css" rel="stylesheet" media="screen"/>
   <link href="css/admin.css" type="text/css" rel="stylesheet" media="screen"/>
   <link rel="stylesheet" href="css/material-scrolltop.css">
   <link rel="apple-touch-icon" sizes="180x180" href="/img/favicons/apple-touch-icon.png">
@@ -76,40 +74,40 @@ $db = database_connect();
 </head>
 
 <body>
-  <nav class="light-blue">
-    <ul id="utenti-dropDown" class="dropdown-content">
-    <li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciStudenti.php">STUDENTI</a></li>
-  	<li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciDocenti.php">DOCENTI</a></li>
-    <li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciCorsi.php">CORSI</a></li>
-    <li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciClassi.php">CLASSI</a></li>
-    <li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciAule.php">AULE</a></li>
-  </ul>
-  	<div class="navbar-fixed">
-  		<nav id="intestaz" class="light-blue">
-  			<div class="nav-wrapper">
-  				<a class="hide-on-small-only left condensed letter-spacing-1" style="margin-left:2%;"> AMMINISTRATORE</a>
-  				<a href="#" class="brand-logo center light">Settimana tecnica</a>
-  				<ul id="nav-mobile" class="right hide-on-med-and-down">
-  					<li><a href="admin.php" class="waves-effect waves-light condensed">HOME</a></li>
-  					<li class="active"><a href="#!" class="dropdown-button waves-effect active waves-light condensed" data-beloworigin="true" data-hover="true" data-activates="utenti-dropDown">GESTISCI<i class="material-icons right">arrow_drop_down</i></a></li>
-  					<li><a href="logout.php" class="waves-effect waves-light condensed"><i class="material-icons left">exit_to_app</i>LOGOUT</a></li>
-  				</ul>
-  			</div>
-  		</nav>
-  	</div>
+  <nav class="primary">
+		<ul id="utenti-dropDown" class="dropdown-content">
+			<li><a class="waves-effect waves-primary condensed primary-text" href="gestisciStudenti.php">STUDENTI</a></li>
+			<li><a class="waves-effect waves-primary condensed primary-text" href="gestisciDocenti.php">DOCENTI</a></li>
+			<li><a class="waves-effect waves-primary condensed primary-text" href="gestisciCorsi.php">CORSI</a></li>
+			<li><a class="waves-effect waves-primary condensed primary-text" href="gestisciClassi.php">CLASSI</a></li>
+			<li><a class="waves-effect waves-primary condensed primary-text" href="gestisciAule.php">AULE</a></li>
+		</ul>
+		<div class="navbar-fixed">
+			<nav id="intestaz" class="primary">
+				<div class="nav-wrapper">
+					<a class="hide-on-small-only left condensed letter-spacing-1" style="margin-left:2%;"> AMMINISTRATORE</a>
+					<a href="#" class="brand-logo center condensed light">Settimana tecnica</a>
+					<ul id="nav-mobile" class="right hide-on-med-and-down">
+						<li class="active"><a href="admin.php" class="waves-effect waves-light condensed">HOME</a></li>
+						<li><a href="#!" class="dropdown-button waves-effect active waves-light condensed" data-beloworigin="true" data-hover="true" data-activates="utenti-dropDown">GESTISCI<i class="material-icons right">arrow_drop_down</i></a></li>
+						<li><a href="include/logout.php" class="waves-effect waves-light condensed"><i class="material-icons left">exit_to_app</i>LOGOUT</a></li>
+					</ul>
+				</div>
+			</nav>
+		</div>
 	</nav>
 
   <div class="container"  style="margin-top:3em;">
     <div class="card">
       <div class="card-content"  style="padding-left:5%; padding-right:5%; padding-bottom:5%">
-        <span class="card-title blue-text center condensed">Cerca studente</span>
+        <span class="card-title primary-text center condensed">Cerca studente</span>
         <div class="row">
           <div class="input-field col s3">
-            <input id="nomeStudenteCerca" type="text" class="validate" required>
+            <input id="nomeStudenteCerca" type="text" class="validate" requiaccent>
             <label for="nomeStudenteCerca" class="condensed">Nome</label>
           </div>
           <div class="input-field col s3">
-            <input id="cognomeStudenteCerca" type="text" class="validate" required>
+            <input id="cognomeStudenteCerca" type="text" class="validate" requiaccent>
             <label for="cognomeStudenteCerca" class="condensed">Cognome</label>
           </div>
           <div class="input-field col s3">
@@ -128,7 +126,7 @@ $db = database_connect();
           </div>
         </div>
         <div class="center">
-          <a onclick="cercaStudente()" class="waves-effect waves-light btn-large red condensed">
+          <a onclick="cercaStudente()" class="waves-effect waves-light btn-large accent condensed">
             <i class="material-icons left">search</i>
             Cerca
           </a>
@@ -139,28 +137,28 @@ $db = database_connect();
     <div class="card">
       <form id="aggiungi-studente">
         <div class="card-content"  style="padding-left:5%; padding-right:5%; padding-bottom:5%">
-          <span class="card-title blue-text center condensed">Aggiungi un nuovo studente</span>
+          <span class="card-title primary-text center condensed">Aggiungi un nuovo studente</span>
           <div class="row">
             <div class="input-field col s4">
-              <input id="nomeStudente" type="text" class="validate" required>
+              <input id="nomeStudente" type="text" class="validate" requiaccent>
               <label class="condensed" for="nomeStudente">Nome</label>
             </div>
             <div class="input-field col s4">
-              <input id="cognomeStudente" type="text" class="validate" required>
+              <input id="cognomeStudente" type="text" class="validate" requiaccent>
               <label class="condensed" for="cognomeStudente">Cognome</label>
             </div>
             <div class="input-field col s4">
-              <input id="usernameStudente" type="text" class="validate" required>
+              <input id="usernameStudente" type="text" class="validate" requiaccent>
               <label class="condensed" for="usernameStudente">Nome utente</label>
             </div>
           </div>
           <div class="row">
             <div class="input-field col s4">
-              <input id="passwordStudente" type="password" class="validate" required>
+              <input id="passwordStudente" type="password" class="validate" requiaccent>
               <label class="condensed" for="passwordStudente">Password</label>
             </div>
             <div class="input-field col s3">
-              <input id="ripeti_passwordStudente" type="password" class="validate" required>
+              <input id="ripeti_passwordStudente" type="password" class="validate" requiaccent>
               <label class="condensed" for="ripeti_passwordStudente">Ripeti password</label>
             </div>
             <div class="input-field col s2">
@@ -175,7 +173,7 @@ $db = database_connect();
               <label>Classe</label>
             </div>
             <div class="col s3 center">
-              <button type="submit" class="waves-effect condensed waves-light btn-large red">
+              <button type="submit" class="waves-effect condensed waves-light btn-large accent">
                 <i class="material-icons left">person_add</i>
                 Aggiungi
               </button>
@@ -187,12 +185,12 @@ $db = database_connect();
   </div>
   <div class="container" style="width:90%">
     <ul class="collection with-header z-depth-1" id="dettagliStudenti">
-      <li class="collection-header blue-text center"><h4 class="condensed light">ELENCO STUDENTI</h4></li>
+      <li class="collection-header primary-text center"><h4 class="condensed light">ELENCO STUDENTI</h4></li>
       <li class="collection-item center">
         <form  action="gestisciStudenti.php" method="POST">
           <div class="row">
             <div class="col s2" style="font-size:120%; margin-top:0.5em">
-              <p class="condensed red-text">
+              <p class="condensed accent-text">
                 <i class="material-icons left">search</i>Cerca
               </p>
             </div>
@@ -211,10 +209,10 @@ $db = database_connect();
               </p>
             </div>
             <div class="input-field col s1">
-              <input id="min" name="quanti" type="text" class="validate" value="<?php echo $quanti?>" required>
+              <input id="min" name="quanti" type="text" class="validate" value="<?php echo $quanti?>" requiaccent>
             </div>
             <div class="input-field col s1 right">
-              <button class="btn-floating btn-large waves-effect waves-light red condensed white-text" type="submit" name="action">
+              <button class="btn-floating btn-large waves-effect waves-light accent condensed white-text" type="submit" name="action">
                 <i class="material-icons">search</i>
               </button>
             </div>
@@ -227,7 +225,7 @@ $db = database_connect();
 
       if($result->num_rows==0){
         ?>  <li class="collection-item">
-              <div class="red-text condensed center-align" style="font-size:150%; margin:1em;">Nessun risultato trovato</div>
+              <div class="accent-text condensed center-align" style="font-size:150%; margin:1em;">Nessun risultato trovato</div>
             </li>
           <?php
       }
@@ -238,22 +236,22 @@ $db = database_connect();
         ?>
 
         <li class="collection-item row valign-wrapper">
-          <div class="col s1 red-text">
-              <i class="material-icons waves-effect waves-red waves-circle" style="border-radius:50%;" onclick="eliminaUtente(<?php echo $row["id"]?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>', 0)">close</i>
+          <div class="col s1 accent-text">
+              <i class="material-icons waves-effect waves-accent waves-circle" style="border-radius:50%;" onclick="eliminaUtente(<?php echo $row["id"]?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>', 0)">close</i>
           </div>
           <div class="col s1 bold">
             ID: <?php echo $row["id"];?>
           </div>
           <div class="input-field col s2 valign">
-            <input id="nome<?php echo $row['id']; ?>Studente" type="text" class="validate valign" value="<?php echo $row['nome']; ?>" required>
+            <input id="nome<?php echo $row['id']; ?>Studente" type="text" class="validate valign" value="<?php echo $row['nome']; ?>" requiaccent>
             <label for="nome<?php echo $row['id']; ?>Studente">Nome</label>
           </div>
           <div class="input-field col s2 valign">
-            <input id="cognome<?php echo $row['id']; ?>Studente" type="text" class="validate valign" value="<?php echo $row['cognome']; ?>" required>
+            <input id="cognome<?php echo $row['id']; ?>Studente" type="text" class="validate valign" value="<?php echo $row['cognome']; ?>" requiaccent>
             <label for="nome<?php echo $row['id']; ?>Studente">Cognome</label>
           </div>
           <div class="input-field col s2 valign">
-            <input id="username<?php echo $row['id']; ?>Studente" type="text" class="validatevalign" value="<?php echo $row['username']; ?>" required>
+            <input id="username<?php echo $row['id']; ?>Studente" type="text" class="validatevalign" value="<?php echo $row['username']; ?>" requiaccent>
             <label for="nome<?php echo $row['id']; ?>Studente">Username</label>
           </div>
           <div class="input-field col s1">
@@ -268,16 +266,16 @@ $db = database_connect();
           </div>
           <div class="col s2 cente valign">
             <p style="margin-bottom:5px;">
-              <a onclick="modificaStudente(<?php echo $row['id'];?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>')" class="waves-effect center-align waves-red btn-flat red-text valign" style="width:98%">
+              <a onclick="modificaStudente(<?php echo $row['id'];?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>')" class="waves-effect center-align waves-accent btn-flat accent-text valign" style="width:98%">
                 Modifica
               </a>
             </p>
             <p style="margin-top:5px;">
-              <a class="waves-effect waves-red center-align btn-flat red-text valign" onclick="mostraOrarioStudente(<?php echo $row['id'];?>)" style="width:98%;">Orario</a>
+              <a class="waves-effect waves-accent center-align btn-flat accent-text valign" onclick="mostraOrarioStudente(<?php echo $row['id'];?>)" style="width:98%;">Orario</a>
             </p>
           </div>
           <div class="col s1 center valign" style="padding:0px;">
-            <a class="waves-effect small-icon condensed waves-red fill-width fake-button valign red-text" onclick="passwordReset(<?php echo $row['id'];?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>')" >
+            <a class="waves-effect small-icon condensed waves-accent fill-width fake-button valign accent-text" onclick="passwordReset(<?php echo $row['id'];?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>')" >
               	<i class="material-icons ">refresh</i> <br/>RESET
             </a>
           </div>
@@ -308,7 +306,7 @@ $db = database_connect();
                     while($i*$quanti<=$numRisultato){
                         ?>
                       <form action="gestisciStudenti.php" id="pagina<?php echo $i; ?>" method="post" style="display:inline;">
-                        <li class="waves-effect waves-red <?php if($i==$page) echo "active"?>">
+                        <li class="waves-effect waves-accent <?php if($i==$page) echo "active"?>">
                               <input type="hidden" name="page" value="<?php echo $i?>">
                               <input type="hidden" name="quanti" value="<?php echo $quanti?>">
                               <?php if(isset($_POST["username"])){?>
@@ -348,7 +346,7 @@ $db = database_connect();
 
   <div id="modal-orario" class="modal bottom-sheet" style="marign-top:5em;">
     <div class="modal-content">
-      <h1 class="light-blue-text thin center" style="margin-bottom:0.3em;">Orario</h1>
+      <h1 class="primary-text thin center" style="margin-bottom:0.3em;">Orario</h1>
     </div>
   </div>
   <div id="modal-continuita" class="modal">
@@ -356,7 +354,7 @@ $db = database_connect();
 
     </div>
     <div class="modal-footer">
-      <a href="#!" class=" modal-action modal-close waves-effect waves-red red-text btn-flat">CHIUDI</a>
+      <a href="#!" class=" modal-action modal-close waves-effect waves-accent accent-text btn-flat">CHIUDI</a>
     </div>
   </div>
 

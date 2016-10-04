@@ -22,9 +22,9 @@ $db = database_connect();
 	<title>Admin - Home</title>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen"/>
-	<link href="css/style.css" type="text/css" rel="stylesheet" media="screen"/>
 	<link href="css/admin.css" type="text/css" rel="stylesheet" media="screen"/>
-	<link rel="stylesheet" href="css/circle.css">
+	<link href="css/style.php" type="text/css" rel="stylesheet" media="screen"/>
+	<link rel="stylesheet" href="css/circle.php">
 	<link rel="apple-touch-icon" sizes="180x180" href="/img/favicons/apple-touch-icon.png">
 <link rel="icon" type="image/png" href="/img/favicons/favicon-32x32.png" sizes="32x32">
 <link rel="icon" type="image/png" href="/img/favicons/favicon-16x16.png" sizes="16x16">
@@ -38,23 +38,23 @@ $db = database_connect();
 </head>
 
 <body>
-	<nav class="light-blue">
+	<nav class="primary">
 		<ul id="utenti-dropDown" class="dropdown-content">
-		<li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciStudenti.php">STUDENTI</a></li>
-		<li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciDocenti.php">DOCENTI</a></li>
-		<li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciCorsi.php">CORSI</a></li>
-		<li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciClassi.php">CLASSI</a></li>
-		<li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciAule.php">AULE</a></li>
-	</ul>
+			<li><a class="waves-effect waves-primary condensed primary-text" href="gestisciStudenti.php">STUDENTI</a></li>
+			<li><a class="waves-effect waves-primary condensed primary-text" href="gestisciDocenti.php">DOCENTI</a></li>
+			<li><a class="waves-effect waves-primary condensed primary-text" href="gestisciCorsi.php">CORSI</a></li>
+			<li><a class="waves-effect waves-primary condensed primary-text" href="gestisciClassi.php">CLASSI</a></li>
+			<li><a class="waves-effect waves-primary condensed primary-text" href="gestisciAule.php">AULE</a></li>
+		</ul>
 		<div class="navbar-fixed">
-			<nav id="intestaz" class="light-blue">
+			<nav id="intestaz" class="primary">
 				<div class="nav-wrapper">
 					<a class="hide-on-small-only left condensed letter-spacing-1" style="margin-left:2%;"> AMMINISTRATORE</a>
-					<a href="#" class="brand-logo center light">Settimana tecnica</a>
+					<a href="#" class="brand-logo center condensed light">Settimana tecnica</a>
 					<ul id="nav-mobile" class="right hide-on-med-and-down">
 						<li class="active"><a href="admin.php" class="waves-effect waves-light condensed">HOME</a></li>
 						<li><a href="#!" class="dropdown-button waves-effect active waves-light condensed" data-beloworigin="true" data-hover="true" data-activates="utenti-dropDown">GESTISCI<i class="material-icons right">arrow_drop_down</i></a></li>
-						<li><a href="logout.php" class="waves-effect waves-light condensed"><i class="material-icons left">exit_to_app</i>LOGOUT</a></li>
+						<li><a href="include/logout.php" class="waves-effect waves-light condensed"><i class="material-icons left">exit_to_app</i>LOGOUT</a></li>
 					</ul>
 				</div>
 			</nav>
@@ -82,7 +82,7 @@ $db = database_connect();
 </div>
 		<div class="card">
 			<div class="card-content">
-				<h3 class="light condensed letter-spacing-1 center light-blue-text">DETTAGLI ISCRIZIONI</h3>
+				<h3 class="light condensed letter-spacing-1 center primary-text">DETTAGLI ISCRIZIONI</h3>
 				<div class="row more-margin-bottom">
 					<div class="col s3">
 						<?php
@@ -110,13 +110,13 @@ $db = database_connect();
 						</div>
 					</div>
 					<div class="col s9">
-							<h5 class="light-blue-text condensed light">ALUNNI ENTRATI ALMENO UNA VOLTA:</h5>
+							<h5 class="primary-text condensed light">ALUNNI ENTRATI ALMENO UNA VOLTA:</h5>
 							<div class="row nomargin">
 								<div class="col s7">
-									<span class="contatore red-text"><?php echo $accesso["conta"]."/".$tutti["conta"];?></span>
+									<span class="contatore accent-text"><?php echo $accesso["conta"]."/".$tutti["conta"];?></span>
 								</div>
 								<div class="col s5">
-									<a class="btn-flat red-text waves-effect waves-red condensed" onclick="elencoNonAccessi()">GENERA ELENCO</a>
+									<a class="btn-flat accent-text waves-effect waves-red condensed" onclick="elencoNonAccessi()">GENERA ELENCO</a>
 								</div>
 						</div>
 					</div>
@@ -145,13 +145,13 @@ $db = database_connect();
 						</div>
 					</div>
 					<div class="col s9">
-						<h5 class="light-blue-text condensed light">ALUNNI ISCRITTI A ORE SUFFICIENTI:</h5>
+						<h5 class="primary-text condensed light">ALUNNI ISCRITTI A ORE SUFFICIENTI:</h5>
 						<div class="row nomargin">
 							<div class="col s7">
-								<span class="contatore red-text"><?php echo $sufficienti["conta"]."/".$accesso["conta"];?></span>
+								<span class="contatore accent-text"><?php echo $sufficienti["conta"]."/".$accesso["conta"];?></span>
 							</div>
 							<div class="col s5">
-								<a class="btn-flat red-text waves-effect waves-red condensed" onclick="elencoNonAbbastanza()">GENERA ELENCO</a>
+								<a class="btn-flat accent-text waves-effect waves-red condensed" onclick="elencoNonAbbastanza()">GENERA ELENCO</a>
 							</div>
 					</div>
 					</div>
@@ -160,17 +160,17 @@ $db = database_connect();
 			</div>
 		<div class="card">
 			<div class="card-content">
-				<h3 class="center light light-blue-text condensed letter-spacing-1">OPERAZIONI DI STAMPA</h3>
+				<h3 class="center light primary-text condensed letter-spacing-1">OPERAZIONI DI STAMPA</h3>
 				<div class="container width-90">
 					<div class="row">
 						<div class="col s4 offset-s2">
-							<a class="fake-button red-text waves-effect waves-red fill-width valign-wrapper" onclick=" generaRegistrini();">
+							<a class="fake-button accent-text waves-effect waves-red fill-width valign-wrapper" onclick=" generaRegistrini();">
 									<i class="material-icons">description</i><br/>
 									REGISTRINI
 							</a>
 						</div>
 						<div class="col s4">
-							<a class="fake-button red-text waves-effect valign-wrapper fill-width waves-red" onclick=" generaOreBuche();">
+							<a class="fake-button accent-text waves-effect valign-wrapper fill-width waves-red" onclick=" generaOreBuche();">
 									<i class="material-icons">date_range</i><br/>
 									ORE BUCHE
 							</a>
@@ -179,7 +179,7 @@ $db = database_connect();
 
 					<div class="row">
 						<div class="col s3">
-							<a class="fake-button red-text waves-effect fill-width valign-wrapper waves-red" onclick="generaCorsiByDocenti();">
+							<a class="fake-button accent-text waves-effect fill-width valign-wrapper waves-red" onclick="generaCorsiByDocenti();">
 								<div class="row">
 									<div class="col s4">
 											<i class="material-icons">school</i><br/>
@@ -191,7 +191,7 @@ $db = database_connect();
 							</a>
 						</div>
 						<div class="col s3">
-							<a class="fake-button red-text waves-effect valign-wrapper fill-width waves-red"  onclick="generaCorsiByOra();">
+							<a class="fake-button accent-text waves-effect valign-wrapper fill-width waves-red"  onclick="generaCorsiByOra();">
 								<div class="row">
 									<div class="col s4">
 											<i class="material-icons">alarm</i><br/>
@@ -203,7 +203,7 @@ $db = database_connect();
 							</a>
 						</div>
 						<div class="col s3">
-							<a class="fake-button red-text waves-effect valign-wrapper fill-width waves-red" onclick="generaCorsiByAula();">
+							<a class="fake-button accent-text waves-effect valign-wrapper fill-width waves-red" onclick="generaCorsiByAula();">
 								<div class="row">
 									<div class="col s4">
 											<i class="material-icons">home</i><br/>
@@ -215,7 +215,7 @@ $db = database_connect();
 							</a>
 						</div>
 						<div class="col s3">
-							<a class="fake-button red-text waves-effect valign-wrapper fill-width waves-red" onclick="generaCorsiByTitolo();">
+							<a class="fake-button accent-text waves-effect valign-wrapper fill-width waves-red" onclick="generaCorsiByTitolo();">
 
 								<div class="row">
 									<div class="col s4">

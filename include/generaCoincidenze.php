@@ -17,7 +17,7 @@ else{
 $db = database_connect();
 $idCorso = $_POST["idCorso"];
 ?><div id="container">
-  <h4 class="thin light-blue-text center">Corsi coincidenti</h4>
+  <h4 class="condensed primary text center">Corsi coincidenti</h4>
 <?php
 $result = $db->query("SELECT * FROM lezioni WHERE idCorso = '$idCorso'") or die('ERRORE: coincidenze 19' . $db->error);
 $corsi_obbligati =array('190', '249', '391', '68', '230', '350', '69', '83', '67', '179');
@@ -46,11 +46,11 @@ while($lezione = $result->fetch_assoc()){
           <?php
             if(in_array($dettagliCorso["id"], $corsi_obbligati)){?>
               <div class="col m4 s8 offset-s4 valign">
-                <a class="waves-effect disabled waves-light btn valign red">Obbligatorio</a>
+                <a class="waves-effect disabled waves-light btn valign accent">Obbligatorio</a>
               </div>
           <?php  }else {?>
           <div class="col m4 s8 offset-s4 valign">
-            <a onclick="rimuoviCorso(<?php echo $dettagliCorso["id"]; ?>)" class="waves-effect waves-light btn valign red">Elimina corso</a>
+            <a onclick="rimuoviCorso(<?php echo $dettagliCorso["id"]; ?>)" class="waves-effect waves-light btn valign accent">Elimina corso</a>
           </div>
           <?php } ?>
         </div>

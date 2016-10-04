@@ -18,8 +18,8 @@ $result = $db->query("SELECT * from sezioni") or die($db->error);
 while($sezione=$result->fetch_assoc()){
 ?>
   <li class="collection-item row valign-wrapper">
-		<div class="col s1 red-text">
-				<i class="material-icons waves-effect waves-red waves-circle" style="border-radius:50%;" onclick="eliminaClasse(<?php echo $sezione["id"]?>)">close</i>
+		<div class="col s1 accent-text">
+				<i class="material-icons waves-effect waves-accent waves-circle" style="border-radius:50%;" onclick="eliminaClasse(<?php echo $sezione["id"]?>)">close</i>
 		</div>
 		<div class="col s1 bold condensed letter-spacing-1">
 			ANNO:

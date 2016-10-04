@@ -48,9 +48,9 @@ $num = $resultAA->num_rows;
   <title>Admin - Docenti</title>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen"/>
-  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen"/>
   <link href="css/admin.css" type="text/css" rel="stylesheet" media="screen"/>
   <link rel="stylesheet" href="css/material-scrolltop.css">
+  <link href="css/style.php" type="text/css" rel="stylesheet" media="screen"/>
   <link rel="apple-touch-icon" sizes="180x180" href="/img/favicons/apple-touch-icon.png">
 <link rel="icon" type="image/png" href="/img/favicons/favicon-32x32.png" sizes="32x32">
 <link rel="icon" type="image/png" href="/img/favicons/favicon-16x16.png" sizes="16x16">
@@ -63,34 +63,33 @@ $num = $resultAA->num_rows;
 <meta name="theme-color" content="#03a9f4">
 </head>
 <body>
-  <nav class="light-blue">
-    <ul id="utenti-dropDown" class="dropdown-content">
-    <li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciStudenti.php">STUDENTI</a></li>
-    <li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciDocenti.php">DOCENTI</a></li>
-    <li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciCorsi.php">CORSI</a></li>
-    <li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciClassi.php">CLASSI</a></li>
-    <li><a class="waves-effect waves-blue condensed light-blue-text" href="gestisciAule.php">AULE</a></li>
-  </ul>
-    <div class="navbar-fixed">
-      <nav id="intestaz" class="light-blue">
-        <div class="nav-wrapper">
-          <a class="hide-on-small-only left condensed letter-spacing-1" style="margin-left:2%;"> AMMINISTRATORE</a>
-          <a href="#" class="brand-logo center light">Settimana tecnica</a>
-          <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="admin.php" class="waves-effect waves-light condensed">HOME</a></li>
-            <li class="active"><a href="#!" class="dropdown-button waves-effect active waves-light condensed" data-beloworigin="true" data-hover="true" data-activates="utenti-dropDown">GESTISCI<i class="material-icons right">arrow_drop_down</i></a></li>
-            <li><a href="logout.php" class="waves-effect waves-light condensed"><i class="material-icons left">exit_to_app</i>LOGOUT</a></li>
-          </ul>
-        </div>
-      </nav>
-    </div>
-  </nav>
-
+  <nav class="primary">
+		<ul id="utenti-dropDown" class="dropdown-content">
+			<li><a class="waves-effect waves-primary condensed primary-text" href="gestisciStudenti.php">STUDENTI</a></li>
+			<li><a class="waves-effect waves-primary condensed primary-text" href="gestisciDocenti.php">DOCENTI</a></li>
+			<li><a class="waves-effect waves-primary condensed primary-text" href="gestisciCorsi.php">CORSI</a></li>
+			<li><a class="waves-effect waves-primary condensed primary-text" href="gestisciClassi.php">CLASSI</a></li>
+			<li><a class="waves-effect waves-primary condensed primary-text" href="gestisciAule.php">AULE</a></li>
+		</ul>
+		<div class="navbar-fixed">
+			<nav id="intestaz" class="primary">
+				<div class="nav-wrapper">
+					<a class="hide-on-small-only left condensed letter-spacing-1" style="margin-left:2%;"> AMMINISTRATORE</a>
+					<a href="#" class="brand-logo center condensed light">Settimana tecnica</a>
+					<ul id="nav-mobile" class="right hide-on-med-and-down">
+						<li class="active"><a href="admin.php" class="waves-effect waves-light condensed">HOME</a></li>
+						<li><a href="#!" class="dropdown-button waves-effect active waves-light condensed" data-beloworigin="true" data-hover="true" data-activates="utenti-dropDown">GESTISCI<i class="material-icons right">arrow_drop_down</i></a></li>
+						<li><a href="include/logout.php" class="waves-effect waves-light condensed"><i class="material-icons left">exit_to_app</i>LOGOUT</a></li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+	</nav>
   <div class="container"  style="margin-top:3em;">
   <div class="card">
     <form id="aggiungi-docente">
       <div class="card-content center-align"  style="padding-left:5%; padding-right:5%; padding-bottom:5%">
-        <span class="card-title blue-text center-align condensed">Aggiungi un nuovo docente</span>
+        <span class="card-title primary-text center-align condensed">Aggiungi un nuovo docente</span>
         <div class="row">
           <div class="input-field col s4">
             <input id="nome" type="text" class="validate" required>
@@ -125,7 +124,7 @@ $num = $resultAA->num_rows;
 </div>
 <div class="container" style="width:90%">
   <ul class="collection with-header z-depth-1" id="dettagliDocenti">
-    <li class="collection-header blue-text center"><h4 class="condensed light">ELENCO DOCENTI</h4></li>
+    <li class="collection-header primary-text center"><h4 class="condensed light">ELENCO DOCENTI</h4></li>
     <li class="collection-item center">
       <form  action="gestisciDocenti.php" method="POST">
         <div class="row">

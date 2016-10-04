@@ -54,7 +54,7 @@ if ($utente == -1) {
         ?>
         <div class="oraLista row valign-wrapper" id="row<?php echo $i; ?>" data-idCorso="<?php echo $idCorso; ?>" data-idLezione="<?php echo $lezione['id']; ?>">
           <div class="col s1">
-            <i class="material-icons waves-effect red-text waves-red waves-circle" style="border-radius:50%; margin-right:10px; display:inline;">close</i>
+            <i class="material-icons waves-effect accent-text waves-accent-text waves-circle" style="border-radius:50%; margin-right:10px; display:inline;">close</i>
             <span class="valign bold condensed" style="display:inline;">   ID: <?php echo $lezione['id']; ?></span>
           </div>
           <div class="input-field col valign s3">

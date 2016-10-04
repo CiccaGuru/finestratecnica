@@ -3,7 +3,7 @@ $(function(){
 		e.preventDefault();
 		$("#wait").fadeIn();
 		var posting = $.post(
-		  '../login.php',
+		  '../include/login.php',
 			{submit: 1, username: $("#username").val(), password: $("#password").val()}
 		);
 		posting.done(function( data ) {
@@ -17,8 +17,8 @@ $(function(){
 				$("#contenitore-cerchio").html("<p id='errore-login' class='white-text'>"+data+"</p> <a id='riprova' onclick='riprova()' class='waves-effect waves-light btn-large light-blue'>Riprova</a>");
 		});
 	});
-	
-	
+
+
 
 });
 

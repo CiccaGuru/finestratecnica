@@ -103,7 +103,7 @@ while($classe = $result->fetch_assoc()){
                   echo "<span class='italic'>Nessuna descrizione</span>";
                   else echo $ora["titolo"];?>
         </div>
-        <div class="col m1 s4 offset-s1 <?php if($Tiscritti) echo "red-text"; else echo "teal-text";?> ">
+        <div class="col m1 s4 offset-s1 <?php if($Tiscritti) echo "accent-text"; else echo "teal-text";?> ">
           <?php echo num_iscritti($ora["id"], $db).'\\'.$ora["maxStudenti"];?>
         </div>
         <div class="col m3 s4">
@@ -113,7 +113,7 @@ while($classe = $result->fetch_assoc()){
             <?php
             if(!in_array($ora["id"], $ore_utente) && $Tiscritti){
               ?>
-              <i class="red-text material-icons">clear</i>
+              <i class="accent-text material-icons">clear</i>
               <?php
             }else{
               ?>
@@ -151,7 +151,7 @@ while($classe = $result->fetch_assoc()){
                 $num = ($j-1)*$_CONFIG["ore_per_giorno"]+$i;
                 if($ore[$num]){
                   if(iscritto($ore[$num], $utente)){
-                    $colore = 'light-blue lighten-2';
+                    $colore = 'primary lighten-2';
                   }
                   else if(troppiIscritti($ore[$num], $db)){
                     $colore = "red";

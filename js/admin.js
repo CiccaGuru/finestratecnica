@@ -93,7 +93,7 @@ function eliminaAula(id, quanti, page, filtro){
           id: id
       }
   );
-  posting.done(function(data)){
+  posting.done(function(data){
     if(data == "SUCCESS"){
       Materialize.toast('Utente eliminato con successo!', 4000);
       aggiornaDettagliUtenti(quanti, page, filtro, level);
@@ -102,7 +102,7 @@ function eliminaAula(id, quanti, page, filtro){
       Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Si è verificato un errore. Controlla la console', 4000);
     console.log(data);
 }
-  }
+  });
 }
 
 function eliminaUtente(id, quanti, page, filtro, level) {

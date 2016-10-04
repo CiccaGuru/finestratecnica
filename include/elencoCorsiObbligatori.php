@@ -38,7 +38,7 @@ while($sezione=$result->fetch_assoc()){
 	if($resultA->num_rows == 0){
 ?>
   <li class="collection-item hover row valign-wrapper waves-effect" onclick="aggiungiCorsoObbligatorio(<?php echo $idCorso.", ".$sezione["id"];?>)">
-		<div class="col s2 valign red-text">
+		<div class="col s2 valign accent-text">
 				<i class="material-icons">add</i>
 		</div>
 		<div class="col valign s10">

@@ -1,3 +1,8 @@
+<?php
+  header("Content-type: text/css; charset: UTF-8");
+  include_once("style.php");
+?>
+
 .rect-auto,
 .c100.p51 .slice,
 .c100.p52 .slice,
@@ -104,7 +109,7 @@
 .c100.p99 .fill,
 .c100.p100 .fill {
   position: absolute;
-  border: 0.08em solid #03a9f4;
+  border: 0.08em solid <?php echo $primaryColor; ?>;
   width: 0.84em;
   height: 0.84em;
   clip: rect(0em, 0.5em, 1em, 0em);
@@ -282,7 +287,7 @@
   display: block;
   content: " ";
   border-radius: 50%;
-  background-color: white; /* #f5f5f5;*/
+  background-color: white;
   width: 0.84em;
   height: 0.84em;
   -webkit-transition-property: all;
@@ -1011,55 +1016,11 @@
   width: 3.33em;
   line-height: 3.33em;
   font-size: 0.3em;
-  color: #03a9f4;
+  color: <?php echo $primaryColor ?>;
 }
 .c100:hover:after {
   top: 0.04em;
   left: 0.04em;
   width: 0.92em;
   height: 0.92em;
-}
-.c100.dark {
-  background-color: #777777;
-}
-.c100.dark .bar,
-.c100.dark .fill {
-  border-color: #c6ff00 !important;
-}
-.c100.dark > span {
-  color: #777777;
-}
-.c100.dark:after {
-  background-color: #666666;
-}
-.c100.dark:hover > span {
-  color: #c6ff00;
-}
-.c100.green .bar,
-.c100.green .fill {
-  border-color: #4db53c !important;
-}
-.c100.green:hover > span {
-  color: #4db53c;
-}
-.c100.green.dark .bar,
-.c100.green.dark .fill {
-  border-color: #5fd400 !important;
-}
-.c100.green.dark:hover > span {
-  color: #5fd400;
-}
-.c100.orange .bar,
-.c100.orange .fill {
-  border-color: #dd9d22 !important;
-}
-.c100.orange:hover > span {
-  color: #dd9d22;
-}
-.c100.orange.dark .bar,
-.c100.orange.dark .fill {
-  border-color: #e08833 !important;
-}
-.c100.orange.dark:hover > span {
-  color: #e08833;
 }

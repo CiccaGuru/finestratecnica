@@ -17,13 +17,13 @@ else{
 
   ?>
 
-  <h4 class="light condensed letter-spacing-1 light-blue-text center" id="titoloOrario">IL TUO ORARIO</h3>
+  <h4 class="light condensed letter-spacing-1 primary-text center" id="titoloOrario">IL TUO ORARIO</h3>
 
     <?php
     $result = $db->query("SELECT id from iscrizioni WHERE idUtente = '$utente' AND partecipa = '1' ") or die($db->error);
     if($result->num_rows<$_CONFIG["soglia_minima"]){
       ?>
-      <div class="center-align red-text condensed" id="messaggioPocheOre">ATTENZIONE! DEVI COPRIRE ALMENO 17 ORE!</div>
+      <div class="center-align accent-text condensed" id="messaggioPocheOre">ATTENZIONE! DEVI COPRIRE ALMENO 17 ORE!</div>
       <?php
     }
 
@@ -96,7 +96,7 @@ else{
                 echo "<td class='cellaBordo waves-mod waves-effect' onclick='scegliQuale(".$num.")' ></td>";
               }
               else{
-                echo "<td class='cellaBordo waves-mod waves-effect red-text condensed' style='font-weight:500;' >ERRORE</td>";
+                echo "<td class='cellaBordo waves-mod waves-effect accent-text condensed' style='font-weight:500;' >ERRORE</td>";
               }
 
             }

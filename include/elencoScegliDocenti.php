@@ -39,11 +39,11 @@ while ($docente = $result->fetch_assoc()) {
 	if(in_array($docente["id"], $listaDocenti)){
 			$spunta = 1;
 	}
-	
+
 	if(!$spunta){
 ?>
   <li class="collection-item hover row valign-wrapper waves-effect" onclick="aggiungiScegliDocenti(<?php echo $docente["id"];?>, '<?php echo $docente["nome"][0].". ".$docente["cognome"];?>')">
-		<div class="col s2 valign red-text">
+		<div class="col s2 valign accent-text">
 				<i class="material-icons">add</i>
 		</div>
 		<div class="col valign s10">
