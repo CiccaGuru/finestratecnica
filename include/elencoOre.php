@@ -62,20 +62,7 @@ if ($utente == -1) {
             <label class="active condensed" for="titoloModificaOre<?php echo $lezione['id']; ?>">Titolo</label>
           </div>
           <div class="input-field col s3">
-            <select id="selezionaAulaModificaOre<?php echo $i; ?>">
-              <?php
-              $aule = '';
-              $resultAule = $db->query('SELECT * from aule') or die('Error: '.$db->error);
-              while ($aula = $resultAule->fetch_assoc()) {
-                if($aula["id"] == $lezione["idAula"]){
-                  $aule .= '<option value="'.$aula['id'].'" selected>Aula '.$aula['nomeAula'].', '.$aula['maxStudenti'].' alunni</option>';
-                }else{
-                  $aule .= '<option value="'.$aula['id'].'">Aula '.$aula['nomeAula'].', '.$aula['maxStudenti'].' alunni</option>';
-                }
-              }
-
-              echo $aule;
-              ?>
+            <select class="slelezionaAula" id="selezionaAulaModificaOre<?php echo $i; ?>">
             </select>
             <label>Aula</label>
           </div>

@@ -185,6 +185,9 @@ function aggiornaListaOre(id){
     });
     posting.done(function(data){
       $("#listaOreModifica").html(data);
+      $.post('../include/elencoAule.php').done(function(data){
+        $(".selezionaAula").html(data);
+      });
       $('select').material_select();
     });
 }

@@ -619,7 +619,7 @@ footer{
 }
 
 .waves-effect.waves-accent .waves-ripple {
-         background-color: <?php echo $accentColorf; ?> !important;
+         background-color: <?php echo $accentColorLight; ?> !important;
 }
 
 .waves-mod{
@@ -697,4 +697,18 @@ footer{
 
 label{
   text-align: left !important;
+}
+
+
+#elencoOreAggiungere::-webkit-scrollbar {
+    width: 8px;
+    margin-left:3px;
+    margin-right:3px;
+    background-color: white;
+}
+
+#elencoOreAggiungere::-webkit-scrollbar-thumb {
+    width: 8px;
+    border-radius:4px;
+    background-color: <?php echo $accentColor;?>;
 }

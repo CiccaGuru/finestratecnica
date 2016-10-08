@@ -2,7 +2,6 @@
 include 'funzioni.php';
 $titolo = secure($_POST["titolo"]);
 $descrizione = secure($_POST["descriz"]);
-//$iddocente = secure($_POST["iddocente"]);
 $tipo = secure($_POST["tipo"]);
 $continuita = secure($_POST["continuita"]);
 $classi = $_POST["classi"];

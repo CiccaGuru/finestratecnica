@@ -18,3 +18,22 @@
 .space-above{
   margin-top:0.5em;
 }
+
+.aggiungiOraCella{
+  transition: all 0.2s ease;
+  border:none;
+  //border-radius:3px;
+  cursor:pointer;
+}
+
+td, tr{
+  border: 0px !important;
+}
+
+#orarioAggiungi td{
+  height:4em;
+}
+
+#contenuto-wait{
+  display:inherit;
+}

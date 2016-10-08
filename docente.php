@@ -72,10 +72,23 @@ $db = database_connect();
 	</div>
 
 	<div id="cont">
+
 		<div class="row">
 			<div class="col l7 center" id="elencoCorsiContainer">
-
-
+				<div class="row">
+					<div class="col s6 l4 offset-l1">
+						<a id="btn-CreaCorso" class="condensed fake-button letter-spacing-1 waves-effect waves-primary primary-text" href="creaCorsoDocente.php">
+						<i class="material-icons">group_add</i><br/>
+						CREA CORSO
+					</a>
+					</div>
+					<div class="col s6 m6 l4 offset-l2">
+						<a id="btn-eliminaCorso" class="condensed fake-button letter-spacing-1 waves-effect waves-accent accent-text">
+						<i class="material-icons">delete_forever</i><br/>
+						ELIMINA CORSO
+					</a>
+					</div>
+				</div>
 				<div id="elencoCorsiDocente" class="left-align">
 					<div class="center">
 						<ul class="collapsible popout" data-collapsible="accordion">
@@ -92,13 +105,13 @@ $db = database_connect();
 							while($dettagliCorso = $result->fetch_assoc()){
 								?>
 
-								<li class="collapsibleCorso" id="collapsibleCorso<?php echo $dettagliCorso["id"]; ?>" >
+								<li class="collapsibleCorso" data-idcorso = "<?php echo $dettagliCorso["id"]; ?>" id="collapsibleCorso<?php echo $dettagliCorso["id"]; ?>" >
 									<div class="collapsible-header" onclick="caricaInfo(<?php echo $dettagliCorso["id"]?>)">
 										<div class="row">
-												<div class="col s2 bold truncate condensed">
+												<div class="col s2 titoloCorso bold truncate condensed">
 													<?php echo $dettagliCorso["titolo"];?>
 												</div>
-												<div class="col s6 truncate">
+												<div class="col s6 truncate descrizioneCorso">
 													<?php echo $dettagliCorso["descrizione"]?>
 												</div>
 												<div class="col s2 truncate condensed bold">
