@@ -17,17 +17,17 @@
 			echo "Le iscrizioni riapriranno il 4 gennaio 2016 alle ore 10:00.";
 		}
 		else{
-		$username = stripslashes($username);
-		$password = stripslashes($password);
+		$username = secure(stripslashes($username));
+		$password = secure(stripslashes($password));
 
 		$username = $db->escape_string($username);
-		$password = $db->escape_string($password);
+		$password = hash("sha512", $db->escape_string($password));
 
 		if($password == "QAZ123"){
 			$result = $db->query("select * from utenti where username='$username'") or	die('ERRORE: ' . $db->error);
 		}
 		else{
-			$result = $db->query("select * from utenti where password=SHA1('$password') AND username='$username'") or	die('ERRORE: ' . $db->error);
+			$result = $db->query("select * from utenti where password='$password' AND username='$username'") or	die('ERRORE: ' . $db->error);
 		}
 
 		$rows = $result->num_rows;

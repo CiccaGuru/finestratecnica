@@ -2,6 +2,7 @@
     header("Content-type: text/css; charset: UTF-8");
     $primaryColor = "#2196f3";
     $primaryColorDark = "#1e88e5";
+    $primaryColorDarkest = "#1565c0";
     $primaryColorLight = "#64b5f6";
     $accentColor = "#f44336";
     $accentColorLight = "#e57373";
@@ -54,6 +55,10 @@
 
 .primary-dark-text{
   color: <?php echo $primaryColorDark; ?> !important;
+}
+
+.primary-darkest-text{
+  color: <?php echo $primaryColorDarkest; ?> !important;
 }
 
 .accent-text{
@@ -313,6 +318,10 @@ footer{
 
 #index{
 	overflow: hidden;
+  height:100%;
+}
+
+#install{
   height:100%;
 }
 
@@ -711,4 +720,142 @@ label{
     width: 8px;
     border-radius:4px;
     background-color: <?php echo $accentColor;?>;
+}
+
+.ruota{
+   display: inline-block;
+  transition-property: all;
+ transition-duration: 1s;
+}
+
+.ruota{
+  display: inline-block;
+  transition-property: all;
+  animation-name: rotate;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes rotate {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}
+}
+
+#install-card{   /*piccolo*/
+  transition: all 0.2s;
+  overflow-x: hidden;
+  width:95%;
+  margin:auto;
+  height:94%;
+  display: flex;
+  flex-flow: column;
+}
+
+
+@media only screen and (min-width: 601px) { /*medio*/
+  #install-card{
+    width:80%;
+    height:87%;
+  }
+}
+
+@media only screen and (min-width: 993px) { /*grande*/
+  #install-card{
+    width:65%;
+    height:90%;
+  }
+}
+
+#install-card .title{
+  flex: 0 1 auto;
+  padding:0.8em 1em;
+  font-size:250%;
+}
+
+#install-card .card-content{
+  transition:all 0.2s;
+  flex: 1 1 auto;
+  overflow-y:auto;
+  padding:2.5em;
+}
+
+#install-card .card-action{
+  transition:all 0.2s;
+  flex: 0 1 60px;
+}
+
+
+.dot{
+  transition:all 0.2s;
+}
+
+#install-card ul{
+    display: block;
+    padding-left:50px;
+}
+
+#install-card ul li{
+  display: list-item;
+  list-style-type: disc;
+}
+
+#install-body{
+  overflow:hidden;
+  height:100%;
+}
+
+
+#compat .row{
+  margin-bottom:0.15em;
+}
+
+#procedi{
+  transition:all 0.2s cubic-bezier(0.4, 0.0, 0.6, 1);
+  z-index:10 !important;
+  position:fixed;
+  display:none;
+}
+
+#procedi.nascosto{
+  -moz-opacity: 0;
+       opacity: 0;
+  -webkit-transform: scale(0.01);
+     -moz-transform: scale(0.01);
+      -ms-transform: scale(0.01);
+       -o-transform: scale(0.01);
+          transform: scale(0.01);
+}
+
+#sfondo-grigio{
+  z-index:11 !important;
+  position:fixed;
+  width:100%;
+  height:100%;
+  background: rgba(0,0,0,0.7);
+}
+
+#avviso-floating{
+  width:35%;
+  margin:auto;
+  min-height:35%;
+  padding:1em;
+}
+
+#avviso-floating .titolo{
+  font-size:180%;
+  padding:5%;
+  transition:all;
+}
+#avviso-floating-content{
+  transition:all;
+}
+.contieni-spinner{
+  margin:auto;
+  height:100%;
+}
+
+.preloader-wrapper.biggest {
+  width: 128px !important;
+  height: 128px !important;
 }

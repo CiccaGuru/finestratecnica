@@ -1,3 +1,6 @@
+<?php if(!file_exists("include/config.php")){
+  header("location: install.php");
+}?>
 <!DOCTYPE html>
 <html lang="it">
 <head>

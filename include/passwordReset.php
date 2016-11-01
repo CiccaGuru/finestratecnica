@@ -17,7 +17,7 @@ else{
 
 $id=$_POST["id"];
 $db=database_connect();
-$result = $db->query("UPDATE utenti SET password=SHA1('123'), passwordOriginale = '1' WHERE id=$id") or  die('ERRORE: ' . $db->error);
+$result = $db->query("UPDATE utenti SET password='".hash("sha512","123")."', passwordOriginale = '1' WHERE id=$id") or  die('ERRORE: ' . $db->error);
 echo 'SUCCESS';
 $db->close();
 
