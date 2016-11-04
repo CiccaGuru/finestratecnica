@@ -340,7 +340,6 @@ if ($) {
       function accordionOpen(object) {
         $panel_headers = $this.find('> li > .collapsible-header');
         if (object.hasClass('active')) {
-            caricaInfo(object.data('id'));
             object.parent().addClass('active');
         }
         else {
@@ -1946,16 +1945,6 @@ $(document).ready(function(){
     }, false);
 
 })(window);
-
-function disappearAllToasts(classe){
-  setTimeout(function(){
-    Vel($(classe), {"opacity": 0, marginTop: '-40px'}, { duration: 375,
-        easing: 'easeOutExpo',
-        queue: false,
-      });
-  }, 200);
-}
-
 ;Materialize.toast = function (message, displayLength, className, completeCallback) {
     className = className || "";
 
@@ -1970,9 +1959,7 @@ function disappearAllToasts(classe){
     }
 
     // Select and append toast
-    $(".toast").addClass("oldToast");
     var newToast = createToast(message);
-    disappearAllToasts(".oldToast");
 
     // only append toast if message is not undefined
     if(message){
@@ -2042,7 +2029,7 @@ function disappearAllToasts(classe){
         }
         else {
           // Insert as text;
-          toast.innerHTML = html;
+          toast.innerHTML = html; 
         }
         // Bind hammer
         var hammerHandler = new Hammer(toast, {prevent_default: false});
