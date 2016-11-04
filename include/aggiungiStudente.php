@@ -28,7 +28,7 @@ if($_POST["submit"]){
 	if ($rows == 0) {
 		if(!$db->query("INSERT INTO utenti
 				(nome, cognome, username, password, classe, level) VALUES
-				('".$nome."', '".$cognome."', '".$username."', '".$password."'), $classe, 0)"))
+				('$nome', '$cognome', '$username', '$password', $classe, 0)"))
 			echo "Errore".$db->error;
 		else
 			echo "SUCCESS";
