@@ -413,7 +413,6 @@ function eliminaObbligatori(idClasse, idCorso){
     $(function() {
         aggiornaListaCorsi();
         aggiornaListaDocenti();
-        //$('.modal-trigger').leanModal();
 
         $("#ore").keyup(function() {
             var val = $("#ore").val();

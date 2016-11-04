@@ -1,6 +1,6 @@
-<?php
-if(!file_exists("include/config.php")){
-  $config = fopen("include/config.php", "w")  or die("Unable to open file!");
+g<?php
+if(!file_exists("/include/config.php")){
+  $config = fopen("include/config.php", "w")  or die("Non riesco a creare il file di configurazione!");
   fclose($config);
 }?>
 <!DOCTYPE html>

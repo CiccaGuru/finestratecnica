@@ -493,31 +493,6 @@ function applicaModificaOre(idCorso) {
     posting.done(function(data){
       console.log(data);
     });
-/*
-    $("#modal-ore .row").each(function(i) {
-        var ora = (parseInt($("#selezionaGiornoModificaOre" + i).val()) - 1) * 6 + parseInt($("#selezionaOraModificaOre" + i).val());
-        var posting = $.post(
-            '../include/modificaOra.php', {
-                idLezione: $("#row" + i).data("idlezione"),
-                titolo: $("#titoloModificaOre" + i).val(),
-                ora: ora,
-                aula: $("#aulaModificaOre" + i).val(),
-                maxIscritti: $("#maxIscrittiModificaOre" + i).val()
-            });
-        posting.done(function(data) {
-            if (data == "SUCCESS") {
-                Materialize.toast('Modifica effettuata con successo', 4000);
-            } else if (data == "MAXISCRITTI_ERROR") {
-                Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Numero massimo di iscritti inferiore agli iscritti!', 4000);
-            } else if (data == "DOMENICA_ERROR") {
-                Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Non è possibile modificare l\'ora: ci sono studenti iscritti.', 4000);
-            } else {
-                Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Si è verificato un errore (3). Controlla la console', 4000);
-                console.log(data);
-            }
-        });
-    });
-    */
 }
 
 
@@ -526,7 +501,6 @@ function applicaModificaOre(idCorso) {
         aggiornaListaDocenti();
         aggiornaListaSezioni();
         aggiornaListaCorsi();
-        $('.modal-trigger').leanModal();
         $("#aggiungi-docente").submit(function(e) {
             e.preventDefault();
             if ($("#password").val() != $("#ripeti_password").val())

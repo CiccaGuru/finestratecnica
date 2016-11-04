@@ -12,18 +12,6 @@ else{
   header('Location: docente.php');
 }
 
-if(isset($_POST["quanti"])){
-  $quanti = $_POST["quanti"];
-}else{
-  $quanti = 20;
-}
-
-if(isset($_POST["page"])){
-  $page = $_POST["page"];
-}
-else{
-  $page = 1;
-}
 $db = database_connect();
 
 if(isset($_POST["username"]) && ($_POST["username"]!="")){
@@ -41,11 +29,11 @@ $numRisultato = $resultAA->num_rows;
 $giorni="";
 $ore_elenco="";
 foreach($_CONFIG['giorni'] as $num=>$nome){
-		$giorni .= '<option value="'.$num.'">'.$nome.'</option>';
+  $giorni .= '<option value="'.$num.'">'.$nome.'</option>';
 }
 
 for($j=1;$j<=$_CONFIG['ore_per_giorno'];$j++){
-	$ore_elenco .= '<option value="'.$j.'">'.$j.'^a ora</option>';
+  $ore_elenco .= '<option value="'.$j.'">'.$j.'^a ora</option>';
 }
 $db = database_connect();
 ?>
@@ -62,40 +50,40 @@ $db = database_connect();
   <link href="css/admin.css" type="text/css" rel="stylesheet" media="screen"/>
   <link rel="stylesheet" href="css/material-scrolltop.css">
   <link rel="apple-touch-icon" sizes="180x180" href="/img/favicons/apple-touch-icon.png">
-<link rel="icon" type="image/png" href="/img/favicons/favicon-32x32.png" sizes="32x32">
-<link rel="icon" type="image/png" href="/img/favicons/favicon-16x16.png" sizes="16x16">
-<link rel="manifest" href="/img/favicons/manifest.json">
-<link rel="mask-icon" href="/img/favicons/safari-pinned-tab.svg" color="#f44336">
-<link rel="shortcut icon" href="/img/favicons/favicon.ico">
-<meta name="msapplication-TileColor" content="#2d89ef">
-<meta name="msapplication-TileImage" content="/img/favicons/mstile-144x144.png">
-<meta name="msapplication-config" content="/img/favicons/browserconfig.xml">
-<meta name="theme-color" content="#03a9f4">
+  <link rel="icon" type="image/png" href="/img/favicons/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/img/favicons/favicon-16x16.png" sizes="16x16">
+  <link rel="manifest" href="/img/favicons/manifest.json">
+  <link rel="mask-icon" href="/img/favicons/safari-pinned-tab.svg" color="#f44336">
+  <link rel="shortcut icon" href="/img/favicons/favicon.ico">
+  <meta name="msapplication-TileColor" content="#2d89ef">
+  <meta name="msapplication-TileImage" content="/img/favicons/mstile-144x144.png">
+  <meta name="msapplication-config" content="/img/favicons/browserconfig.xml">
+  <meta name="theme-color" content="#03a9f4">
 </head>
 
 <body>
   <nav class="primary">
-		<ul id="utenti-dropDown" class="dropdown-content">
-			<li><a class="waves-effect waves-primary condensed primary-text" href="gestisciStudenti.php">STUDENTI</a></li>
-			<li><a class="waves-effect waves-primary condensed primary-text" href="gestisciDocenti.php">DOCENTI</a></li>
-			<li><a class="waves-effect waves-primary condensed primary-text" href="gestisciCorsi.php">CORSI</a></li>
-			<li><a class="waves-effect waves-primary condensed primary-text" href="gestisciClassi.php">CLASSI</a></li>
-			<li><a class="waves-effect waves-primary condensed primary-text" href="gestisciAule.php">AULE</a></li>
-		</ul>
-		<div class="navbar-fixed">
-			<nav id="intestaz" class="primary">
-				<div class="nav-wrapper">
-					<a class="hide-on-small-only left condensed letter-spacing-1" style="margin-left:2%;"> AMMINISTRATORE</a>
-					<a href="#" class="brand-logo center condensed light">Settimana tecnica</a>
-					<ul id="nav-mobile" class="right hide-on-med-and-down">
-						<li class="active"><a href="admin.php" class="waves-effect waves-light condensed">HOME</a></li>
-						<li><a href="#!" class="dropdown-button waves-effect active waves-light condensed" data-beloworigin="true" data-hover="true" data-activates="utenti-dropDown">GESTISCI<i class="material-icons right">arrow_drop_down</i></a></li>
-						<li><a href="include/logout.php" class="waves-effect waves-light condensed"><i class="material-icons left">exit_to_app</i>LOGOUT</a></li>
-					</ul>
-				</div>
-			</nav>
-		</div>
-	</nav>
+    <ul id="utenti-dropDown" class="dropdown-content">
+      <li><a class="waves-effect waves-primary condensed primary-text" href="gestisciStudenti.php">STUDENTI</a></li>
+      <li><a class="waves-effect waves-primary condensed primary-text" href="gestisciDocenti.php">DOCENTI</a></li>
+      <li><a class="waves-effect waves-primary condensed primary-text" href="gestisciCorsi.php">CORSI</a></li>
+      <li><a class="waves-effect waves-primary condensed primary-text" href="gestisciClassi.php">CLASSI</a></li>
+      <li><a class="waves-effect waves-primary condensed primary-text" href="gestisciAule.php">AULE</a></li>
+    </ul>
+    <div class="navbar-fixed">
+      <nav id="intestaz" class="primary">
+        <div class="nav-wrapper">
+          <a class="hide-on-small-only left condensed letter-spacing-1" style="margin-left:2%;"> AMMINISTRATORE</a>
+          <a href="#" class="brand-logo center condensed light">Settimana tecnica</a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li class="active"><a href="admin.php" class="waves-effect waves-light condensed">HOME</a></li>
+            <li><a href="#!" class="dropdown-button waves-effect active waves-light condensed" data-beloworigin="true" data-hover="true" data-activates="utenti-dropDown">GESTISCI<i class="material-icons right">arrow_drop_down</i></a></li>
+            <li><a href="include/logout.php" class="waves-effect waves-light condensed"><i class="material-icons left">exit_to_app</i>LOGOUT</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </nav>
 
   <div class="container"  style="margin-top:3em;">
     <div class="card">
@@ -197,10 +185,10 @@ $db = database_connect();
 
             <div class="input-field col s4">
               <input id="usernameSearch" name="username" type="text" class="validate" value="<?php
-                          if(isset($_POST["username"]) && ($_POST["username"]!="")){
-                            echo $_POST["username"];
-                          }
-                          ?>">
+              if(isset($_POST["username"]) && ($_POST["username"]!="")){
+                echo $_POST["username"];
+              }
+              ?>">
               <label for="usernameSearch" class="condensed">Parola chiave</label>
             </div>
             <div class="col s2 offset-s1" style="margin-top:0.6em;">
@@ -225,9 +213,9 @@ $db = database_connect();
 
       if($result->num_rows==0){
         ?>  <li class="collection-item">
-              <div class="accent-text condensed center-align" style="font-size:150%; margin:1em;">Nessun risultato trovato</div>
-            </li>
-          <?php
+          <div class="accent-text condensed center-align" style="font-size:150%; margin:1em;">Nessun risultato trovato</div>
+        </li>
+        <?php
       }
 
 
@@ -237,7 +225,7 @@ $db = database_connect();
 
         <li class="collection-item row valign-wrapper">
           <div class="col s1 accent-text">
-              <i class="material-icons waves-effect waves-accent waves-circle" style="border-radius:50%;" onclick="eliminaUtente(<?php echo $row["id"]?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>', 0)">close</i>
+            <i class="material-icons waves-effect waves-accent waves-circle" style="border-radius:50%;" onclick="eliminaUtente(<?php echo $row["id"]?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>', 0)">close</i>
           </div>
           <div class="col s1 bold">
             ID: <?php echo $row["id"];?>
@@ -276,7 +264,7 @@ $db = database_connect();
           </div>
           <div class="col s1 center valign" style="padding:0px;">
             <a class="waves-effect small-icon condensed waves-accent fill-width fake-button valign accent-text" onclick="passwordReset(<?php echo $row['id'];?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>')" >
-              	<i class="material-icons ">refresh</i> <br/>RESET
+              <i class="material-icons ">refresh</i> <br/>RESET
             </a>
           </div>
         </li>
@@ -288,84 +276,84 @@ $db = database_connect();
         <li class="collection-item row center">
           <div class"center">
             <ul class="pagination center">
-                <li <?php if($page=='1') echo 'class="disabled"'?>>
-                  <form action="gestisciStudenti.php" id="paginaIndietro"  method="post">
-                    <input type="hidden" name="page" value="<?php echo ($page -1)?>">
-                    <input type="hidden" name="quanti" value="<?php echo $quanti?>">
-                    <?php if(isset($_POST["username"])){?>
+              <li <?php if($page=='1') echo 'class="disabled"'?>>
+                <form action="gestisciStudenti.php" id="paginaIndietro"  method="post">
+                  <input type="hidden" name="page" value="<?php echo ($page -1)?>">
+                  <input type="hidden" name="quanti" value="<?php echo $quanti?>">
+                  <?php if(isset($_POST["username"])){?>
                     <input type="hidden" name="username" value="<?php echo $_POST["username"]?>">
                     <?php }?>
                     <a onclick="$('#paginaIndietro').submit();">
-                    <i class="material-icons">chevron_left</i>
-                  </a>
-                </form>
+                      <i class="material-icons">chevron_left</i>
+                    </a>
+                  </form>
 
                 </li>
 
                 <?php
-                    while($i*$quanti<=$numRisultato){
-                        ?>
-                      <form action="gestisciStudenti.php" id="pagina<?php echo $i; ?>" method="post" style="display:inline;">
-                        <li class="waves-effect waves-accent <?php if($i==$page) echo "active"?>">
-                              <input type="hidden" name="page" value="<?php echo $i?>">
-                              <input type="hidden" name="quanti" value="<?php echo $quanti?>">
-                              <?php if(isset($_POST["username"])){?>
-                              <input type="hidden" name="username" value="<?php echo $_POST["username"]?>">
-                              <?php }?>
-                              <a onclick="$('#pagina<?php echo $i?>').submit();">
-                                <?php echo $i ?>
-                              <a/>
-                          </li>
-                        </form>
+                while($i*$quanti<=$numRisultato){
+                  ?>
+                  <form action="gestisciStudenti.php" id="pagina<?php echo $i; ?>" method="post" style="display:inline;">
+                    <li class="waves-effect waves-accent <?php if($i==$page) echo "active"?>">
+                      <input type="hidden" name="page" value="<?php echo $i?>">
+                      <input type="hidden" name="quanti" value="<?php echo $quanti?>">
+                      <?php if(isset($_POST["username"])){?>
+                        <input type="hidden" name="username" value="<?php echo $_POST["username"]?>">
+                        <?php }?>
+                        <a onclick="$('#pagina<?php echo $i?>').submit();">
+                          <?php echo $i ?>
+                          <a/>
+                        </li>
+                      </form>
                       <?php
-                        $i++;
+                      $i++;
                     }
-                ?>
+                    ?>
 
-                <li <?php if($page==($i-1)) echo 'class="disabled"'?>class="waves-effect">
-                  <form action="gestisciStudenti.php" id="paginaAvanti" method="post">
-                    <input type="hidden" name="page" value="<?php echo ($page +1)?>">
-                    <input type="hidden" name="quanti" value="<?php echo $quanti?>">
-                    <?php if(isset($_POST["username"])){?>
-                    <input type="hidden" name="username" value="<?php echo $_POST["username"]?>">
-                    <?php }?>
-                    <a onclick="$('#paginaAvanti').submit();">
-                    <i class="material-icons">chevron_right</i>
-                  </a>
-                </form>
+                    <li <?php if($page==($i-1)) echo 'class="disabled"'?>class="waves-effect">
+                      <form action="gestisciStudenti.php" id="paginaAvanti" method="post">
+                        <input type="hidden" name="page" value="<?php echo ($page +1)?>">
+                        <input type="hidden" name="quanti" value="<?php echo $quanti?>">
+                        <?php if(isset($_POST["username"])){?>
+                          <input type="hidden" name="username" value="<?php echo $_POST["username"]?>">
+                          <?php }?>
+                          <a onclick="$('#paginaAvanti').submit();">
+                            <i class="material-icons">chevron_right</i>
+                          </a>
+                        </form>
+                      </li>
+                    </ul>
+                  </div>
                 </li>
+                <?php
+              }
+              ?>
             </ul>
+
           </div>
-        </li>
+
+          <div id="modal-orario" class="modal bottom-sheet" style="marign-top:5em;">
+            <div class="modal-content">
+              <h1 class="primary-text thin center" style="margin-bottom:0.3em;">Orario</h1>
+            </div>
+          </div>
+          <div id="modal-continuita" class="modal">
+            <div class="modal-content">
+
+            </div>
+            <div class="modal-footer">
+              <a href="#!" class=" modal-action modal-close waves-effect waves-accent accent-text btn-flat">CHIUDI</a>
+            </div>
+          </div>
+
+
+          <script src="js/jquery-2.1.4.min.js"></script>
+          <script src="js/materialize.js"></script>
+          <script src="js/init.js"></script>
+          <script src="js/gestisciUtenti.js"></script>
+        </body>
+        </html>
         <?php
-      }
-    ?>
-    </ul>
 
-  </div>
-
-  <div id="modal-orario" class="modal bottom-sheet" style="marign-top:5em;">
-    <div class="modal-content">
-      <h1 class="primary-text thin center" style="margin-bottom:0.3em;">Orario</h1>
-    </div>
-  </div>
-  <div id="modal-continuita" class="modal">
-    <div class="modal-content">
-
-    </div>
-    <div class="modal-footer">
-      <a href="#!" class=" modal-action modal-close waves-effect waves-accent accent-text btn-flat">CHIUDI</a>
-    </div>
-  </div>
-
-
-  <script src="js/jquery-2.1.4.min.js"></script>
-  <script src="js/materialize.js"></script>
-  <script src="js/init.js"></script>
-  <script src="js/gestisciUtenti.js"></script>
-</body>
-</html>
-<?php
-
-$db->close();
-?>
+        $db->close();
+        ?>

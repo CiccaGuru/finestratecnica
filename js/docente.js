@@ -109,7 +109,6 @@ function getElenco(idLezione){
     });
     $("#elencoOreAggiungere").css("max-height", $("#cardOrarioAggiungi").height());
     $("#elencoOreAggiungere").css("overflowY","auto");
-    $('.modal-trigger').leanModal();
     if ( $( "#modal-primoAccesso" ).length ) {
       $( "#modal-primoAccesso" ).modal("open");
     }

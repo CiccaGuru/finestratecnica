@@ -15,55 +15,54 @@ if(isset($_POST["page"])){
 else{
   $page = 1;
 }
-
-if(isset($_POST["username"]) && ($_POST["username"]!="")){
-  $filtro = $_POST["username"];
-  $result = $db->query("SELECT * FROM utenti WHERE (username LIKE '$filtro' or nome like  '$filtro' or cognome like '$filtro') and level = '$level'  ORDER BY cognome,nome LIMIT ".(($page-1)*$quanti).", ".$quanti) or  die('ERRORE: ' . $db->error);
-  $resultAA = $db->query("SELECT id FROM utenti WHERE (username LIKE '".$_POST["username"]."' or nome like  '".$_POST["username"]."' or cognome like '".$_POST["username"]."') and level = '$level'") or  die('ERRORE: ' . $db->error);
+echo $level;
+$filtro = $_POST["filtro"];
+echo $filtro;
+echo $quanti;
+if(isset($_POST["filtro"]) && ($_POST["filtro"]!="")){
+  echo "Ci sono";
+  $result = $db->query("SELECT * FROM utenti WHERE (username LIKE '%$filtro%' or nome like  '%$filtro%' or cognome like '%$filtro%') and level = $level  ORDER BY cognome,nome LIMIT ".(($page-1)*$quanti).", ".$quanti) or  die('ERRORE: ' . $db->error);
+  $resultAA = $db->query("SELECT id FROM utenti WHERE (username LIKE '%$filtro%' or nome like  '%$filtro%' or cognome like '%$filtro%') and level = $level") or  die('ERRORE: ' . $db->error);
 }
 else{
-  $result = $db->query("SELECT * FROM utenti WHERE level='$level' ORDER BY cognome, nome LIMIT ".(($page-1)*$quanti+1).", ".$quanti) or  die('ERRORE: R' . $db->error);
-  $resultAA = $db->query("SELECT * FROM utenti WHERE level='$level'") or  die('ERRORE: ' . $db->error);
+  $result = $db->query("SELECT * FROM utenti WHERE level=$level ORDER BY cognome, nome LIMIT ".(($page-1)*$quanti).", ".$quanti) or  die('ERRORE: R' . $db->error);
+  $resultAA = $db->query("SELECT * FROM utenti WHERE level=$level") or  die('ERRORE: ' . $db->error);
 }
 
 $numRisultato = $resultAA->num_rows;
 
 if($level == 1){
 ?>
-  <li class="collection-header primary-text center"><h4 class="condensed light">ELENCO DOCENTI</h4></li>
-  <li class="collection-item center">
-    <form  action="gestisciDocenti.php" method="POST">
-      <div class="row">
-        <div class="col s2" style="font-size:120%; margin-top:0.5em">
-          <p class="condensed accent-text">
-            <i class="material-icons left">search</i>Cerca
-          </p>
-        </div>
-
-        <div class="input-field col s4">
-          <input id="username" name="username" type="text" class="validate" value="<?php
-                      if(isset($_POST["username"]) && ($_POST["username"]!="")){
-                        echo $_POST["username"];
-                      }
-                      ?>">
-          <label for="username" class="condensed">Parola chiave</label>
-        </div>
-        <div class="col s2 offset-s1" style="margin-top:0.6em;">
-          <p class="condensed">
-            Risultati per pagina:
-          </p>
-        </div>
-        <div class="input-field col s1">
-          <input id="min" name="quanti" type="text" class="validate" value="<?php echo $quanti?>" required>
-        </div>
-        <div class="input-field col s1 right">
-          <button class="btn-floating btn-large waves-effect waves-light accent condensed white-text" type="submit" name="action">
-            <i class="material-icons">search</i>
-          </button>
-        </div>
+<li class="collection-header primary-text center"><h4 class="condensed light">ELENCO DOCENTI</h4></li>
+<li class="collection-item center">
+<form id="filtraDocenti">
+    <div class="row">
+      <div class="col s2" style="font-size:120%; margin-top:0.5em">
+        <p class="condensed accent-text">
+          <i class="material-icons left">search</i>Cerca
+        </p>
       </div>
-    </form>
-  </li>
+
+      <div class="input-field col s4">
+        <input id="filtro"type="text" class="validate" value="<?php echo $filtro;?>">
+        <label for="filtro" class="condensed">Parola chiave</label>
+      </div>
+      <div class="col s2 offset-s1" style="margin-top:0.6em;">
+        <p class="condensed">
+          Risultati per pagina:
+        </p>
+      </div>
+      <div class="input-field col s1">
+        <input id="quanti" type="text" class="validate" value="<?php echo $quanti; ?>" required>
+      </div>
+      <div class="input-field col s1 right">
+        <button type="submit" class="btn-floating btn-large waves-effect waves-light accent condensed white-text">
+          <i class="material-icons">search</i>
+        </button>
+      </div>
+    </div>
+  </form>
+</li>
 <?php
 if($result->num_rows==0){
   ?>  <li class="collection-item">
@@ -76,7 +75,7 @@ if($result->num_rows==0){
   { ?>
     <li class="collection-item row valign-wrapper">
       <div class="col s1 accent-text">
-          <i class="material-icons waves-effect waves-accent waves-circle" style="border-radius:50%;" onclick="eliminaUtente(<?php echo $row["id"]?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>', 1)">close</i>
+          <i class="material-icons waves-effect waves-accent waves-circle" style="border-radius:50%;" onclick="eliminaUtente(<?php echo $row["id"]?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["filtro"]?>', 1)">close</i>
       </div>
       <div class="col s1 bold">
         ID: <?php echo $row["id"];?>
@@ -94,11 +93,11 @@ if($result->num_rows==0){
         <label for="username<?php echo $row['id']; ?>">Username</label>
       </div>
       <div class="col s2 cente valign">
-        <p><a onclick="modificaDocente(<?php echo $row['id'];?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>')" class="waves-effect center-align waves-accent btn-flat accent-text valign" style="width:98%">Modifica</a></p>
-        <p><a class="waves-effect waves-accent center-align btn-flat accent-text valign" onclick="eliminaDocente(<?php echo $row['id'];?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>')" style="width:98%">Elimina</a></p>
+        <p><a onclick="modificaDocente(<?php echo $row['id'];?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["filtro"]?>')" class="waves-effect center-align waves-accent btn-flat accent-text valign" style="width:98%">Modifica</a></p>
+        <p><a class="waves-effect waves-accent center-align btn-flat accent-text valign" onclick="eliminaDocente(<?php echo $row['id'];?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["filtro"]?>')" style="width:98%">Elimina</a></p>
       </div>
       <div class="col s2 center valign">
-        <a onclick="passwordReset(<?php echo $row['id'];?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>')" class="waves-effect small-icon condensed waves-accent fill-width fake-button valign accent-text">
+        <a onclick="passwordReset(<?php echo $row['id'];?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["filtro"]?>')" class="waves-effect small-icon condensed waves-accent fill-width fake-button valign accent-text">
             <i class="material-icons ">refresh</i> <br/>RESET
         </a>
       </div>
@@ -113,8 +112,8 @@ if($result->num_rows==0){
                 <form action="gestisciDocenti.php" id="paginaIndietro"  method="post">
                   <input type="hidden" name="page" value="<?php echo ($page -1)?>">
                   <input type="hidden" name="quanti" value="<?php echo $quanti?>">
-                  <?php if(isset($_POST["username"])){?>
-                  <input type="hidden" name="username" value="<?php echo $_POST["username"]?>">
+                  <?php if(isset($_POST["filtro"])){?>
+                  <input type="hidden" name="filtro" value="<?php echo $_POST["filtro"]?>">
                   <?php }?>
                   <a onclick="$('#paginaIndietro').submit();">
                   <i class="material-icons">chevron_left</i>
@@ -130,8 +129,8 @@ if($result->num_rows==0){
                       <li class="waves-effect waves-accent <?php if($i==$page) echo "active"?>">
                             <input type="hidden" name="page" value="<?php echo $i?>">
                             <input type="hidden" name="quanti" value="<?php echo $quanti?>">
-                            <?php if(isset($_POST["username"])){?>
-                            <input type="hidden" name="username" value="<?php echo $_POST["username"]?>">
+                            <?php if(isset($_POST["filtro"])){?>
+                            <input type="hidden" name="filtro" value="<?php echo $_POST["filtro"]?>">
                             <?php }?>
                             <a onclick="$('#pagina<?php echo $i?>').submit();">
                               <?php echo $i ?>
@@ -147,8 +146,8 @@ if($result->num_rows==0){
                 <form action="gestisciDocenti.php" id="paginaAvanti" method="post">
                   <input type="hidden" name="page" value="<?php echo ($page +1)?>">
                   <input type="hidden" name="quanti" value="<?php echo $quanti?>">
-                  <?php if(isset($_POST["username"])){?>
-                  <input type="hidden" name="username" value="<?php echo $_POST["username"]?>">
+                  <?php if(isset($_POST["filtro"])){?>
+                  <input type="hidden" name="filtro" value="<?php echo $_POST["filtro"]?>">
                   <?php }?>
                   <a onclick="$('#paginaAvanti').submit();">
                   <i class="material-icons">chevron_right</i>
@@ -161,13 +160,27 @@ if($result->num_rows==0){
       <?php
     }
   ?>
-    <li class="collection-item row valign-wrapper">
-      <script>
-        $("#dettagliDocenti input").focus();
-        $("#dettagliDocenti input").first().focus();
-      </script>
 <?php
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 else{
 
     ?>
@@ -184,8 +197,8 @@ else{
 
           <div class="input-field col s4">
             <input id="usernameSearch" name="username" type="text" class="validate" value="<?php
-                        if(isset($_POST["username"]) && ($_POST["username"]!="")){
-                          echo $_POST["username"];
+                        if(isset($_POST["filtro"]) && ($_POST["filtro"]!="")){
+                          echo $_POST["filtro"];
                         }
                         ?>">
             <label for="usernameSearch" class="condensed">Parola chiave</label>
@@ -224,7 +237,7 @@ else{
 
       <li class="collection-item row valign-wrapper">
         <div class="col s1 accent-text">
-            <i class="material-icons waves-effect waves-accent waves-circle" style="border-radius:50%;" onclick="eliminaUtente(<?php echo $row["id"]?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>', 0)">close</i>
+            <i class="material-icons waves-effect waves-accent waves-circle" style="border-radius:50%;" onclick="eliminaUtente(<?php echo $row["id"]?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["filtro"]?>', 0)">close</i>
         </div>
         <div class="col s1 bold">
           ID: <?php echo $row["id"];?>
@@ -253,7 +266,7 @@ else{
         </div>
         <div class="col s2 cente valign">
           <p style="margin-bottom:5px;">
-            <a onclick="modificaStudente(<?php echo $row['id'];?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>')" class="waves-effect center-align waves-accent btn-flat accent-text valign" style="width:98%">
+            <a onclick="modificaStudente(<?php echo $row['id'];?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["filtro"]?>')" class="waves-effect center-align waves-accent btn-flat accent-text valign" style="width:98%">
               Modifica
             </a>
           </p>
@@ -262,7 +275,7 @@ else{
           </p>
         </div>
         <div class="col s1 center valign" style="padding:0px;">
-          <a class="waves-effect small-icon condensed waves-accent fill-width fake-button valign accent-text" onclick="passwordReset(<?php echo $row['id'];?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>')" >
+          <a class="waves-effect small-icon condensed waves-accent fill-width fake-button valign accent-text" onclick="passwordReset(<?php echo $row['id'];?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["filtro"]?>')" >
               <i class="material-icons ">refresh</i> <br/>RESET
           </a>
         </div>
@@ -279,8 +292,8 @@ else{
                 <form action="gestisciStudenti.php" id="paginaIndietro"  method="post">
                   <input type="hidden" name="page" value="<?php echo ($page -1)?>">
                   <input type="hidden" name="quanti" value="<?php echo $quanti?>">
-                  <?php if(isset($_POST["username"])){?>
-                  <input type="hidden" name="username" value="<?php echo $_POST["username"]?>">
+                  <?php if(isset($_POST["filtro"])){?>
+                  <input type="hidden" name="username" value="<?php echo $_POST["filtro"]?>">
                   <?php }?>
                   <a onclick="$('#paginaIndietro').submit();">
                   <i class="material-icons">chevron_left</i>
@@ -296,8 +309,8 @@ else{
                       <li class="waves-effect waves-accent <?php if($i==$page) echo "active"?>">
                             <input type="hidden" name="page" value="<?php echo $i?>">
                             <input type="hidden" name="quanti" value="<?php echo $quanti?>">
-                            <?php if(isset($_POST["username"])){?>
-                            <input type="hidden" name="username" value="<?php echo $_POST["username"]?>">
+                            <?php if(isset($_POST["filtro"])){?>
+                            <input type="hidden" name="username" value="<?php echo $_POST["filtro"]?>">
                             <?php }?>
                             <a onclick="$('#pagina<?php echo $i?>').submit();">
                               <?php echo $i ?>
@@ -313,8 +326,8 @@ else{
                 <form action="gestisciStudenti.php" id="paginaAvanti" method="post">
                   <input type="hidden" name="page" value="<?php echo ($page +1)?>">
                   <input type="hidden" name="quanti" value="<?php echo $quanti?>">
-                  <?php if(isset($_POST["username"])){?>
-                  <input type="hidden" name="username" value="<?php echo $_POST["username"]?>">
+                  <?php if(isset($_POST["filtro"])){?>
+                  <input type="hidden" name="username" value="<?php echo $_POST["filtro"]?>">
                   <?php }?>
                   <a onclick="$('#paginaAvanti').submit();">
                   <i class="material-icons">chevron_right</i>
@@ -323,12 +336,7 @@ else{
               </li>
     <?php
   }
-  ?>
-  <script>
-    $("#dettagliStudenti input").focus();
-    $("#dettagliStudenti input").first().focus();
-  </script>
-  <?php
+
 }
 $db->close();
 ?>

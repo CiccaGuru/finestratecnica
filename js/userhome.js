@@ -340,7 +340,6 @@ function cercaSubmit(s, mute){
     $('.collapsible').collapsible({
       accordion : true
     });
-    $('.modal-trigger').leanModal();
     if ( $( "#modal-primoAccesso" ).length ) {
       $( "#modal-primoAccesso" ).openModal();
     }

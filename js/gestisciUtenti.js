@@ -1,16 +1,3 @@
-function aggiornaListaDocenti() {
-    var posting = $.post(
-        '../include/generaElencoDocenti.php', {
-            1: 1
-        }
-    );
-    posting.done(function(data) {
-        $("#selezionaDocenti").html('<option value="" disabled selected class="grey-text">Seleziona insegnante</option>' + data);
-        $('select').material_select();
-    });
-}
-
-
 function modificaDocente(user_id, quanti, page, filtro) {
     if (($("#nome" + user_id).val() == "") || ($("#cognome" + user_id).val() == "") || ($("#username" + user_id).val() == ""))
         Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i>Dati non validi', 4000);
@@ -26,8 +13,7 @@ function modificaDocente(user_id, quanti, page, filtro) {
         posting.done(function(data) {
             if (data == "SUCCESS") {
                 Materialize.toast('Utente modificato con succeso!', 4000);
-                aggiornaDettagliUtenti(quanti, page, filtro, 1);
-                aggiornaListaDocenti();
+                aggiornaDettagliUtenti(1);
             } else {
                 Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Si è verificato un errore. Controlla la console', 4000);
                 console.log(data);
@@ -57,8 +43,7 @@ function modificaStudente(user_id, quanti, page, filtro) {
         posting.done(function(data) {
             if (data == "SUCCESS") {
                 Materialize.toast('Utente modificato con succeso!', 4000);
-                aggiornaDettagliUtenti(quanti, page, filtro, 0);
-                aggiornaListaDocenti();
+                aggiornaDettagliUtenti(0);
             } else {
                 Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Si è verificato un errore. Controlla la console', 4000);
                 console.log(data);
@@ -68,21 +53,37 @@ function modificaStudente(user_id, quanti, page, filtro) {
 }
 
 
-function aggiornaDettagliUtenti(quantiN, pageN, filtro, level) {
+function aggiornaDettagliUtenti(level) {
+    quanti = $("#quanti").val();
+    console.log(quanti);
+    if(quanti<=0){
+      quanti = 20;
+    }
+    filtro = $("#filtro").val();
     console.log(filtro);
+    pagina = $("#page").val();
     var posting = $.post(
         '../include/elencoUtenti.php', {
             "level": level,
-            "quanti": quantiN,
-            "page": pageN,
-            "username": filtro
+            "quanti": quanti,
+            "page": pagina,
+            "filtro": filtro
         }
     );
     posting.done(function(data) {
-        if (level == 0)
-            $("#dettagliStudenti").html(data);
-        if (level == 1)
+        if (level == 0){
+            var html = '  <li class="collection-header primary-text center"><h4 class="condensed light">ELENCO STUDENTI</h4></li><li class="collection-item center">'+$("#dettagliStudenti li:nth-child(2)").html()+"</li>";
+            $("#dettagliStudenti").html(html+data);
+            $("#dettagliStudenti input").focus();
+            $("#dettagliStudenti input").first().focus();
+        }
+        if (level == 1){
+            var html = '  <li class="collection-header primary-text center"><h4 class="condensed light">ELENCO DOCENTI</h4></li><li class="collection-item center">'+$("#dettagliDocenti li:nth-child(2)").html()+"</li>";
             $("#dettagliDocenti").html(data);
+            $("#dettagliDocenti input").focus();
+            $("#dettagliDocenti input").first().focus();
+        }
+          Materialize.updateTextFields();
     });
 
 }
@@ -96,8 +97,7 @@ function eliminaUtente(id, quanti, page, filtro, level) {
     posting.done(function(data) {
         if (data == "SUCCESS") {
             Materialize.toast('Utente eliminato con successo!', 4000);
-            aggiornaDettagliUtenti(quanti, page, filtro, level);
-            aggiornaListaDocenti();
+            aggiornaDettagliUtenti(level);
         } else {
             Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Si è verificato un errore. Controlla la console', 4000);
             console.log(data);
@@ -161,8 +161,20 @@ function cercaStudente() {
 
 (function($) {
     $(function() {
-        aggiornaListaDocenti();
-        $('.modal-trigger').leanModal();
+        if($("body#docenti").length>0){
+          aggiornaDettagliUtenti(1);
+        }
+        if($("body#studenti").length>0){
+          aggiornaDettagliUtenti(0);
+        }
+
+
+        $(document).on("submit","#filtraDocenti", function(e) {
+            e.preventDefault();
+            aggiornaDettagliUtenti(1);
+        });
+
+
         $("#aggiungi-docente").submit(function(e) {
             e.preventDefault();
             if ($("#password").val() != $("#ripeti_password").val())
@@ -180,6 +192,7 @@ function cercaStudente() {
                 posting.done(function(data) {
                     if (data == "SUCCESS") {
                         Materialize.toast('Docente aggiunto con successo!', 4000);
+                        aggiornaDettagliUtenti(1);
                     } else if (data == "EXISTS") {
                         Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Nome utente già esistente', 4000);
                         console.log(data);
@@ -192,7 +205,7 @@ function cercaStudente() {
             }
         });
 
-        $("#aggiungi-studente").submit(function(e) {
+            $("#aggiungi-studente").submit(function(e) {
             e.preventDefault();
             if ($("#passwordStudente").val() != $("#ripeti_passwordStudente").val())
                 Materialize.toast('Le due password non coincidono!', 4000);
@@ -210,6 +223,7 @@ function cercaStudente() {
                 posting.done(function(data) {
                     if (data == "SUCCESS") {
                         Materialize.toast('Studente aggiunto con successo!', 4000);
+                        aggiornaDettagliUtenti(0);
                     } else if (data == "EXISTS") {
                         Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Nome utente già esistente', 4000);
                         console.log(data);

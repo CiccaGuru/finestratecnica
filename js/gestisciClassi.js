@@ -24,7 +24,6 @@ function aggiornaListaSezioni() {
 (function($) {
     $(function() {
         aggiornaListaSezioni();
-        $('.modal-trigger').leanModal();
         $("#aggiungiClasse").on("click", function() {
             var posting = $.post(
                 '../include/creaClasse.php', {
