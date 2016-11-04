@@ -29,7 +29,7 @@ while($docente = $result->fetch_assoc()){
 
           <div class="chip chip-persist" data-iddocente="<?php echo $docente["idDocente"];?>">
             <?php echo $docente["nome"][0].". ".$docente["cognome"];?>
-            <i class="material-icons">close</i>
+            <i class="close material-icons">close</i>
           </div>
 <?php
 }

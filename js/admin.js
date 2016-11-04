@@ -365,7 +365,7 @@ function mostraOrarioStudente(idUtente) {
         });
     posting.done(function(data) {
         $("#modal-orario .modal-content").html("<div class='container'>" + data + "</div>");
-        $("#modal-orario").openModal();
+        $("#modal-orario").modal("open");
     });
 }
 
@@ -376,7 +376,7 @@ function mostraOrarioDocente(idUtente) {
         });
     posting.done(function(data) {
         $("#modal-orario .modal-content").html("<div class='container'>" + data + "</div>");
-        $("#modal-orario").openModal();
+        $("#modal-orario").modal("open");
     });
 }
 
@@ -391,7 +391,7 @@ function cercaStudente() {
     );
     posting.done(function(data) {
         $("#modal-orario .modal-content").html(data);
-        $("#modal-orario").openModal();
+        $("#modal-orario").modal("open");
     });
 
 }
@@ -415,7 +415,7 @@ function mostraModalDettagli(id, idDocente) {
             $('select').material_select();
         });
         aggiornaListaOre(id);
-        $("#modal-ore").openModal();
+        $("#modal-ore").modal("open");
     });
 }
 

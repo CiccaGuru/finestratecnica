@@ -30,7 +30,7 @@ while($corso = $result->fetch_assoc()){
 ?>
           <div class="chip chip-persist">
             <?php echo $corso["titolo"];?>
-            <i class="material-icons" onclick="eliminaIncompatibilita(<?php echo $idCorso.", ".$corso["idCorso2"];?>)">close</i>
+            <i class="close material-icons" onclick="eliminaIncompatibilita(<?php echo $idCorso.", ".$corso["idCorso2"];?>)">close</i>
           </div>
 <?php
 }

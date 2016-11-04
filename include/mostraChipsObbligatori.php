@@ -31,7 +31,7 @@ while($sezione = $result->fetch_assoc()){
 
           <div class="chip chip-persist">
             <?php echo $sezione["classe"].$sezione["sezione"];?>
-            <i class="material-icons" onclick="eliminaObbligatori(<?php echo $sezione["idClasse"].", ".$idCorso;?>)">close</i>
+            <i class="close material-icons" onclick="eliminaObbligatori(<?php echo $sezione["idClasse"].", ".$idCorso;?>)">close</i>
           </div>
 <?php
 }

@@ -181,9 +181,11 @@ th,td{
   margin:0px;
 }
 
+.modal.bottom-sheet{
+  max-height: 80%;
+}
 .fake-button{
   width:95%;
-/*  height:5.5em;*/
   text-align:center;
   height:auto;
   padding:1em;
@@ -339,13 +341,6 @@ footer{
 	padding-bottom:1em;
   position:fixed;
 }
-/*
-#intestaz{
-  position:fixed;
-  top:0px;
-  z-index:1001;
-}
-*/
 
 .fixed-action-btn{
   bottom: 45px;
@@ -545,7 +540,6 @@ footer{
 .coincidenzaTrigger:hover {
   transition: box-shadow .25s;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  /*box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);*/
 }
 
 #titoloOrario{

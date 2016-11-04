@@ -215,7 +215,7 @@ $(window).on('beforeunload', function(){
 
 <?php
 if(($dettagliUtente["primoAccesso"])&&!($dettagliUtente["passwordOriginale"])){
-	?><script>$("#modal-help").openModal</script><?php
+	?><script>$("#modal-help").modal("open");</script><?php
 }
 if($dettagliUtente["primoAccesso"]){
 	$result = $db->query("UPDATE utenti SET primoAccesso = '0' where id = '$utente'");

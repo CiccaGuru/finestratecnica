@@ -42,27 +42,27 @@ else{
 <body>
   <div id="pagina" style="display:none;">1</div>
   <nav class="primary">
-		<ul id="utenti-dropDown" class="dropdown-content">
-			<li><a class="waves-effect waves-primary condensed primary-text" href="gestisciStudenti.php">STUDENTI</a></li>
-			<li><a class="waves-effect waves-primary condensed primary-text" href="gestisciDocenti.php">DOCENTI</a></li>
-			<li><a class="waves-effect waves-primary condensed primary-text" href="gestisciCorsi.php">CORSI</a></li>
-			<li><a class="waves-effect waves-primary condensed primary-text" href="gestisciClassi.php">CLASSI</a></li>
-			<li><a class="waves-effect waves-primary condensed primary-text" href="gestisciAule.php">AULE</a></li>
-		</ul>
-		<div class="navbar-fixed">
-			<nav id="intestaz" class="primary">
-				<div class="nav-wrapper">
-					<a class="hide-on-small-only left condensed letter-spacing-1" style="margin-left:2%;"> AMMINISTRATORE</a>
-					<a href="#" class="brand-logo center condensed light">Settimana tecnica</a>
-					<ul id="nav-mobile" class="right hide-on-med-and-down">
-						<li class="active"><a href="admin.php" class="waves-effect waves-light condensed">HOME</a></li>
-						<li><a href="#!" class="dropdown-button waves-effect active waves-light condensed" data-beloworigin="true" data-hover="true" data-activates="utenti-dropDown">GESTISCI<i class="material-icons right">arrow_drop_down</i></a></li>
-						<li><a href="include/logout.php" class="waves-effect waves-light condensed"><i class="material-icons left">exit_to_app</i>LOGOUT</a></li>
-					</ul>
-				</div>
-			</nav>
-		</div>
-	</nav>
+    <ul id="utenti-dropDown" class="dropdown-content">
+      <li><a class="waves-effect waves-primary condensed primary-text" href="gestisciStudenti.php">STUDENTI</a></li>
+      <li><a class="waves-effect waves-primary condensed primary-text" href="gestisciDocenti.php">DOCENTI</a></li>
+      <li><a class="waves-effect waves-primary condensed primary-text" href="gestisciCorsi.php">CORSI</a></li>
+      <li><a class="waves-effect waves-primary condensed primary-text" href="gestisciClassi.php">CLASSI</a></li>
+      <li><a class="waves-effect waves-primary condensed primary-text" href="gestisciAule.php">AULE</a></li>
+    </ul>
+    <div class="navbar-fixed">
+      <nav id="intestaz" class="primary">
+        <div class="nav-wrapper">
+          <a class="hide-on-small-only left condensed letter-spacing-1" style="margin-left:2%;"> AMMINISTRATORE</a>
+          <a href="#" class="brand-logo center condensed light">Settimana tecnica</a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li class="active"><a href="admin.php" class="waves-effect waves-light condensed">HOME</a></li>
+            <li><a href="#!" class="dropdown-button waves-effect active waves-light condensed" data-beloworigin="true" data-hover="true" data-activates="utenti-dropDown">GESTISCI<i class="material-icons right">arrow_drop_down</i></a></li>
+            <li><a href="include/logout.php" class="waves-effect waves-light condensed"><i class="material-icons left">exit_to_app</i>LOGOUT</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </nav>
 
   <div class="container" id="ins-corso" style="margin-top:5em;">
     <div class="card">
@@ -119,19 +119,19 @@ else{
           </div>
           <div class="col valign s4 offset-s1">
             <span class="valign">
-          <div id="ChipsDocenti">
+              <div id="ChipsDocenti">
 
+              </div>
+              <a class="waves-effect animateButton row valign-wrapper small-icon-corsi condensed waves-accent fill-width fake-button valign accent-text" style="margin-bottom:0px;" onclick="mostraModalScegliDocenti()">
+                <div class="col s1 offset-s1 valign ">
+                  <i class="material-icons valign" style="margin:0px;">add</i>
+                </div>
+                <div class="col s8 offset-s1 condensed valign center-align " style="margin-top:4px;" >
+                  AGGIUNGI DOCENTE
+                </div>
+              </a>
+            </span>
           </div>
-          <a class="waves-effect animateButton row valign-wrapper small-icon-corsi condensed waves-accent fill-width fake-button valign accent-text" style="margin-bottom:0px;" onclick="mostraModalScegliDocenti()">
-            <div class="col s1 offset-s1 valign ">
-              <i class="material-icons valign" style="margin:0px;">add</i>
-            </div>
-            <div class="col s8 offset-s1 condensed valign center-align " style="margin-top:4px;" >
-              AGGIUNGI DOCENTE
-            </div>
-          </a>
-        </span>
-</div>
         </div>
         <div class="center-align condensed bold" style="font-size:130%; margin-top:1em;">ELENCO ORE</div>
         <div id="ore_future">
@@ -148,61 +148,61 @@ else{
       <li class="collection-header primary-text center"><h4 class="light condensed">ELENCO CORSI</h4></li>
       <li class="collection-item">
         <form method="post" action="gestisciCorsi.php" id="formCercaCorsi">
-        <div class="row condensed" style="margin-bottom:0px;">
-          <div class="col s2" style="font-size:120%; margin-top:0.8em">
-            <p class="condensed accent-text">
-              <i class="material-icons left">search</i>Cerca
-            </p>
-          </div>
-          <div class="col s2 valign">
-            <div class="row" style="margin-bottom:0px;">
-              <p style="margin-bottom:8px;">
-                <input checked type="checkbox" class="filled-in" id="concontinuita" />
-                <label for="concontinuita">Con continuità</label>
+          <div class="row condensed" style="margin-bottom:0px;">
+            <div class="col s2" style="font-size:120%; margin-top:0.8em">
+              <p class="condensed accent-text">
+                <i class="material-icons left">search</i>Cerca
               </p>
             </div>
-            <div class="row" style="margin-bottom:0px;">
-              <p style="margin-top:8px;">
-                <input  checked type="checkbox" class="filled-in" id="senzacontinuita" />
-                <label for="senzacontinuita">Senza continuità</label>
+            <div class="col s2 valign">
+              <div class="row" style="margin-bottom:0px;">
+                <p style="margin-bottom:8px;">
+                  <input checked type="checkbox" class="filled-in" id="concontinuita" />
+                  <label for="concontinuita">Con continuità</label>
+                </p>
+              </div>
+              <div class="row" style="margin-bottom:0px;">
+                <p style="margin-top:8px;">
+                  <input  checked type="checkbox" class="filled-in" id="senzacontinuita" />
+                  <label for="senzacontinuita">Senza continuità</label>
+                </p>
+              </div>
+            </div>
+            <div class="col s2 valign">
+              <div class="row" style="margin-bottom:0px;">
+                <p style="margin-bottom:8px;">
+                  <input checked type="checkbox" class="filled-in" id="recuperoCerca" />
+                  <label for="recuperoCerca">Recupero</label>
+                </p>
+              </div>
+              <div class="row" style="margin-bottom:0px;">
+                <p style="margin-top:8px;">
+                  <input checked type="checkbox" class="filled-in"  id="approfondimentoCerca" />
+                  <label for="approfondimentoCerca">Approfondimento</label>
+                </p>
+              </div>
+            </div>
+            <div class="input-field col s3 valign">
+              <input id="parolaChiave" type="text" value="" class="validate valign">
+              <label for="parolaChiave">Parola chiave</label>
+            </div>
+            <div class="col s1 right-align" style="margin-top:0.6em;">
+              <p class="right-align">
+                Mostra
               </p>
             </div>
-          </div>
-          <div class="col s2 valign">
-            <div class="row" style="margin-bottom:0px;">
-              <p style="margin-bottom:8px;">
-                <input checked type="checkbox" class="filled-in" id="recuperoCerca" />
-                <label for="recuperoCerca">Recupero</label>
-              </p>
+            <div class="input-field col s1 valign">
+              <input id="mostra" type="text" class="validate valign" value="10" requiaccent>
             </div>
-            <div class="row" style="margin-bottom:0px;">
-              <p style="margin-top:8px;">
-                <input checked type="checkbox" class="filled-in"  id="approfondimentoCerca" />
-                <label for="approfondimentoCerca">Approfondimento</label>
-              </p>
+            <div class="col s1">
+              <div class="input-field">
+                <button id="cercaCorsi" type="submit" class="btn-floating btn-large center waves-effect waves-light accent condensed white-text">
+                  <i class="material-icons">search</i>
+                </button>
+              </div>
             </div>
           </div>
-          <div class="input-field col s3 valign">
-            <input id="parolaChiave" type="text" value="" class="validate valign">
-            <label for="parolaChiave">Parola chiave</label>
-          </div>
-          <div class="col s1 right-align" style="margin-top:0.6em;">
-            <p class="right-align">
-              Mostra
-            </p>
-          </div>
-          <div class="input-field col s1 valign">
-            <input id="mostra" type="text" class="validate valign" value="10" requiaccent>
-          </div>
-          <div class="col s1">
-            <div class="input-field">
-              <button id="cercaCorsi" type="submit" class="btn-floating btn-large center waves-effect waves-light accent condensed white-text">
-                <i class="material-icons">search</i>
-              </button>
-            </div>
-          </div>
-        </div>
-      </form>
+        </form>
       </li>
       <span id="dettagliCorsiContenuto">
       </span>

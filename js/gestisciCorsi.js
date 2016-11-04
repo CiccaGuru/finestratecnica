@@ -131,17 +131,17 @@ function aggiornaListaCorsiObbligatori(){
 
 function mostraModalCorsiIncompatibili(id){
   aggiornaListaCorsiIncompatibili(id);
-  $('#modalCorsiIncompatibili').openModal();
+  $('#modalCorsiIncompatibili').modal("open");
 }
 
 function mostraModalScegliDocenti(){
   aggiornaListaDocenti();
-  $('#modalScegliDocenti').openModal();
+  $('#modalScegliDocenti').modal("open");
 }
 
 function mostraModalCorsiObbligatori(id){
   aggiornaListaCorsiObbligatori(id);
-  $('#modalCorsiObbligatori').openModal();
+  $('#modalCorsiObbligatori').modal("open");
 }
 
 function mostraModalDettagli(id, idDocente) {
@@ -158,7 +158,7 @@ function mostraModalDettagli(id, idDocente) {
         aggiornaChipsIncompatibili(id);
         aggiornaChipsObbligatori(id);
         aggiornaChipsDocentiDettagli(id);
-        $("#modal-ore").openModal();
+        $("#modal-ore").modal("open");
     });
 }
 
@@ -321,10 +321,10 @@ function aggiornaChipsObbligatori(idCorso){
 
 function aggiungiScegliDocenti(idDocente, nomeDocente){
   if(qualeListaChipDocenti()){
-    $("#ChipsDocenti").append('<div class="chip" data-iddocente = "'+idDocente+'">'+nomeDocente+'<i class="material-icons">close</i></div>');
+    $("#ChipsDocenti").append('<div class="chip" data-iddocente = "'+idDocente+'">'+nomeDocente+' <i class="close material-icons">close</i></div>');
   }
   else{
-    $("#ChipsDocentiDettagli").append('<div class="chip" data-iddocente = "'+idDocente+'">'+nomeDocente+'<i class="material-icons">close</i></div>');
+    $("#ChipsDocentiDettagli").append('<div class="chip" data-iddocente = "'+idDocente+'">'+nomeDocente+'<i class="close material-icons">close</i></div>');
   }
   $("#modalScegliDocenti").closeModal();
 }
@@ -413,7 +413,7 @@ function eliminaObbligatori(idClasse, idCorso){
     $(function() {
         aggiornaListaCorsi();
         aggiornaListaDocenti();
-        $('.modal-trigger').leanModal();
+        //$('.modal-trigger').leanModal();
 
         $("#ore").keyup(function() {
             var val = $("#ore").val();
