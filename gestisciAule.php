@@ -27,8 +27,6 @@ else{
 }
 $db = database_connect();
 
-$result = $db->query("SELECT * FROM aule");
-
 ?>
 
 <!DOCTYPE html>
@@ -41,7 +39,7 @@ $result = $db->query("SELECT * FROM aule");
 	<link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen"/>
 	<link href="css/admin.css" type="text/css" rel="stylesheet" media="screen"/>
 	<link href="css/style.php" type="text/css" rel="stylesheet" media="screen"/>
-	<link rel="stylesheet" href="css/circle.css">
+	<link rel="stylesheet" href="css/material-scrolltop.css">
 	<link rel="apple-touch-icon" sizes="180x180" href="/img/favicons/apple-touch-icon.png">
 <link rel="icon" type="image/png" href="/img/favicons/favicon-32x32.png" sizes="32x32">
 <link rel="icon" type="image/png" href="/img/favicons/favicon-16x16.png" sizes="16x16">
@@ -101,131 +99,10 @@ $result = $db->query("SELECT * FROM aule");
   </div>
 </div>
 <div class="container" style="width:70%">
-  <ul class="collection with-header z-depth-1" id="dettagliAule">
-    <li class="collection-header primary-text center"><h4 class="condensed light">ELENCO AULE</h4></li>
-    <li class="collection-item center">
-      <form  action="gestisciAule.php" method="POST">
-        <div class="row">
-          <div class="col s2" style="font-size:120%; margin-top:0.5em">
-            <p class="condensed accent-text">
-              <i class="material-icons left">search</i>Cerca
-            </p>
-          </div>
+<ul class="collection with-header z-depth-1" id="dettagliAule">
 
-          <div class="input-field col s4">
-            <input id="usernameSearch" name="username" type="text" class="validate" value="<?php
-                        if(isset($_POST["username"]) && ($_POST["username"]!="")){
-                          echo $_POST["username"];
-                        }
-                        ?>">
-            <label for="usernameSearch" class="condensed">Parola chiave</label>
-          </div>
-          <div class="col s2 offset-s1" style="margin-top:0.6em;">
-            <p class="condensed">
-              Risultati per pagina:
-            </p>
-          </div>
-          <div class="input-field col s1">
-            <input id="min" name="quanti" type="text" class="validate" value="<?php echo $quanti?>" required>
-          </div>
-          <div class="input-field col s1 right">
-            <button class="btn-floating btn-large waves-effect waves-light accent condensed white-text" type="submit" name="action">
-              <i class="material-icons">search</i>
-            </button>
-          </div>
-        </div>
-      </form>
-    </li>
-  <?php
-  if($result->num_rows==0){
-    ?>  <li class="collection-item">
-          <div class="accent-text condensed center-align" style="font-size:150%; margin:1em;">Nessuna aula</div>
-        </li>
-      <?php
-  }
-   while($row = $result->fetch_assoc())
-    { ?>
-      <li class="collection-item row valign-wrapper">
-        <div class="col s1 accent-text">
-            <i class="material-icons waves-effect waves-accent waves-circle" style="border-radius:50%;" onclick="eliminaAula(<?php echo $row["id"]?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>')">close</i>
-        </div>
-        <div class="col s2 bold">
-          ID: <?php echo $row["id"];?>
-        </div>
-        <div class="input-field col s3 valign">
-          <input id="nomeAula<?php echo $row['id']; ?>" type="text" class="validate valign" value="<?php echo $row['nomeAula']; ?>" required>
-            <label for="nomeAula<?php echo $row['id']; ?>">Nome aula</label>
-        </div>
-        <div class="input-field col s3 valign">
-          <input id="maxStudenti<?php echo $row['id']; ?>" type="text" class="validate valign" value="<?php echo $row['maxStudenti']; ?>" required>
-          <label for="maxStudenti<?php echo $row['id']; ?>">N° studenti</label>
-        </div>
-        <div class="col s2 offset-s1 center valign">
-          <a onclick="modficaAula(<?php echo $row['id'];?>)" class="waves-effect small-icon condensed waves-accent fill-width btn-flat valign accent-text">
-            	MODIFICA
-          </a>
-        </div>
-      </li>
-      <?php  }
-      if($num>$quanti){
-        ?>
-        <li class="collection-item row center">
-          <div class"center">
-            <ul class="pagination center">
-                <li <?php if($page=='1') echo 'class="disabled"'?>>
-                  <form action="gestisciDocenti.php" id="paginaIndietro"  method="post">
-                    <input type="hidden" name="page" value="<?php echo ($page -1)?>">
-                    <input type="hidden" name="quanti" value="<?php echo $quanti?>">
-                    <?php if(isset($_POST["username"])){?>
-                    <input type="hidden" name="username" value="<?php echo $_POST["username"]?>">
-                    <?php }?>
-                    <a onclick="$('#paginaIndietro').submit();">
-                    <i class="material-icons">chevron_left</i>
-                  </a>
-                </form>
 
-                </li>
-
-                <?php
-                    while($i*$quanti<=$num){
-                        ?>
-                      <form action="gestisciDocenti.php" id="pagina<?php echo $i; ?>" method="post" style="display:inline;">
-                        <li class="waves-effect waves-accent <?php if($i==$page) echo "active"?>">
-                              <input type="hidden" name="page" value="<?php echo $i?>">
-                              <input type="hidden" name="quanti" value="<?php echo $quanti?>">
-                              <?php if(isset($_POST["username"])){?>
-                              <input type="hidden" name="username" value="<?php echo $_POST["username"]?>">
-                              <?php }?>
-                              <a onclick="$('#pagina<?php echo $i?>').submit();">
-                                <?php echo $i ?>
-                              <a/>
-                          </li>
-                        </form>
-                      <?php
-                        $i++;
-                    }
-                ?>
-                <li <?php if($page==($i-1)) echo 'class="disabled"'?>class="waves-effect">
-                  <form action="gestisciDocenti.php" id="paginaAvanti" method="post">
-                    <input type="hidden" name="page" value="<?php echo ($page +1)?>">
-                    <input type="hidden" name="quanti" value="<?php echo $quanti?>">
-                    <?php if(isset($_POST["username"])){?>
-                    <input type="hidden" name="username" value="<?php echo $_POST["username"]?>">
-                    <?php }?>
-                    <a onclick="$('#paginaAvanti').submit();">
-                    <i class="material-icons">chevron_right</i>
-                  </a>
-                </form>
-                </li>
-            </ul>
-          </div>
-        </li>
-        <?php
-      }
-    ?>
-  <li class="collection-item row valign-wrapper">
-
-  </ul>
+</ul>
 
   <script src="js/jquery-2.1.4.min.js"></script>
   <script src="js/materialize.js"></script>

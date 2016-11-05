@@ -35,19 +35,49 @@ function modficaAula(idAula) {
     }
 }
 
+function aggiornaDettagliAule(pagina){
+  var quanti = $("#quanti").val();
+  if(quanti<=0){
+    quanti = 20;
+  }
+  var filtro = $("#filtro").val();
+  if(pagina == undefined){
+    pagina = 1;
+  }
+  var posting = $.post(
+      '../include/elencoDettagliAule.php', {
+          "quanti": quanti,
+          "page": pagina,
+          "filtro": filtro
+      }
+  );
+  posting.done(function(data) {
+      $("#dettagliAule").html(data);
+      Materialize.updateTextFields();
+      $('select').material_select();
+  });
+}
+
 (function($) {
     $(function() {
+      aggiornaDettagliAule();
         $("#aggiungi-aula").submit(function(e) {
             e.preventDefault();
+            e.stopImmediatePropagation();
             var posting = $.post(
                 '../include/aggiungiAula.php', {
                     submit: 1,
                     nomeAula: $("#nomeAula").val(),
                     maxStudenti: $("#maxStudenti").val()
-                });
+                });        $(document).on("submit","#filtraDocenti", function(e) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            aggiornaDettagliUtenti(1);
+        });
             posting.done(function(data) {
                 if (data == "SUCCESS") {
                     Materialize.toast('Aula aggiunto con successo!', 4000);
+                    aggiornaDettagliAule();
                 } else if (data == "EXISTS") {
                     Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Aula già esistente', 4000);
                     console.log(data);
@@ -56,6 +86,12 @@ function modficaAula(idAula) {
                     console.log(data);
                 }
             });
+        });
+
+        $(document).on("submit","#filtraAule", function(e) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            aggiornaDettagliAule();
         });
 
     });
