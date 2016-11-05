@@ -24,7 +24,10 @@ function aggiornaListaSezioni() {
 (function($) {
     $(function() {
         aggiornaListaSezioni();
-        $("#aggiungiClasse").on("click", function() {
+        $("#aggiungiClasse").on("submit", function(e) {
+          console.log("CICCC");
+          e.preventDefault();
+          e.stopImmediatePropagation();
             var posting = $.post(
                 '../include/creaClasse.php', {
                     "classe": $("#selezionaClasseStudente").val(),

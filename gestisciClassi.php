@@ -65,6 +65,7 @@ $db = database_connect();
 	</nav>
 	<div class="container" id="ins-classe" style="margin-top:5em;">
 		<div class="card">
+			<form id ="aggiungiClasse">
 			<div class="card-content" style="padding-left:5%; padding-right:5%; padding-bottom:5%">
 				<h4 class="center-align condensed primary-text light">Crea classe</h4>
 				<div class="row valign-wrapper">
@@ -89,10 +90,13 @@ $db = database_connect();
 						<label for="sezione">Sezione</label>
 					</div>
 					<div class="col valign  s3 offset-s1">
-						<a id="aggiungiClasse" class="waves-effect waves-light btn-large condensed accent">  <i class="material-icons left">group_add</i>CREA CLASSE</a>
+						<button type="submit" class="waves-effect waves-light btn-large condensed accent">
+							<i class="material-icons left">group_add</i>CREA CLASSE
+						</button>
 					</div>
 				</div>
 			</div>
+		</div>
 		</div>
 	</div>
 
