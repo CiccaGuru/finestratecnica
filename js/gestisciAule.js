@@ -37,8 +37,6 @@ function modficaAula(idAula) {
 
 (function($) {
     $(function() {
-        $('.modal-trigger').leanModal();
-
         $("#aggiungi-aula").submit(function(e) {
             e.preventDefault();
             var posting = $.post(

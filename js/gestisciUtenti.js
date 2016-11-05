@@ -79,6 +79,7 @@ function aggiornaDettagliUtenti(level, pagina) {
             $("#dettagliDocenti").html(data);
         }
           Materialize.updateTextFields();
+          $('select').material_select();
     });
 }
 
@@ -126,6 +127,20 @@ function mostraOrarioStudente(idUtente) {
     });
 }
 
+function mostraModalScegliClasse(idUtente){
+  $.post(
+    "../include/classeStudente.php",
+    {
+      "id":idUtente
+    })
+    .done(function(data){
+      $("#modal-scegli-classe .modal-content").html(data);
+      $("#modal-scegli-classe").modal("open");
+      $('select').material_select();
+    });
+
+}
+
 function mostraOrarioDocente(idUtente) {
     var posting = $.post(
         '../include/generaOrario.php', {
@@ -163,10 +178,62 @@ function cercaStudente() {
         }
 
 
+        $("#selezionaClasseStudente").change(function(){
+          $.post("include/elencoSezioniAnno.php",
+              {
+                  "anno":$(this).val()
+              })
+          .done(function(data){
+            console.log(data);
+            $("#selezionaSezioneStudente").html(data);
+            $('select').material_select();
+          });
+        });
+
+        $(document).on("change", "#cambiaClasseStudente", function(){
+          console.log("cc");
+          $.post("include/elencoSezioniAnno.php",
+              {
+                  "anno":$(this).val()
+              })
+          .done(function(data){
+            console.log(data);
+            $("#cambiaSezioneStudente").html(data);
+            $('select').material_select();
+          });
+        });
+
+        $(document).on("click", "#applicaCambiaClasse", function(e){
+          $.post("../include/modificaClasseStudente.php",
+            {
+              "idUtente":$("#idUtenteClasse").val(),
+              "classe":$("#cambiaClasseStudente").val(),
+              "idSezione":$("#cambiaSezioneStudente").val()
+            })
+            .done(function(data){
+              if(data == "SUCCESS"){
+                Materialize.toast('Classe modificata con successo', 4000);
+                $("#modal-scegli-classe").modal("close");
+              }
+              else{
+                Materialize.toast('Si è verificato un errore', 4000);
+                console.log(data);
+              }
+            })
+        })
+
         $(document).on("submit","#filtraDocenti", function(e) {
             e.preventDefault();
+            e.stopImmediatePropagation();
             aggiornaDettagliUtenti(1);
         });
+
+        $(document).on("submit","#filtraStudenti", function(e) {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          aggiornaDettagliUtenti(0);
+        });
+
 
         $("#aggiungi-docente").submit(function(e) {
             e.preventDefault();
@@ -208,6 +275,7 @@ function cercaStudente() {
                         submit: 1,
                         username: $("#usernameStudente").val(),
                         classe: $("#selezionaClasseStudente").val(),
+                        sezione: $("#selezionaSezioneStudente").val(),
                         password: $("#passwordStudente").val(),
                         nome: $("#nomeStudente").val(),
                         cognome: $("#cognomeStudente").val()

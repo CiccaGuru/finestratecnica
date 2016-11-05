@@ -119,6 +119,3 @@ else{
   $('body').materialScrollTop();
 </script>
 </body>
-<?php
-$db->close();
-?>

@@ -102,5 +102,4 @@ $result = $db->query("INSERT INTO utenti (nome, cognome, username, password, cla
                                   VALUES ('$username', '$username', '$username', '$password', '6', '2',
                                           '0','','0','0')
     ") or die($db->error);
-echo "SUCCESSSSSSSSO";
 ?>

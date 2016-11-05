@@ -19,6 +19,7 @@ if($_POST["submit"]){
 	$username = secure($_POST["username"]);
 	$password = hash("sha512", secure($_POST["password"]));
 	$classe = secure($_POST["classe"]);
+	$idSezione = secure($_POST["sezione"]);
 	$db = database_connect();
 	if(!$result = $db->query("select * from utenti where username='$username'")){
 		die('ERRORE: ' . $db->error);
@@ -27,8 +28,8 @@ if($_POST["submit"]){
 	$rows = $result->num_rows;
 	if ($rows == 0) {
 		if(!$db->query("INSERT INTO utenti
-				(nome, cognome, username, password, classe, level) VALUES
-				('$nome', '$cognome', '$username', '$password', $classe, 0)"))
+				(nome, cognome, username, password, classe, idClasse, level) VALUES
+				('$nome', '$cognome', '$username', '$password', $classe, $idSezione, 0)"))
 			echo "Errore".$db->error;
 		else
 			echo "SUCCESS";
