@@ -87,7 +87,9 @@
 	  border-bottom: 2px solid #26a69a;
 }
 
-
+.pagination li.active {
+  background-color: <?php echo $accentColor?> !important;
+}
 
 /* label focus color */
 .input-field input[type=text]:focus + label,

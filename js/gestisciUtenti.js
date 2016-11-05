@@ -53,15 +53,16 @@ function modificaStudente(user_id, quanti, page, filtro) {
 }
 
 
-function aggiornaDettagliUtenti(level) {
+function aggiornaDettagliUtenti(level, pagina) {
     quanti = $("#quanti").val();
     console.log(quanti);
     if(quanti<=0){
       quanti = 20;
     }
     filtro = $("#filtro").val();
-    console.log(filtro);
-    pagina = $("#page").val();
+    if(pagina == undefined){
+      pagina = 1;
+    }
     var posting = $.post(
         '../include/elencoUtenti.php', {
             "level": level,
@@ -72,20 +73,13 @@ function aggiornaDettagliUtenti(level) {
     );
     posting.done(function(data) {
         if (level == 0){
-            var html = '  <li class="collection-header primary-text center"><h4 class="condensed light">ELENCO STUDENTI</h4></li><li class="collection-item center">'+$("#dettagliStudenti li:nth-child(2)").html()+"</li>";
-            $("#dettagliStudenti").html(html+data);
-            $("#dettagliStudenti input").focus();
-            $("#dettagliStudenti input").first().focus();
+            $("#dettagliStudenti").html(data);
         }
         if (level == 1){
-            var html = '  <li class="collection-header primary-text center"><h4 class="condensed light">ELENCO DOCENTI</h4></li><li class="collection-item center">'+$("#dettagliDocenti li:nth-child(2)").html()+"</li>";
             $("#dettagliDocenti").html(data);
-            $("#dettagliDocenti input").focus();
-            $("#dettagliDocenti input").first().focus();
         }
           Materialize.updateTextFields();
     });
-
 }
 
 function eliminaUtente(id, quanti, page, filtro, level) {
@@ -173,7 +167,6 @@ function cercaStudente() {
             e.preventDefault();
             aggiornaDettagliUtenti(1);
         });
-
 
         $("#aggiungi-docente").submit(function(e) {
             e.preventDefault();
