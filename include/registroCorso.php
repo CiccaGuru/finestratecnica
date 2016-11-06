@@ -12,24 +12,21 @@ else{
     die("LOGINPROBLEM");
   if($user_level == 1)
     die('LOGINPROBLEM');
-$ora = $_POST["ora"];
 $db = database_connect();
-
-$result = $db->query("SELECT id from lezioni where ora = '$ora'") or die($db->error);
-$file = array();
-while($idLez = $result->fetch_assoc()){
-  $res = generaRegistroOra($idLez["id"], $ora);
-  $file[]= $res;
+if (!file_exists('./tmp/registrini')) {
+    mkdir('./tmp/registrini', 0777, true);
+    chmod("./tmp/registrini", 0777);
 }
-
-chdir("tmp/registrini");
-$zip = new ZipArchive;
-$download = getStringaOraBreve($ora).'.zip';
-$zip->open($download, ZipArchive::CREATE);
-foreach (glob("./".getStringaOraBreve($ora)."/*.pdf") as $file) { /* Add appropriate path to read content of zip */
-   $zip->addFile($file);
+else{
+    recursiveRemoveDirectory("./tmp/registrini");
 }
-$zip->close();
+for($i=1;$i<=($_CONFIG["numero_giorni"]*$_CONFIG["ore_per_giorno"]);$i++){
+  $result = $db->query("SELECT id from lezioni where ora = '$i'") or die($db->error);
+  while($idLez = $result->fetch_assoc()){
+    generaRegistroOra($idLez["id"], $i);
+  }
 }
-echo $download;
+Zip("./tmp/registrini/", "./tmp/registrini.zip");
+echo "SUCCESS";
+}
 ?>

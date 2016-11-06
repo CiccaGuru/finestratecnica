@@ -285,13 +285,15 @@ function listDirectory($dir)
   }
 
 function generaRegistroOra($idLezione, $ora){
-	//include("../mpdf60/mpdf.php");
 	$db = database_connect();
-	$result = $db->query("SELECT utenti.nome, utenti.cognome, corsi.titolo, corsi.descrizione, lezioni.aula
-	                    from utenti, corsi, lezioni
-	                    where lezioni.id = '$idLezione' AND
+	$result = $db->query("SELECT utenti.nome, utenti.cognome, corsi.titolo, corsi.descrizione, aule.nomeAula as aula
+	                    from utenti, corsi, lezioni, corsi_docenti, aule
+	                    where lezioni.id = $idLezione AND
 	                          corsi.id = lezioni.idCorso AND
-	                          utenti.id = corsi.iddocente");
+								corsi.id = corsi_docenti.idCorso
+                                AND corsi_docenti.idDocente = utenti.id
+                                AND lezioni.idAula = aule.id
+                                GROUP BY corsi.id");
 
 	$dettagliLezione = $result->fetch_assoc();
 	$result = $db->query("SELECT utenti.nome, utenti.cognome, utenti.classe
@@ -368,17 +370,12 @@ function generaRegistroOra($idLezione, $ora){
 	$mpdf->SetDisplayMode('fullpage');
 	$mpdf->list_indent_first_level = 0;  // 1 or 0 - whether to indent the first level of a list
 	$mpdf->WriteHTML($code);
-
-	chdir("./tmp/registrini/");
-	if (!file_exists(getStringaOraBreve($ora))) {
-		mkdir(getStringaOraBreve($ora), 0777, true);
-		chmod(getStringaOraBreve($ora), 0777);
+	if (!file_exists("./tmp/registrini".getStringaOraBreve($ora))) {
+		mkdir("./tmp/registrini/".getStringaOraBreve($ora), 0777, true);
+		chmod("./tmp/registrini/".getStringaOraBreve($ora), 0777);
 	}
-	$fileName = $dettagliLezione["titolo"]."_".getStringaOraBreve($ora)."_".$dettagliLezione["aula"];
-	$mpdf->Output("$fileName.pdf", "F");
-	rename("$fileName.pdf", getStringaOraBreve($ora)."/".$fileName.".pdf");
-
-	return "tmp/".$fileName.".pdf";
+	$fileName = getStringaOraBreve($ora)."/".$dettagliLezione["titolo"]."_".getStringaOraBreve($ora)."_".$dettagliLezione["aula"];
+	$mpdf->Output("./tmp/registrini/$fileName.pdf", "F");
 }
 
 
@@ -394,4 +391,54 @@ function replace($stringa){
 $string = str_replace("&eacuto", "é", $string);
 return $string;
 }
+function recursiveRemoveDirectory($directory)
+{
+    foreach(glob("{$directory}/*") as $file)
+    {
+        if(is_dir($file)) {
+            recursiveRemoveDirectory($file);
+        } else {
+            unlink($file);
+        }
+    }
+    rmdir($directory);
+}
+
+function Zip($source, $destination)
+{
+    if (!extension_loaded('zip') || !file_exists($source)) {
+        return false;
+    }
+    $zip = new ZipArchive();
+    if (!$zip->open($destination, ZIPARCHIVE::CREATE)) {
+        return false;
+    }
+    $source = str_replace('\\', '/', realpath($source));
+    if (is_dir($source) === true)
+    {
+        $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($source), RecursiveIteratorIterator::SELF_FIRST);
+        foreach ($files as $file)
+        {
+            $file = str_replace('\\', '/', $file);
+            // Ignore "." and ".." folders
+            if( in_array(substr($file, strrpos($file, '/')+1), array('.', '..')) )
+                continue;
+            $file = realpath($file);
+            if (is_dir($file) === true)
+            {
+                $zip->addEmptyDir(str_replace($source . '/', '', $file . '/'));
+            }
+            else if (is_file($file) === true)
+            {
+                $zip->addFromString(str_replace($source . '/', '', $file), file_get_contents($file));
+            }
+        }
+    }
+    else if (is_file($source) === true)
+    {
+        $zip->addFromString(basename($source), file_get_contents($source));
+    }
+    return $zip->close();
+}
+
 ?>

@@ -223,24 +223,16 @@ function generaRegistrini() {
     $("#wait").fadeIn();
     var i = 0;
     var counter = 1;
-    for (i = 1; i < 24; i++) {
-        var posting = $.post(
-            '../include/registroCorso.php', {
-                "ora": i
-            });
-        posting.done(function(data) {
+    $.post('../include/registroCorso.php')
+      .done(function(data) {
             if (data == "LOGINPROBLEM") {
                 window.location = "../index.php";
             }
-            window.open("../include/tmp/registrini/" + data, '_blank');
-            console.log(data);
-            if (counter >= 23) {
-                $("#wait").fadeOut();
+            if(data == "SUCCESS"){
+              window.location = "/include/tmp/registrini.zip";
             }
-            $(".determinate").css("width", counter / 23 * 100 + "%");
-            counter++;
+            console.log(data);
         });
-    }
 }
 
 function modficaAula(idAula) {

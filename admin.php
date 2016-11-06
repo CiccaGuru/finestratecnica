@@ -176,7 +176,6 @@ $db = database_connect();
 							</a>
 						</div>
 					</div>
-
 					<div class="row">
 						<div class="col s3">
 							<a class="fake-button accent-text waves-effect fill-width valign-wrapper waves-red" onclick="generaCorsiByDocenti();">
@@ -216,7 +215,6 @@ $db = database_connect();
 						</div>
 						<div class="col s3">
 							<a class="fake-button accent-text waves-effect valign-wrapper fill-width waves-red" onclick="generaCorsiByTitolo();">
-
 								<div class="row">
 									<div class="col s4">
 											<i class="material-icons">title</i><br/>
@@ -226,11 +224,8 @@ $db = database_connect();
 									</div>
 								</div>
 							</a>
-
-
 						</div>
 				</div>
-
 				</div>
 			</div>
 		</div>
