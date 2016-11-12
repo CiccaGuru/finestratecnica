@@ -178,7 +178,7 @@ $db = database_connect();
 					</div>
 					<div class="row">
 						<div class="col s3">
-							<a class="fake-button accent-text waves-effect fill-width valign-wrapper waves-red" onclick="generaCorsiByDocenti();">
+							<a class="fake-button accent-text waves-effect fill-width valign-wrapper waves-red" onclick="generaCorsi(1);">
 								<div class="row">
 									<div class="col s4">
 											<i class="material-icons">school</i><br/>
@@ -190,7 +190,7 @@ $db = database_connect();
 							</a>
 						</div>
 						<div class="col s3">
-							<a class="fake-button accent-text waves-effect valign-wrapper fill-width waves-red"  onclick="generaCorsiByOra();">
+							<a class="fake-button accent-text waves-effect valign-wrapper fill-width waves-red"  onclick="generaCorsi(3);">
 								<div class="row">
 									<div class="col s4">
 											<i class="material-icons">alarm</i><br/>
@@ -202,7 +202,7 @@ $db = database_connect();
 							</a>
 						</div>
 						<div class="col s3">
-							<a class="fake-button accent-text waves-effect valign-wrapper fill-width waves-red" onclick="generaCorsiByAula();">
+							<a class="fake-button accent-text waves-effect valign-wrapper fill-width waves-red" onclick="generaCorsi(2);">
 								<div class="row">
 									<div class="col s4">
 											<i class="material-icons">home</i><br/>
@@ -214,7 +214,7 @@ $db = database_connect();
 							</a>
 						</div>
 						<div class="col s3">
-							<a class="fake-button accent-text waves-effect valign-wrapper fill-width waves-red" onclick="generaCorsiByTitolo();">
+							<a class="fake-button accent-text waves-effect valign-wrapper fill-width waves-red" onclick="generaCorsi(4);">
 								<div class="row">
 									<div class="col s4">
 											<i class="material-icons">title</i><br/>
@@ -233,7 +233,9 @@ $db = database_connect();
 
 
 		<div id="wait" class="center-align valign-wrapper">
-			<div id="contenitore-cerchio" class="valign">
+			<div id="close-icon" class="right white-text" style="display:none; margin:0.5em;"><i class="material-icons waves-effect waves-light waves-circle">close</i></div>
+			<p id='messaggio' class='valign condensed white-text'>Elaborazione in corso.. può richiedere molto tempo!</p>
+			<div id="contenitore-cerchio-admin" class="valign">
 				<div class="preloader-wrapper big active">
 					<div class="spinner-layer spinner-blue-only">
 						<div class="circle-clipper right">
@@ -241,10 +243,6 @@ $db = database_connect();
 						</div>
 					</div>
 				</div>
-			</div>
-			<p id='errore-login' class='white-text'>Elaborazione in corso.. può richiedere molto tempo!</p>
-			<div class="progress center">
-				<div class="determinate center red"></div>
 			</div>
 		</div>
 

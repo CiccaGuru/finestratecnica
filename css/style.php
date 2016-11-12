@@ -333,9 +333,17 @@ footer{
 	margin-top:20%;
 }
 
-#errore-login{
+#contenitore-cerchio-admin{
+	margin-top:5%;
+}
+
+#errore-login, #messaggio{
 	font-weight:300;
 	font-size:200%;
+}
+
+#messaggio{
+  margin-top:15%;
 }
 
 #card-orario-gen{

@@ -219,6 +219,17 @@ function elencoNonAbbastanza() {
 }
 
 function generaRegistrini() {
+    $("#wait").html('<div id="close-icon" class="right white-text" style="display:none; margin:0.5em;"><i class="material-icons waves-effect waves-light waves-circle">close</i></div> \
+    <p id="messaggio" class="valign condensed white-text">Elaborazione in corso.. può richiedere molto tempo!</p>\
+    <div id="contenitore-cerchio-admin" class="valign">\
+      <div class="preloader-wrapper big active">\
+        <div class="spinner-layer spinner-blue-only">\
+          <div class="circle-clipper right">\
+            <div class="circle"></div>\
+          </div>\
+        </div>\
+      </div>\
+    </div>');
     $("#wait").css("height:100%");
     $("#wait").fadeIn();
     var i = 0;
@@ -229,9 +240,13 @@ function generaRegistrini() {
                 window.location = "../index.php";
             }
             if(data == "SUCCESS"){
-              window.location = "/include/tmp/registrini.zip";
+              $("#close-icon").fadeIn();
+              $("#messaggio").html("Registrini generati");
+              $("#contenitore-cerchio-admin").html("<a class='btn-large center primary waves-effect waves-light' href='/include/tmp/registrini.zip'><i class='material-icons left'>file_download</i>SCARICA</a>")
             }
-            console.log(data);
+            else{
+              console.log(data);
+            }
         });
 }
 
@@ -256,99 +271,83 @@ function modficaAula(idAula) {
 }
 
 function generaOreBuche() {
+  $("#wait").html('<div id="close-icon" class="right white-text" style="display:none; margin:0.5em;"><i class="material-icons waves-effect waves-light waves-circle">close</i></div> \
+  <p id="messaggio" class="valign condensed white-text">Elaborazione in corso.. può richiedere molto tempo!</p>\
+  <div id="contenitore-cerchio-admin" class="valign">\
+    <div class="preloader-wrapper big active">\
+      <div class="spinner-layer spinner-blue-only">\
+        <div class="circle-clipper right">\
+          <div class="circle"></div>\
+        </div>\
+      </div>\
+    </div>\
+  </div>');
     $("#wait").css("height:100%");
     $("#wait").fadeIn();
-    var i = 0;
-    var counter = 1;
-    for (i = 1; i < 24; i++) {
-        var posting = $.post(
-            '../include/oreBuche.php', {
-                "ora": i
-            });
-        posting.done(function(data) {
-            if (data == "LOGINPROBLEM") {
-                window.location = "../index.php";
-            }
-            window.open("../include/tmp/orebuche/" + data, '_blank');
-            console.log(data);
-            if (counter >= 23) {
-                $("#wait").fadeOut();
-            }
-            $(".determinate").css("width", counter / 23 * 100 + "%");
-            counter++;
-        });
-    }
-
+    $.post('../include/oreBuche.php')
+      .done(function(data) {
+        if(data == "SUCCESS"){
+          $("#close-icon").fadeIn();
+          $("#messaggio").html("Elenchi alunni liberi per ora generati");
+          $("#contenitore-cerchio-admin").html("<a class='btn-large center primary waves-effect waves-light' href='/include/tmp/orebuche.zip'><i class='material-icons left'>file_download</i>SCARICA</a>")
+        }
+        else{
+          console.log(data);
+        }
+      });
 }
 
-function generaCorsiByDocenti() {
+/*
+1 = DOCENTE
+2 = AULA
+3 = ORA
+4 = TITOLO
+*/
+
+function generaCorsi(ordine) {
+  $("#wait").html('<div id="close-icon" class="right white-text" style="display:none; margin:0.5em;"><i class="material-icons waves-effect waves-light waves-circle">close</i></div> \
+  <p id="messaggio" class="valign condensed white-text">Elaborazione in corso.. può richiedere molto tempo!</p>\
+  <div id="contenitore-cerchio-admin" class="valign">\
+    <div class="preloader-wrapper big active">\
+      <div class="spinner-layer spinner-blue-only">\
+        <div class="circle-clipper right">\
+          <div class="circle"></div>\
+        </div>\
+      </div>\
+    </div>\
+  </div>');
     $("#wait").css("height:100%");
     $("#wait").fadeIn();
     var posting = $.post(
-        '../include/corsiByDocente.php', {
-            1: 1
+        '../include/corsiSorted.php', {
+            "ordine": ordine
         });
     posting.done(function(data) {
-        if (data == "LOGINPROBLEM") {
-            window.location = "../index.php";
+      if(data == "SUCCESS"){
+        $("#close-icon").fadeIn();
+        $("#messaggio").html("Elenco corsi generato");
+        var stringa = "";
+        switch (ordine) {
+          case 1:
+            stringa = "Docente"
+            break;
+          case 2:
+            stringa = "Aula"
+            break;
+          case 3:
+            stringa = "Ora"
+            break;
+          case 4:
+            stringa = "Titolo"
+            break;
         }
-        window.location = "../include/tmp/" + data;
+        $("#contenitore-cerchio-admin").html("<a class='btn-large center primary waves-effect waves-light' href='/include/tmp/ElencoCorsiPer"+stringa+".pdf'><i class='material-icons left'>file_download</i>SCARICA</a>")
+      }
+      else{
         console.log(data);
+      }
     });
 }
-
-
-function generaCorsiByTitolo() {
-    $("#wait").css("height:100%");
-    $("#wait").fadeIn();
-    var posting = $.post(
-        '../include/corsiByTitolo.php', {
-            1: 1
-        });
-    posting.done(function(data) {
-        if (data == "LOGINPROBLEM") {
-            window.location = "../index.php";
-        }
-        window.location = "../include/tmp/" + data;
-        console.log(data);
-    });
-}
-
-
-function generaCorsiByAula() {
-    $("#wait").css("height:100%");
-    $("#wait").fadeIn();
-    var posting = $.post(
-        '../include/corsiByAula.php', {
-            1: 1
-        });
-    posting.done(function(data) {
-        if (data == "LOGINPROBLEM") {
-            window.location = "../index.php";
-        }
-        window.location = "../include/tmp/" + data;
-        console.log(data);
-    });
-}
-
-
-
-function generaCorsiByOra() {
-    $("#wait").css("height:100%");
-    $("#wait").fadeIn();
-    var posting = $.post(
-        '../include/corsiByOra.php', {
-            1: 1
-        });
-    posting.done(function(data) {
-        if (data == "LOGINPROBLEM") {
-            window.location = "../index.php";
-        }
-        window.location = "../include/tmp/" + data;
-        console.log(data);
-    });
-}
-
 
 function mostraOrarioStudente(idUtente) {
     var posting = $.post(
@@ -570,6 +569,9 @@ function applicaModificaOre(idCorso) {
             }
         });
 
+        $(document).on("click", "#close-icon", function(){
+          $("#wait").fadeOut();
+        });
         $("#inserisciOre").on("click", function() {
             var val = $("#ore").val();
             $("#ore_future").hide();

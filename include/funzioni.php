@@ -391,6 +391,8 @@ function replace($stringa){
 $string = str_replace("&eacuto", "é", $string);
 return $string;
 }
+
+
 function recursiveRemoveDirectory($directory)
 {
     foreach(glob("{$directory}/*") as $file)
