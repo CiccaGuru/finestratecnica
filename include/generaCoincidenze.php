@@ -17,16 +17,23 @@ else{
 $db = database_connect();
 $idCorso = $_POST["idCorso"];
 ?><div id="container">
-  <h4 class="condensed primary text center">Corsi coincidenti</h4>
+  <h4 class="condensed primary-text center">Corsi coincidenti</h4>
 <?php
+$result = $db->query("SELECT  corsi_obbligatori.idCorso
+                        from  corsi_obbligatori, utenti
+                        where corsi_obbligatori.idClasse = utenti.idClasse and
+                              utenti.id = $utente") or die($db->error);
+while($corsoObbl = $result->fetch_assoc()){
+  $corsi_obbligati[] = $corsoObbl["idCorso"];
+}
 $result = $db->query("SELECT * FROM lezioni WHERE idCorso = '$idCorso'") or die('ERRORE: coincidenze 19' . $db->error);
-$corsi_obbligati =array('190', '249', '391', '68', '230', '350', '69', '83', '67', '179');
 while($lezione = $result->fetch_assoc()){
-  $resultA =  $db->query("SELECT  idCorso, ora
-                          FROM    iscrizioni, corsi
-                          WHERE   iscrizioni.ora = '".$lezione["ora"]."' AND
+  $resultA =  $db->query("SELECT  iscrizioni.idCorso, lezioni.ora
+                          FROM    iscrizioni, corsi, lezioni
+                          WHERE   lezioni.ora = '".$lezione["ora"]."' AND
                                   iscrizioni.idUtente = '$utente' AND
                                   corsi.continuita='1' AND
+                                  lezioni.id = iscrizioni.idLezione AND
                                   NOT iscrizioni.idCorso = $idCorso AND
                                   corsi.id = iscrizioni.idCorso") or die('ERRORE: coincidenze 21' . $db->error);
   if($resultA->num_rows>0){

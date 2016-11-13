@@ -52,7 +52,7 @@ else{
 }
 
 $db = database_connect();
-$result = $db->query("SELECT classe from utenti where id='$utente'") or die('ERRORE: ' . $db->error);
+$result = $db->query("SELECT classe, idClasse from utenti where id='$utente'") or die('ERRORE: ' . $db->error);
 $dettagliUtente = $result->fetch_assoc();
 $result = $db->query('SELECT idLezione, idCorso from iscrizioni where idUtente='.$utente) or  die('ERRORE: 0 ' . $db->error);
 while($ora_el = $result->fetch_assoc()){
@@ -86,7 +86,11 @@ function generaLista($tipo, $continuita){
   $classe = $dettagliUtente["classe"];
   $corsi_particolari_uno = array('275', '391', '392');
   $corsi_particolari_due = array('113', '114', '115');
-  $corsi_obbligati = array('190', '249',  '68', '230', '350', '69', '83', '67', '179');
+  $corsi_obbligati = array();
+  $result = $db->query("SELECT idCorso from corsi_obbligatori where idClasse = ".$dettagliUtente["idClasse"]) or die($db->error);
+  while($corsoObbl = $result->fetch_assoc()){
+    $corsi_obbligati[] = $corsoObbl["idCorso"];
+  }
   $result = $db->query("SELECT  corsi.titolo AS titolo,
                                 corsi.descrizione AS descrizione,
                                 corsi_docenti.idDocente AS iddocente,
@@ -162,7 +166,7 @@ if($result->num_rows == 0){
             ESAURITO
           </div>
           <?php
-        } else if((!in_array($idCorso,$corsi_utente) && $coincide) || (in_array($idCorso, $corsi_particolari_uno) && sono_iscritto($corsi_particolari_uno) && !in_array($idCorso,$corsi_utente) || (in_array($idCorso, $corsi_particolari_due) && !(in_array($idCorso,$corsi_utente)) && sono_iscritto($corsi_particolari_due)))){
+        } else if((!in_array($idCorso,$corsi_utente) && $coincide)){
           ?>
           <div class="chipMio hide-on-small-only center center-align waves-effect hoverable waves-light amber darken-2 white-text coincidenzaTrigger" onclick="mostraCoincidenze(<?php echo $idCorso; ?>)">
             COINCIDE
@@ -171,7 +175,26 @@ if($result->num_rows == 0){
             COINCIDE
           </div>
           <?php
-        } else {
+        }
+        else {
+          $resultIncompatibili = $db->query("SELECT idCorso2 from corsi_incompatibili where idCorso1 = $idCorso") or die($db->error);
+          $incompatibile = 0;
+          while($corsoIncompatibile = $resultIncompatibili->fetch_assoc()){
+            if(in_array($corsoIncompatibile["idCorso2"], $corsi_utente)){
+              $incompatibile = 1;
+            }
+          }
+          if($incompatibile){
+          ?>
+          <div class="chipMio hide-on-small-only center center-align waves-effect hoverable waves-light amber darken-2 white-text coincidenzaTrigger" onclick="mostraIncompatibilita(<?php echo $idCorso; ?>)">
+            INCOMPAT.
+          </div>
+          <div class="chipMio hide-on-med-and-up center center-align waves-effect hoverable waves-amber amber-text text-darken-4 coincidenzaTrigger" onclick="mostraIncompatibilita(<?php echo $idCorso; ?>)">
+            INCOMPAT.
+          </div>
+          <?php
+          }
+          else{
             if(in_array($idCorso, $corsi_obbligati) && in_array($idCorso, $corsi_utente)){
              ?>
              <div class="chipMio center center-align primary darken-2 white-text hide-on-small-only" data-position="bottom">
@@ -195,7 +218,7 @@ if($result->num_rows == 0){
               <span class="lever"></span>
             </label>
           </div>
-          <?php  } }?>
+          <?php  } }}?>
         </div>
       </div>
     </div>

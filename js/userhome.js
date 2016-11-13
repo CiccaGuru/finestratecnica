@@ -121,7 +121,7 @@ function scegliQuale(ora){
       }else{
         $("#modal-scegliquale .modal-content").html(data);
         $("#modal-scegliquale").css("margin-top","3em");
-        $("#modal-scegliquale").openModal();
+        $("#modal-scegliquale").modal("open");
       }
     });
 }
@@ -190,6 +190,25 @@ function rimuoviCorso(idCorso){
     });
 }
 
+function mostraIncompatibilita(corso){
+  $.post('../include/generaIncompatibilita.php',
+  {
+    "idCorso":corso
+  })
+  .done(function(data){
+    if(data == "LOGINPROBLEM"){
+      window.location = "index.php";
+    }else{
+      $("#modal-continuita .modal-content").html(data);
+      $("#modal-continuita").css("margin-top","5em");
+      $("#modal-continuita").modal("open");
+    }
+  });
+  var evt = this.event ? this.event : window.event;
+  if (evt.stopPropagation)    evt.stopPropagation();
+  if (evt.cancelBubble!=null) evt.cancelBubble = true;
+}
+
 function mostraCoincidenze(corso){
   var posting = $.post(
     '../include/generaCoincidenze.php',
@@ -202,7 +221,7 @@ function mostraCoincidenze(corso){
       }else{
         $("#modal-continuita .modal-content").html(data);
         $("#modal-continuita").css("margin-top","5em");
-        $("#modal-continuita").openModal();
+        $("#modal-continuita").modal("open");
       }
     });
    var evt = this.event ? this.event : window.event;
@@ -341,7 +360,7 @@ function cercaSubmit(s, mute){
       accordion : true
     });
     if ( $( "#modal-primoAccesso" ).length ) {
-      $( "#modal-primoAccesso" ).openModal();
+      $( "#modal-primoAccesso" ).modal("open");
     }
     $('.tooltipped').tooltip({delay: 50});
 
@@ -404,9 +423,9 @@ function cercaSubmit(s, mute){
              if(data == "LOGINPROBLEM"){
                window.location = "index.php";
              } else if(data == "SUCCESS"){
-               $("#modal-primoAccesso").closeModal();
+               $("#modal-primoAccesso").modal("close");
                Materialize.toast('Password cambiata con successo!', 1200);
-               $("#modal-help").openModal();
+               $("#modal-help").modal("open");
 
              }
              else {

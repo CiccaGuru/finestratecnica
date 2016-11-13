@@ -326,7 +326,7 @@ function aggiungiScegliDocenti(idDocente, nomeDocente){
   else{
     $("#ChipsDocentiDettagli").append('<div class="chip" data-iddocente = "'+idDocente+'">'+nomeDocente+'<i class="close material-icons">close</i></div>');
   }
-  $("#modalScegliDocenti").closeModal();
+  $("#modalScegliDocenti").modal("close");
 }
 
 function aggiungiCorsoIncompatibile(idCorso1, idCorso2){
@@ -338,7 +338,7 @@ function aggiungiCorsoIncompatibile(idCorso1, idCorso2){
       });
   posting.done(function(data){
     if(data=="SUCCESS"){
-      $("#modalCorsiIncompatibili").closeModal();
+      $("#modalCorsiIncompatibili").modal("close");
       aggiornaChipsIncompatibili(idCorso1);
       Materialize.toast("Incompatibilità aggiunta con successo!", 2000);
     }
@@ -359,7 +359,7 @@ function aggiungiCorsoObbligatorio(idCorso, idClasse){
       });
   posting.done(function(data){
     if(data=="SUCCESS"){
-      $("#modalCorsiObbligatori").closeModal();
+      $("#modalCorsiObbligatori").modal("close");
       aggiornaChipsObbligatori(idCorso);
       Materialize.toast("Corso obbligatorio aggiunto con successo!", 2000);
     }
