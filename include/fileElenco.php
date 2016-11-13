@@ -20,8 +20,15 @@ else{
   if($user_level == 2)
     die('LOGINPROBLEM');
 
-$result = $db->query("SELECT nome, cognome from utenti where id = '$utente'") or die($db->error);
+$result = $db->query("SELECT nome, cognome, username from utenti where id = '$utente'") or die($db->error);
 $dettagliProfessore = $result->fetch_assoc();
+
+if (file_exists('./tmp/docente_'.$dettagliProfessore["username"])) {
+  recursiveRemoveDirectory("./tmp/docente_".$dettagliProfessore["username"]);
+}
+mkdir('./tmp/docente_'.$dettagliProfessore["username"], 0777, true);
+chmod("./tmp/docente_".$dettagliProfessore["username"], 0777);
+
 $result = $db->query("SELECT  corsi.titolo as titoloCorso,
                               corsi.id as idCorso,
                               corsi.descrizione as descrizione,
@@ -103,9 +110,8 @@ $code .= "</tbody></table>";
   $mpdf->list_indent_first_level = 0;  // 1 or 0 - whether to indent the first level of a list
 
   $mpdf->WriteHTML($code);
-  $fileName = $dettagliProfessore["nome"]."_".$dettagliProfessore["cognome"]."_".$idLezione;
-  $mpdf->Output("$fileName.pdf", "F");
-  rename($fileName.".pdf", "tmp/".$fileName.".pdf");
-  echo "tmp/".$fileName.".pdf";
+  $fileName = $dettagliProfessore["nome"][0]."_".$dettagliProfessore["cognome"]."_".getStringaOraBreve($dettagliLezione["lezioniOra"]);
+  $mpdf->Output("./tmp/docente_".$dettagliProfessore["username"]."/$fileName.pdf", "F");
+  echo "tmp/docente_".$dettagliProfessore["username"]."/$fileName.pdf";
 }
 ?>

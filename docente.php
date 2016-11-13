@@ -85,7 +85,7 @@ $db = database_connect();
 					<div class="col s6 m6 l4 offset-l2">
 						<a id="btn-eliminaCorso" class="condensed fake-button letter-spacing-1 waves-effect waves-accent accent-text">
 						<i class="material-icons">delete_forever</i><br/>
-						ELIMINA CORSO
+						<span>ELIMINA CORSO</span>
 					</a>
 					</div>
 				</div>

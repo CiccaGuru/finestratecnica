@@ -149,7 +149,7 @@ while($lezione = $result->fetch_assoc()){
           <?php echo (num_iscritti($lezione["id"], $db)).'\\'.$lezione["maxIscritti"];?>
         </div>
         <div class="col valign s12 m3">
-          <a class="btn accent valign white-text waves-effect waves-light" onclick="getElenco(<?php echo $lezione["id"];?>)">Elenco studenti</a>
+          <a class="btn-flat accent-text center-align valign waves-effect waves-accent" onclick="getElenco(<?php echo $lezione["id"];?>)">Elenco studenti</a>
         </div>
     </div>
       <?php

@@ -97,9 +97,9 @@ function getElenco(idLezione){
       if(data == "LOGINPROBLEM"){
         window.location = "index.php";
       }
-        window.location.href = "include/"+data;
-        console.log(data);
-    });
+        var win = window.open("include/"+data, '_blank');
+        win.focus();
+      });
 }
 
 (function($){
@@ -196,8 +196,11 @@ function getElenco(idLezione){
          });
          setTimeout(function(){
            $("#btn-eliminaCorso i").fadeOut();
+           $("#btn-eliminaCorso span").fadeOut();
            setTimeout(function(){
-             $("#btn-eliminaCorso i").html("arrow_back").fadeIn(); }, 300);
+             $("#btn-eliminaCorso i").html("arrow_back").fadeIn();
+             $("#btn-eliminaCorso span").html("INDIETRO").fadeIn();
+            }, 300);
          }, 200);
 
          fatto=1;
@@ -210,8 +213,11 @@ function getElenco(idLezione){
          });
          setTimeout(function(){
            $("#btn-eliminaCorso i").fadeOut();
+           $("#btn-eliminaCorso span").fadeOut();
            setTimeout(function(){
-             $("#btn-eliminaCorso i").html("delete_forever").fadeIn(); }, 300);
+             $("#btn-eliminaCorso i").html("delete_forever").fadeIn();
+              $("#btn-eliminaCorso span").html("ELIMINA CORSO").fadeIn();
+           }, 300);
          }, 200);
 
          fatto=0;
