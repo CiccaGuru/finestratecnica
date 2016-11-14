@@ -43,6 +43,7 @@ else{
       <li><a class="waves-effect waves-primary condensed primary-text" href="gestisciDocenti.php">DOCENTI</a></li>
       <li><a class="waves-effect waves-primary condensed primary-text" href="gestisciCorsi.php">CORSI</a></li>
       <li><a class="waves-effect waves-primary condensed primary-text" href="gestisciClassi.php">CLASSI</a></li>
+      	<li><a href="impostazioni.php" class="waves-effect waves-light condensed"><i class="material-icons">settings</i></a></li>
       <li><a class="waves-effect waves-primary condensed primary-text" href="gestisciAule.php">AULE</a></li>
     </ul>
     <div class="navbar-fixed">

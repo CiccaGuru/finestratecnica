@@ -14,6 +14,10 @@ h3
   margin-bottom:1em;
 }
 
+body{
+  height:100%;
+}
+
 .contatore{
   font-size:150%;
 }
@@ -59,4 +63,60 @@ h5{
 #collectionCorsiIncompatibili .collection-item.hover:hover,
 #collectionCorsiObbligatori .collection-item.hover:hover{
   background-color: #ddd;
+}
+
+#total{
+  display:flex;
+  height:100%;
+  flex-direction:column;
+  align-items: stretch;
+  align-content: stretch;
+}
+
+.wrapper {
+  display: flex;
+  flex:1 1 auto;
+  flex-direction: row;
+  align-items: stretch;
+  align-content: stretch;
+}
+
+#side{
+  flex-grow: 1;
+  flex-basis: auto;
+  display:flex;
+  flex-direction:column;
+}
+
+.setting-trigger{
+  padding:0.8em 1.4em;
+  font-size:120%;
+  transition: all 0.4s;
+  justify-content: space-around;
+  display: inline-flex;
+  justify-content: flex-start;
+  vertical-align: middle;
+}
+
+.setting-trigger:hover{
+  background: #e0e0e0;
+}
+
+.setting-trigger i{
+  margin-right:1em;
+}
+
+#main {
+  flex-grow: 6;
+  flex-basis: auto;
+  margin:1em;
+  padding:1em;
+}
+
+.huge{
+  font-size:2000%;
+}
+
+.big-text{
+  font-size:150%;
 }

@@ -54,6 +54,7 @@ $db = database_connect();
 					<ul id="nav-mobile" class="right hide-on-med-and-down">
 						<li class="active"><a href="admin.php" class="waves-effect waves-light condensed">HOME</a></li>
 						<li><a href="#!" class="dropdown-button waves-effect active waves-light condensed" data-beloworigin="true" data-hover="true" data-activates="utenti-dropDown">GESTISCI<i class="material-icons right">arrow_drop_down</i></a></li>
+												<li><a href="impostazioni.php" class="waves-effect waves-light condensed"><i class="material-icons">settings</i></a></li>
 						<li><a href="include/logout.php" class="waves-effect waves-light condensed"><i class="material-icons left">exit_to_app</i>LOGOUT</a></li>
 					</ul>
 				</div>
