@@ -388,7 +388,7 @@ $db = database_connect();
 	?>
 
 	<!--  Scripts-->
-	<script src="js/jquery-2.1.4.min.js"></script>
+	<script src="js/jquery-3.1.1.min.js"></script>
 	<script src="js/materialize.js"></script>
 	<script src="js/jquery-ui.min.js"></script>
 	<script src="js/jquery.cookie.js"></script>

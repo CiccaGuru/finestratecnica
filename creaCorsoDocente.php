@@ -188,8 +188,26 @@ $db = database_connect();
 </div>
 </div>
 </div>
+
+<?php
+if(($dettagliUtente["primoAccesso"])&&!($dettagliUtente["passwordOriginale"])){
+	?><script>$("#modal-help").modal("open");</script><?php
+}
+if($dettagliUtente["primoAccesso"]){
+	$result = $db->query("UPDATE utenti SET primoAccesso = '0' where id = '$utente'");
+}
+?>
+
+<div id="wait" class="center-align">
+	<div id="contenuto-wait" class="center-align" style="position:relative; top:15%;">
+		<i class="material-icons green-text light" style="font-size:1500%;">check_circle</i><br/>
+		<div class="white-text condensed light" style="font-size:200%; margin-bottom:1em;">Il corso è stato aggiunto con successo.</div>
+		<a href="docente.php" class='waves-effect waves-light btn-large primary condensed'>Continua</a>"
+	</div>
+</div>
+
 <!--  Scripts-->
-<script src="js/jquery-2.1.4.min.js"></script>
+<script src="js/jquery-3.1.1.min.js"></script>
 <script src="js/materialize.js"></script>
 <script src="js/jquery-ui.min.js"></script>
 <script src="js/jquery.cookie.js"></script>
@@ -212,23 +230,6 @@ $(window).on('beforeunload', function(){
 });
 
 </script>
-
-<?php
-if(($dettagliUtente["primoAccesso"])&&!($dettagliUtente["passwordOriginale"])){
-	?><script>$("#modal-help").modal("open");</script><?php
-}
-if($dettagliUtente["primoAccesso"]){
-	$result = $db->query("UPDATE utenti SET primoAccesso = '0' where id = '$utente'");
-}
-?>
-
-<div id="wait" class="center-align">
-	<div id="contenuto-wait" class="center-align" style="position:relative; top:15%;">
-		<i class="material-icons green-text light" style="font-size:1500%;">check_circle</i><br/>
-		<div class="white-text condensed light" style="font-size:200%; margin-bottom:1em;">Il corso è stato aggiunto con successo.</div>
-		<a href="docente.php" class='waves-effect waves-light btn-large primary condensed'>Continua</a>"
-	</div>
-</div>
 
 </body>
 </html>

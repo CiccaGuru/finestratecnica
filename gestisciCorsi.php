@@ -310,13 +310,11 @@ else{
       </div>
     </div>
   </div>
-  <script src="js/jquery-2.1.4.min.js"></script>
+  <script src="js/jquery-3.1.1.min.js"></script>
   <script src="js/materialize.js"></script>
   <script src="js/init.js"></script>
   <script src="js/gestisciCorsi.js"></script>
-
-  <button class="material-scrolltop" type="button"><i class="material-icons white-text">keyboard_arrow_up</i></button>
-
+<script src="https://code.jquery.com/jquery-migrate-3.0.0.js"></script>
   <!-- material-scrolltop plugin -->
   <script src="js/material-scrolltop.js"></script>
 
