@@ -71,6 +71,8 @@ h5{
   flex-direction:column;
   align-items: stretch;
   align-content: stretch;
+  min-height: min-content;
+  min-height: -webkit-min-content;
 }
 
 .wrapper {
@@ -82,7 +84,7 @@ h5{
 }
 
 #side{
-  flex-grow: 1;
+  width:20%;
   flex-basis: auto;
   display:flex;
   flex-direction:column;
@@ -107,7 +109,7 @@ h5{
 }
 
 #main {
-  flex-grow: 6;
+  width:80%;
   flex-basis: auto;
   margin:1em;
   padding:1em;
@@ -119,4 +121,324 @@ h5{
 
 .big-text{
   font-size:150%;
+}
+
+#aspetto{
+  display:none;
+}
+
+.colorpicker{
+  display:flex;
+  flex-direction:column;
+}
+
+.maincolor{
+  display:flex;
+  flex-direction: column;
+}
+
+.listaColori{
+  display:flex;
+  flex-direction:row;
+  justify-content: center;
+  padding-top:0.15em;
+  padding-bottom:0.15em;
+}
+
+.materialPickerCheck:checked + label:after{
+  padding:2.4px;
+  background-clip:content-box;
+  border-style:solid;
+  border-width: 1.5px;
+   -webkit-transform: scale(1.6);
+            transform: scale(1.6);
+  transition: all 0.2s ease;
+}
+
+.redCheck:not(:checked) + label:before,
+.redCheck:not(:checked) + label:after{
+  border: 1.5px solid #F44336 !important;
+  background-color: #F44336 !important;
+}
+
+.pinkCheck:not(:checked) + label:before,
+.pinkCheck:not(:checked) + label:after{
+  border: 1.5px solid #E91E63 !important;
+  background-color: #E91E63 !important;
+
+}
+
+.purpleCheck:not(:checked) + label:before,
+.purpleCheck:not(:checked) + label:after{
+  border: 1.5px solid #9C27B0 !important;
+  background-color: #9C27B0 !important;
+}
+
+.deep-purpleCheck:not(:checked) + label:before,
+.deep-purpleCheck:not(:checked) + label:after{
+  border: 1.5px solid #673AB7 !important;
+  background-color: #673AB7 !important;
+}
+
+.indigoCheck:not(:checked) + label:before,
+.indigoCheck:not(:checked) + label:after{
+  border: 1.5px solid #3F51B5 !important;
+  background-color: #3F51B5 !important;
+}
+
+.blueCheck:not(:checked) + label:before,
+.blueCheck:not(:checked) + label:after{
+  border: 1.5px solid #2196F3 !important;
+  background-color: #2196F3 !important;
+}
+
+.light-blueCheck:not(:checked) + label:before,
+.light-blueCheck:not(:checked) + label:after{
+  border: 1.5px solid #03A9F4 !important;
+  background-color: #03A9F4 !important;
+}
+
+.cyanCheck:not(:checked) + label:before,
+.cyanCheck:not(:checked) + label:after{
+  border: 1.5px solid #00BCD4 !important;
+  background-color: #00BCD4 !important;
+}
+
+.tealCheck:not(:checked) + label:before,
+.tealCheck:not(:checked) + label:after{
+  border: 1.5px solid #009688 !important;
+  background-color: #009688 !important;
+}
+
+.greenCheck:not(:checked) + label:before,
+.greenCheck:not(:checked) + label:after{
+  border: 1.5px solid #4CAF50 !important;
+  background-color: #4CAF50 !important;
+}
+
+.light-greenCheck:not(:checked) + label:before,
+.light-greenCheck:not(:checked) + label:after{
+  border: 1.5px solid #8BC34A !important;
+  background-color: #8BC34A !important;
+}
+
+.limeCheck:not(:checked) + label:before,
+.limeCheck:not(:checked) + label:after{
+  border: 1.5px solid #CDDC39 !important;
+  background-color: #CDDC39 !important;
+}
+
+.yellowCheck:not(:checked) + label:before,
+.yellowCheck:not(:checked) + label:after{
+  border: 1.5px solid #FFEB3B !important;
+  background-color: #FFEB3B !important;
+}
+
+.amberCheck:not(:checked) + label:before,
+.amberCheck:not(:checked) + label:after{
+  border: 1.5px solid #FFC107 !important;
+  background-color: #FFC107 !important;
+}
+
+.orangeCheck:not(:checked) + label:before,
+.orangeCheck:not(:checked) + label:after{
+  border: 1.5px solid #FF9800 !important;
+  background-color: #FF9800 !important;
+}
+
+.deep-orangeCheck:not(:checked) + label:before,
+.deep-orangeCheck:not(:checked) + label:after{
+  border: 1.5px solid #FF5722 !important;
+  background-color: #FF5722 !important;
+}
+
+.brownCheck:not(:checked) + label:before,
+.brownCheck:not(:checked) + label:after{
+  border: 1.5px solid #795548 !important;
+  background-color: #795548 !important;
+}
+
+.greyCheck:not(:checked) + label:before,
+.greyCheck:not(:checked) + label:after{
+  border: 1.5px solid #9E9E9E !important;
+  background-color: #9E9E9E !important;
+}
+
+.blackCheck:not(:checked) + label:before,
+.blackCheck:not(:checked) + label:after{
+  border: 1.5px solid #000 !important;
+  background-color: #000 !important;
+}
+
+.blue-greyCheck:not(:checked) + label:before,
+.blue-greyCheck:not(:checked) + label:after{
+  border: 1.5px solid #607D8B !important;
+  background-color: #607D8B !important;
+}
+
+
+.redCheck:checked + label:after{
+  border: 1.5px solid #F44336 !important;
+  background-color: #F44336 !important;
+}
+
+.pinkCheck:checked + label:after{
+  border: 1.5px solid #E91E63 !important;
+  background-color: #E91E63 !important;
+
+}
+
+.purpleCheck:checked + label:after{
+  border: 1.5px solid #9C27B0 !important;
+  background-color: #9C27B0 !important;
+}
+
+.deep-purpleCheck:checked + label:after{
+  border: 1.5px solid #673AB7 !important;
+  background-color: #673AB7 !important;
+}
+
+.indigoCheck:checked + label:after{
+  border: 1.5px solid #3F51B5 !important;
+  background-color: #3F51B5 !important;
+}
+
+.blueCheck:checked + label:after{
+  border: 1.5px solid #2196F3 !important;
+  background-color: #2196F3 !important;
+}
+
+.light-blueCheck:checked + label:after{
+  border: 1.5px solid #03A9F4 !important;
+  background-color: #03A9F4 !important;
+}
+
+.cyanCheck:checked + label:after{
+  border: 1.5px solid #00BCD4 !important;
+  background-color: #00BCD4 !important;
+}
+
+.tealCheck:checked + label:after{
+  border: 1.5px solid #009688 !important;
+  background-color: #009688 !important;
+}
+
+.greenCheck:checked + label:after{
+  border: 1.5px solid #4CAF50 !important;
+  background-color: #4CAF50 !important;
+}
+
+.light-greenCheck:checked + label:after{
+  border: 1.5px solid #8BC34A !important;
+  background-color: #8BC34A !important;
+}
+
+.limeCheck:checked + label:after{
+  border: 1.5px solid #CDDC39 !important;
+  background-color: #CDDC39 !important;
+}
+
+.yellowCheck:checked + label:after{
+  border: 1.5px solid #FFEB3B !important;
+  background-color: #FFEB3B !important;
+}
+
+.amberCheck:checked + label:after{
+  border: 1.5px solid #FFC107 !important;
+  background-color: #FFC107 !important;
+}
+
+.orangeCheck:checked + label:after{
+  border: 1.5px solid #FF9800 !important;
+  background-color: #FF9800 !important;
+}
+
+.deep-orangeCheck:checked + label:after{
+  border: 1.5px solid #FF5722 !important;
+  background-color: #FF5722 !important;
+}
+
+.brownCheck:checked + label:after{
+  border: 1.5px solid #795548 !important;
+  background-color: #795548 !important;
+}
+
+.greyCheck:checked + label:after{
+  border: 1.5px solid #9E9E9E !important;
+  background-color: #9E9E9E !important;
+}
+
+.blue-greyCheck:checked + label:after{
+  border: 1.5px solid #607D8B !important;
+  background-color: #607D8B !important;
+}
+
+.blackCheck:checked + label:after{
+  border: 1.5px solid #000 !important;
+  background-color: #000 !important;
+}
+
+.colorpicker{
+  display:flex;
+  flex-direction: row;
+  align-items: stretch;
+  background:white !important;
+  box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -1px rgba(0, 0, 0, 0.2);
+}
+.variations{
+  display:flex;
+  flex:1;
+  flex-direction:column;
+  justify-content: center;
+  text-align: center;
+}
+
+.variation{
+    flex: 1;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    cursor:pointer;
+    flex-grow:1;
+    transition:all 0.2s ease;
+}
+
+.variation:hover{
+  flex-grow:1.5;
+}
+
+.variation .detail{
+  display:flex;
+  flex-direction:row;
+  justify-content: space-around;
+}
+
+.variations .noColor{
+  font-size:170%;
+  color: #757575;
+  align-items: stretch;
+}
+
+.maincolor{
+  padding:1.5em;
+}
+
+.actual-container{
+  display:flex;
+  flex-direction:row;
+  justify-content: space-around;
+  align-items:stretch;
+  margin-bottom:1em;
+  margin-top:0.5em;
+}
+
+.actual{
+  padding:0.5em;
+  color:#fff;
+}
+
+.actual-container div{
+  display:flex;
+  flex-direction:column;
+  justify-content: center;
 }

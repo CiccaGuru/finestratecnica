@@ -22,8 +22,8 @@ $db = database_connect();
 	<title>Admin - Home</title>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen"/>
-	<link href="css/admin.css" type="text/css" rel="stylesheet" media="screen"/>
 	<link href="css/style.php" type="text/css" rel="stylesheet" media="screen"/>
+	<link href="css/admin.css" type="text/css" rel="stylesheet" media="screen"/>
 	<link rel="stylesheet" href="css/circle.php">
 	<link rel="apple-touch-icon" sizes="180x180" href="/img/favicons/apple-touch-icon.png">
 <link rel="icon" type="image/png" href="/img/favicons/favicon-32x32.png" sizes="32x32">
@@ -65,13 +65,197 @@ $db = database_connect();
 	<div class="wrapper">
 
 		<div id="side" class="z-depth-1 white grey-text text-darken-3 condensed">
-				<div class="setting-trigger waves-effect"><i class="material-icons">color_lens</i>Aspetto</div>
-				<div class="setting-trigger waves-effect"><i class="material-icons">access_time</i>Orario</div>
-				<div class="setting-trigger waves-effect"><i class="material-icons">storage</i>Database</div>
+				<div id="aspettoTrigger" class="setting-trigger waves-effect"><i class="material-icons">color_lens</i>Aspetto</div>
+				<div id="orarioTrigger" class="setting-trigger waves-effect"><i class="material-icons">access_time</i>Orario</div>
+				<div id="databaseTrigger" class="setting-trigger waves-effect"><i class="material-icons">storage</i>Database</div>
 		</div>
 		<div id="main">
+			<div id="cover">
 				<p class="center-align grey-text text-darken-1"><i class="material-icons huge">settings</i></p>
 				<p class="big-text center-align grey-text grey-darken-1" >Scegli una categoria dal menu a lato<p>
+			</div>
+			<div id="aspetto">
+				<h3 class="primary-text condensed" style="margin-top:0px;">Modifica aspetto</h3>
+				<p>Finestratecnica rispetta le Linee Guida Material Design. Per questo motivo è basata su due colori,
+					un colore principale (primary) ed uno secondario, usato in elementi isolati (accent). Vengono usate anche delle sfumature più
+					chiare e scure, per favorire la leggibilità.
+				</p>
+				<section>
+					<h4 class="primary-text condensed">Primary</h4>
+					  <div class="row">
+							<div class="col s4">
+								<div class="description">
+									<h5 class="primary-text condensed">Primary color</h5>
+									<div>E' il colore principale del sito</div>
+									<div class="actual-container">
+										<div>Valore attuale:</div>
+										<div class="actual" style="color: <?php echo getProp("primaryText");?>; background-color: <?php echo getProp("primaryColor");?>;"><?php echo getProp("primaryColor");?></div>
+									</div>
+								</div>
+								<div id="primaryColor" class="colorpicker">
+									<div class="maincolor">
+									</div>
+									<div class="variations">
+									</div>
+								</div>
+							</div>
+							<div class="col s4">
+								<div class="description">
+									<h5 class="primary-text condensed">Primary color light</h5>
+									<div>La sfumatura chiara del colore principale</div>
+									<div class="actual-container">
+										<div>Valore attuale:</div>
+										<div class="actual" style="color: <?php echo getProp("primaryLightText");?>; background-color:<?php echo getProp("primaryColorLight");?>;"><?php echo getProp("primaryColorLight");?></div>
+									</div>
+								</div>
+								<div id="primaryColorLight" class="colorpicker">
+									<div class="maincolor">
+									</div>
+									<div class="variations">
+									</div>
+								</div>
+							</div>
+							<div class="col s4">
+								<div class="description">
+									<h5 class="primary-text condensed">Primary color dark</h5>
+									<div>La sfumatura scura del colore principale</div>
+									<div class="actual-container">
+										<div>Valore attuale:</div>
+										<div class="actual" style="color: <?php echo getProp("primaryDarkText");?>; background-color:<?php echo getProp("primaryColorDark");?>;"><?php echo getProp("primaryColorDark");?></div>
+									</div>
+								</div>
+								<div id="primaryColorDark" class="colorpicker">
+									<div class="maincolor">
+									</div>
+									<div class="variations">
+									</div>
+								</div>
+							</div>
+					  </div>
+						<div class="row">
+							<div class="col s4">
+								<div class="description">
+									<h5 class="primary-text condensed">Primary color darkest</h5>
+									<div>La sfumatura scurissima del colore principale</div>
+									<div class="actual-container">
+										<div>Valore attuale:</div>
+										<div class="actual" style="color: <?php echo getProp("primaryDarkText");?>; background-color:<?php echo getProp("primaryColorDarkest");?>;"><?php echo getProp("primaryColorDarkest");?></div>
+									</div>
+								</div>
+								<div id="primaryColorDarkest" class="colorpicker">
+									<div class="maincolor">
+									</div>
+									<div class="variations">
+									</div>
+								</div>
+							</div>
+							<div class="col s4">
+								<div class="description">
+									<h5 class="primary-text condensed">Primary text</h5>
+									<div>Il colore del testo abbinato al colore principale</div>
+									<div class="actual-container">
+										<div>Valore attuale:</div>
+										<div class="actual" style="color: <?php echo getProp("primaryText");?>; background-color:<?php echo getProp("primaryColor");?>;"><?php echo getProp("primaryText");?></div>
+									</div>
+								</div>
+								<div id="primaryText" class="colorpicker">
+									<div class="maincolor">
+									</div>
+									<div class="variations">
+									</div>
+								</div>
+							</div>
+							<div class="col s4">
+								<div class="description">
+									<h5 class="primary-text condensed">Primary text light</h5>
+									<div>Il colore del testo della sfumatura chiara</div>
+									<div class="actual-container">
+										<div>Valore attuale:</div>
+										<div class="actual" style="color: <?php echo getProp("primaryLightText");?>; background-color:<?php echo getProp("primaryColorLight");?>;"><?php echo getProp("primaryLightText");?></div>
+									</div>
+								</div>
+								<div id="primaryLightText" class="colorpicker">
+									<div class="maincolor">
+									</div>
+									<div class="variations">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col s4 offset-s4">
+								<div class="description">
+									<h5 class="primary-text condensed">Primary text dark</h5>
+									<div>Il colore del testo della sfumatura scura</div>
+									<div class="actual-container">
+										<div>Valore attuale:</div>
+										<div class="actual" style="color: <?php echo getProp("primaryDarkText");?>; background-color:<?php echo getProp("primaryColorDark");?>;"><?php echo getProp("primaryDarkText");?></div>
+									</div>
+								</div>
+								<div id="primaryDarkText" class="colorpicker">
+									<div class="maincolor">
+									</div>
+									<div class="variations">
+									</div>
+								</div>
+							</div>
+						</div>
+				</section>
+
+				<section>
+					<h4 class="accent-text condensed">Accent</h4>
+					<div class="row">
+						<div class="col s4">
+							<div class="description">
+								<h5 class="accent-text condensed">Accent color</h5>
+								<div>E' il colore secondario del sito</div>
+								<div class="actual-container">
+									<div>Valore attuale:</div>
+									<div class="actual" style="color: <?php echo getProp("accentText");?>; background-color: <?php echo getProp("accentColor");?>;"><?php echo getProp("accentColor");?></div>
+								</div>
+							</div>
+							<div id="accentColor" class="colorpicker">
+								<div class="maincolor">
+								</div>
+								<div class="variations">
+								</div>
+							</div>
+						</div>
+						<div class="col s4">
+							<div class="description">
+								<h5 class="accent-text condensed">Accent color light</h5>
+								<div>La sfumatura chiara del colore secondario</div>
+								<div class="actual-container">
+									<div>Valore attuale:</div>
+									<div class="actual" style="color: <?php echo getProp("accentText");?>; background-color:<?php echo getProp("accentColorLight");?>;"><?php echo getProp("accentColorLight");?></div>
+								</div>
+							</div>
+							<div id="accentColorLight" class="colorpicker">
+								<div class="maincolor">
+								</div>
+								<div class="variations">
+								</div>
+							</div>
+						</div>
+						<div class="col s4">
+							<div class="description">
+								<h5 class="accent-text condensed">Accent text</h5>
+								<div>Il colore del testo del colore secondario</div>
+								<div class="actual-container">
+									<div>Valore attuale:</div>
+									<div class="actual" style="color: <?php echo getProp("accentText");?>; background-color:<?php echo getProp("accentColor");?>;"><?php echo getProp("accentText");?></div>
+								</div>
+							</div>
+							<div id="accentText" class="colorpicker">
+								<div class="maincolor">
+								</div>
+								<div class="variations">
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
 		</div>
 	</div>
 </div>
@@ -93,7 +277,7 @@ $db = database_connect();
 		<script src="js/jquery-2.1.4.min.js"></script>
 	  <script src="js/materialize.js"></script>
 	  <script src="js/init.js"></script>
-	  <script src="js/admin.js"></script>
+	  <script src="js/impostazioni.js"></script>
 
 		</body>
 		</html>

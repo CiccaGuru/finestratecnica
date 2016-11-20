@@ -1,6 +1,8 @@
 <?php
 require_once("config.php");
 
+
+
 function database_connect(){
 	global $_CONFIG;
 	$db = new mysqli($_CONFIG['db_host'], $_CONFIG['db_user'], $_CONFIG['db_password'], $_CONFIG['db_name']);
@@ -11,6 +13,24 @@ function database_connect(){
 	{
 		return $db;
 	}
+}
+
+function getProp($prop){
+	$db = database_connect();
+	$result = $db->query("SELECT value from impostazioni where prop = '$prop'") or die($db->error);
+	$valore = $result->fetch_assoc();
+	if((string)(int)$valore["value"] == $valore["value"]) {
+    return (int)$valore["value"];
+	}
+	else{
+		return $valore["value"];
+	}
+}
+
+function setProp($prop, $value){
+	$db = database_connect();
+	$result = $db->query("UPDATE impostazioni SET value = '$value' WHERE prop='$prop'") or die($db->error);
+	return 1;
 }
 
 function secure($string){
