@@ -1,0 +1,424 @@
+[
+  {
+        "color": "Red",
+        "nickname":"red",
+        "variations": [
+            {
+                "weight": 100,
+                "hex": "#FFCDD2"
+            },
+            {
+                "weight": 200,
+                "hex": "#EF9A9A"
+            },
+            {
+                "weight": 300,
+                "hex": "#E57373"
+            },
+            {
+                "weight": 400,
+                "hex": "#EF5350"
+            },
+            {
+                "weight": 500,
+                "hex": "#F44336"
+            },
+            {
+                "weight": 600,
+                "hex": "#E53935"
+            },
+            {
+                "weight": 700,
+                "hex": "#D32F2F"
+            },
+            {
+                "weight": 800,
+                "hex": "#C62828"
+            },
+            {
+                "weight": 900,
+                "hex": "#B71C1C"
+            }
+        ]
+    },
+    {
+        "color": "Pink",
+        "nickname":"pink",
+        "variations": [
+            {
+                "weight": 100,
+                "hex": "#F8BBD0"
+            },
+            {
+                "weight": 200,
+                "hex": "#F48FB1"
+            },
+            {
+                "weight": 300,
+                "hex": "#F06292"
+            },
+            {
+                "weight": 400,
+                "hex": "#EC407A"
+            },
+            {
+                "weight": 500,
+                "hex": "#E91E63"
+            },
+            {
+                "weight": 600,
+                "hex": "#D81B60"
+            },
+            {
+                "weight": 700,
+                "hex": "#C2185B"
+            },
+            {
+                "weight": 800,
+                "hex": "#AD1457"
+            },
+            {
+                "weight": 900,
+                "hex": "#880E4F"
+            }
+        ]
+    },
+    {
+        "color": "Purple",
+        "nickname":"purple",
+        "variations": [
+            {
+                "weight": 100,
+                "hex": "#E1BEE7"
+            },
+            {
+                "weight": 200,
+                "hex": "#CE93D8"
+            },
+            {
+                "weight": 300,
+                "hex": "#BA68C8"
+            },
+            {
+                "weight": 400,
+                "hex": "#AB47BC"
+            },
+            {
+                "weight": 500,
+                "hex": "#9C27B0"
+            },
+            {
+                "weight": 600,
+                "hex": "#8E24AA"
+            },
+            {
+                "weight": 700,
+                "hex": "#7B1FA2"
+            },
+            {
+                "weight": 800,
+                "hex": "#6A1B9A"
+            },
+            {
+                "weight": 900,
+                "hex": "#4A148C"
+            }
+        ]
+    },
+    {
+        "color": "Blue",
+        "nickname":"blue",
+        "variations": [
+            {
+                "weight": 100,
+                "hex": "#BBDEFB"
+            },
+            {
+                "weight": 200,
+                "hex": "#90CAF9"
+            },
+            {
+                "weight": 301,
+                "hex": "#4FC3F7"
+            },
+            {
+              "weight": 401,
+              "hex": "#29B6F6"
+            },
+            {
+                "weight": 500,
+                "hex": "#2196F3"
+            },
+            {
+                "weight": 600,
+                "hex": "#1E88E5"
+            },
+            {
+                "weight": 700,
+                "hex": "#1976D2"
+            },
+            {
+                "weight": 800,
+                "hex": "#1565C0"
+            },
+
+            {
+                "weight": 900,
+                "hex": "#0D47A1"
+            }
+        ]
+    },
+    {
+        "color": "Teal",
+        "nickname":"teal",
+        "variations": [
+            {
+                "weight": 100,
+                "hex": "#B2DFDB"
+            },
+            {
+                "weight": 200,
+                "hex": "#80CBC4"
+            },
+            {
+                "weight": 300,
+                "hex": "#4DB6AC"
+            },
+            {
+                "weight": 400,
+                "hex": "#26A69A"
+            },
+            {
+                "weight": 500,
+                "hex": "#009688"
+            },
+            {
+                "weight": 600,
+                "hex": "#00897B"
+            },
+            {
+                "weight": 700,
+                "hex": "#00796B"
+            },
+            {
+                "weight": 800,
+                "hex": "#00695C"
+            },
+            {
+                "weight": 900,
+                "hex": "#004D40"
+            }
+        ]
+    },
+    {
+        "color": "Green",
+        "nickname":"green",
+        "variations": [
+            {
+                "weight": 100,
+                "hex": "#C8E6C9"
+            },
+            {
+                "weight": 200,
+                "hex": "#A5D6A7"
+            },
+            {
+                "weight": 300,
+                "hex": "#81C784"
+            },
+
+            {
+                "weight": 400,
+                "hex": "#66BB6A"
+            },
+            {
+                "weight": 500,
+                "hex": "#4CAF50"
+            },
+            {
+                "weight": 600,
+                "hex": "#43A047"
+            },
+            {
+                "weight": 700,
+                "hex": "#388E3C"
+            },
+            {
+                "weight": 800,
+                "hex": "#2E7D32"
+            },
+            {
+                "weight": 900,
+                "hex": "#1B5E20"
+            }
+        ]
+    },
+    {
+        "color": "Yellow",
+        "nickname":"yellow",
+        "variations": [
+            {
+                "weight": 100,
+                "hex": "#FFF9C4"
+            },
+            {
+                "weight": 200,
+                "hex": "#FFF59D"
+            },
+            {
+                "weight": 300,
+                "hex": "#FFF176"
+            },
+            {
+                "weight": 400,
+                "hex": "#FFEE58"
+            },
+            {
+                "weight": 500,
+                "hex": "#FFEB3B"
+            },
+            {
+                "weight": 600,
+                "hex": "#FDD835"
+            },
+            {
+                "weight": 700,
+                "hex": "#FBC02D"
+            },
+            {
+                "weight": 800,
+                "hex": "#F9A825"
+            },
+            {
+                "weight": 900,
+                "hex": "#F57F17"
+            }
+        ]
+    },
+    {
+        "color": "Orange",
+        "nickname":"deep-orange",
+        "variations": [
+          {
+              "weight": 100,
+              "hex": "#FFCCBC"
+          },
+          {
+              "weight": 200,
+              "hex": "#FFAB91"
+          },
+          {
+              "weight": 300,
+              "hex": "#FF8A65"
+          },
+          {
+              "weight": 400,
+              "hex": "#FF7043"
+          },
+          {
+              "weight": 500,
+              "hex": "#FF5722"
+          },
+          {
+              "weight": 600,
+              "hex": "#F4511E"
+          },
+          {
+              "weight": 700,
+              "hex": "#E64A19"
+          },
+          {
+              "weight": 800,
+              "hex": "#D84315"
+          },
+          {
+              "weight": 900,
+              "hex": "#BF360C"
+          }
+        ]
+    },
+    {
+        "color": "Brown",
+        "nickname":"brown",
+        "variations": [
+            {
+                "weight": 100,
+                "hex": "#D7CCC8"
+            },
+            {
+                "weight": 200,
+                "hex": "#BCAAA4"
+            },
+            {
+                "weight": 300,
+                "hex": "#A1887F"
+            },
+            {
+                "weight": 400,
+                "hex": "#8D6E63"
+            },
+            {
+                "weight": 500,
+                "hex": "#795548"
+            },
+            {
+                "weight": 600,
+                "hex": "#6D4C41"
+            },
+            {
+                "weight": 700,
+                "hex": "#5D4037"
+            },
+            {
+                "weight": 800,
+                "hex": "#4E342E"
+            },
+            {
+                "weight": 900,
+                "hex": "#3E2723"
+            }
+        ]
+    },
+    {
+        "color": "Grey",
+        "nickname":"grey",
+        "variations": [
+            {
+                "weight": 100,
+                "hex": "#F5F5F5"
+            },
+            {
+                "weight": 200,
+                "hex": "#EEEEEE"
+            },
+            {
+                "weight": 300,
+                "hex": "#E0E0E0"
+            },
+            {
+                "weight": 400,
+                "hex": "#BDBDBD"
+            },
+            {
+                "weight": 500,
+                "hex": "#9E9E9E"
+            },
+            {
+                "weight": 600,
+                "hex": "#757575"
+            },
+            {
+                "weight": 700,
+                "hex": "#616161"
+            },
+            {
+                "weight": 800,
+                "hex": "#424242"
+            },
+            {
+                "weight": 900,
+                "hex": "#212121"
+            }
+        ]
+    }
+]
