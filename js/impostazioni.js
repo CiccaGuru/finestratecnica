@@ -167,11 +167,10 @@ function getDarkest(main, position){
               $.each(color["variations"], function(index, variation) {
                 var forecolor = getTextColor(variation["hex"]);
                 var waves = getWavesColor(variation["hex"]);
-                luma = getLuma(variation["hex"]);
                 html +='<div data-hex="'+variation["hex"]+'" data-target="'+$(colorpicker).data("prop")+'" class="variation waves-effect '+waves+'" style="background-color:'+variation["hex"]+'">\
                           <div class="detail condensed" style="color: '+forecolor+'; ">\
                             <div>'+variation["hex"]+'</div>\
-                            <div class="bold">'+/*variation["weight"]*/luma+'</div>\
+                            <div class="bold">'+variation["weight"]+'</div>\
                         </div></div>';
               });
               $(".variations", $(colorpicker))
