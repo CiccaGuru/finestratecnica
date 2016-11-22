@@ -313,7 +313,6 @@ else{
   <script src="js/materialize.js"></script>
   <script src="js/init.js"></script>
   <script src="js/gestisciCorsi.js"></script>
-<script src="https://code.jquery.com/jquery-migrate-3.0.0.js"></script>
   <!-- material-scrolltop plugin -->
   <script src="js/material-scrolltop.js"></script>
 

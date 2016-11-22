@@ -259,7 +259,7 @@ function coincideCorso($idCorso, $db, $utente){
 }
 
 function getStringaOra($ora){
-	$numGiorno = (int) ($ora / getProp("ore_per_giorno")+1;
+	$numGiorno = (int) ($ora / getProp("ore_per_giorno")+1);
 	$numOra = $ora % (getProp("ore_per_giorno"));
 	if($numOra == 0){
 		$numOra = 6;
@@ -269,7 +269,7 @@ function getStringaOra($ora){
 }
 
 function getStringaOraBreve($ora){
-	$numGiorno = (int) ($ora / getProp("ore_per_giorno")+1;
+	$numGiorno = (int) ($ora / getProp("ore_per_giorno")+1);
 	$numOra = $ora % getProp("ore_per_giorno");
 	if($numOra == 0){
 		$numOra = 6;
