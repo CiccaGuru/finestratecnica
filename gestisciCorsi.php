@@ -1,7 +1,6 @@
 <?php
 require_once('include/funzioni.php'); // Includes Login Script
 include 'include/config.php';
-global $_CONFIG;
 
 $utente = check_login();
 if($utente==-1){

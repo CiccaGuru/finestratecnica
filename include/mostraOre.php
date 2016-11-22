@@ -16,7 +16,6 @@ if ($utente == -1) {
 $db = database_connect();
 $idCorso = $_POST['idCorso'];
 $ore = $_POST['ore'];
-global $_CONFIG;
 
 $result = $db->query("SELECT  corsi.titolo as titolo,
   corsi.descrizione as descrizione,

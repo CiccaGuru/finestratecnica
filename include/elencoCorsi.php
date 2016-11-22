@@ -1,6 +1,7 @@
 <?php
 require_once 'funzioni.php'; // Includes Login Script
 $utente = check_login();
+$db = database_connect();
 if ($utente == -1) {
   header('Location: index.php');
 } else {
@@ -39,14 +40,13 @@ else{
 
 $giorni = '';
 $ore_elenco = '';
-foreach ($_CONFIG['giorni'] as $num => $nome) {
+foreach (unserialize(getProp("giorni")) as $num => $nome) {
   $giorni .= '<option value="'.$num.'">'.$nome.'</option>';
 }
 
-for ($j = 1;$j <= $_CONFIG['ore_per_giorno'];++$j) {
+for ($j = 1;$j <= getProp('ore_per_giorno');++$j) {
   $ore_elenco .= '<option value="'.$j.'">'.$j.'^a ora</option>';
 }
-$db = database_connect();
 
 $query = "SELECT  corsi.titolo as titolo,
   corsi.descrizione as descrizione,

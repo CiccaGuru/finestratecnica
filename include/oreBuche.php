@@ -1,7 +1,6 @@
 <?php
 include 'funzioni.php';
 include("../mpdf60/mpdf.php");
-global $_CONFIG;
 $utente = check_login();
 if($utente==-1){
   die("LOGINPROBLEM");
@@ -19,7 +18,7 @@ if (file_exists('./tmp/orebuche')) {
 }
 mkdir('./tmp/orebuche', 0777, true);
 chmod("./tmp/orebuche", 0777);
-while($ora <= $_CONFIG["numero_giorni"]*$_CONFIG["ore_per_giorno"]){
+while($ora <= getProp("numero_giorni")*getProp("ore_per_giorno")){
 
   $result = $db->query("SELECT utenti.nome, utenti.cognome
                             from utenti

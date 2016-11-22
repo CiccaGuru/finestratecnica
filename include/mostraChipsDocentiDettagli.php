@@ -1,7 +1,6 @@
 <?php
 require_once 'funzioni.php'; // Includes Login Script
 include 'config.php';
-global $_CONFIG;
 $utente = check_login();
 if ($utente == -1) {
     header('Location: index.php');

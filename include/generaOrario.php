@@ -1,6 +1,5 @@
 <?php
 include 'funzioni.php';
-global $_CONFIG;
 $utente = check_login();
 if($utente==-1){
   die("LOGINPROBLEM");
@@ -14,14 +13,20 @@ else{
   }
 
   $db = database_connect();
-
+  $numero_giorni = getProp("numero_giorni");
+  $ore_per_giorno = getProp("ore_per_giorno");
+  $colori = unserialize(getProp("colori"));
+  $colore_testo = unserialize(getProp("colore_testo"));
+  $giorni = unserialize(getProp("giorni"));
+  $soglia_minima = getProp("soglia_minima");
+  $chiusura_iscrizioni = getProp("chiusura_iscrizioni");
   ?>
 
   <h4 class="light condensed letter-spacing-1 primary-text center" id="titoloOrario">IL TUO ORARIO</h3>
 
     <?php
     $result = $db->query("SELECT id from iscrizioni WHERE idUtente = '$utente' AND partecipa = '1' ") or die($db->error);
-    if($result->num_rows<$_CONFIG["soglia_minima"]){
+    if($result->num_rows<["soglia_minima"]){
       ?>
       <div class="center-align accent-text condensed" id="messaggioPocheOre">ATTENZIONE! DEVI COPRIRE ALMENO 17 ORE!</div>
       <?php
@@ -32,8 +37,8 @@ else{
       <thead>
         <th></th>
         <?php
-        for($i =1; $i<=$_CONFIG["numero_giorni"]; $i++){
-          $giorno = str_replace("ì", "i'", $_CONFIG["giorni"][$i]);
+        for($i =1; $i<=$numero_giorni; $i++){
+          $giorno = str_replace("ì", "i'", $giorni[$i]);
           echo '<th class="condensed letter-spacing-1">'.strtoupper($giorno).'</th>';
         }
         ?>
@@ -42,10 +47,10 @@ else{
         <?php
         $colori = array();
         $r = 0;
-        for($i = 1; $i<=$_CONFIG["ore_per_giorno"]; $i++){
+        for($i = 1; $i<=$ore_per_giorno; $i++){
           echo '<tr><td class="condensed">'.$i."</td>";
-          for($j=1; $j<=$_CONFIG["numero_giorni"];$j++){
-            $num = ($j-1)*$_CONFIG["ore_per_giorno"]+$i;
+          for($j=1; $j<=$numero_giorni;$j++){
+            $num = ($j-1)*$ore_per_giorno+$i;
             $result = $db->query("SELECT  iscrizioni.idCorso as idCorso,
                                           iscrizioni.idLezione as idLezione,
                                           corsi.continuita as continuita,
@@ -69,16 +74,16 @@ else{
                   $conta = $result->fetch_assoc();
                   if(!(in_array($iscrizione["idCorso"], $colori))){
                     $colori[$r]=$iscrizione["idCorso"];
-                    $bgcolor = $_CONFIG["colori"][$r];
-                    $fgcolor = $_CONFIG["colore-testo"][$r];
+                    $bgcolor = $colori[$r];
+                    $fgcolor = $colore_testo[$r];
                     $r++;
                   }
                   else{
                     $index = array_search($iscrizione["idCorso"], $colori);
-                    $bgcolor = $_CONFIG["colori"][$index];
-                    $fgcolor = $_CONFIG["colore-testo"][$index];
+                    $bgcolor = $colori[$index];
+                    $fgcolor = $colore_testo[$index];
                   }
-                  if((time()>$_CONFIG["chiusura_iscrizioni"]) && ($conta["conta"]>=$_CONFIG["soglia_minima"])){
+                  if((time()>$chiusura_iscrizioni) && ($conta["conta"]>=$soglia_minima)){
                     if(($resultContr->num_rows > 0)){
                       echo '<td class="cellaOrario" style="background-color: '.$bgcolor.'; color: '.$fgcolor.';" >'.$nomeCorso.'<span>Aula '.$aula.'</span></td>';
                     }

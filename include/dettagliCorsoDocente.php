@@ -1,7 +1,6 @@
 <?php
 include 'funzioni.php';
 include 'config.php';
-global $_CONFIG;
 
 $utente = check_login();
 $idCorso = $_POST["idCorso"];

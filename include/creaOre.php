@@ -3,15 +3,14 @@ include_once("config.php");
 include_once("funzioni.php");
 
 $ore=$_POST["ore"];
-global $_CONFIG;
 $giorni="<option value='' disabled selected>Scegli giorno</option>";
 $ore_elenco="<option value='' disabled selected>Scegli ora</option>";
 $aule = "<option value='' disabled selected>Scegli aula</option>";
-foreach($_CONFIG['giorni'] as $num=>$nome){
+foreach(unserialize(getProp("giorni")) as $num=>$nome){
 		$giorni .= '<option value="'.$num.'">'.$nome.'</option>';
 }
 
-for($j=1;$j<=$_CONFIG['ore_per_giorno'];$j++){
+for($j=1;$j<=getProp('ore_per_giorno');$j++){
 	$ore_elenco .= '<option value="'.$j.'">'.$j.'^a ora</option>';
 }
 $db=database_connect();

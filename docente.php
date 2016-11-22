@@ -1,6 +1,5 @@
 <?php
 include_once "include/funzioni.php";
-global $_CONFIG;
 $utente = check_login();
 
 if($utente==-1){
@@ -15,6 +14,11 @@ else{
 }
 
 $db = database_connect();
+$numero_giorni = getProp("numero_giorni");
+$ore_per_giorno = getProp("ore_per_giorno");
+$giorni = unserialize(getProp("giorni"));
+$colori = unserialize(getProp("colori"));
+$colore_testo = unserialize(getProp("colore_testo"));
 ?>
 <!DOCTYPE html>
 <html lang="it">
@@ -166,8 +170,8 @@ $db = database_connect();
 							<thead>
 								<th></th>
 								<?php
-								for($i =1; $i<=$_CONFIG["numero_giorni"]; $i++){
-									echo '<th class="condensed">'.strtoupper($_CONFIG["giorni"][$i]).'</th>';
+								for($i =1; $i<=$numero_giorni; $i++){
+									echo '<th class="condensed">'.strtoupper($giorni[$i]).'</th>';
 								}
 							?>
 						</thead>
@@ -175,10 +179,10 @@ $db = database_connect();
 							<?php
 								$colori = array();
 								$r = 0;
-								for($i = 1; $i<=$_CONFIG["ore_per_giorno"]; $i++){
+								for($i = 1; $i<=$ore_per_giorno; $i++){
 									echo '<tr><td class="condensed">'.$i."</td>";
-									for($j=1; $j<=$_CONFIG["numero_giorni"];$j++){
-										$num = ($j-1)*$_CONFIG["ore_per_giorno"]+$i;
+									for($j=1; $j<=$numero_giorni;$j++){
+										$num = ($j-1)*$ore_per_giorno+$i;
 										$result = $db->query("SELECT  lezioni.idCorso as idCorso,
 																									corsi.continuita as continuita,
 																									corsi.titolo as titolo,
@@ -197,14 +201,14 @@ $db = database_connect();
 												$aula =  $lezione["aula"];
 												if(!(in_array($lezione["idCorso"], $colori))){
 													$colori[$r]=$lezione["idCorso"];
-													$bgcolor = $_CONFIG["colori"][$r];
-													$fgcolor = $_CONFIG["colore-testo"][$r];
+													$bgcolor = $colori[$r];
+													$fgcolor = $colore_testo[$r];
 													$r++;
 												}
 												else{
 														$index = array_search($lezione["idCorso"], $colori);
-														$bgcolor = $_CONFIG["colori"][$index];
-														$fgcolor = $_CONFIG["colore-testo"][$index];
+														$bgcolor = $colori[$index];
+														$fgcolor = $colore_testo[$index];
 												}
 												echo '<td class="orario-cell-normal condensed" style="background-color: '.$bgcolor.'; color: '.$fgcolor.';" onclick="$(\'#collapsible'.$iscrizione["idCorso"].'\').animatedScroll({easing: \'easeOutQuad\'});">'.$nomeCorso.'<span>Aula '.$aula.'</span></td>';
 											}

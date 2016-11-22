@@ -259,25 +259,23 @@ function coincideCorso($idCorso, $db, $utente){
 }
 
 function getStringaOra($ora){
-	global $_CONFIG;
-	$numGiorno = (int) ($ora / $_CONFIG["ore_per_giorno"])+1;
-	$numOra = $ora % ($_CONFIG["ore_per_giorno"]);
+	$numGiorno = (int) ($ora / getProp("ore_per_giorno")+1;
+	$numOra = $ora % (getProp("ore_per_giorno"));
 	if($numOra == 0){
 		$numOra = 6;
 		$numGiorno --;
 	}
-	return $_CONFIG["giorni"][$numGiorno].", ".$numOra."^ ora";
+	return unserialize(getProp("giorni"))[$numGiorno].", ".$numOra."^ ora";
 }
 
 function getStringaOraBreve($ora){
-	global $_CONFIG;
-	$numGiorno = (int) ($ora / $_CONFIG["ore_per_giorno"])+1;
-	$numOra = $ora % ($_CONFIG["ore_per_giorno"]);
+	$numGiorno = (int) ($ora / getProp("ore_per_giorno")+1;
+	$numOra = $ora % getProp("ore_per_giorno");
 	if($numOra == 0){
 		$numOra = 6;
 		$numGiorno --;
 	}
-	return substr($_CONFIG["giorni"][$numGiorno],0, 3)."_".$numOra."_ora";
+	return substr(unserialize(getProp("giorni"))[$numGiorno],0, 3)."_".$numOra."_ora";
 }
 
 

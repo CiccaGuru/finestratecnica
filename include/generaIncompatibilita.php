@@ -1,6 +1,5 @@
 <?php
 include 'funzioni.php';
-global $_CONFIG;
 $utente = check_login();
 
 if($utente==-1){

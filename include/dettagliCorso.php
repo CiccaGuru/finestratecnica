@@ -1,9 +1,6 @@
 <?php
 include 'funzioni.php';
 include 'config.php';
-global $_CONFIG;
-
-
 
 $utente = check_login();
 $idCorso = $_POST["idCorso"];
@@ -18,6 +15,9 @@ else{
   if($user_level == 2)
     die('LOGINPROBLEM');
 
+$numero_giorni = getProp("numero_giorni");
+$ore_per_giorno = getProp("ore_per_giorno");
+$giorni = unserialize(getProp("giorni"));
 $result = $db->query("SELECT classe FROM utenti where id = '$utente'");
 $dettagliUtente = $result->fetch_assoc();
 $result = $db->query("SELECT  corsi.titolo AS titolo,
@@ -141,14 +141,14 @@ while($classe = $result->fetch_assoc()){
           <thead>
             <th></th>
             <?php
-            for($i =1; $i<=$_CONFIG["numero_giorni"]; $i++){
-              echo '<th>'.$_CONFIG["giorni"][$i].'</th>';
+            for($i =1; $i<=$numero_giorni; $i++){
+              echo '<th>'.$giorni[$i].'</th>';
             }
             echo '</thead> <tbody>';
-            for($i = 1; $i<=$_CONFIG["ore_per_giorno"]; $i++){
+            for($i = 1; $i<=$ore_per_giorno; $i++){
               echo "<tr><td>".$i."</td>";
-              for($j=1; $j<=$_CONFIG["numero_giorni"];$j++){
-                $num = ($j-1)*$_CONFIG["ore_per_giorno"]+$i;
+              for($j=1; $j<=$numero_giorni;$j++){
+                $num = ($j-1)*$ore_per_giorno+$i;
                 if($ore[$num]){
                   if(iscritto($ore[$num], $utente)){
                     $colore = 'primary lighten-2';

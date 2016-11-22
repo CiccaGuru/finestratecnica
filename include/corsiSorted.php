@@ -1,7 +1,6 @@
 <?php
 include 'funzioni.php';
 include("../mpdf60/mpdf.php");
-global $_CONFIG;
 $utente = check_login();
 if($utente==-1){
   die("LOGINPROBLEM");

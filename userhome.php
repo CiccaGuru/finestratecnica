@@ -20,6 +20,7 @@ else{
 }
 
 $db = database_connect();
+$chiusura_iscrizioni = getProp("chiusura_iscrizioni");
 ?>
 <!DOCTYPE html>
 <html lang="it">
@@ -95,7 +96,7 @@ $db = database_connect();
 					<?php
 						$result = $db->query("SELECT COUNT(*) as conta from iscrizioni where idUtente = $utente and partecipa = '1'");
 						$conta = $result->fetch_assoc();
-						if((time()>$_CONFIG["chiusura_iscrizioni"]) && ($conta["conta"]>=17) && !($posso == "44")){
+						if((time()>$chiusura_iscrizioni) && ($conta["conta"]>=17) && !($posso == "44")){
 					?>
 
 					<h3 class="accent-text center light">Iscrizioni chiuse</h3>
@@ -202,7 +203,7 @@ $db = database_connect();
 	</div>
 	</form>
 
-<?php  if(time()>$_CONFIG["chiusura_iscrizioni"] ){
+<?php  if(time()>$chiusura_iscrizioni){
 	?>
 	<h3 class="accent-text center light">Iscrizioni chiuse</h3>
 	<div class="center">
@@ -386,7 +387,6 @@ $db = database_connect();
 		<?php
 	}
 	?>
-
 	<!--  Scripts-->
 	<script src="js/jquery-3.1.1.min.js"></script>
 	<script src="js/materialize.js"></script>

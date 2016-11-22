@@ -1,7 +1,5 @@
 <?php
 include 'funzioni.php';
-include 'config.php';
-global $_CONFIG;
 $active = $_POST["active"];
 $utente = check_login();
 $ore_utente = array();
@@ -75,7 +73,6 @@ function sono_iscritto($array){
 
 
 function generaLista($tipo, $continuita){
-  global $_CONFIG;
   global $corsi_utente;
   global $ore_utente;
   global $utente;

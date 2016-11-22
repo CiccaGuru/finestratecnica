@@ -1,6 +1,5 @@
 <?php
 include_once "include/funzioni.php";
-global $_CONFIG;
 $utente = check_login();
 
 if($utente==-1){
@@ -15,6 +14,9 @@ else{
 }
 
 $db = database_connect();
+$numero_giorni = getProp("numero_giorni");
+$ore_per_giorno = getProp("ore_per_giorno");
+$giorni = unserialize(getProp("giorni"));
 ?>
 <!DOCTYPE html>
 <html lang="it">
@@ -132,8 +134,8 @@ $db = database_connect();
 						<thead>
 							<th></th>
 							<?php
-							for($i =1; $i<=$_CONFIG["numero_giorni"]; $i++){
-								echo '<th class="condensed">'.strtoupper($_CONFIG["giorni"][$i]).'</th>';
+							for($i =1; $i<=$numero_giorni; $i++){
+								echo '<th class="condensed">'.strtoupper($giorni[$i]).'</th>';
 							}
 						?>
 					</thead>
@@ -141,10 +143,10 @@ $db = database_connect();
 						<?php
 							$colori = array();
 							$r = 0;
-							for($i = 1; $i<=$_CONFIG["ore_per_giorno"]; $i++){
+							for($i = 1; $i<=$ore_per_giorno; $i++){
 								echo '<tr><td class="condensed">'.$i."</td>";
-								for($j=1; $j<=$_CONFIG["numero_giorni"];$j++){
-									$num = ($j-1)*$_CONFIG["ore_per_giorno"]+$i;
+								for($j=1; $j<=$numero_giorni;$j++){
+									$num = ($j-1)*$ore_per_giorno+$i;
 									$result = $db->query("SELECT  lezioni.idCorso as idCorso
 																				FROM    corsi, lezioni, aule, corsi_docenti
 																				WHERE   corsi_docenti.idDocente = '$utente' AND

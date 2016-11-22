@@ -15,6 +15,9 @@ if ($utente == -1) {
   if ($user_level == 2){
 
     $db = database_connect();
+    $numero_giorni = getProp("numero_giorni");
+    $ore_per_giorno = getProp("ore_per_giorno");
+    $giorni = unserialize(getProp("giorni"));
     $idCorso = $_POST["idCorso"];
     $result = $db->query("SELECT lezioni.id, lezioni.ora, lezioni.titolo, aule.id as idAula, aule.nomeAula as aula, aule.maxStudenti as maxIscritti
       from lezioni, aule
@@ -24,14 +27,14 @@ if ($utente == -1) {
 
       $giorni = '';
       $ore_elenco = '';
-      $numGiorno = (int) ($lezione['ora'] / $_CONFIG['ore_per_giorno']) + 1;
-      $numOra = $lezione['ora'] % $_CONFIG['ore_per_giorno'];
+      $numGiorno = (int) ($lezione['ora'] / $ore_per_giorno) + 1;
+      $numOra = $lezione['ora'] % $ore_per_giorno;
 
       if ($numOra == 0) {
         $numOra = 6;
         --$numGiorno;
       }
-      foreach ($_CONFIG['giorni'] as $num => $nome) {
+      foreach ($giorni as $num => $nome) {
         if ($num == $numGiorno) {
           $giorni .= '<option value="'.$num.'" selected>'.$nome.'</option>';
         } else {
@@ -39,7 +42,7 @@ if ($utente == -1) {
         }
       }
 
-      for ($j = 1;$j <= $_CONFIG['ore_per_giorno'];++$j) {
+      for ($j = 1;$j <= $ore_per_giorno;++$j) {
         if ($j == $numOra) {
           $ore_elenco .= '<option value="'.$j.'" selected>'.$j.'^a ora</option>';
         } else {

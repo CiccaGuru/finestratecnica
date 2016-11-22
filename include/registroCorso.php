@@ -1,7 +1,6 @@
 <?php
 include 'funzioni.php';
 include("../mpdf60/mpdf.php");
-global $_CONFIG;
 $utente = check_login();
 if($utente==-1){
   die("LOGINPROBLEM");
@@ -20,7 +19,7 @@ if (!file_exists('./tmp/registrini')) {
 else{
     recursiveRemoveDirectory("./tmp/registrini");
 }
-for($i=1;$i<=($_CONFIG["numero_giorni"]*$_CONFIG["ore_per_giorno"]);$i++){
+for($i=1;$i<=(getProp("numero_giorni")*getProp("ore_per_giorno"));$i++){
   $result = $db->query("SELECT id from lezioni where ora = '$i'") or die($db->error);
   while($idLez = $result->fetch_assoc()){
     generaRegistroOra($idLez["id"], $i);
