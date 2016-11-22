@@ -34,7 +34,11 @@ function getLight(main, position){
   var res;
     $.each(materialColorsAdvanced, function(i,color){
         if(color["nickname"]==main){
-          res = color["variations"][position]["hex"];
+          if((position-1)>=0){
+            res = color["variations"][position-1]["hex"];
+          }else{
+              res = color["variations"][0]["hex"];
+          }
         }
     });
     return res.toString();
