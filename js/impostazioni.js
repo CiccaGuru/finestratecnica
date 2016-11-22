@@ -6,12 +6,12 @@ function getLuma(hexa){
   var r = (rgb >> 16) & 0xff;
   var g = (rgb >>  8) & 0xff;
   var b = (rgb >>  0) & 0xff;
-  return 0.2526*r + 0.7152*g + 0.0722*b;
+  return (6*r + 7*g + 3*b)/20;
 }
 
 function getTextColor(hexa){
   var luma = getLuma(hexa);
-  if (luma < 120) {
+  if (luma < 127) {
     forecolor = "#fafafa";
   }
   else{
@@ -167,10 +167,11 @@ function getDarkest(main, position){
               $.each(color["variations"], function(index, variation) {
                 var forecolor = getTextColor(variation["hex"]);
                 var waves = getWavesColor(variation["hex"]);
+                luma = getLuma(variation["hex"]);
                 html +='<div data-hex="'+variation["hex"]+'" data-target="'+$(colorpicker).data("prop")+'" class="variation waves-effect '+waves+'" style="background-color:'+variation["hex"]+'">\
                           <div class="detail condensed" style="color: '+forecolor+'; ">\
                             <div>'+variation["hex"]+'</div>\
-                            <div class="bold">'+variation["weight"]+'</div>\
+                            <div class="bold">'+/*variation["weight"]*/luma+'</div>\
                         </div></div>';
               });
               $(".variations", $(colorpicker))
