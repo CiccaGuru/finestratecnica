@@ -1,17 +1,30 @@
 <?php
     header("Content-type: text/css; charset: UTF-8");
     include "../include/funzioni.php";
-
-    $primaryColor = getProp("primaryColor");
-    $primaryColorDark = getProp("primaryColorDark");
-    $primaryColorDarkest = getProp("primaryColorDarkest");
-    $primaryColorLight = getProp("primaryColorLight");
-    $accentColor = getProp("accentColor");
-    $accentColorLight = getProp("accentColorLight");
-    $primaryText = getProp("primaryText");
-    $primaryDarkText = getProp("primaryDarkText");
-    $primaryLightText = getProp("primaryLightText");
-    $accentText = getProp("accentText");
+    if($db=database_connect()){
+      $primaryColor = getProp("primaryColor");
+      $primaryColorDark = getProp("primaryColorDark");
+      $primaryColorDarkest = getProp("primaryColorDarkest");
+      $primaryColorLight = getProp("primaryColorLight");
+      $accentColor = getProp("accentColor");
+      $accentColorLight = getProp("accentColorLight");
+      $primaryText = getProp("primaryText");
+      $primaryDarkText = getProp("primaryDarkText");
+      $primaryLightText = getProp("primaryLightText");
+      $accentText = getProp("accentText");
+    }
+    else{
+      $primaryColor = "#2196f3";
+      $primaryColorDark = "#1976d2";
+      $primaryColorDarkest = "#1565c0";
+      $primaryColorLight = "#64b5f6";
+      $accentColor = "#f44336";
+      $accentColorLight = "#e57373";
+      $primaryText = "#fafafa";
+      $primaryDarkText = "#fafafa";
+      $primaryLightText = "#fafafa";
+      $accentText = "#fafafa";
+    }
 ?>
 
 @.icon-block {

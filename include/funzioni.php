@@ -7,7 +7,7 @@ function database_connect(){
 	global $_CONFIG;
 	$db = new mysqli($_CONFIG['db_host'], $_CONFIG['db_user'], $_CONFIG['db_password'], $_CONFIG['db_name']);
 	if ($db->connect_error) {
-		die("Connection failed: " . $db->connect_error);
+		return 0;
 	}
 	else
 	{

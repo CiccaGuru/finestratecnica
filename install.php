@@ -1,8 +1,8 @@
-g<?php
-if(!file_exists("/include/config.php")){
+<!--<?php
+/*if(!file_exists("/include/config.php")){
   $config = fopen("include/config.php", "w")  or die("Non riesco a creare il file di configurazione!");
   fclose($config);
-}?>
+}*/?>-->
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -59,29 +59,29 @@ if(!file_exists("/include/config.php")){
         <div class="row">
           <div class="col s6 distribut-container">
             <div class="input-field distribute">
-              <input id="DBLocation" type="text" value="localhost" class="validate">
+              <input id="DBLocation" type="text" class="validate">
               <label for="DBLocation">Posizione database:</label>
             </div>
             <div class="input-field distribute">
-              <input id="DBUser" type="text" value="mysql" class="validate">
+              <input id="DBUser" type="text" class="validate">
               <label for="DBUser">Username:</label>
             </div>
             <div class="input-field distribute">
-              <input id="DBPassword" type="password" value="mysqlPassword" class="validate">
+              <input id="DBPassword" type="password" class="validate">
               <label for="DBPassword">Password:</label>
             </div>
           </div>
           <div class="col s6">
             <div class="input-field distribute">
-              <input id="DBName" type="text" value="finestratecnica" class="validate">
+              <input id="DBName" type="text" class="validate">
               <label for="DBName">Nome del database:</label>
             </div>
             <div class="input-field distribute">
-              <input id="adminUsername" type="text" value="admin" class="validate">
+              <input id="adminUsername" type="text" class="validate">
               <label for="adminUsername">Username amministratore:</label>
             </div>
             <div class="input-field distribute">
-              <input id="adminPassword" type="text" value="QAZ123" class="validate">
+              <input id="adminPassword" type="password" class="validate">
               <label for="adminPassword">Password amministratore:</label>
             </div>
           </div>

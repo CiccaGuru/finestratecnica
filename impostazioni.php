@@ -66,16 +66,15 @@ $db = database_connect();
 		<div class="wrapper">
 
 			<div id="side" class="z-depth-1 white grey-text text-darken-3 condensed">
+				<div data-trigger="database" class="setting-trigger waves-effect"><i class="material-icons">storage</i>Database & admin</div>
 				<div data-trigger="aspettoBase" class="setting-trigger waves-effect"><i class="material-icons">color_lens</i>Aspetto</div>
-				<div class="setting-trigger waves-effect"><i class="material-icons">access_time</i>Orario</div>
-				<div class="setting-trigger waves-effect"><i class="material-icons">storage</i>Database</div>
+				<div data-trigger="orario" class="setting-trigger waves-effect"><i class="material-icons">access_time</i>Orario</div>
 			</div>
 			<div id="main">
 				<div id="cover">
 					<p class="center-align grey-text text-darken-1"><i class="material-icons huge">settings</i></p>
 					<p class="big-text center-align grey-text grey-darken-1" >Scegli una categoria dal menu a lato<p>
 					</div>
-
 
 					<div id="aspettoBase" data-trigged="aspettoTrigger">
 						<div class="row">
@@ -318,6 +317,76 @@ $db = database_connect();
 								</div>
 							</div>
 						</section>
+					</div>
+
+					<div id="database" data-trigged="databaseTrigger">
+						<h3 class="primary-text condensed" style="margin-top:0px;">Impostazioni del database</h3>
+						<div class="row">
+							<div class="col s12 l6 offset-l3">
+								<div class="card" id="card-database">
+									<div class="card-content">
+										<div class="card-title condensed primary-text">
+											Connessione al database
+										</div>
+										<form id="modificaDatabase">
+										<div class="input-field">
+												<input id="db-host" type="text" autocomplete="off" class="validate">
+												<label for="db-host">Posizione database</label>
+										</div>
+										<div class="input-field">
+												<input id="db-username" type="text" autocomplete="off" class="validate">
+												<label for="db-host">Username database</label>
+										</div>
+										<div class="input-field">
+												<input id="db-password" type="password" autocomplete="off" class="validate">
+												<label for="db-password">Password database</label>
+										</div>
+										<div class="input-field">
+												<input id="db-name" type="text"  autocomplete="off"class="validate">
+												<label for="db-host">Nome database</label>
+										</div>
+										<div class="right-align">
+										<button type="submit" class="btn accent">APPLICA</button>
+									</div>
+									</form>
+									</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col s12 l6 offset-l3">
+									<div class="card" id="card-admin">
+										<div class="card-content">
+											<div class="card-title condensed primary-text">
+												Utente amministratore
+											</div>
+											<div id="admin-error"></div>
+											<form id="modificaAdmin">
+											<div class="input-field">
+													<input id="admin-username" type="text" autocomplete="off" class="validate">
+													<label for="admin-username">Username</label>
+											</div>
+											<div class="input-field">
+													<input id="admin-nowpassword" type="password" autocomplete="off" class="validate">
+													<label for="admin-nowpassword">Password attuale</label>
+											</div>
+											<div class="input-field">
+													<input id="admin-newpassword" type="password" autocomplete="off" class="validate">
+													<label for="admin-newpassword">Nuova password</label>
+											</div>
+											<div class="input-field">
+													<input id="admin-renewpassword" type="password" autocomplete="off" class="validate">
+													<label for="admin-renewpassword">Ripeti nuova password</label>
+											</div>
+											<div class="right-align">
+											<button type="submit" class="btn accent waves-effect waves-light">APPLICA</button>
+										</div>
+										</form>
+										</div>
+										</div>
+									</div>
+								</div>
+						</div>
 					</div>
 				</div>
 			</div>

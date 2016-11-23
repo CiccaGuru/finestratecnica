@@ -227,6 +227,55 @@ function getDarkest(main, position){
         });
     });
 
+    $(document).on("submit", "#modificaAdmin", function(e){
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      if($("#admin-newpassword").val()!=$("#admin-renewpassword").val()){
+        $("#admin-error").html( "<p class='red-text center-align condensed'>Le due password non sono uguali!</p>" );
+      }else{
+        $.post("./include/modificaPasswordAdmin.php",
+        {
+          "username":$("#admin-username").val(),
+          "attuale":$("#admin-nowpassword").val(),
+          "nuova":$("#admin-newpassword").val()
+        }).done(function(data){
+          if(data=="ERRATA"){
+            $("#admin-error").html("<p class='red-text center-align condensed'>La password corrente è errata!</p>");
+          } else if(data == "SUCCESS"){
+            Materialize.toast('Utente admin modificato con successo', 4000);
+          } else if(data="VUOTO"){
+            Materialize.toast('Compilare almeno un campo!', 4000);
+          } else{
+            Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Si è verificato un errore. Controlla la console', 4000);
+            console.log(data);
+          }
+        });
+      }
+    });
+
+    $(document).on("submit", "#modificaDatabase", function(e){
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      $.post("./include/modificaCredenzialiDatabase.php",
+      {
+          "user":$("#db-username").val(),
+          "host":$("#db-host").val(),
+          "password":$("#db-password").val(),
+          "name":$("#db-name").val()
+      }).done(function(data){
+            if(data ==  "2002"){
+                Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i>Impossibile connettersi alla posizione specificata.', 4000);
+            }
+            else if (data == "1045"){
+              Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Accesso negato per l\'utente specificato', 4000);
+            }else if(data == "SUCCESS"){
+              Materialize.toast('Impostazioni modificate con successo');
+            }else{
+                Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Si è verificato un errore. Controlla la console', 4000);
+                console.log(data);
+          }
+        });
+    });
 
     $.getJSON("./js/materialColorsAdvanced.json")
     .done(function(materialColorsJSON){
