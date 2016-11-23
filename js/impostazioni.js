@@ -269,7 +269,7 @@ function getDarkest(main, position){
             else if (data == "1045"){
               Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Accesso negato per l\'utente specificato', 4000);
             }else if(data == "SUCCESS"){
-              Materialize.toast('Impostazioni modificate con successo');
+              Materialize.toast('Impostazioni modificate con successo', 4000);
             }else{
                 Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Si è verificato un errore. Controlla la console', 4000);
                 console.log(data);

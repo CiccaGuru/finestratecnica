@@ -15,7 +15,7 @@ else{
   $db = database_connect();
   $numero_giorni = getProp("numero_giorni");
   $ore_per_giorno = getProp("ore_per_giorno");
-  $colori = unserialize(getProp("colori"));
+  $coloriDB = unserialize(getProp("colori"));
   $colore_testo = unserialize(getProp("colore_testo"));
   $giorni = unserialize(getProp("giorni"));
   $soglia_minima = getProp("soglia_minima");
@@ -25,6 +25,7 @@ else{
   <h4 class="light condensed letter-spacing-1 primary-text center" id="titoloOrario">IL TUO ORARIO</h3>
 
     <?php
+
     $result = $db->query("SELECT id from iscrizioni WHERE idUtente = '$utente' AND partecipa = '1' ") or die($db->error);
     if($result->num_rows<["soglia_minima"]){
       ?>
@@ -74,13 +75,13 @@ else{
                   $conta = $result->fetch_assoc();
                   if(!(in_array($iscrizione["idCorso"], $colori))){
                     $colori[$r]=$iscrizione["idCorso"];
-                    $bgcolor = $colori[$r];
+                    $bgcolor = $coloriDB[$r];
                     $fgcolor = $colore_testo[$r];
                     $r++;
                   }
                   else{
                     $index = array_search($iscrizione["idCorso"], $colori);
-                    $bgcolor = $colori[$index];
+                    $bgcolor = $coloriDB[$index];
                     $fgcolor = $colore_testo[$index];
                   }
                   if((time()>$chiusura_iscrizioni) && ($conta["conta"]>=$soglia_minima)){

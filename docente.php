@@ -17,7 +17,7 @@ $db = database_connect();
 $numero_giorni = getProp("numero_giorni");
 $ore_per_giorno = getProp("ore_per_giorno");
 $giorni = unserialize(getProp("giorni"));
-$colori = unserialize(getProp("colori"));
+$coloriDB = unserialize(getProp("colori"));
 $colore_testo = unserialize(getProp("colore_testo"));
 ?>
 <!DOCTYPE html>
@@ -166,6 +166,7 @@ $colore_testo = unserialize(getProp("colore_testo"));
 			<div class="col l5">
 				<div id="card-orario-gen" class="card">
 					<div class="card-content">
+						<h4 class="primary-text condensed center-align">Il suo orario</h4>
 						<table id="orario" class="centered bordered">
 							<thead>
 								<th></th>
@@ -201,13 +202,13 @@ $colore_testo = unserialize(getProp("colore_testo"));
 												$aula =  $lezione["aula"];
 												if(!(in_array($lezione["idCorso"], $colori))){
 													$colori[$r]=$lezione["idCorso"];
-													$bgcolor = $colori[$r];
+													$bgcolor = $coloriDB[$r];
 													$fgcolor = $colore_testo[$r];
 													$r++;
 												}
 												else{
 														$index = array_search($lezione["idCorso"], $colori);
-														$bgcolor = $colori[$index];
+														$bgcolor = $coloriDB[$index];
 														$fgcolor = $colore_testo[$index];
 												}
 												echo '<td class="orario-cell-normal condensed" style="background-color: '.$bgcolor.'; color: '.$fgcolor.';" onclick="$(\'#collapsible'.$iscrizione["idCorso"].'\').animatedScroll({easing: \'easeOutQuad\'});">'.$nomeCorso.'<span>Aula '.$aula.'</span></td>';

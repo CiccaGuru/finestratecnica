@@ -97,9 +97,37 @@ $result = $db->query("CREATE TABLE `utenti` (
       PRIMARY KEY (`id`,`username`)
 )") or die("11 ".$db->error);
 
-$result = $db->query("INSERT INTO utenti (nome, cognome, username, password, classe, level,
+$result = $db->query("CREATE TABLE `impostazioni` (
+                        `id` int(11) NOT NULL,
+                        `prop` varchar(64) NOT NULL,
+                        `value` varchar(512) NOT NULL
+                      )");
+
+$result = $db->query("INSERT INTO utenti (nome, cRIMARY KEYognome, username, password, classe, level,
                                           idClasse, email, primoAccesso, passwordOriginale)
                                   VALUES ('$username', '$username', '$username', '$password', '6', '2',
                                           '0','','0','0')
     ") or die($db->error);
+
+$result = $db->query("INSERT INTO `impostazioni` (`id`, `prop`, `value`) VALUES
+(1, 'primaryColor', '#2196F3'),
+(2, 'primaryColorDark', '#1E88E5'),
+(3, 'primaryColorDarkest', '#1976D2'),
+(4, 'primaryColorLight', '#64B5F6'),
+(5, 'accentColor', '#F44336'),
+(6, 'accentColorLight', '#EF5350'),
+(7, 'primaryText', '#fafafa'),
+(8, 'primaryDarkText', '#fafafa'),
+(9, 'primaryLightText', '#263238'),
+(10, 'accentText', '#fafafa'),
+(11, 'numero_giorni', '4'),
+(12, 'ore_per_giorno', '6'),
+(13, 'soglia_minima', '17'),
+(14, 'chiusura_iscrizioni', '111111111111'),
+(15, 'apertura_iscrizioni', '0000000000000000'),
+(16, 'colori', 'a:17:{i:0;s:7:\"#03a9f4\";i:1;s:7:\"#F44336\";i:2;s:7:\"#FFEB3B\";i:3;s:7:\"#0d47a1\";i:4;s:7:\"#4CAF50\";i:5;s:7:\"#FF5722\";i:6;s:7:\"#9C27B0\";i:7;s:7:\"#311b92\";i:8;s:7:\"#212121\";i:9;s:7:\"#795548\";i:10;s:7:\"#607D8B\";i:11;s:7:\"#E91E63\";i:12;s:7:\"#00695c\";i:13;s:7:\"#01579b\";i:14;s:7:\"#1b5e20\";i:15;s:7:\"#aeea00\";i:16;s:7:\"#FFFFFF\";}'),
+(17, 'colore_testo', 'a:20:{i:0;s:5:\"black\";i:1;s:5:\"white\";i:2;s:5:\"black\";i:3;s:5:\"white\";i:4;s:5:\"black\";i:5;s:5:\"white\";i:6;s:5:\"white\";i:7;s:5:\"white\";i:8;s:5:\"white\";i:9;s:5:\"white\";i:10;s:5:\"black\";i:11;s:5:\"black\";i:12;s:5:\"white\";i:13;s:5:\"white\";i:14;s:5:\"white\";i:15;s:5:\"white\";i:16;s:5:\"white\";i:17;s:5:\"black\";i:18;s:5:\"white\";i:19;s:5:\"white\";}\"),
+(18, 'giorni', 'a:4:{i:1;s:10:\"Mercoledì\";i:2;s:8:\"Giovedì\";i:3;s:8:\"Venerdì\";i:4;s:6:\"Sabato\";}');
+")
+
 ?>
