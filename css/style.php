@@ -98,13 +98,52 @@
 }
 
 .cont-dett [type="checkbox"]:checked + label:before {
-	  border-right: 2px solid #26a69a;
-	  border-bottom: 2px solid #26a69a;
+	  border-right: 2px solid <?php echo $primaryColor;?>;
+	  border-bottom: 2px solid <?php echo $primaryColor;?>;
 }
+
+.picker__button--today:hover,
+.picker__button--clear:hover,
+.picker__button--close:hover {
+  color: <?php echo $primaryLightText;?>;
+  background: <?php echo $primaryColorLight;?>;
+  border-bottom-color: <?php echo $primaryColorLight;?>;
+}
+
+.picker__date-display {
+  color: <?php echo $primaryText;?>;
+  background-color: <?php echo $primaryColor;?>;
+}
+
+.picker__nav--prev:hover,
+.picker__nav--next:hover,
+  button.picker__today:focus, button.picker__clear:focus, button.picker__close:focus,
+  .picker__button--today:focus,
+  .picker__button--clear:focus,
+  .picker__button--close:focus {
+  background: <?php echo $primaryColorLight;?>;
+}
+
+.picker__weekday-display {
+  color: <?php echo $primaryDarkText;?>;
+  background-color: <?php echo $primaryColorDark;?>;
+}
+
+.picker__day.picker__day--today,
+  .picker__close, .picker__today {
+  color: <?php echo $primaryColorDark;?>;
+}
+
+.picker__day--selected,
+.picker__day--selected:hover,
+.picker--focused .picker__day--selected {
+    background-color: <?php echo $primaryColor;?>;
+  }
 
 .pagination li.active {
   background-color: <?php echo $accentColor?> !important;
 }
+
 
 /* label focus color */
 .input-field input[type=text]:focus + label,
@@ -131,7 +170,7 @@
 }
 /* icon prefix focus color */
 .input-field .prefix.active {
-    color: <?php echo $primaryColorDark ?>;
+    color: <?php echo $primaryColorDark; ?>;
 }
 
 a, .dropdown-content li > span {

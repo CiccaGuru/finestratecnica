@@ -125,7 +125,7 @@ function getDarkest(main, position){
       var position = parseInt($(variation).data("position"));
       $.post("./include/cambiaProp.php",
           {
-            "hex":hex,
+            "val":hex,
             "target":quale
           })
         .done(function(data){
@@ -137,12 +137,12 @@ function getDarkest(main, position){
                 text = getTextColor(hex);
                 lightText = getTextColor(lightColor);
                 darkText = getTextColor(darkColor);
-                $.post("./include/cambiaProp.php",{"hex":lightColor,"target":"primaryColorLight"});
-                $.post("./include/cambiaProp.php",{"hex":darkColor,"target":"primaryColorDark"});
-                $.post("./include/cambiaProp.php",{"hex":darkestColor,"target":"primaryColorDarkest"});
-                $.post("./include/cambiaProp.php",{"hex":text,"target":"primaryText"});
-                $.post("./include/cambiaProp.php",{"hex":lightText,"target":"primaryLightText"});
-                $.post("./include/cambiaProp.php",{"hex":darkText,"target":"primaryDarkText"})
+                $.post("./include/cambiaProp.php",{"val":lightColor,"target":"primaryColorLight"});
+                $.post("./include/cambiaProp.php",{"val":darkColor,"target":"primaryColorDark"});
+                $.post("./include/cambiaProp.php",{"val":darkestColor,"target":"primaryColorDarkest"});
+                $.post("./include/cambiaProp.php",{"val":text,"target":"primaryText"});
+                $.post("./include/cambiaProp.php",{"val":lightText,"target":"primaryLightText"});
+                $.post("./include/cambiaProp.php",{"val":darkText,"target":"primaryDarkText"})
               }
               if(quale == "accentColor"){
                 lightColor = getLight(main, position);
@@ -276,6 +276,60 @@ function getDarkest(main, position){
           }
         });
     });
+      var conta;
+    $(document).on("submit", "#modificaOrario", function(e){
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      conta = 0;
+      $.post("./include/cambiaProp.php",
+        {
+          "target":"numero_giorni",
+          "val":$("#numero_giorni").val()
+      }).done(function(data){
+        if(data=="SUCCESS"){
+          $.post("./include/cambiaProp.php",
+            {
+              "target":"ore_per_giorno",
+              "val":$("#ore_per_giorno").val()
+          }).done(function(data){
+            if(data=="SUCCESS"){
+              $.post("./include/cambiaProp.php",
+                {
+                  "target":"soglia_minima",
+                  "val":$("#soglia_minima").val()
+              }).done(function(data){
+                if(data=="SUCCESS"){
+                  var aperturaArray = $("input[name='apertura_iscrizioni_submit']").val().split("/");
+                  var apertura = new Date(aperturaArray[2], aperturaArray[1], aperturaArray[0], $("#ora-apertura").val(), $("#minuti-apertura").val());
+                  console.log(aperturaArray);
+                  console.log(apertura);
+                  $.post("./include/cambiaProp.php",
+                    {
+                      "target":"apertura_iscrizioni",
+                      "val":apertura.getTime()/1000
+                  }).done(function(data){
+                    if(data=="SUCCESS"){
+                      var chiusuraArray = $("input[name='chiusura_iscrizioni_submit']").val().split("/");
+                      var chiusura = new Date(chiusuraArray[2], chiusuraArray[1], chiusuraArray[0], $("#ora-chiusura").val(), $("#minuti-chiusura").val());
+                      $.post("./include/cambiaProp.php",
+                        {
+                          "target":"chiusura_iscrizioni",
+                          "val":chiusura.getTime()/1000
+                      }).done(function(data){
+                        if(data=="SUCCESS"){
+                          Materialize.toast("Modifiche effettuate con successo!", 4000);
+                        }
+                      });
+                    }
+                  });
+                }
+              });
+            }
+          });
+        }
+      });
+    });
+
 
     $.getJSON("./js/materialColorsAdvanced.json")
     .done(function(materialColorsJSON){

@@ -387,6 +387,93 @@ $db = database_connect();
 									</div>
 								</div>
 						</div>
+						<div id="orario"  data-trigged="orarioTrigger">
+							<h3 class="primary-text condensed" style="margin-top:0px;">Impostazioni dell'orario</h3>
+							<div class="row">
+								<div class="col s12 l8 offset-l2">
+									<div class="card" id="card-orario">
+										<div class="card-content">
+											<form id="modificaOrario">
+												<div class="row valign-wrapper">
+													<div class="col s3 bold condensed valign">
+														Numero giorni
+													</div>
+													<div class="col s1 valign center-align">
+														<i class="material-icons tooltipped" data-position="right" data-delay="50" data-tooltip="Il numero dei giorni che durerà la finestra tecnica">info_outline</i>
+													</div>
+													<div class="input-field col s8 valign">
+				 											<input id="numero_giorni" type="text" value="<?php echo getProp("numero_giorni");?>" class="validate">
+			 										</div>
+												</div>
+												<div class="row valign-wrapper">
+													<div class="col s3 bold condensed valign">
+														Apertura iscrizioni
+													</div>
+													<div class="col s1 valign center-align">
+														<i class="material-icons tooltipped" data-position="right" data-delay="50" data-tooltip="Quando si apriranno le iscrizioni">info_outline</i>
+													</div>
+													<div class="col s4 valign">
+														<label for="apertura_iscrizioni">Scegli la data...</label>
+														<input id="apertura_iscrizioni" name="apertura_iscrizioni" type="date" data-value="<?php echo date("d/m/Y", getProp("apertura_iscrizioni"))?>" class="datepicker">
+													</div>
+													<div class="input-field col s2 valign">
+															<input id="ora-apertura" type="text" value="<?php echo date("H", getProp("apertura_iscrizioni"))?>"  placeholder="hh" class="validate">
+															<label for="ora-apertura">Ora</label>
+													</div>:
+													<div class="input-field col s2 valign">
+															<input id="minuti-apertura" type="text"  value="<?php echo date("i", getProp("apertura_iscrizioni"))?>"   placeholder="mm" class="validate">
+															<label for="minuti-apertura">Minuti</label>
+													</div>
+												</div>
+												<div class="row valign-wrapper">
+													<div class="col s3 bold condensed valign">
+														Chiusura iscrizioni
+													</div>
+													<div class="col s1 valign center-align">
+														<i class="material-icons tooltipped" data-position="right" data-delay="50" data-tooltip="Quando si apriranno le iscrizioni">info_outline</i>
+													</div>
+													<div class="col s4 valign">
+														<label for="apertura_iscrizioni">Scegli la data...</label>
+														<input id="chiusura_iscrizioni" name="chiusura_iscrizioni" type="date" data-value="<?php echo date("d/m/Y", getProp("chiusura_iscrizioni"))?>" class="datepicker">
+													</div>
+													<div class="input-field col s2 valign">
+															<input id="ora-chiusura" value="<?php echo date("H", getProp("chiusura_iscrizioni"))?>"  type="text" placeholder="hh" class="validate">
+															<label for="ora-chiusura">Ora</label>
+													</div>:
+													<div class="input-field col s2 valign">
+															<input id="minuti-chiusura" value="<?php echo date("i", getProp("chiusura_iscrizioni"))?>" type="text" placeholder="mm"  class="validate">
+															<label for="minuti-chiusura">Minuti</label>
+													</div>
+												</div>
+												<div class="row valign-wrapper">
+												<div class="col s3 bold condensed valign">
+													Ore per giorno:
+												</div>
+												<div class="col s1 valign center-align">
+													<i class="material-icons tooltipped" data-position="right" data-delay="50" data-tooltip="Il numero di lezioni massime giornaliere">info_outline</i>
+												</div>
+												<div class="input-field col s2 valign">
+														<input id="ore_per_giorno" value="<?php echo getProp("ore_per_giorno");?>"  type="text" class="validate">
+												</div>
+											<div class="col s3 bold condensed right-align valign">
+												Ore minime:
+											</div>
+											<div class="col s1 valign center-align">
+												<i class="material-icons tooltipped" data-position="right" data-delay="50" data-tooltip="Il minimo numero di ore a cui uno studente deve iscriversi">info_outline</i>
+											</div>
+											<div class="input-field col s2 valign">
+													<input id="soglia_minima" value="<?php echo getProp("soglia_minima");?>"  type="text" class="validate">
+											</div>
+										</div>
+											<div class="right-align">
+											<button type="submit" class="btn waves-effect waves-light accent">APPLICA</button>
+										</div>
+										</form>
+										</div>
+										</div>
+									</div>
+								</div>
+						</div>
 					</div>
 				</div>
 			</div>

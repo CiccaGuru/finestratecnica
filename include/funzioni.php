@@ -23,6 +23,7 @@ function getProp($prop){
     return (int)$valore["value"];
 	}
 	else{
+
 		return $valore["value"];
 	}
 }

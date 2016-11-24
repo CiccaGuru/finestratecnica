@@ -12,6 +12,6 @@ else{
 	header('Location: docente.php');
 }
 
-setProp($_POST["target"], $_POST["hex"]) or die("ERRORE");
+setProp($_POST["target"], $_POST["val"]) or die("ERRORE");
 echo "SUCCESS";
 ?>
