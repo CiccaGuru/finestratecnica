@@ -28,7 +28,7 @@ $giorni = unserialize(getProp("giorni"));
   <title>Stampa orario</title>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen"/>
-  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen"/>
+  <link href="css/style.php" type="text/css" rel="stylesheet" media="screen"/>
   <link rel="apple-touch-icon" sizes="180x180" href="/img/favicons/apple-touch-icon.png">
   <link rel="icon" type="image/png" href="/img/favicons/favicon-32x32.png" sizes="32x32">
   <link rel="icon" type="image/png" href="/img/favicons/favicon-16x16.png" sizes="16x16">
@@ -43,9 +43,9 @@ $giorni = unserialize(getProp("giorni"));
 
 <body style="background:white;">
   <div class="container">
-    <h1 class="thin light-blue-text center">Il Suo orario</h1>
-    <h3 class="thin light-blue-text center"><?php echo $dettagliUtente["nome"]." ".$dettagliUtente["cognome"]." - ".$dettagliUtente["username"]?></h3>
-    <div class="center-align" style="margin:1em;"><a href="javascript:window.print()">Stampa orario</a></div>
+    <h1 class="condensed primary-text center">Il Suo orario</h1>
+    <h3 class="condensed primary-text center"><?php echo $dettagliUtente["nome"]." ".$dettagliUtente["cognome"]." - ".$dettagliUtente["username"]?></h3>
+    <a class="right center-align btn-flat waves-effect waves-accent accent-text" href="javascript:window.print()" style="margin:1em;">Stampa orario</a>
     <style>
     tr, th, td{border:solid 1px black;}
     table{border-collapse: collapse;}
@@ -91,13 +91,15 @@ $giorni = unserialize(getProp("giorni"));
           for($j=1; $j<=$numero_giorni;$j++){
             $num = ($j-1)*$ore_per_giorno+$i;
             $result = $db->query("SELECT  lezioni.idCorso as idCorso,
-            corsi.continuita as continuita,
-            corsi.titolo as titolo,
-            lezioni.aula as aula
-            FROM    corsi, lezioni
-            WHERE   corsi.idDocente = '".$utente."'
-            AND lezioni.idCorso = corsi.id AND
-            lezioni.ora = '$num'")
+                                          corsi.continuita as continuita,
+                                          corsi.titolo as titolo,
+                                          aule.nomeAula as aula
+                                  FROM    corsi, lezioni, aule, corsi_docenti
+                                  WHERE   corsi_docenti.idDocente = '$utente' AND
+                                          corsi.id = corsi_docenti.idCorso AND
+                                          lezioni.idAula = aule.id AND
+                                          lezioni.idCorso = corsi.id AND
+                                          lezioni.ora = '$num'")
             or die('ERRORE: ' . $db->error);
             if($result->num_rows > 0){
               while($lezione = $result->fetch_assoc()){
@@ -136,7 +138,14 @@ $giorni = unserialize(getProp("giorni"));
       </thead>
       <tbody>
         <?php
-        $result = $db->query("SELECT id, titolo, descrizione, continuita, tipo from corsi where iddocente = '$utente'");
+        $result = $db->query("SELECT  corsi.id as id,
+                                      corsi.titolo,
+                                      corsi.descrizione,
+                                      corsi.continuita,
+                                      corsi.tipo
+                              from    corsi, corsi_docenti
+                              where   corsi_docenti.idDocente = '$utente'
+                                      AND corsi_docenti.idCorso = corsi.id");
         while($corso = $result->fetch_assoc()){
           ?>
           <tr>
@@ -149,7 +158,7 @@ $giorni = unserialize(getProp("giorni"));
             <td style="padding:15px;">
               <?php
               $classi = "";
-              $resultClassi = $db->query("SELECT classe from corsi_classi where id_corso = '".$corso["id"]."' GROUP BY classe");
+              $resultClassi = $db->query("SELECT classe from corsi_classi where idCorso = '".$corso["id"]."' GROUP BY classe");
               while($classe = $resultClassi->fetch_assoc()){
                 $classi .= $classe["classe"]." ";
               }
@@ -182,5 +191,8 @@ $giorni = unserialize(getProp("giorni"));
       </tbody>
     </table>
   </div>
+  <script src="js/jquery-3.1.1.min.js"></script>
+  <script src="js/materialize.js"></script>
+  <script src="js/init.js"></script>
 </body>
 </html>

@@ -59,8 +59,7 @@ $chiusura_iscrizioni = getProp("chiusura_iscrizioni");
 				</a>
 				<a href="#" class="brand-logo center condensed light">Settimana tecnica</a>
 				<ul id="nav-mobile" class="right hide-on-med-and-down">
-					<li><a href="include/logout.php" class="waves-effect waves-light condensed">LOGOUT</a></li>
-				</ul>
+				<li><a href="include/logout.php" class="waves-effect waves-light condensed"><i class="material-icons left">exit_to_app</i>LOGOUT</a></li>				</ul>
 			</div>
 		</nav>
 	</div>
@@ -96,16 +95,16 @@ $chiusura_iscrizioni = getProp("chiusura_iscrizioni");
 					<?php
 						$result = $db->query("SELECT COUNT(*) as conta from iscrizioni where idUtente = $utente and partecipa = '1'");
 						$conta = $result->fetch_assoc();
-						if((time()>$chiusura_iscrizioni) && ($conta["conta"]>=17) && !($posso == "44")){
+						if((time()>$chiusura_iscrizioni) && ($conta["conta"]>=getProp("soglia_minima")) && !($posso == "44")){
 					?>
 
 					<h3 class="accent-text center light">Iscrizioni chiuse</h3>
 					<div class="center">
-							Le iscrizioni sono chiuse. Puoi solo visualizzare il tuo orario. Se noti qualche problema, contattaci
+							Le iscrizioni sono chiuse. Puoi solo visualizzare il tuo orario.
 					</div>
-					<a href = "stampabile.php" class="btn-flat accent-text waves-effect waves-red center">Orario stampabile</a>
+					<a href = "stampabile.php" class="btn-flat accent-text waves-effect waves-accent center condensed">Orario stampabile</a>
 					<div class="center">
-						<img src="img/imggif.gif" alt="Nancy Cat">
+						<img src="img/gif.gif" style="width:100%" alt="Nancy Cat">
 					</div>
 					<?php } else {?>
 
@@ -208,7 +207,7 @@ $chiusura_iscrizioni = getProp("chiusura_iscrizioni");
 	<h3 class="accent-text center light">Iscrizioni chiuse</h3>
 	<div class="center">
 		Le iscrizioni sono chiuse ma, visto che il tuo orario non è completo, potrai completarlo.
-		<br/>Appena raggiungerai 17 ore sarà bloccato.
+		<br/>Appena raggiungerai <?php echo $getProp("soglia_minima")?> ore sarà bloccato.
 	</div>
 
 <?php	} ?>

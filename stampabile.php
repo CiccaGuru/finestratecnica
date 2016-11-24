@@ -29,7 +29,7 @@ $giorni = unserialize(getProp("giorni"));
   <title>Stampa orario</title>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen"/>
-  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen"/>
+  <link href="css/style.php" type="text/css" rel="stylesheet" media="screen"/>
   <link rel="apple-touch-icon" sizes="180x180" href="/img/favicons/apple-touch-icon.png">
 <link rel="icon" type="image/png" href="/img/favicons/favicon-32x32.png" sizes="32x32">
 <link rel="icon" type="image/png" href="/img/favicons/favicon-16x16.png" sizes="16x16">
@@ -44,9 +44,9 @@ $giorni = unserialize(getProp("giorni"));
 
 <body style="background:white;">
 <div class="container">
-<h1 class="thin light-blue-text center">Il tuo orario</h1>
-<h3 class="thin light-blue-text center"><?php echo $dettagliUtente["nome"]." ".$dettagliUtente["cognome"]." - ".$dettagliUtente["username"]?></h3>
-<div class="center-align" style="margin:1em;"><a href="javascript:window.print()">Stampa orario</a></div>
+<h1 class="condensed primary-text center">Il tuo orario</h1>
+<h3 class="condensed primary-text center"><?php echo $dettagliUtente["nome"]." ".$dettagliUtente["cognome"]." - ".$dettagliUtente["username"]?></h3>
+<a class="right center-align btn-flat waves-effect waves-accent accent-text" href="javascript:window.print()" style="margin:1em;">Stampa orario</a>
  <style>
   tr, th, td{border:solid 1px black;}
   table{border-collapse: collapse;}
@@ -91,17 +91,20 @@ $giorni = unserialize(getProp("giorni"));
         echo '<tr><td>'.$i."</td>";
         for($j=1; $j<=$numero_giorni;$j++){
           $num = ($j-1)*$ore_per_giorno+$i;
+
           $result = $db->query("SELECT  iscrizioni.idCorso as idCorso,
                                         iscrizioni.idLezione as idLezione,
-                                        iscrizioni.continuita as continuita,
+                                        corsi.continuita as continuita,
                                         corsi.titolo as titolo,
-                                        lezioni.aula as aula
-                                FROM    iscrizioni, corsi, lezioni
-                                WHERE   iscrizioni.idUtente = '".$utente."'
-                                        AND iscrizioni.ora = '".$num."'
+                                        lezioni.idAula,
+                                        aule.nomeAula as aula
+                                FROM    iscrizioni, corsi, lezioni, aule
+                                WHERE   iscrizioni.idUtente = '$utente'
+                                        AND lezioni.ora = '$num'
                                         AND iscrizioni.partecipa = '1'
                                         AND corsi.id = iscrizioni.idCorso
-                                        AND lezioni.id = iscrizioni.idLezione") or die('ERRORE: ' . $db->error);
+                                        AND lezioni.id = iscrizioni.idLezione
+                                        AND lezioni.idAula = aule.id") or die('ERRORE: ' . $db->error);
           if($result->num_rows > 0){
             while($iscrizione = $result->fetch_assoc()){
               $aula =  $iscrizione["aula"];//$lezione["aula"];
@@ -141,12 +144,14 @@ $giorni = unserialize(getProp("giorni"));
         $result = $db->query("SELECT  corsi.titolo as titolo,
                                       corsi.descrizione as descrizione,
                                       utenti.nome as nome,
-                                      utenti.cognome as cognome
-                              FROM    corsi, utenti, iscrizioni
+                                      utenti.cognome as cognome,
+                                      corsi.id as idCorso
+                              FROM    corsi, utenti, iscrizioni, corsi_docenti
                               WHERE   iscrizioni.idCorso = corsi.id AND
                                       iscrizioni.partecipa = '1' AND
                                       iscrizioni.idUtente = '$utente' AND
-                                      utenti.id = corsi.iddocente
+                                      utenti.id = corsi_docenti.idDocente and
+                                      corsi_docenti.idCorso = corsi.id
                               GROUP BY corsi.id") or die($db->error);
         while($corso = $result->fetch_assoc()){
           ?>
@@ -155,7 +160,13 @@ $giorni = unserialize(getProp("giorni"));
               <b><?php echo $corso["titolo"];?></b>
             </td>
             <td style="padding:15px;">
-              <?php echo $corso["nome"][0].". ".$corso["cognome"];?>
+              <?php
+                $resultDoc = $db->query("SELECT id from corsi_docenti where idCorso = ".$corso["idCorso"]) or die($db->error);
+                if($resultDoc->num_rows>1){
+                  echo "<i>Docenti vari</i>";
+                }else{
+                  echo $corso["nome"][0].". ".$corso["cognome"];
+                }?>
             </td>
             <td style="padding:15px;">
               <?php echo $corso["descrizione"];?>
@@ -167,5 +178,8 @@ $giorni = unserialize(getProp("giorni"));
     </tbody>
   </table>
 </div>
+<script src="js/jquery-3.1.1.min.js"></script>
+<script src="js/materialize.js"></script>
+<script src="js/init.js"></script>
 </body>
 </html>

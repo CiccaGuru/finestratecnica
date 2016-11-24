@@ -300,7 +300,7 @@ function getDarkest(main, position){
               }).done(function(data){
                 if(data=="SUCCESS"){
                   var aperturaArray = $("input[name='apertura_iscrizioni_submit']").val().split("/");
-                  var apertura = new Date(aperturaArray[2], aperturaArray[1], aperturaArray[0], $("#ora-apertura").val(), $("#minuti-apertura").val());
+                  var apertura = new Date(aperturaArray[2], aperturaArray[1]-1, aperturaArray[0], $("#ora-apertura").val(), $("#minuti-apertura").val());
                   console.log(aperturaArray);
                   console.log(apertura);
                   $.post("./include/cambiaProp.php",
@@ -310,7 +310,7 @@ function getDarkest(main, position){
                   }).done(function(data){
                     if(data=="SUCCESS"){
                       var chiusuraArray = $("input[name='chiusura_iscrizioni_submit']").val().split("/");
-                      var chiusura = new Date(chiusuraArray[2], chiusuraArray[1], chiusuraArray[0], $("#ora-chiusura").val(), $("#minuti-chiusura").val());
+                      var chiusura = new Date(chiusuraArray[2], chiusuraArray[1]-1, chiusuraArray[0], $("#ora-chiusura").val(), $("#minuti-chiusura").val());
                       $.post("./include/cambiaProp.php",
                         {
                           "target":"chiusura_iscrizioni",
