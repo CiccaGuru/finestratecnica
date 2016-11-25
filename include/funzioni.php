@@ -1,8 +1,6 @@
 <?php
 require_once("config.php");
 
-
-
 function database_connect(){
 	global $_CONFIG;
 	$db = new mysqli($_CONFIG['db_host'], $_CONFIG['db_user'], $_CONFIG['db_password'], $_CONFIG['db_name']);

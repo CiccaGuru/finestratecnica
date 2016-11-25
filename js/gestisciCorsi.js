@@ -10,7 +10,7 @@ function aggiungiCorso() {
         return false;
       }
     });
-    $.post('../include/aggiungiCorso.php',
+    $.post('./include/aggiungiCorso.php',
     {
       titolo: $("#titolo").val(),
       descriz: $("#descriz").val(),
@@ -24,7 +24,7 @@ function aggiungiCorso() {
       }
       var idCorso = data;
       var docenti = listaDocentiCorso();
-      $.post('../include/assegnaCorsoDocenti.php',
+      $.post('./include/assegnaCorsoDocenti.php',
         {
           "idCorso":idCorso,
           "docenti":docenti
@@ -39,7 +39,7 @@ function aggiungiCorso() {
       $(".ora_da_inserire").each(function(i) {
         var ora = (parseInt($("#selezionaGiorno" + i).val()) - 1) * 6 + parseInt($("#selezionaOra" + i).val());
         $.post(
-          '../include/aggiungiOra.php', {
+          './include/aggiungiOra.php', {
             "idcorso": idCorso,
             "titolo": $("#nomeOra" + i).val(),
             "ora": ora,
@@ -90,7 +90,7 @@ function aggiornaListaDocenti() {
   }
 
   $.post(
-        '../include/elencoScegliDocenti.php', {
+        './include/elencoScegliDocenti.php', {
             "keyword": keyword,
             "listaDocenti": listaDocenti
         }
@@ -104,7 +104,7 @@ function aggiornaListaCorsiIncompatibili(){
   keyword = $("#cercaCorsiIncompatibili").val();
   console.log(keyword);
   var posting = $.post(
-      '../include/elencoCorsiIncompatibili.php', {
+      './include/elencoCorsiIncompatibili.php', {
           "keyword": keyword,
           "id": idCorso
       }
@@ -119,7 +119,7 @@ function aggiornaListaCorsiObbligatori(){
   keyword = $("#cercaCorsiObbligatori").val();
   console.log(keyword);
   var posting = $.post(
-      '../include/elencoCorsiObbligatori.php', {
+      './include/elencoCorsiObbligatori.php', {
           "keyword": keyword,
           "id": idCorso
       }
@@ -146,7 +146,7 @@ function mostraModalCorsiObbligatori(id){
 
 function mostraModalDettagli(id, idDocente) {
     var posting = $.post(
-        '../include/mostraOre.php', {
+        './include/mostraOre.php', {
             idCorso: id
         }
     );
@@ -164,7 +164,7 @@ function mostraModalDettagli(id, idDocente) {
 
 function eliminaCorso(id){
     console.log("cane");
-    var posting = $.post("../include/eliminaCorso.php", {
+    var posting = $.post("./include/eliminaCorso.php", {
       "id":id
     });
     posting.done(function(data) {
@@ -179,13 +179,13 @@ function eliminaCorso(id){
 
 function aggiornaListaOre(id){
   posting = $.post(
-    "../include/elencoOre.php",
+    "./include/elencoOre.php",
     {
         "idCorso":id
     });
     posting.done(function(data){
       $("#listaOreModifica").html(data);
-      $.post('../include/elencoAule.php').done(function(data){
+      $.post('./include/elencoAule.php').done(function(data){
         $(".selezionaAula").html(data);
       });
       $('select').material_select();
@@ -207,7 +207,7 @@ function vaiPagina(pagina){
 
 
 function aggiornaListaCorsi(){
-  var posting = $.post('../include/elencoCorsi.php', {
+  var posting = $.post('./include/elencoCorsi.php', {
     "mostra": $("#mostra").val(),
     "concontinuita": $("#concontinuita:checked").length,
     "senzacontinuita": $("#senzacontinuita:checked").length,
@@ -225,7 +225,7 @@ function applicaModificaOre(idCorso) {
   $(".oraLista").each(function(i){
     var ora = (parseInt($("#selezionaGiornoModificaOre" + i).val()) - 1) * 6 + parseInt($("#selezionaOraModifcaOre" + i).val());
     $.post(
-      '../include/modificaOra.php',
+      './include/modificaOra.php',
       {
         "idOra":$(this).data("idLezione"),
         "titolo":$("#titoloModificaOre"+i).val(),
@@ -242,7 +242,7 @@ function applicaModificaOre(idCorso) {
     });
   });
   $.post(
-    '../include/modificaCorso.php',
+    './include/modificaCorso.php',
     {
       "id":idCorso,
       "titolo":$("#titoloCorsoModifica").val(),
@@ -265,7 +265,7 @@ function applicaModificaOre(idCorso) {
     return false;
   }else{
   $.post(
-    '../include/modificaDocentiCorso.php',
+    './include/modificaDocentiCorso.php',
     {
       "idCorso":idCorso,
       "docenti[]":listaDocenti
@@ -287,7 +287,7 @@ aggiornaListaCorsi();
 
 function aggiornaChipsIncompatibili(idCorso){
   var   posting = $.post(
-      "../include/mostraChipsIncompatibili.php",
+      "./include/mostraChipsIncompatibili.php",
       {
         "idCorso": idCorso
       });
@@ -298,7 +298,7 @@ function aggiornaChipsIncompatibili(idCorso){
 
 function aggiornaChipsDocentiDettagli(idCorso){
   var   posting = $.post(
-      "../include/mostraChipsDocentiDettagli.php",
+      "./include/mostraChipsDocentiDettagli.php",
       {
         "idCorso": idCorso
       });
@@ -310,7 +310,7 @@ function aggiornaChipsDocentiDettagli(idCorso){
 
 function aggiornaChipsObbligatori(idCorso){
   var   posting = $.post(
-      "../include/mostraChipsObbligatori.php",
+      "./include/mostraChipsObbligatori.php",
       {
         "idCorso": idCorso
       });
@@ -331,7 +331,7 @@ function aggiungiScegliDocenti(idDocente, nomeDocente){
 
 function aggiungiCorsoIncompatibile(idCorso1, idCorso2){
   var   posting = $.post(
-      "../include/aggiungiCorsoIncompatibile.php",
+      "./include/aggiungiCorsoIncompatibile.php",
       {
         "idCorso1": idCorso1,
         "idCorso2": idCorso2
@@ -352,7 +352,7 @@ function aggiungiCorsoIncompatibile(idCorso1, idCorso2){
 
 function aggiungiCorsoObbligatorio(idCorso, idClasse){
   var   posting = $.post(
-      "../include/aggiungiCorsoObbligatorio.php",
+      "./include/aggiungiCorsoObbligatorio.php",
       {
         "idClasse": idClasse,
         "idCorso": idCorso
@@ -373,7 +373,7 @@ function aggiungiCorsoObbligatorio(idCorso, idClasse){
 
 function eliminaIncompatibilita(idCorso1, idCorso2){
   var   posting = $.post(
-      "../include/rimuoviCorsoIncompatibile.php",
+      "./include/rimuoviCorsoIncompatibile.php",
       {
         "idCorso1": idCorso1,
         "idCorso2": idCorso2
@@ -392,7 +392,7 @@ function eliminaIncompatibilita(idCorso1, idCorso2){
 
 function eliminaObbligatori(idClasse, idCorso){
   var   posting = $.post(
-      "../include/rimuoviCorsoObbligatorio.php",
+      "./include/rimuoviCorsoObbligatorio.php",
       {
         "idClasse": idClasse,
         "idCorso": idCorso
@@ -431,7 +431,7 @@ function eliminaObbligatori(idClasse, idCorso){
                   val = 20;
                 }
                 var posting = $.post(
-                    '../include/creaOre.php', {
+                    './include/creaOre.php', {
                         ore: val
                     }
                 );
@@ -475,7 +475,7 @@ function eliminaObbligatori(idClasse, idCorso){
         $("#aggiungi-aula").submit(function(e) {
             e.preventDefault();
             var posting = $.post(
-                '../include/aggiungiAula.php', {
+                './include/aggiungiAula.php', {
                     submit: 1,
                     nomeAula: $("#nomeAula").val(),
                     maxStudenti: $("#maxStudenti").val()

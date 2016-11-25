@@ -1,6 +1,6 @@
 function eliminaAula(id, quanti, page, filtro){
   var posting = $.post(
-      '../include/eliminaAula.php', {
+      './include/eliminaAula.php', {
           id: id
       }
   );
@@ -20,7 +20,7 @@ function modficaAula(idAula) {
         Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Non è possibile lasciare un campo vuoto!', 4000);
     else {
         var posting = $.post(
-            '../include/modificaAula.php', {
+            './include/modificaAula.php', {
                 "id": idAula,
                 "maxStudenti": $("#maxStudenti" + idAula).val(),
                 "nomeAula": $("#nomeAula" + idAula).val()
@@ -45,7 +45,7 @@ function aggiornaDettagliAule(pagina){
     pagina = 1;
   }
   var posting = $.post(
-      '../include/elencoDettagliAule.php', {
+      './include/elencoDettagliAule.php', {
           "quanti": quanti,
           "page": pagina,
           "filtro": filtro
@@ -65,7 +65,7 @@ function aggiornaDettagliAule(pagina){
             e.preventDefault();
             e.stopImmediatePropagation();
             var posting = $.post(
-                '../include/aggiungiAula.php', {
+                './include/aggiungiAula.php', {
                     submit: 1,
                     nomeAula: $("#nomeAula").val(),
                     maxStudenti: $("#maxStudenti").val()

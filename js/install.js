@@ -58,7 +58,7 @@ $(function(){
           alert("Devi accettare la licenza per continuare");
         }
         else{
-        $.post("../include/controllaCompatibilitaInstall.php")
+        $.post("./include/controllaCompatibilitaInstall.php")
         .done(function(data){
             $("#install-1")
                   .animate({"opacity":"0"},150, "swing")
@@ -136,7 +136,7 @@ $(function(){
         </div>\
       </div>');
         $("#sfondo-grigio").fadeIn();
-        $.post("../include/verifica-db.php",
+        $.post("./include/verifica-db.php",
         {
           "db-host":$("#DBLocation").val(),
           "db-user":$("#DBUser").val(),
@@ -180,7 +180,7 @@ $(function(){
           .animate({"font-size":"100%"}, 20, "swing");
 
 
-          $.post("../include/creaTabelleDb.php",
+          $.post("./include/creaTabelleDb.php",
           {
             "admin-username":$("#adminUsername").val(),
             "admin-password":$("#adminPassword").val()

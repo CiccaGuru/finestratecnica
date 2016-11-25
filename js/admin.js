@@ -1,6 +1,6 @@
 function aggiornaListaDocenti() {
     var posting = $.post(
-        '../include/generaElencoDocenti.php', {
+        './include/generaElencoDocenti.php', {
             1: 1
         }
     );
@@ -16,7 +16,7 @@ function modificaDocente(user_id, quanti, page, filtro) {
         Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i>Dati non validi', 4000);
     else {
         var posting = $.post(
-            '../include/modificaUtente.php', {
+            './include/modificaUtente.php', {
                 id: user_id,
                 nome: $("#nome" + user_id).val(),
                 cognome: $("#cognome" + user_id).val(),
@@ -46,7 +46,7 @@ function modificaStudente(user_id, quanti, page, filtro) {
         console.log($("#username" + user_id + "Studente").val());
     } else {
         var posting = $.post(
-            '../include/modificaUtente.php', {
+            './include/modificaUtente.php', {
                 id: user_id,
                 nome: $("#nome" + user_id + "Studente").val(),
                 cognome: $("#cognome" + user_id + "Studente").val(),
@@ -71,7 +71,7 @@ function modificaStudente(user_id, quanti, page, filtro) {
 function aggiornaDettagliUtenti(quantiN, pageN, filtro, level) {
     console.log(filtro);
     var posting = $.post(
-        '../include/elencoUtenti.php', {
+        './include/elencoUtenti.php', {
             "level": level,
             "quanti": quantiN,
             "page": pageN,
@@ -89,7 +89,7 @@ function aggiornaDettagliUtenti(quantiN, pageN, filtro, level) {
 
 function eliminaAula(id, quanti, page, filtro){
   var posting = $.post(
-      '../include/eliminaAula.php', {
+      './include/eliminaAula.php', {
           id: id
       }
   );
@@ -107,7 +107,7 @@ function eliminaAula(id, quanti, page, filtro){
 
 function eliminaUtente(id, quanti, page, filtro, level) {
     var posting = $.post(
-        '../include/eliminaUtente.php', {
+        './include/eliminaUtente.php', {
             id: id
         }
     );
@@ -125,7 +125,7 @@ function eliminaUtente(id, quanti, page, filtro, level) {
 
 function passwordReset(user_id) {
     var posting = $.post(
-        '../include/passwordReset.php', {
+        './include/passwordReset.php', {
             id: user_id
         }
     );
@@ -142,7 +142,7 @@ function passwordReset(user_id) {
 function aggiungiCorso() {
     var res = 1;
     var posting_corso = $.post(
-        '../include/aggiungiCorso.php', {
+        './include/aggiungiCorso.php', {
             titolo: $("#titolo").val(),
             descriz: $("#descriz").val(),
             tipo: $("#ins-corso input[name=tipo]:checked").val(),
@@ -163,7 +163,7 @@ function aggiungiCorso() {
                 console.log("ORA");
                 var ora = (parseInt($("#selezionaGiorno" + i).val()) - 1) * 6 + parseInt($("#selezionaOra" + i).val());
                 var posting = $.post(
-                    '../include/aggiungiOra.php', {
+                    './include/aggiungiOra.php', {
                         "idcorso": idCorso,
                         "titolo": $("#nomeOra" + i).val(),
                         "ora": ora,
@@ -191,12 +191,12 @@ function aggiungiCorso() {
 
 function elencoNonAccessi() {
     var posting = $.post(
-        '../include/elencoNonAccessi.php', {
+        './include/elencoNonAccessi.php', {
             1: 1
         });
     posting.done(function(data) {
         if (data == "LOGINPROBLEM") {
-            window.location = "index.php";
+            window.location = "./index.php";
         }
         window.location.href = "include/" + data;
         console.log(data);
@@ -206,7 +206,7 @@ function elencoNonAccessi() {
 
 function elencoNonAbbastanza() {
     var posting = $.post(
-        '../include/elencoNonAbbastanza.php', {
+        './include/elencoNonAbbastanza.php', {
             1: 1
         });
     posting.done(function(data) {
@@ -234,7 +234,7 @@ function generaRegistrini() {
     $("#wait").fadeIn();
     var i = 0;
     var counter = 1;
-    $.post('../include/registroCorso.php')
+    $.post('./include/registroCorso.php')
       .done(function(data) {
             if (data == "LOGINPROBLEM") {
                 window.location = "../index.php";
@@ -255,7 +255,7 @@ function modficaAula(idAula) {
         Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Non è possibile lasciare un campo vuoto!', 4000);
     else {
         var posting = $.post(
-            '../include/modificaAula.php', {
+            './include/modificaAula.php', {
                 "id": idAula,
                 "maxStudenti": $("#maxStudenti" + idAula).val(),
                 "nomeAula": $("#nomeAula" + idAula).val()
@@ -284,7 +284,7 @@ function generaOreBuche() {
   </div>');
     $("#wait").css("height:100%");
     $("#wait").fadeIn();
-    $.post('../include/oreBuche.php')
+    $.post('./include/oreBuche.php')
       .done(function(data) {
         if(data == "SUCCESS"){
           $("#close-icon").fadeIn();
@@ -319,7 +319,7 @@ function generaCorsi(ordine) {
     $("#wait").css("height:100%");
     $("#wait").fadeIn();
     var posting = $.post(
-        '../include/corsiSorted.php', {
+        './include/corsiSorted.php', {
             "ordine": ordine
         });
     posting.done(function(data) {
@@ -351,7 +351,7 @@ function generaCorsi(ordine) {
 
 function mostraOrarioStudente(idUtente) {
     var posting = $.post(
-        '../include/generaOrario.php', {
+        './include/generaOrario.php', {
             "id": idUtente
         });
     posting.done(function(data) {
@@ -362,7 +362,7 @@ function mostraOrarioStudente(idUtente) {
 
 function mostraOrarioDocente(idUtente) {
     var posting = $.post(
-        '../include/generaOrario.php', {
+        './include/generaOrario.php', {
             "id": idUtente
         });
     posting.done(function(data) {
@@ -374,7 +374,7 @@ function mostraOrarioDocente(idUtente) {
 function cercaStudente() {
     var oraNum = (parseInt($("#selezionaGiornoCerca").val()) - 1) * 6 + parseInt($("#selezionaOraCerca").val());
     var posting = $.post(
-        '../include/cercaStudente.php', {
+        './include/cercaStudente.php', {
             nome: $("#nomeStudenteCerca").val(),
             cognome: $("#cognomeStudenteCerca").val(),
             ora: oraNum
@@ -389,7 +389,7 @@ function cercaStudente() {
 
 function mostraModalDettagli(id, idDocente) {
     var posting = $.post(
-        '../include/mostraOre.php', {
+        './include/mostraOre.php', {
             idCorso: id
         }
     );
@@ -397,7 +397,7 @@ function mostraModalDettagli(id, idDocente) {
         $("#modal-ore").html(data);
         $('select').material_select();
         var posting = $.post(
-            '../include/generaElencoDocenti.php', {
+            './include/generaElencoDocenti.php', {
                 "idDocente": idDocente
             }
         );
@@ -412,7 +412,7 @@ function mostraModalDettagli(id, idDocente) {
 
 function eliminaCorso(id){
     console.log("cane");
-    var posting = $.post("../include/eliminaCorso.php", {
+    var posting = $.post("./include/eliminaCorso.php", {
       "id":id
     });
     posting.done(function(data) {
@@ -426,7 +426,7 @@ function eliminaCorso(id){
 }
 
 function eliminaClasse(id) {
-    var posting = $.post('../include/eliminaClasse.php', {
+    var posting = $.post('./include/eliminaClasse.php', {
         "id": id
     });
     posting.done(function(data) {
@@ -441,7 +441,7 @@ function eliminaClasse(id) {
 
 function aggiornaListaOre(id){
   posting = $.post(
-    "../include/elencoOre.php",
+    "./include/elencoOre.php",
     {
         "idCorso":id
     });
@@ -452,14 +452,14 @@ function aggiornaListaOre(id){
 }
 
 function aggiornaListaCorsi(){
-  var posting = $.post('../include/elencoCorsi.php');
+  var posting = $.post('./include/elencoCorsi.php');
   posting.done(function(data) {
       $("#dettagliCorsi").html(data);
   });
 }
 
 function aggiornaListaSezioni() {
-    var posting = $.post('../include/elencoSezioni.php', {
+    var posting = $.post('./include/elencoSezioni.php', {
         1: 1
     });
     posting.done(function(data) {
@@ -470,7 +470,7 @@ function aggiornaListaSezioni() {
 function applicaModificaOre(idCorso) {
     console.log("CIAO");
     var posting = $.post(
-      '../include/modificaCorso.php',
+      './include/modificaCorso.php',
       {
           "id":idCorso,
           "titolo":$("#titoloCorsoModifica").val(),
@@ -498,7 +498,7 @@ function applicaModificaOre(idCorso) {
                 Materialize.toast('Le due password non coincidono!', 4000);
             else {
                 var posting = $.post(
-                    '../include/aggiungiDocente.php', {
+                    './include/aggiungiDocente.php', {
                         submit: 1,
                         username: $("#username").val(),
                         password: $("#password").val(),
@@ -523,7 +523,7 @@ function applicaModificaOre(idCorso) {
 
         $("#aggiungiClasse").on("click", function() {
             var posting = $.post(
-                '../include/creaClasse.php', {
+                './include/creaClasse.php', {
                     "classe": $("#selezionaClasseStudente").val(),
                     "sezione": $("#sezione").val()
                 }
@@ -545,7 +545,7 @@ function applicaModificaOre(idCorso) {
                 Materialize.toast('Le due password non coincidono!', 4000);
             else {
                 var posting = $.post(
-                    '../include/aggiungiStudente.php', {
+                    './include/aggiungiStudente.php', {
                         submit: 1,
                         username: $("#usernameStudente").val(),
                         classe: $("#selezionaClasseStudente").val(),
@@ -583,7 +583,7 @@ function applicaModificaOre(idCorso) {
                 $("#wait").css("height:100%");
                 $("#wait").fadeIn();
                 var posting = $.post(
-                    '../include/creaOre.php', {
+                    './include/creaOre.php', {
                         ore: val
                     }
                 );
@@ -603,7 +603,7 @@ function applicaModificaOre(idCorso) {
         $("#aggiungi-aula").submit(function(e) {
             e.preventDefault();
             var posting = $.post(
-                '../include/aggiungiAula.php', {
+                './include/aggiungiAula.php', {
                     submit: 1,
                     nomeAula: $("#nomeAula").val(),
                     maxStudenti: $("#maxStudenti").val()

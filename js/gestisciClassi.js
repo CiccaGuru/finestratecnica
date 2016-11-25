@@ -1,5 +1,5 @@
 function eliminaClasse(id) {
-    var posting = $.post('../include/eliminaClasse.php', {
+    var posting = $.post('./include/eliminaClasse.php', {
         "id": id
     });
     posting.done(function(data) {
@@ -13,7 +13,7 @@ function eliminaClasse(id) {
 }
 
 function aggiornaListaSezioni() {
-    var posting = $.post('../include/elencoSezioni.php', {
+    var posting = $.post('./include/elencoSezioni.php', {
         1: 1
     });
     posting.done(function(data) {
@@ -29,7 +29,7 @@ function aggiornaListaSezioni() {
           e.preventDefault();
           e.stopImmediatePropagation();
             var posting = $.post(
-                '../include/creaClasse.php', {
+                './include/creaClasse.php', {
                     "classe": $("#selezionaClasseStudente").val(),
                     "sezione": $("#sezione").val()
                 }

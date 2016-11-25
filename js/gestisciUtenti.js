@@ -3,7 +3,7 @@ function modificaDocente(user_id, quanti, page, filtro) {
         Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i>Dati non validi', 4000);
     else {
         var posting = $.post(
-            '../include/modificaUtente.php', {
+            './include/modificaUtente.php', {
                 id: user_id,
                 nome: $("#nome" + user_id).val(),
                 cognome: $("#cognome" + user_id).val(),
@@ -32,7 +32,7 @@ function modificaStudente(user_id, quanti, page, filtro) {
         console.log($("#username" + user_id + "Studente").val());
     } else {
         var posting = $.post(
-            '../include/modificaUtente.php', {
+            './include/modificaUtente.php', {
                 id: user_id,
                 nome: $("#nome" + user_id + "Studente").val(),
                 cognome: $("#cognome" + user_id + "Studente").val(),
@@ -64,7 +64,7 @@ function aggiornaDettagliUtenti(level, pagina) {
       pagina = 1;
     }
     var posting = $.post(
-        '../include/elencoUtenti.php', {
+        './include/elencoUtenti.php', {
             "level": level,
             "quanti": quanti,
             "page": pagina,
@@ -85,7 +85,7 @@ function aggiornaDettagliUtenti(level, pagina) {
 
 function eliminaUtente(id, quanti, page, filtro, level) {
     var posting = $.post(
-        '../include/eliminaUtente.php', {
+        './include/eliminaUtente.php', {
             id: id
         }
     );
@@ -102,7 +102,7 @@ function eliminaUtente(id, quanti, page, filtro, level) {
 
 function passwordReset(user_id) {
     var posting = $.post(
-        '../include/passwordReset.php', {
+        './include/passwordReset.php', {
             id: user_id
         }
     );
@@ -118,7 +118,7 @@ function passwordReset(user_id) {
 
 function mostraOrarioStudente(idUtente) {
     var posting = $.post(
-        '../include/generaOrario.php', {
+        './include/generaOrario.php', {
             "id": idUtente
         });
     posting.done(function(data) {
@@ -129,7 +129,7 @@ function mostraOrarioStudente(idUtente) {
 
 function mostraModalScegliClasse(idUtente){
   $.post(
-    "../include/classeStudente.php",
+    "./include/classeStudente.php",
     {
       "id":idUtente
     })
@@ -143,7 +143,7 @@ function mostraModalScegliClasse(idUtente){
 
 function mostraOrarioDocente(idUtente) {
     var posting = $.post(
-        '../include/generaOrario.php', {
+        './include/generaOrario.php', {
             "id": idUtente
         });
     posting.done(function(data) {
@@ -155,7 +155,7 @@ function mostraOrarioDocente(idUtente) {
 function cercaStudente() {
     var oraNum = (parseInt($("#selezionaGiornoCerca").val()) - 1) * 6 + parseInt($("#selezionaOraCerca").val());
     var posting = $.post(
-        '../include/cercaStudente.php', {
+        './include/cercaStudente.php', {
             nome: $("#nomeStudenteCerca").val(),
             cognome: $("#cognomeStudenteCerca").val(),
             ora: oraNum
@@ -204,7 +204,7 @@ function cercaStudente() {
         });
 
         $(document).on("click", "#applicaCambiaClasse", function(e){
-          $.post("../include/modificaClasseStudente.php",
+          $.post("./include/modificaClasseStudente.php",
             {
               "idUtente":$("#idUtenteClasse").val(),
               "classe":$("#cambiaClasseStudente").val(),
@@ -241,7 +241,7 @@ function cercaStudente() {
                 Materialize.toast('Le due password non coincidono!', 4000);
             else {
                 var posting = $.post(
-                    '../include/aggiungiDocente.php', {
+                    './include/aggiungiDocente.php', {
                         submit: 1,
                         username: $("#username").val(),
                         password: $("#password").val(),
@@ -271,7 +271,7 @@ function cercaStudente() {
                 Materialize.toast('Le due password non coincidono!', 4000);
             else {
                 var posting = $.post(
-                    '../include/aggiungiStudente.php', {
+                    './include/aggiungiStudente.php', {
                         submit: 1,
                         username: $("#usernameStudente").val(),
                         classe: $("#selezionaClasseStudente").val(),

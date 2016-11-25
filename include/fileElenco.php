@@ -1,5 +1,5 @@
 <?php
-include("../mpdf60/mpdf.php");
+include("./mpdf/mpdf.php");
 include 'funzioni.php';
 include 'config.php';
 

@@ -14,7 +14,7 @@ function aggiornaCorsi(idCorso){
       act = -1;
     }
     var posting = $.post(
-      '../include/listaCorsiStudente.php',
+      './include/listaCorsiStudente.php',
       {"active":act}
     );
     posting.done(function( data ){
@@ -41,7 +41,7 @@ function aggiornaCorsi(idCorso){
 
 function iscriviOra(idOra, idCorso){
   var posting = $.post(
-    '../include/iscriviOra.php',
+    './include/iscriviOra.php',
     {
       "id_ora":idOra,
       "id_corso":idCorso
@@ -73,7 +73,7 @@ function aggiornaOrario(){
  }
   $("#"+div + " table").animate({opacity:0});
   var posting = $.post(
-    '../include/generaOrario.php',
+    './include/generaOrario.php',
     {1:1});
   posting.done(function(data){
     if(data == "LOGINPROBLEM"){
@@ -87,7 +87,7 @@ function aggiornaOrario(){
 
 function rimuoviOra(idOra, idCorso){
   var posting = $.post(
-    '../include/rimuoviOra.php',
+    './include/rimuoviOra.php',
     {
       "id_ora":idOra,
       "id_corso":idCorso
@@ -111,7 +111,7 @@ function rimuoviOra(idOra, idCorso){
 
 function scegliQuale(ora){
   var posting = $.post(
-    '../include/mostraPossibilita.php',
+    './include/mostraPossibilita.php',
     {
       "ora":ora
     });
@@ -131,7 +131,7 @@ function iscriviCorso(idCorso){
   $("#collapsibleCorso"+idCorso+" .collapsible-header").addClass("light-blue");
   $("#collapsibleCorso"+idCorso+" .collapsible-header").addClass("lighten-2");
   var posting = $.post(
-    '../include/iscriviCorso.php',
+    './include/iscriviCorso.php',
     {
       "idCorso":idCorso
     });
@@ -167,7 +167,7 @@ function rimuoviCorso(idCorso){
   $("#collapsibleCorso"+idCorso+" .collapsible-header").removeClass("light-blue");
   $("#collapsibleCorso"+idCorso+" .collapsible-header").removeClass("lighten-2");
   var posting = $.post(
-    '../include/rimuoviCorso.php',
+    './include/rimuoviCorso.php',
     {
       "id_corso":idCorso
     });
@@ -191,7 +191,7 @@ function rimuoviCorso(idCorso){
 }
 
 function mostraIncompatibilita(corso){
-  $.post('../include/generaIncompatibilita.php',
+  $.post('./include/generaIncompatibilita.php',
   {
     "idCorso":corso
   })
@@ -211,7 +211,7 @@ function mostraIncompatibilita(corso){
 
 function mostraCoincidenze(corso){
   var posting = $.post(
-    '../include/generaCoincidenze.php',
+    './include/generaCoincidenze.php',
     {
       "idCorso":corso
     });
@@ -233,7 +233,7 @@ function aggiornaPartecipa(){
   var lezioneId = $("input[name=group1]:checked").data("idlezione");
   var ora = $("input[name=group1]:checked").data("ora");
   var posting = $.post(
-    '../include/aggiornaPartecipa.php',
+    './include/aggiornaPartecipa.php',
     {
       "idLezione":lezioneId,
       "ora":ora
@@ -252,7 +252,7 @@ function aggiornaPartecipa(){
 
 function caricaInfo(idCorso){
   var posting = $.post(
-    '../include/dettagliCorso.php',
+    './include/dettagliCorso.php',
     {
       "idCorso":idCorso
     });
@@ -269,7 +269,7 @@ function invia_mail(){
   alert("ENTRATO");
   Materialize.toast('Sto inviando...', 1200);
   var posting = $.post(
-    '../include/mandaEmail.php',
+    './include/mandaEmail.php',
     {
       recapito:$("#recapito").val(),
       email:$("#email").val(),
@@ -325,7 +325,7 @@ function cercaSubmit(s, mute){
   }
 
   var posting = $.post(
-    '../include/listaCorsiStudente.php',
+    './include/listaCorsiStudente.php',
     {
       filtro: $("#filtro"+s).val(),
       concontinuita: concontinuitaVal,
@@ -415,7 +415,7 @@ function cercaSubmit(s, mute){
        e.preventDefault();
        if(($("#cane").val()==$("#ripeti").val()) && ($("#cane").val()!="") && ($("#ripeti").val()!="")){
          var posting = $.post(
-           '../include/cambiaPassword.php',
+           './include/cambiaPassword.php',
            {
              "cane":$("#cane").val()
            });

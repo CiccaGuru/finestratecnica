@@ -2,7 +2,7 @@ var ore = []
 var aule = "";
 function caricaInfo(idCorso){
   var posting = $.post(
-    '../include/dettagliCorsoDocente.php',
+    './include/dettagliCorsoDocente.php',
     {
       "idCorso":idCorso
     });
@@ -17,7 +17,7 @@ function caricaInfo(idCorso){
 
 function aggiungiOraAggiungere(ora){
   var giorni = [];
-  $.post('../include/nomeOreSettimana.php', {dataType: "JSON"}).done(function(data) {
+  $.post('./include/nomeOreSettimana.php', {dataType: "JSON"}).done(function(data) {
       giorni =  $.parseJSON(data);
       var ore_giornaliere = Number(giorni[0]);
       ora = Number(ora);
@@ -73,7 +73,7 @@ function rimuoviOraAggiungere(ora){
 
 
 function eliminaCorso(id){
-    var posting = $.post("../include/eliminaCorso.php", {
+    var posting = $.post("./include/eliminaCorso.php", {
       "id":id
     });
     posting.done(function(data) {
@@ -89,7 +89,7 @@ function eliminaCorso(id){
 
 function getElenco(idLezione){
   var posting = $.post(
-    '../include/fileElenco.php',
+    './include/fileElenco.php',
     {
       "id":idLezione
     });
@@ -118,7 +118,7 @@ function getElenco(idLezione){
      $("#cambiaPassword").click(function (){
        if(($("#cane").val()==$("#ripeti").val()) && ($("#cane").val()!="")){
          var posting = $.post(
-           '../include/cambiaPassword.php',
+           './include/cambiaPassword.php',
            {
              "cane":$("#cane").val()
            });
@@ -225,7 +225,7 @@ function getElenco(idLezione){
 
      });
 
-     $.post('../include/elencoAule.php').done(function(data){
+     $.post('./include/elencoAule.php').done(function(data){
        aule = data;
      });
 
@@ -236,7 +236,7 @@ function getElenco(idLezione){
            Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Completare tutti i campi nei dettagli corso!', 4000);
            return false;
          }
-         $.post('../include/aggiungiCorso.php',
+         $.post('./include/aggiungiCorso.php',
          {
            titolo: $("#titolo").val(),
            descriz: $("#descriz").val(),
@@ -249,7 +249,7 @@ function getElenco(idLezione){
              return false;
            }
            var idCorso = data;
-           $.post('../include/assegnaCorsoDocenti.php',
+           $.post('./include/assegnaCorsoDocenti.php',
              {
                "idCorso":idCorso
              }).done(function(data){
@@ -263,7 +263,7 @@ function getElenco(idLezione){
            $(".oreDaAggiungere").each(function(i) {
              var ora = $(this).data("ora");
              $.post(
-               '../include/aggiungiOra.php', {
+               './include/aggiungiOra.php', {
                  "idcorso": idCorso,
                  "titolo": $(".titoloLezione", this).val(),
                  "ora": ora,
