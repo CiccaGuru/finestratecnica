@@ -81,7 +81,7 @@ $chiusura_iscrizioni = getProp("chiusura_iscrizioni");
 					<div class="card-content">
 						<div class="center valign-wrapper">
 							<div class="preloader-wrapper valign center big active">
-								<div class="spinner-layer spinner-red-only">
+								<div class="spinner-layer spinner-accent-only">
 									<div class="circle-clipper right">
 										<div class="circle"></div>
 									</div>
@@ -215,7 +215,7 @@ $chiusura_iscrizioni = getProp("chiusura_iscrizioni");
 					<div id="elencoCorsiStudente" class="left-align">
 						<div class="center">
 							<div class="preloader-wrapper center big active">
-								<div class="spinner-layer spinner-red-only">
+								<div class="spinner-layer spinner-accent-only">
 									<div class="circle-clipper right">
 										<div class="circle"></div>
 									</div>

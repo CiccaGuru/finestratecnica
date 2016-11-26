@@ -105,7 +105,7 @@ $db = database_connect();
 			<li class="collection-header center"><h4 class="condensed primary-text">ELENCO SEZIONI</h4></li>
 			<li class="collection-item center">
 				<div class="preloader-wrapper big active" style="margin:2em;">
-					<div class="spinner-layer spinner-primary-only">
+					<div class="spinner-layer spinner-blue-only">
 						<div class="circle-clipper left">
 							<div class="circle"></div>
 						</div><div class="gap-patch">

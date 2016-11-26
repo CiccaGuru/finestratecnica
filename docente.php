@@ -143,7 +143,7 @@ $colore_testo = unserialize(getProp("colore_testo"));
 										<div class="center">
 
 										<div class="preloader-wrapper center big active">
-											<div class="spinner-layer center spinner-red-only">
+											<div class="spinner-layer center spinner-accent-only">
 												<div class="circle-clipper right">
 													<div class="circle"></div>
 												</div>

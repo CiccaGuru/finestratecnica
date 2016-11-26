@@ -23,5 +23,5 @@ $(function(){
 });
 
 function riprova(){
-		$("#wait").fadeOut().html('<div id="contenitore-cerchio" class="valign"> 	<div class="preloader-wrapper big active"> <div class="spinner-layer spinner-blue-only"> <div class="circle-clipper right"> <div class="circle"></div>  </div> </div> </div>');
+		$("#wait").fadeOut().html('<div id="contenitore-cerchio" class="valign"> 	<div class="preloader-wrapper big active"> <div class="spinner-layer spinner-primary-only"> <div class="circle-clipper right"> <div class="circle"></div>  </div> </div> </div>');
 	}

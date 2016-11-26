@@ -1,10 +1,6 @@
 function aggiornaListaDocenti() {
-    var posting = $.post(
-        './include/generaElencoDocenti.php', {
-            1: 1
-        }
-    );
-    posting.done(function(data) {
+    $.post(
+        './include/generaElencoDocenti.php').done(function(data) {
         $("#selezionaDocenti").html('<option value="" disabled selected class="grey-text">Seleziona insegnante</option>' + data);
         $('select').material_select();
     });
@@ -15,15 +11,15 @@ function modificaDocente(user_id, quanti, page, filtro) {
     if (($("#nome" + user_id).val() == "") || ($("#cognome" + user_id).val() == "") || ($("#username" + user_id).val() == ""))
         Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i>Dati non validi', 4000);
     else {
-        var posting = $.post(
+        $.post(
             './include/modificaUtente.php', {
                 id: user_id,
                 nome: $("#nome" + user_id).val(),
                 cognome: $("#cognome" + user_id).val(),
                 username: $("#username" + user_id).val(),d
             }
-        );
-        posting.done(function(data) {
+        )
+        .done(function(data) {
             if (data == "SUCCESS") {
                 Materialize.toast('Utente modificato con succeso!', 4000);
                 aggiornaDettagliUtenti(quanti, page, filtro, 1);
@@ -45,7 +41,7 @@ function modificaStudente(user_id, quanti, page, filtro) {
         Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i>Dati non validi', 4000);
         console.log($("#username" + user_id + "Studente").val());
     } else {
-        var posting = $.post(
+        $.post(
             './include/modificaUtente.php', {
                 id: user_id,
                 nome: $("#nome" + user_id + "Studente").val(),
@@ -53,8 +49,8 @@ function modificaStudente(user_id, quanti, page, filtro) {
                 username: $("#username" + user_id + "Studente").val(),
                 classe: $("#classeStudente" + user_id).val()
             }
-        );
-        posting.done(function(data) {
+        )
+        .done(function(data) {
             if (data == "SUCCESS") {
                 Materialize.toast('Utente modificato con succeso!', 4000);
                 aggiornaDettagliUtenti(quanti, page, filtro, 0);
@@ -70,15 +66,15 @@ function modificaStudente(user_id, quanti, page, filtro) {
 
 function aggiornaDettagliUtenti(quantiN, pageN, filtro, level) {
     console.log(filtro);
-    var posting = $.post(
+    $.post(
         './include/elencoUtenti.php', {
             "level": level,
             "quanti": quantiN,
             "page": pageN,
             "username": filtro
         }
-    );
-    posting.done(function(data) {
+    )
+    .done(function(data) {
         if (level == 0)
             $("#dettagliStudenti").html(data);
         if (level == 1)
@@ -88,12 +84,12 @@ function aggiornaDettagliUtenti(quantiN, pageN, filtro, level) {
 }
 
 function eliminaAula(id, quanti, page, filtro){
-  var posting = $.post(
+  $.post(
       './include/eliminaAula.php', {
           id: id
       }
-  );
-  posting.done(function(data){
+  )
+  .done(function(data){
     if(data == "SUCCESS"){
       Materialize.toast('Utente eliminato con successo!', 4000);
       aggiornaDettagliUtenti(quanti, page, filtro, level);
@@ -106,12 +102,12 @@ function eliminaAula(id, quanti, page, filtro){
 }
 
 function eliminaUtente(id, quanti, page, filtro, level) {
-    var posting = $.post(
+    $.post(
         './include/eliminaUtente.php', {
             id: id
         }
-    );
-    posting.done(function(data) {
+    )
+    .done(function(data) {
         if (data == "SUCCESS") {
             Materialize.toast('Utente eliminato con successo!', 4000);
             aggiornaDettagliUtenti(quanti, page, filtro, level);
@@ -124,12 +120,12 @@ function eliminaUtente(id, quanti, page, filtro, level) {
 }
 
 function passwordReset(user_id) {
-    var posting = $.post(
+    $.post(
         './include/passwordReset.php', {
             id: user_id
         }
-    );
-    posting.done(function(data) {
+    )
+    .done(function(data) {
         if (data == "SUCCESS") {
             Materialize.toast('Password reimpostata con successo!', 4000);
         } else {
@@ -141,7 +137,8 @@ function passwordReset(user_id) {
 
 function aggiungiCorso() {
     var res = 1;
-    var posting_corso = $.post(
+    idCorso = -1;
+    $.post(
         './include/aggiungiCorso.php', {
             titolo: $("#titolo").val(),
             descriz: $("#descriz").val(),
@@ -150,9 +147,7 @@ function aggiungiCorso() {
             iddocente: $("#selezionaDocenti").val(),
             "classi[]": $("#selezionaClassi").val()
         }
-    );
-    idCorso = -1;
-    posting_corso.done(function(data) {
+    ).done(function(data) {
         if (isNaN(data)) {
             Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Si è verificato un errore (1). Controlla la console', 4000);
             console.log(data);
@@ -223,7 +218,7 @@ function generaRegistrini() {
     <p id="messaggio" class="valign condensed white-text">Elaborazione in corso.. può richiedere molto tempo!</p>\
     <div id="contenitore-cerchio-admin" class="valign">\
       <div class="preloader-wrapper big active">\
-        <div class="spinner-layer spinner-blue-only">\
+        <div class="spinner-layer spinner-primary-only">\
           <div class="circle-clipper right">\
             <div class="circle"></div>\
           </div>\
@@ -275,7 +270,7 @@ function generaOreBuche() {
   <p id="messaggio" class="valign condensed white-text">Elaborazione in corso.. può richiedere molto tempo!</p>\
   <div id="contenitore-cerchio-admin" class="valign">\
     <div class="preloader-wrapper big active">\
-      <div class="spinner-layer spinner-blue-only">\
+      <div class="spinner-layer spinner-primary-only">\
         <div class="circle-clipper right">\
           <div class="circle"></div>\
         </div>\
@@ -309,7 +304,7 @@ function generaCorsi(ordine) {
   <p id="messaggio" class="valign condensed white-text">Elaborazione in corso.. può richiedere molto tempo!</p>\
   <div id="contenitore-cerchio-admin" class="valign">\
     <div class="preloader-wrapper big active">\
-      <div class="spinner-layer spinner-blue-only">\
+      <div class="spinner-layer spinner-primary-only">\
         <div class="circle-clipper right">\
           <div class="circle"></div>\
         </div>\

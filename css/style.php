@@ -80,6 +80,14 @@
   color: <?php echo $accentColor; ?> !important;
 }
 
+.spinner-primary-only {
+  border-color: <?php echo $primaryColor;?>;
+}
+
+.spinner-accent-only {
+  border-color: <?php echo $accentColor;?>;
+}
+
 
 .switch label input[type=checkbox]:checked + .lever {
   background-color: <?php echo $accentColorLight; ?>;

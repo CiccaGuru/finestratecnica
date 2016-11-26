@@ -484,7 +484,7 @@ $db = database_connect();
 			<p id='messaggio' class='valign condensed white-text'>Elaborazione in corso.. può richiedere molto tempo!</p>
 			<div id="contenitore-cerchio-admin" class="valign">
 				<div class="preloader-wrapper big active">
-					<div class="spinner-layer spinner-blue-only">
+					<div class="spinner-layer spinner-primary-only">
 						<div class="circle-clipper right">
 							<div class="circle"></div>
 						</div>

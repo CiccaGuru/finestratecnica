@@ -93,7 +93,7 @@
         <span id="install-4-content">
         <div class="contieni-spinner" style="margin-top:3em; margin-bottom:3em;">
         <div class="preloader-wrapper active center-align">
-          <div class="spinner-layer biggest spinner-blue-only">
+          <div class="spinner-layer biggest spinner-primary-only">
             <div class="circle-clipper left">
               <div class="circle"></div>
             </div><div class="gap-patch">
@@ -133,7 +133,7 @@
     <div>
   <div class="contieni-spinner">
   <div class="preloader-wrapper active center-align">
-    <div class="spinner-layer big spinner-blue-only">
+    <div class="spinner-layer big spinner-primary-only">
       <div class="circle-clipper left">
         <div class="circle"></div>
       </div><div class="gap-patch">

@@ -123,7 +123,7 @@ $(function(){
         <div>\
       <div class="contieni-spinner">\
       <div class="preloader-wrapper active center-align">\
-        <div class="spinner-layer big spinner-blue-only">\
+        <div class="spinner-layer big spinner-primary-only">\
           <div class="circle-clipper left">\
             <div class="circle"></div>\
           </div><div class="gap-patch">\

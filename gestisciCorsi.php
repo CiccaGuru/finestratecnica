@@ -301,7 +301,7 @@ else{
   <div id="wait" class="center-align valign-wrapper">
     <div id="contenitore-cerchio" class="valign">
       <div class="preloader-wrapper big active">
-        <div class="spinner-layer spinner-blue-only">
+        <div class="spinner-layer spinner-primary-only">
           <div class="circle-clipper right">
             <div class="circle"></div>
           </div>
