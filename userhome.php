@@ -210,9 +210,15 @@ $chiusura_iscrizioni = getProp("chiusura_iscrizioni");
 									</div><?php } ?>
 								</div>
 								<div id="card-orario-container">
-									<div id="card-orario" class="card">
+									<div id="card-orario" class="preloader card">
 										<div class="card-content">
-
+											<div class="preloader-wrapper big active">
+												<div class="spinner-layer spinner-primary-only">
+													<div class="circle-clipper right">
+														<div class="circle"></div>
+													</div>
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -328,16 +334,6 @@ $chiusura_iscrizioni = getProp("chiusura_iscrizioni");
 							</div>
 						</div>
 
-						<div id="miao" class="modal">
-							<div class="modal-content">
-								<img src = "img/easteregg.jpg" alt="Flavio">
-							</div>
-						</div>
-						<div id="miaomiao" class="modal" >
-							<div class="modal-content">
-								<img src = "img/easteregg2.jpg" alt="Boss">
-							</div>
-						</div>
 						<?php
 						if($dettagliUtente["passwordOriginale"]){
 							?>

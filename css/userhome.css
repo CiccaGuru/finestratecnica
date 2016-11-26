@@ -60,22 +60,51 @@
 @media only screen and (min-width: 993px) {
 
 #cont{
-  display:flex;
-  flex-direction: row;
+  display: flex;
+  flex:1 1 auto;
   justify-content: space-between;
   margin:none;
   width:100%;
+  flex-direction: row;
+  align-items: stretch;
+  align-content: stretch;
 
 }
 
 #elencoCorsiContainer{
-  flex-basis:58%;
+  width:58%;
+  flex-basis: auto;
 }
 
 #card-orario-container{
-  flex-basis:40%;
+  width:40%;
+  flex-basis:auto;
+  transition:all 0.2s;
+  right:0px;
+  position:fixed;
 
+}
+  #card-orario.preloader{
+    display:flex;
+    flex-direction:column;
+    justify-content: center;
   }
+  #card-orario{
+    min-height:460px;
+    transition:height 0.2s;
+    display:auto;
+  }
+
+  #card-orario.preloader .card-content{
+    display: flex;
+    flex-direction:row;
+    justify-content: center;
+  }
+
+  #card-orario .card-content{
+    display:auto;
+  }
+
 }
 @media only screen and (max-width: 993px) {
   #cont{
@@ -93,7 +122,6 @@
 
   #card-orario-container{
     order:1;
-
     }
 }
 

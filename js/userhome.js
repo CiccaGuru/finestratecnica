@@ -72,7 +72,7 @@ function aggiornaOrario(){
     if(data == "LOGINPROBLEM"){
       window.location = "index.php";
     }else{
-      $("#card-orario").html('<div class="card-content" style="padding-top:10px;">'+data+'</div>');
+      $("#card-orario").html('<div class="card-content" style="padding-top:10px;">'+data+'</div>').removeClass("preloader");
       $("#card-orario" +" table").animate({opacity:1});
     }
   });
