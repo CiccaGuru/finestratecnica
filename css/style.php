@@ -457,6 +457,7 @@ footer{
   cursor:pointer;
 }
 
+
 .chipMio{
   font-family:"Roboto-Condensed";
   letter-spacing:1px;

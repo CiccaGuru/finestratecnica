@@ -65,15 +65,13 @@ function iscriviOra(idOra, idCorso){
 
 function aggiornaOrario(){
   $("#card-orario table").animate({opacity:0});
-  var posting = $.post(
-    './include/generaOrario.php',
-    {1:1});
-  posting.done(function(data){
+  $.post('./include/generaOrario.php')
+    .done(function(data){
     if(data == "LOGINPROBLEM"){
       window.location = "index.php";
     }else{
       $("#card-orario").html('<div class="card-content" style="padding-top:10px;">'+data+'</div>').removeClass("preloader");
-      $("#card-orario" +" table").animate({opacity:1});
+      $("#card-orario table").animate({opacity:1});
     }
   });
 }

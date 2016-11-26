@@ -223,17 +223,18 @@
   width:97%;
 }
 
+.iscriviOraModal{
+  transition: all 0.2s ease;
+}
+
+
 #pointsFAB i{
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;}
 
-#pointsFAB .rotate{
+#pointsFAB i:hover{
   -webkit-transform: rotate(270deg);
   transform: rotate(270deg);
-}
-
-.iscriviOraModal{
-  transition: all 0.2s ease;
 }
 
 #elencoOreAggiungere::-webkit-scrollbar {
