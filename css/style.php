@@ -97,6 +97,14 @@
   background-color: <?php echo $accentColor; ?>;
 }
 
+[type="checkbox"]:checked + label:before {
+  border-right: 2px solid <?php echo $accentColor;?>;
+  border-bottom: 2px solid <?php echo $accentColor;?>;
+}
+
+.multiple-select-dropdown li.disabled label{
+  display:none;
+}
 .icon-block .material-icons {
     font-size: inherit;
 }
@@ -345,11 +353,6 @@ hide
     position:absolute;
 }
 
-#cont{
-	width:97%;
-  margin-top:1em;
-}
-
 footer{
   padding:0.1em;
   position:fixed;
@@ -419,139 +422,6 @@ footer{
   right: 24px;
 }
 
-
-/*--------------------------USERHOME----------------------*/
-
-#body-userhome{
-  overflow-y: scroll;
-}
-
-.lightText{
-  font-weight: 300;
-}
-
-#card-orario-gen-piccolo{
-  display:auto;
-  position:relative;
-  margin-top:3em;
-}
-
-#card-orario-gen{
-  margin-top 15%;
-  overflow-y: auto;
-  max-height: 95%;
-}
-
-#card-orario-gen-piccolo .card-content,
-#card-orario-gen .card-content{
-  padding-top:0px;
-}
-
-#card-cerca, #card-cercaP{
-  margin-bottom: 3em;
-}
-
-#card-cerca .card-content,
-#card-cercaP .card-content{
-  padding-top:15px;
-  padding-bottom:15px;
-}
-
-#card-cerca .card-content .row,
-#card-cercaP .card-content .row{
-  margin-bottom:0px;
-}
-
-#modal-scrivi h3{
-  margin-bottom:0.3em;
-}
-
-#modal-scrivi .valign-wrapper{
-  width:100%;
-}
-
-#miao{
-  padding:0px;
-  overflow:hidden;
-}
-
-#miao .modal-content{
-    width:100%;
-    padding:0px;
-    height:100%;
-    margin:0px;
-}
-
-#miao img{
-  width:100%;
-}
-
-#miaomiao{
-  padding:0px;
-  width:25em;
-  overflow:hidden;
-}
-
-#miaomiao .modal-content{
-  width:100%;
-  padding:0px;
-  margin:0px;"
-}
-
-#miaomiao img{
-  width:25em;
-}
-
-#modal-primoAccesso h1{
-  margin-bottom:0.3em;
-}
-
-#modal-primoAccesso h4{
-  margin-top:0px;
-}
-
-#modal-primoAccesso .container{
-  width:60%;
-  margin-top:3em;
-}
-
-#cambiaPassword{
-  margin-bottom:1em;
-}
-
-/*------------------------------------------------------------------------*/
-.collapsibleCorso .collapsible-header > .row{
-  margin:0px;
-}
-
-@media only screen and (max-width: 600px){
-.collapsibleCorso{
-    margin:0px !important;
-  }
-  #cont{
-    margin-right:0px;
-  }
-  .cont-dett{
-    margin-left:5px;
-    margin-right:5px;
-  }
-}
-
-.collapsibleCorso .collapsible-body{
-  padding:1.2em;
-}
-
-.orario-cell-normal{
-  font-size:85%;
-  cursor: pointer;
-  padding:5px 0px;
-}
-
-.orario-cell-normal span{
-  display:block;
-  font-size:70%;
-}
-
 .modal-content h1{
   margin-bottom:0.3em;
 }
@@ -560,30 +430,9 @@ footer{
   margin-top:0px;
 }
 
-#modal-primoAccesso .container{
-  width:60%;
-  margin-top:3em;
-}
-
-#cambiaPassword{
-  margin-bottom:1em;
-}
 
 .all-width{
   width:100%;
-}
-
-
-.center < #cambiaPassword{
-  padding:1em;
-}
-
-.error-nessun-corso{
-  font-size:120%;
-}
-
-.collapsibleCorso{
-  border-bottom:0px;
 }
 
 .margin0{
@@ -604,56 +453,8 @@ footer{
   margin-bottom:3em;
 }
 
-.coincidenzaTrigger{
-  cursor: pointer;
-  z-index:900;
-}
-
-.coincidenzaTrigger:hover {
-  transition: box-shadow .25s;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-}
-
-#titoloOrario{
-  margin-top:0px;
-}
-
-#messaggioPocheOre{
-  font-size:120%;
-}
-
-.cellaOrario{
-  font-size:85%;
-  padding:5px 0px;
-  margin: 0px !important;
-  border-style: hidden !important;
-}
-
-.cellaBordo{
-  border-bottom: 1px solid #d0d0d0 !important;
-}
-
-.cellaOrario span{
-  display:block;
-  font-size:70%
-}
-
 .pointerCursor{
   cursor:pointer;
-}
-
-#lezioni_dettagli{
-  margin-top:2em;
-}
-
-#lezioni_dettagli > .bold{
-  font-size:110%;
-  margin-bottom:1em;
-}
-
-.aulaDettagli{
-  display:block;
-  font-size:70%;
 }
 
 .chipMio{
@@ -716,26 +517,9 @@ footer{
   letter-spacing:0.1px;
 }
 
-#scegliCorso label{
-    color:black;
-}
-
-#modal-scegliquale .container{
-  width:97%;
-}
-
 .space-below{
   margin-top:1em;
   margin-bottom:2.5em;
-}
-
-#pointsFAB i{
-  -webkit-transition: all 0.3s ease;
-  transition: all 0.3s ease;}
-
-#pointsFAB .rotate{
-  -webkit-transform: rotate(270deg);
-  transform: rotate(270deg);
 }
 
 .p-no-space p{
@@ -772,20 +556,6 @@ footer{
 
 label{
   text-align: left !important;
-}
-
-
-#elencoOreAggiungere::-webkit-scrollbar {
-    width: 8px;
-    margin-left:3px;
-    margin-right:3px;
-    background-color: white;
-}
-
-#elencoOreAggiungere::-webkit-scrollbar-thumb {
-    width: 8px;
-    border-radius:4px;
-    background-color: <?php echo $accentColor;?>;
 }
 
 .ruota{
@@ -876,6 +646,11 @@ label{
   margin-bottom:0.15em;
 }
 
+.lightText{
+  font-weight: 300;
+}
+
+
 #procedi{
   transition:all 0.2s cubic-bezier(0.4, 0.0, 0.6, 1);
   z-index:10 !important;
@@ -913,6 +688,7 @@ label{
   padding:5%;
   transition:all;
 }
+
 #avviso-floating-content{
   transition:all;
 }

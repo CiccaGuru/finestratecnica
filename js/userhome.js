@@ -64,14 +64,7 @@ function iscriviOra(idOra, idCorso){
   }
 
 function aggiornaOrario(){
-  var div = "";
-  if($(window).width()>=993){
-    div = "card-orario-gen";
-  }
- else{
-  div = "card-orario-gen-piccolo";
- }
-  $("#"+div + " table").animate({opacity:0});
+  $("#card-orario table").animate({opacity:0});
   var posting = $.post(
     './include/generaOrario.php',
     {1:1});
@@ -79,8 +72,8 @@ function aggiornaOrario(){
     if(data == "LOGINPROBLEM"){
       window.location = "index.php";
     }else{
-      $("#"+div).html('<div class="card-content" style="padding-top:10px;">'+data+'</div>');
-      $("#"+div+" table").animate({opacity:1});
+      $("#card-orario").html('<div class="card-content" style="padding-top:10px;">'+data+'</div>');
+      $("#card-orario" +" table").animate({opacity:1});
     }
   });
 }
@@ -397,21 +390,7 @@ function cercaSubmit(s, mute){
       cercaSubmit("P");
     });
 
-    var lastWindowWidth;
-    $(window).resize(function() {
-       var windowWidth = $(window).width();
-       if((lastWindowWidth < 993) && (windowWidth >= 993)){
-               lastWindowWidth = windowWidth;
-               $("#card-orario-gen").html($("#card-orario-gen-piccolo").html());
-       }
-       if((lastWindowWidth > 993) && (windowWidth <= 993)){
-               lastWindowWidth = windowWidth;
-               $("#card-orario-gen-piccolo").html($("#card-orario-gen").html());
-       }
-       lastWindowWidth = windowWidth;
-     });
-
-     $("#cambiaPassword").click(function (e){
+       $("#cambiaPassword").click(function (e){
        e.preventDefault();
        if(($("#cane").val()==$("#ripeti").val()) && ($("#cane").val()!="") && ($("#ripeti").val()!="")){
          var posting = $.post(
