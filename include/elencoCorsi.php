@@ -1,5 +1,5 @@
 <?php
-require_once 'funzioni.php'; // Includes Login Script
+include dirname(__FILE__).'/funzioni.php';
 $utente = check_login();
 $db = database_connect();
 if ($utente == -1) {

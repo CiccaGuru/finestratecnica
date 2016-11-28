@@ -1,5 +1,5 @@
 <?php
-include 'funzioni.php';
+include dirname(__FILE__).'/funzioni.php';
   $id = $_POST['id'];
   $db = database_connect();
   if(!$db->query("DELETE FROM sezioni WHERE id=$id"))

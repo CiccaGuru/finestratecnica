@@ -1,5 +1,5 @@
 <?php
-include 'funzioni.php';
+include dirname(__FILE__).'/funzioni.php';
 $db = database_connect();
 $level = $_POST["level"];
 

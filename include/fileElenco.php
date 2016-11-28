@@ -1,7 +1,6 @@
 <?php
-include("./mpdf/mpdf.php");
-include 'funzioni.php';
-include 'config.php';
+include(dirname(__FILE__)."/mpdf/mpdf.php");
+include dirname(__FILE__).'/funzioni.php';
 
 $idLezione = $_POST["id"];
 

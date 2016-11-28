@@ -1,7 +1,5 @@
 <?php
-include_once("config.php");
-include_once("funzioni.php");
-
+include dirname(__FILE__).'/funzioni.php';
 $ore=$_POST["ore"];
 $giorni="<option value='' disabled selected>Scegli giorno</option>";
 $ore_elenco="<option value='' disabled selected>Scegli ora</option>";

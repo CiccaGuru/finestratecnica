@@ -1,6 +1,5 @@
 <?php
-include 'funzioni.php';
-
+include dirname(__FILE__).'/funzioni.php';
 $utente = check_login();
 
 if($utente==-1){

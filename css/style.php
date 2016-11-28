@@ -1,7 +1,8 @@
 <?php
     header("Content-type: text/css; charset: UTF-8");
-    include "../include/funzioni.php";
-    if($db=database_connect()){
+    include dirname(dirname(__FILE__)).'/include/funzioni.php';
+    $db = database_connect();
+    if($db){
       $primaryColor = getProp("primaryColor");
       $primaryColorDark = getProp("primaryColorDark");
       $primaryColorDarkest = getProp("primaryColorDarkest");

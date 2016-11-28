@@ -1,15 +1,15 @@
 <?php
-require_once("config.php");
+if(file_exists(dirname(__FILE__)."/config.php")){
+	require_once(dirname(__FILE__)."/config.php");
+}
 
 function database_connect(){
 	global $_CONFIG;
-	$db = new mysqli($_CONFIG['db_host'], $_CONFIG['db_user'], $_CONFIG['db_password'], $_CONFIG['db_name']);
-	if ($db->connect_error) {
-		return 0;
-	}
-	else
-	{
+	if($_CONFIG['db_host']!=""){
+		$db = new mysqli($_CONFIG['db_host'], $_CONFIG['db_user'], $_CONFIG['db_password'], $_CONFIG["db_name"]);
 		return $db;
+	}else{
+		return 0;
 	}
 }
 
@@ -21,9 +21,9 @@ function getProp($prop){
     return (int)$valore["value"];
 	}
 	else{
-
 		return $valore["value"];
 	}
+	$db->close();
 }
 
 function setProp($prop, $value){
@@ -43,7 +43,7 @@ function secure($string){
 function check_login(){
 	session_start();
 	$db = database_connect();
-	if((isset($_SESSION['login_user'])) && ($_SESSION['login'] != -1)){
+	if((isset($_SESSION['login_user'])) && isset($_SESSION['login'])  && ($_SESSION['login']  != -1)||(isset($_SESSION['login_user']) && !isset($_SESSION["login"]))){
 		$userid=$_SESSION['login_user'];
 		if(!($result = $db->query("select * from sessioni where userid='$userid'"))){
 			die('ERRORE: ' . $db->error);

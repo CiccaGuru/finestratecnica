@@ -1,6 +1,5 @@
 <?php
-include 'funzioni.php';
-include 'config.php';
+include dirname(__FILE__).'/funzioni.php';
 
 $utente = check_login();
 $idCorso = $_POST["idCorso"];

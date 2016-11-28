@@ -1,5 +1,5 @@
 <?php
-include 'funzioni.php';
+include dirname(__FILE__).'/funzioni.php';
 $titolo = secure($_POST["titolo"]);
 $descrizione = secure($_POST["descriz"]);
 $tipo = secure($_POST["tipo"]);

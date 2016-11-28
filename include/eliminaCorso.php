@@ -1,5 +1,5 @@
 <?php
-include 'funzioni.php';
+include dirname(__FILE__).'/funzioni.php';
 $id = $_POST['id'];
 $db = database_connect();
 $db->query("DELETE FROM corsi WHERE id=$id") or die("Errore".$db->error);

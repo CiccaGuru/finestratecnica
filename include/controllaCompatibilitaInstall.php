@@ -1,4 +1,7 @@
-<h4 class="condensed primary-text" style="margin-top:0px;">Step 2: Controllo requisiti</h4>
+<?php if(!file_exists(dirname(__FILE__)."/config.php")){
+  $config = fopen(dirname(__FILE__)."/config.php", "w")  or die("Non riesco a creare il file di configurazione!");
+  fclose($config);
+}?><h4 class="condensed primary-text" style="margin-top:0px;">Step 2: Controllo requisiti</h4>
 <p>Per poter usare finestratecnica, il server deve soddisfare alcuni requisiti minimi. Se ci sono problemi,
   consulta la pagina wiki del canale Gihtub</p>
 <div id="compat">

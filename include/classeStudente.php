@@ -1,5 +1,5 @@
 <?php
-require_once 'funzioni.php'; // Includes Login Script
+include dirname(__FILE__).'/funzioni.php'; // Includes Login Script
 $utente = check_login();
 if ($utente == -1) {
   header('Location: index.php');

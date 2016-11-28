@@ -186,44 +186,56 @@ $(function(){
             "admin-password":$("#adminPassword").val()
           })
           .done(function(data){
-            $("#install-4-content")
+            if(data=="SUCCESS"){
+              $("#install-4-content")
               .animate({"opacity":"0"}, 300)
               .queue(function(){
-                console.log("FATTO");
                 $(this).html(' <div class="center-align" style="margin:2em;"><i class="material-icons green-text" style="font-size:64px;">check_circle</i></div> <div class="titolo condensed green-text center-align" style="font-size:150%;">Operazione completata!</div> ')
-                  .dequeue();
+                .dequeue();
               })
               .animate({"opacity":"1"}, 300)
               .delay(1500);
 
               $("#install-1")
-                    .delay(2100)
-                    .animate({"opacity":"0"},150, "swing")
-                    .delay(100)
-                    .queue(function(){
-                        $(this).addClass("center-align");
-                        $(this).html($("#install-5").html()).dequeue();
-                    })
-                    .delay(100)
-                    .animate({"opacity":"1"}, 150, "swing");
+              .delay(2100)
+              .animate({"opacity":"0"},150, "swing")
+              .delay(100)
+              .queue(function(){
+                $(this).addClass("center-align");
+                $(this).html($("#install-5").html()).dequeue();
+              })
+              .delay(100)
+              .animate({"opacity":"1"}, 150, "swing");
               $("#dot-5")
-                    .delay(2150)
-                    .animate({"font-size":"65%"}, 100, "swing")
-                    .queue(function(){
-                      $(this).removeClass("white-text")
-                      .addClass("primary-darkest-text").dequeue();
-                    });
+              .delay(2150)
+              .animate({"font-size":"65%"}, 100, "swing")
+              .queue(function(){
+                $(this).removeClass("white-text")
+                .addClass("primary-darkest-text").dequeue();
+              });
               $("#dot-6")
-                    .delay(2450)
-                    .queue(function(){
-                      $(this).addClass("white-text")
-                      .removeClass("primary-darkest-text").dequeue();
-                    })
+              .delay(2450)
+              .queue(function(){
+                $(this).addClass("white-text")
+                .removeClass("primary-darkest-text").dequeue();
+              })
               .animate({"font-size":"100%"}, 20, "swing");
               $("#procedi").delay(2500)
-                      .queue(function(){
-                        $(this).html("Termina").dequeue();
-                      });
+              .queue(function(){
+                $(this).html("Termina").dequeue();
+              });
+            }
+            else{
+              console.log(data);
+              $("#install-4-content")
+              .animate({"opacity":"0"}, 300)
+              .queue(function(){
+                $(this).html(' <div class="center-align" style="margin:2em;"><i class="material-icons red-text" style="font-size:64px;">error</i></div> <div class="titolo condensed red-text center-align" style="font-size:150%;">Si è verificato un errore!</div> ')
+                .dequeue();
+              })
+              .animate({"opacity":"1"}, 300)
+              .delay(1500);
+            }
           });
           conta ++;
         }

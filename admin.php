@@ -91,7 +91,12 @@ $db = database_connect();
 							$accesso = $result->fetch_assoc();
 							$result = $db->query("SELECT COUNT(*) as conta from utenti where level='0'") or die($db->error);
 							$tutti = $result->fetch_assoc();
-							$percentuale = intval($accesso["conta"]/$tutti["conta"]*100);
+							if($tutti["conta"]!=0){
+								$percentuale = intval($accesso["conta"]/$tutti["conta"]*100);
+							}
+							else{
+								$percentuale = 0;
+							}
 
 							if(($percentuale == 0) && ($accesso["conta"]>0))
 							{
@@ -127,7 +132,12 @@ $db = database_connect();
 						<?php
 							$result = $db->query("SELECT COUNT(*) as conta from (SELECT * from utenti where level = '0') as tab WHERE (SELECT COUNT(*) from iscrizioni where iscrizioni.idUtente = tab.id and iscrizioni.partecipa = '1') > 16") or die($db->error);
 							$sufficienti = $result->fetch_assoc();
-							$percentuale = intval($sufficienti["conta"]/$accesso["conta"]*100);
+							if($accesso["conta"]!=0){
+								$percentuale = intval($sufficienti["conta"]/$accesso["conta"]*100);
+							}
+							else{
+								$percentuale = 0;
+							}
 							if(($percentuale == 0) && ($sufficienti["conta"]>0))
 							{
 								$percentuale = 1;

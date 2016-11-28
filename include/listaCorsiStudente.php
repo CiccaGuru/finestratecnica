@@ -1,5 +1,5 @@
 <?php
-include 'funzioni.php';
+include dirname(__FILE__).'/funzioni.php';
 $active = $_POST["active"];
 $utente = check_login();
 $ore_utente = array();
