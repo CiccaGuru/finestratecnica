@@ -31,6 +31,7 @@ $colore_testo = unserialize(getProp("colore_testo"));
 	<link href="css/docente.css" type="text/css" rel="stylesheet" media="screen"/>
 	<link rel="stylesheet" href="css/material-scrolltop.css">
 	<link href="css/style.php" type="text/css" rel="stylesheet" media="screen"/>
+		<link href="css/userhome.css" type="text/css" rel="stylesheet" media="screen"/>
 	<link rel="apple-touch-icon" sizes="180x180" href="/img/favicons/apple-touch-icon.png">
 <link rel="icon" type="image/png" href="/img/favicons/favicon-32x32.png" sizes="32x32">
 <link rel="icon" type="image/png" href="/img/favicons/favicon-16x16.png" sizes="16x16">
@@ -76,9 +77,7 @@ $colore_testo = unserialize(getProp("colore_testo"));
 	</div>
 
 	<div id="cont">
-
-		<div class="row">
-			<div class="col l7 center" id="elencoCorsiContainer">
+			<div class="center" id="elencoCorsiContainer">
 				<div class="row">
 					<div class="col s6 l4 offset-l1">
 						<a id="btn-CreaCorso" class="condensed fake-button letter-spacing-1 waves-effect waves-primary primary-text" href="creaCorsoDocente.php">
@@ -162,9 +161,8 @@ $colore_testo = unserialize(getProp("colore_testo"));
 					</div>
 				</div>
 			</div>
-
-			<div class="col l5">
-				<div id="card-orario-gen" class="card">
+			<div id="card-orario-container">
+				<div id="card-orario" class="card">
 					<div class="card-content">
 						<h4 class="primary-text condensed center-align">Il suo orario</h4>
 						<table id="orario" class="centered bordered">
@@ -228,7 +226,6 @@ $colore_testo = unserialize(getProp("colore_testo"));
 				</div>
 			</div>
 		</div>
-	</div>
 	<div id="modal-continuita" class="modal">
 		<div class="modal-content">
 

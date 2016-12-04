@@ -1,4 +1,5 @@
 <?php
+include dirname(__FILE__).'/mpdf/mpdf.php';
 if(file_exists(dirname(__FILE__)."/config.php")){
 	require_once(dirname(__FILE__)."/config.php");
 }
@@ -387,12 +388,13 @@ function generaRegistroOra($idLezione, $ora){
 	$mpdf->SetDisplayMode('fullpage');
 	$mpdf->list_indent_first_level = 0;  // 1 or 0 - whether to indent the first level of a list
 	$mpdf->WriteHTML($code);
-	if (!file_exists("./tmp/registrini".getStringaOraBreve($ora))) {
-		mkdir("./tmp/registrini/".getStringaOraBreve($ora), 0777, true);
-		chmod("./tmp/registrini/".getStringaOraBreve($ora), 0777);
+	die(getStringOraBreve($ora));
+	if (!file_exists( dirname(__FILE__)."/tmp/registrini".getStringaOraBreve($ora))) {
+		mkdir( dirname(__FILE__)."/tmp/registrini/".getStringaOraBreve($ora), 0777, true);
+		chmod( dirname(__FILE__)."/tmp/registrini/".getStringaOraBreve($ora), 0777);
 	}
 	$fileName = getStringaOraBreve($ora)."/".$dettagliLezione["titolo"]."_".getStringaOraBreve($ora)."_".$dettagliLezione["aula"];
-	$mpdf->Output("./tmp/registrini/$fileName.pdf", "F");
+	$mpdf->Output( dirname(__FILE__)."/tmp/registrini/$fileName.pdf", "F");
 }
 
 

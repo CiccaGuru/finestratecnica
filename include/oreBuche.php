@@ -16,8 +16,8 @@ $ora = 1;
 if (file_exists('./tmp/orebuche')) {
     recursiveRemoveDirectory("./tmp/orebuche");
 }
-mkdir('./tmp/orebuche', 0777, true);
-chmod("./tmp/orebuche", 0777);
+mkdir( dirname(__FILE__).'/tmp/orebuche', 0777, true);
+chmod( dirname(__FILE__)."/tmp/orebuche", 0777);
 while($ora <= getProp("numero_giorni")*getProp("ore_per_giorno")){
 
   $result = $db->query("SELECT utenti.nome, utenti.cognome
@@ -52,10 +52,10 @@ while($ora <= getProp("numero_giorni")*getProp("ore_per_giorno")){
     $mpdf->list_indent_first_level = 0;  // 1 or 0 - whether to indent the first level of a list
     $mpdf->WriteHTML($code);
     $fileName = getStringaOraBreve($ora);
-    $mpdf->Output("./tmp/orebuche/$fileName.pdf", "F");
+    $mpdf->Output( dirname(__FILE__)."/tmp/orebuche/$fileName.pdf", "F");
     $ora ++;
 }
-Zip("./tmp/orebuche/", "./tmp/orebuche.zip");
+Zip( dirname(__FILE__)."/tmp/orebuche/",  dirname(__FILE__)."/tmp/orebuche.zip");
 echo "SUCCESS";
 }
 ?>

@@ -1,6 +1,6 @@
 <?php
 include dirname(__FILE__).'/funzioni.php';
-include("./mpdf/mpdf.php");
+include dirname(__FILE__).'/mpdf/mpdf.php';
 $utente = check_login();
 if($utente==-1){
   die("LOGINPROBLEM");
@@ -33,12 +33,12 @@ switch ($ordine) {
       break;
 }
 
-if (file_exists('./tmp/elencoCorsiPer'.$stringa)) {
-  unlink('./tmp/elencoCorsiPer'.$stringa);
+if (file_exists( dirname(__FILE__).'/tmp/elencoCorsiPer'.$stringa)) {
+  unlink( dirname(__FILE__).'/tmp/elencoCorsiPer'.$stringa);
 }
-if(!file_exists('./tmp')){
-  mkdir('./tmp', 0777, true);
-  chmod("./tmp", 0777);
+if(!file_exists( dirname(__FILE__).'/tmp')){
+  mkdir( dirname(__FILE__).'/tmp', 0777, true);
+  chmod( dirname(__FILE__)."/tmp", 0777);
 }
 
 $result = $db->query("SELECT  corsi.titolo as titoloCorso,
@@ -88,7 +88,7 @@ $mpdf->list_indent_first_level = 0;  // 1 or 0 - whether to indent the first lev
 //echo $code;
 $mpdf->WriteHTML($code);
 $fileName = "ElencoCorsiPer".$stringa;
-$mpdf->Output("./tmp/$fileName.pdf", "F");
+$mpdf->Output( dirname(__FILE__)."/tmp/$fileName.pdf", "F");
 echo "SUCCESS";
 }
 ?>

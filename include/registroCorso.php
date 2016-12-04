@@ -12,12 +12,12 @@ else{
   if($user_level == 1)
     die('LOGINPROBLEM');
 $db = database_connect();
-if (!file_exists('./tmp/registrini')) {
-    mkdir('./tmp/registrini', 0777, true);
-    chmod("./tmp/registrini", 0777);
+if (!file_exists( dirname(__FILE__).'/tmp/registrini')) {
+    mkdir( dirname(__FILE__).'/tmp/registrini', 0777, true);
+    chmod( dirname(__FILE__)."/tmp/registrini", 0777);
 }
 else{
-    recursiveRemoveDirectory("./tmp/registrini");
+    recursiveRemoveDirectory( dirname(__FILE__)."/tmp/registrini");
 }
 for($i=1;$i<=(getProp("numero_giorni")*getProp("ore_per_giorno"));$i++){
   $result = $db->query("SELECT id from lezioni where ora = '$i'") or die($db->error);
@@ -25,7 +25,7 @@ for($i=1;$i<=(getProp("numero_giorni")*getProp("ore_per_giorno"));$i++){
     generaRegistroOra($idLez["id"], $i);
   }
 }
-Zip("./tmp/registrini/", "./tmp/registrini.zip");
+Zip( dirname(__FILE__)."/tmp/registrini/",  dirname(__FILE__)."/tmp/registrini.zip");
 echo "SUCCESS";
 }
 ?>
