@@ -5462,6 +5462,12 @@ button.btn-floating {
   margin-right: 1rem;
 }
 
+.collapsible-header i.right-icon {
+  float: right !important;
+  margin-left: 1rem !important;
+  margin-right: 0px !important;
+}
+
 .collapsible-body {
   display: none;
   border-bottom: 1px solid #ddd;

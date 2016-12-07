@@ -69,6 +69,10 @@
   color: <?php echo $primaryColor; ?> !important;
 }
 
+.text-on-primary{
+  color: <?php echo $primaryText; ?> !important;
+}
+
 .primary-dark-text{
   color: <?php echo $primaryColorDark; ?> !important;
 }
@@ -384,6 +388,14 @@ footer{
 	left:0;
 	top:0;
 	display:none;
+}
+
+.username{
+    padding-bottom: 16px;
+    padding-top:30px;
+    font-size: 14px;
+    line-height: 24px;
+      display: block;
 }
 
 #index{

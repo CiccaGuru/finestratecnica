@@ -396,7 +396,9 @@ if (jQuery) {
         $panel_headers = $this.find('> li > .collapsible-header');
         if (object.hasClass('active')) {
           object.parent().addClass('active');
-          caricaInfo(object.data('id'));
+          if(object.hasClass("collapsibleCorso")){
+            caricaInfo(object.data('id'));
+          }
         }
         else {
           object.parent().removeClass('active');
