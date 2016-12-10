@@ -23,7 +23,7 @@ function modificaDocente(user_id, quanti, page, filtro) {
 }
 
 
-function modificaStudente(user_id, quanti, page, filtro) {
+function modificaStudente(user_id) {
     if (($("#nome" + user_id + "Studente").val() == "") ||
         ($("#cognome" + user_id + "Studente").val() == "") ||
         ($("#username" + user_id + "Studente").val() == "") ||
@@ -52,10 +52,36 @@ function modificaStudente(user_id, quanti, page, filtro) {
     }
 }
 
+function modificaStudenteMobile(user_id) {
+    if (($("#nome" + user_id + "StudenteMobile").val() == "") ||
+        ($("#cognome" + user_id + "StudenteMobile").val() == "") ||
+        ($("#username" + user_id + "StudenteMobile").val() == "")) {
+        Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i>Dati non validi', 4000);
+        console.log($("#username" + user_id + "Studente").val());
+    } else {
+        var posting = $.post(
+            './include/modificaUtente.php', {
+                id: user_id,
+                nome: $("#nome" + user_id + "StudenteMobile").val(),
+                cognome: $("#cognome" + user_id + "StudenteMobile").val(),
+                username: $("#username" + user_id + "StudenteMobile").val()
+            }
+        );
+        posting.done(function(data) {
+            if (data == "SUCCESS") {
+                Materialize.toast('Utente modificato con succeso!', 4000);
+                aggiornaDettagliUtenti(0);
+            } else {
+                Materialize.toast('<i class="material-icons red-text" style="margin-right:0.2em">error</i> Si è verificato un errore. Controlla la console', 4000);
+                console.log(data);
+            }
+        });
+    }
+}
+
 
 function aggiornaDettagliUtenti(level, pagina) {
     quanti = $("#quanti").val();
-    console.log(quanti);
     if(quanti<=0){
       quanti = 20;
     }
@@ -72,8 +98,164 @@ function aggiornaDettagliUtenti(level, pagina) {
         }
     );
     posting.done(function(data) {
+      $("#dettagliStudenti .collection-item.studenti").remove();
+      $("#dettagliStudenti .collection-item.paginazione").remove();
+      var json = JSON.parse(data);
         if (level == 0){
-            $("#dettagliStudenti").html(data);
+            if(json == 0){
+              $("#dettagliStudenti").append('\
+                <li class="collection-item">\
+                    <div class="accent-text condensed center-align" style="font-size:150%; margin:1em;">Nessun risultato trovato</div>\
+                </li>');
+            }
+            else{
+              $.each(json["studenti"], function(index, utente){
+                $("#dettagliStudenti").append('\
+                <li class="collection-item hide-on-med-and-down studenti row valign-wrapper">\
+                  <div class="col s1 accent-text">\
+                    <i class="material-icons waves-effect waves-accent waves-circle" style="border-radius:50%;" onclick="eliminaUtente('+utente["id"]+', 0)">close</i>\
+                  </div>\
+                  <div class="col s1 bold">\
+                    ID:'+utente["id"]+'\
+                  </div>\
+                  <div class="input-field col s2 valign">\
+                    <input id="nome'+utente["id"]+'Studente" type="text" class="validate valign" value="'+utente["nome"]+'" requiaccent>\
+                    <label for="nome'+utente["id"]+'Studente">Nome</label>\
+                  </div>\
+                  <div class="input-field col s2 valign">\
+                    <input id="cognome'+utente["cognome"]+'Studente" type="text" class="validate valign" value="'+utente["cognome"]+'" requiaccent>\
+                    <label for="cognome'+utente["cognome"]+'Studente">Cognome</label>\
+                  </div>\
+                  <div class="input-field col s2 valign">\
+                    <input id="username'+utente["id"]+'>Studente" type="text" class="validatevalign" value="'+utente["username"]+'" requiaccent>\
+                    <label for="nom'+utente["id"]+'Studente">Username</label>\
+                  </div>\
+                  <div class="input-field col s1 valign">\
+                    <a class="valgin waves-accent waves-effect btn-flat condensed" onclick="mostraModalScegliClasse('+utente["id"]+')">CLASSE</a>\
+                  </div>\
+                  <div class="col s2 cente valign">\
+                    <p style="margin-bottom:5px;">\
+                      <a onclick="modificaStudente('+utente["id"]+')" class="waves-effect center-align waves-accent btn-flat accent-text valign" style="width:98%">\
+                        Modifica\
+                      </a>\
+                    </p>\
+                    <p style="margin-top:5px;">\
+                      <a class="waves-effect waves-accent center-align btn-flat accent-text valign" onclick="mostraOrarioStudente('+utente["id"]+')" style="width:98%;">Orario</a>\
+                    </p>\
+                  </div>\
+                  <div class="col s1 center valign" style="padding:0px;">\
+                    <a class="waves-effect small-icon condensed waves-accent fill-width fake-button valign accent-text" onclick="passwordReset('+utente["id"]+')" >\
+                      <i class="material-icons ">refresh</i> <br/>RESET\
+                    </a>\
+                  </div>\
+                </li>\
+                ');
+                $("#dettagliStudentiMobile").append('\
+                <li>\
+                <div class="collapsible-header">\
+                  <div class="row">\
+                  <div class="col s2 bold">\
+                    ID:'+utente["id"]+'\
+                  </div>\
+                  <div class="col s3 valign">\
+                    '+utente["nome"]+'\
+                  </div>\
+                  <div class="col s3 valign">\
+                    '+utente["cognome"]+'\
+                  </div>\
+                  <div class="col s3 valign">\
+                    '+utente["username"]+'\
+                  </div>\
+                  <div class="col s1 left">\
+                  <i class="material-icons">arrow_drop_down</i>\
+                  </div>\
+                  </div>\
+                </div>\
+                <div class="collapsible-body">\
+                <div class="container">\
+                  <div class="input-field">\
+                    <input id="nome'+utente["id"]+'StudenteMobile" type="text" class="validate valign" value="'+utente["nome"]+'" requiaccent>\
+                    <label for="nome'+utente["id"]+'StudenteMobile">Nome</label>\
+                  </div>\
+                  <div class="input-field">\
+                    <input id="cognome'+utente["cognome"]+'StudenteMobile" type="text" class="validate valign" value="'+utente["cognome"]+'" requiaccent>\
+                    <label for="cognome'+utente["cognome"]+'StudenteMobile">Cognome</label>\
+                  </div>\
+                  <div class="input-field">\
+                    <input id="username'+utente["id"]+'>StudenteMobile" type="text" class="validatevalign" value="'+utente["username"]+'" requiaccent>\
+                    <label for="nom'+utente["id"]+'StudenteMobile">Username</label>\
+                  </div>\
+                  <div class="center">\
+                    <a class="valgin waves-light waves-effect btn accent condensed" onclick="mostraModalScegliClasse('+utente["id"]+')">SELEZIONA CLASSE</a>\
+                  </div>\
+                  <div class="row" style="margin-top:2em;">\
+                  <div class="col s6 center valign">\
+                    <p style="margin:5px;padding:0.2em;">\
+                      <a onclick="modificaStudenteMobile('+utente["id"]+')" class="waves-effect center-align waves-accent btn-flat accent-text valign" style="width:98%">\
+                        Modifica\
+                      </a>\
+                    </p>\
+                    <p style="margin:5px;padding:0.2em;">\
+                      <a class="waves-effect waves-accent center-align btn-flat accent-text valign" onclick="mostraOrarioStudente('+utente["id"]+')" style="width:98%;">Orario</a>\
+                    </p>\
+                  </div>\
+                  <div class="col s6 center valign" style="padding:0px;">\
+                    <a class="waves-effect small-icon condensed waves-accent fill-width fake-button valign accent-text" onclick="passwordReset('+utente["id"]+')" >\
+                      <i class="material-icons ">refresh</i> <br/>RESET\
+                    </a>\
+                    </div>\
+                    </div>\
+                  </div>\
+                </li>\
+                ');
+              });
+            }
+            if(json["numRisultato"]>quanti){
+            var classePrimaPagina = "";
+            if(pagina==1){
+              classePrimaPagina = 'disabled';
+            }
+            else{
+              classePrimaPagina = 'waves-effect waves-accent';
+            }
+            var classeUltimaPagina = "";
+            if(pagina*quanti>=json["numRisultato"]){
+              classeUltimaPagina = "disabled";
+            }
+            else{
+              classeUltimaPagina = 'waves-effect waves-accent';
+            }
+            var impaginazione = '\
+            <li class="collection-item center paginazione">\
+              <ul class="pagination">\
+                <li class="'+classePrimaPagina+'" onclick="aggiornaDettagliUtenti(0, '+(pagina-1)+')">\
+                  <a href="#!"><i class="material-icons">chevron_left</i></a>\
+                </li>';
+                var i=1;
+                while(i*quanti<=json["numRisultato"]){
+                  var classePagina = "";
+                  if(i == pagina){
+                    classePagina = "accent";
+                  }
+                  else{
+                    classePagina = 'waves-effect waves-accent';
+                  }
+                  var classeNumeroPagina = "";
+                  if(i == pagina){
+                    classeNumeroPagina = "text-on-accent";
+                  }
+                  impaginazione+='<li onclick="aggiornaDettagliUtenti(0, '+i+')" class="'+classePagina+'"><a href="#!" class="'+classeNumeroPagina+'">'+i+'</a></li>';
+                  i++;
+                }
+
+                impaginazione += '\
+                    <li class="'+classeUltimaPagina+'" onclick="aggiornaDettagliUtenti(0,'+(pagina+1)+')">\
+                      <a href="#!"><i class="material-icons">chevron_right</i></a>\
+                    </li>\
+                  </ul>\
+                </li>';
+                $("#dettagliStudenti").append(impaginazione);
+            }
         }
         if (level == 1){
             $("#dettagliDocenti").html(data);
@@ -83,7 +265,7 @@ function aggiornaDettagliUtenti(level, pagina) {
     });
 }
 
-function eliminaUtente(id, quanti, page, filtro, level) {
+function eliminaUtente(id, level) {
     var posting = $.post(
         './include/eliminaUtente.php', {
             id: id

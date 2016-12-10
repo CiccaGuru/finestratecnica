@@ -60,9 +60,39 @@ $db = database_connect();
 			<li><a class="waves-effect waves-primary condensed primary-text" href="gestisciClassi.php">CLASSI</a></li>
 			<li><a class="waves-effect waves-primary condensed primary-text" href="gestisciAule.php">AULE</a></li>
 		</ul>
+    <ul id="sidebar" class="side-nav">
+			<li><div class="userView">
+				<div class="background primary">
+
+				</div>
+				<a class="text-on-primary condensed" style="font-size:200%;">Finestratecnica</a>
+				<a><span class="text-on-primary condensed username">Amministratore</span></a>
+			</div></li>
+			<li><a href="admin.php" class="waves-effect waves-light condensed"><i class="material-icons">home</i>HOME</a></li>
+			<li class="no-padding active">
+				<ul class="collapsible" data-collapsible="accordion">
+					<li>
+						<a class="collapsible-header condensed"><i class="material-icons">find_in_page</i>GESTISCI<i class="material-icons right-icon">arrow_drop_down</i></a>
+						<div class="collapsible-body">
+							<ul>
+								<li><a class="waves-effect condensed" href="gestisciStudenti.php">STUDENTI</a></li>
+								<li><a class="waves-effect condensed" href="gestisciDocenti.php">DOCENTI</a></li>
+								<li><a class="waves-effect condensed" href="gestisciCorsi.php">CORSI</a></li>
+								<li><a class="waves-effect condensed" href="gestisciClassi.php">CLASSI</a></li>
+								<li class="active"><a class="waves-effect condensed" href="gestisciAule.php">AULE</a></li>
+							</ul>
+						</div>
+					</li>
+				</ul>
+			</li>
+			<li><a href="impostazioni.php" class="waves-effect waves-light condensed"><i class="material-icons">settings</i>IMPOSTAZIONI</a></li>
+			<li class="divider"></li>
+			<li><a href="include/logout.php" class="waves-effect waves-light condensed"><i class="material-icons left">exit_to_app</i>LOGOUT</a></li>
+		</ul>
 		<div class="navbar-fixed">
 			<nav id="intestaz" class="primary">
 				<div class="nav-wrapper">
+          <a href="#" data-activates="sidebar" class="button-collapse"><i class="material-icons">menu</i></a>
 					<a class="hide-on-small-only left condensed letter-spacing-1" style="margin-left:2%;"> AMMINISTRATORE</a>
 					<a href="#" class="brand-logo center condensed light">Settimana tecnica</a>
 					<ul id="nav-mobile" class="right hide-on-med-and-down">
@@ -75,21 +105,21 @@ $db = database_connect();
 			</nav>
 		</div>
 	</nav>
-  <div class="container"  style="margin-top:3em;">
+  <div class="container">
   <div class="card">
     <form id="aggiungi-aula">
-      <div class="card-content center-align"  style="padding-left:5%; padding-right:5%; padding-bottom:5%">
+      <div class="card-content center-align"  style="padding-left:2em; padding-right:2em; padding-bottom:2em;">
         <div class="card-title primary-text center-align condensed" style="margin-bottom:1em;">Aggiungi una nuova aula</div>
-        <div class="row valign-wrapper">
-          <div class="input-field col s4 offset-s1 valign">
+        <div class="row">
+          <div class="input-field col s6 m4 offset-m1">
             <input id="nomeAula" type="text" class="validate" required>
             <label class="condensed" for="nomeAula">Nome aula</label>
           </div>
-          <div class="input-field col s3 valign">
+          <div class="input-field col s6 m3">
             <input id="maxStudenti" type="text" class="validate" required>
             <label class="condensed" for="maxStudenti">Numero studenti</label>
           </div>
-          <div class="col s3 valign">
+          <div class="col s8 offset-s2 m3">
           <button type="submit" class="waves-effect waves-light btn-large accent condensed">
             <i class="material-icons left">add_location</i>Aggiungi
           </button>
@@ -99,7 +129,7 @@ $db = database_connect();
     </form>
   </div>
 </div>
-<div class="container" style="width:70%">
+<div class="elenco-aule-container">
 <ul class="collection with-header z-depth-1" id="dettagliAule">
 
 
@@ -112,7 +142,7 @@ $db = database_connect();
   <!-- material-scrolltop button -->
 
 </div>
-<button class="material-scrolltop" type="button"><i class="material-icons white-text">keyboard_arrow_up</i></button>
+<button class="material-scrolltop hide-on-small-only" type="button"><i class="material-icons white-text">keyboard_arrow_up</i></button>
 
 <!-- material-scrolltop plugin -->
 <script src="js/material-scrolltop.js"></script>

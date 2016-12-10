@@ -1,0 +1,38 @@
+var html ="<li class="collection-item row valign-wrapper hide-on-med-and-down">
+  <div class="col s1 accent-text">
+    <i class="material-icons waves-effect waves-accent waves-circle" style="border-radius:50%;" onclick="eliminaUtente(<?php echo $row["id"]?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>', 0)">close</i>
+  </div>
+  <div class="col s1 bold">
+    ID: <?php echo $row["id"];?>
+  </div>
+  <div class="input-field col s2 valign">
+    <input id="nome<?php echo $row['id']; ?>Studente" type="text" class="validate valign" value="<?php echo $row['nome']; ?>" requiaccent>
+    <label for="nome<?php echo $row['id']; ?>Studente">Nome</label>
+  </div>
+  <div class="input-field col s2 valign">
+    <input id="cognome<?php echo $row['id']; ?>Studente" type="text" class="validate valign" value="<?php echo $row['cognome']; ?>" requiaccent>
+    <label for="nome<?php echo $row['id']; ?>Studente">Cognome</label>
+  </div>
+  <div class="input-field col s2 valign">
+    <input id="username<?php echo $row['id']; ?>Studente" type="text" class="validatevalign" value="<?php echo $row['username']; ?>" requiaccent>
+    <label for="nome<?php echo $row['id']; ?>Studente">Username</label>
+  </div>
+  <div class="input-field col s1 valign">
+    <a class="valgin waves-accent waves-effect btn-flat condensed" onclick="mostraModalScegliClasse(<?php echo $row["id"];?>)">CLASSE</a>
+  </div>
+  <div class="col s2 cente valign">
+    <p style="margin-bottom:5px;">
+      <a onclick="modificaStudente(<?php echo $row['id'];?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>')" class="waves-effect center-align waves-accent btn-flat accent-text valign" style="width:98%">
+        Modifica
+      </a>
+    </p>
+    <p style="margin-top:5px;">
+      <a class="waves-effect waves-accent center-align btn-flat accent-text valign" onclick="mostraOrarioStudente(<?php echo $row['id'];?>)" style="width:98%;">Orario</a>
+    </p>
+  </div>
+  <div class="col s1 center valign" style="padding:0px;">
+    <a class="waves-effect small-icon condensed waves-accent fill-width fake-button valign accent-text" onclick="passwordReset(<?php echo $row['id'];?>, <?php echo $quanti;?>, <?php echo $page;?>, '<?php echo $_POST["username"]?>')" >
+      <i class="material-icons ">refresh</i> <br/>RESET
+    </a>
+  </div>
+</li>";

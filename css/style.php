@@ -73,6 +73,10 @@
   color: <?php echo $primaryText; ?> !important;
 }
 
+.text-on-accent{
+  color: <?php echo $accentText; ?> !important;
+}
+
 .primary-dark-text{
   color: <?php echo $primaryColorDark; ?> !important;
 }
@@ -160,6 +164,18 @@
 .picker--focused .picker__day--selected {
     background-color: <?php echo $primaryColor;?>;
   }
+
+.side-nav li.active,
+.side-nav .collapsible-body > ul:not(.collapsible) > li.active,
+.side-nav.fixed .collapsible-body > ul:not(.collapsible) > li.active{
+  background-color: rgba(0, 0, 0, 0.07) !important;
+}
+
+.side-nav a,
+.side-nav .collapsible-body > ul:not(.collapsible) > li.active a,
+.side-nav.fixed .collapsible-body > ul:not(.collapsible) > li.active a{
+  color: rgba(0, 0, 0, 0.87);
+}
 
 .pagination li.active {
   background-color: <?php echo $accentColor?> !important;

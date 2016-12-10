@@ -47,10 +47,26 @@ h5{
 }
 
 .modal-piccolo{
-  max-height: 70%;
-  width: 25%;
+  max-height: 90%;
+  width: 80%;
   border-radius:3px;
 }
+
+@media only screen and (min-width: 601px) {
+  .modal-piccolo{
+    max-height: 90%;
+    width: 50%;
+  }
+}
+
+@media only screen and (min-width: 993px) {
+  .modal-piccolo{
+    max-height: 70%;
+    width: 25%;
+  }
+}
+
+
 
 #collectionCorsiIncompatibili .collection-item,
 #collectionCorsiObbligatori .collection-item{
@@ -292,4 +308,34 @@ h5{
     order:2;
   }
 
+}
+
+.elenco-aule-container {
+  margin: 0 auto;
+  max-width: 1280px;
+  width: 97%;
+}
+
+@media only screen and (min-width: 601px) {
+  .elenco-aule-container {
+    width: 85%;
+  }
+}
+
+@media only screen and (min-width: 993px) {
+  .elenco-aule-container {
+    width: 70%;
+  }
+}
+
+.lista-studenti-item{
+  display:flex;
+  flex-direction:row;
+  justify-content: space-between;
+  flex-wrap:wrap;
+  align-items: center;
+}
+
+.collapsible-header .row{
+  margin:0px;
 }

@@ -48,9 +48,39 @@ $db = database_connect();
 				<li><a class="waves-effect waves-primary condensed primary-text" href="gestisciClassi.php">CLASSI</a></li>
 				<li><a class="waves-effect waves-primary condensed primary-text" href="gestisciAule.php">AULE</a></li>
 			</ul>
+			<ul id="sidebar" class="side-nav">
+				<li><div class="userView">
+					<div class="background primary">
+
+					</div>
+					<a class="text-on-primary condensed" style="font-size:200%;">Finestratecnica</a>
+					<a><span class="text-on-primary condensed username">Amministratore</span></a>
+				</div></li>
+				<li><a href="admin.php" class="waves-effect waves-light condensed"><i class="material-icons">home</i>HOME</a></li>
+				<li class="no-padding">
+					<ul class="collapsible" data-collapsible="accordion">
+						<li>
+							<a class="collapsible-header condensed"><i class="material-icons">find_in_page</i>GESTISCI<i class="material-icons right-icon">arrow_drop_down</i></a>
+							<div class="collapsible-body">
+								<ul>
+									<li><a class="waves-effect condensed" href="gestisciStudenti.php">STUDENTI</a></li>
+									<li><a class="waves-effect condensed" href="gestisciDocenti.php">DOCENTI</a></li>
+									<li><a class="waves-effect condensed" href="gestisciCorsi.php">CORSI</a></li>
+									<li><a class="waves-effect condensed" href="gestisciClassi.php">CLASSI</a></li>
+									<li><a class="waves-effect condensed" href="gestisciAule.php">AULE</a></li>
+								</ul>
+							</div>
+						</li>
+					</ul>
+				</li>
+				<li class="active"><a href="impostazioni.php" class="waves-effect waves-light condensed"><i class="material-icons">settings</i>IMPOSTAZIONI</a></li>
+				<li class="divider"></li>
+				<li><a href="include/logout.php" class="waves-effect waves-light condensed"><i class="material-icons left">exit_to_app</i>LOGOUT</a></li>
+			</ul>
 			<div class="navbar-fixed">
 				<nav id="intestaz" class="primary">
 					<div class="nav-wrapper">
+						<a href="#" data-activates="sidebar" class="button-collapse"><i class="material-icons">menu</i></a>
 						<a class="hide-on-small-only left condensed letter-spacing-1" style="margin-left:2%;"> AMMINISTRATORE</a>
 						<a href="#" class="brand-logo center condensed light">Settimana tecnica</a>
 						<ul id="nav-mobile" class="right hide-on-med-and-down">

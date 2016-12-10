@@ -45,9 +45,39 @@ else{
       <li><a class="waves-effect waves-primary condensed primary-text" href="gestisciClassi.php">CLASSI</a></li>
       <li><a class="waves-effect waves-primary condensed primary-text" href="gestisciAule.php">AULE</a></li>
     </ul>
+    <ul id="sidebar" class="side-nav">
+			<li><div class="userView">
+				<div class="background primary">
+
+				</div>
+				<a class="text-on-primary condensed" style="font-size:200%;">Finestratecnica</a>
+				<a><span class="text-on-primary condensed username">Amministratore</span></a>
+			</div></li>
+			<li><a href="admin.php" class="waves-effect waves-light condensed"><i class="material-icons">home</i>HOME</a></li>
+			<li class="no-padding active">
+				<ul class="collapsible" data-collapsible="accordion">
+					<li>
+						<a class="collapsible-header condensed"><i class="material-icons">find_in_page</i>GESTISCI<i class="material-icons right-icon">arrow_drop_down</i></a>
+						<div class="collapsible-body">
+							<ul>
+								<li class="active"><a class="waves-effect condensed" href="gestisciStudenti.php">STUDENTI</a></li>
+								<li><a class="waves-effect condensed" href="gestisciDocenti.php">DOCENTI</a></li>
+								<li><a class="waves-effect condensed" href="gestisciCorsi.php">CORSI</a></li>
+								<li><a class="waves-effect condensed" href="gestisciClassi.php">CLASSI</a></li>
+								<li><a class="waves-effect condensed" href="gestisciAule.php">AULE</a></li>
+							</ul>
+						</div>
+					</li>
+				</ul>
+			</li>
+			<li><a href="impostazioni.php" class="waves-effect waves-light condensed"><i class="material-icons">settings</i>IMPOSTAZIONI</a></li>
+			<li class="divider"></li>
+			<li><a href="include/logout.php" class="waves-effect waves-light condensed"><i class="material-icons left">exit_to_app</i>LOGOUT</a></li>
+		</ul>
     <div class="navbar-fixed">
       <nav id="intestaz" class="primary">
         <div class="nav-wrapper">
+          <a href="#" data-activates="sidebar" class="button-collapse"><i class="material-icons">menu</i></a>
           <a class="hide-on-small-only left condensed letter-spacing-1" style="margin-left:2%;"> AMMINISTRATORE</a>
           <a href="#" class="brand-logo center condensed light">Settimana tecnica</a>
           <ul id="nav-mobile" class="right hide-on-med-and-down">
@@ -100,32 +130,32 @@ else{
     </div>
     <div class="card">
       <form id="aggiungi-studente">
-        <div class="card-content"  style="padding-left:5%; padding-right:5%; padding-bottom:5%">
+        <div class="card-content"  style="padding-left:2em; padding-right:2em; padding-bottom:2em;">
           <span class="card-title primary-text center condensed">Aggiungi un nuovo studente</span>
           <div class="row">
-            <div class="input-field col s4">
+            <div class="input-field col m4 s6">
               <input id="nomeStudente" type="text" class="validate" requiaccent>
               <label class="condensed" for="nomeStudente">Nome</label>
             </div>
-            <div class="input-field col s4">
+            <div class="input-field col m4 s6">
               <input id="cognomeStudente" type="text" class="validate" requiaccent>
               <label class="condensed" for="cognomeStudente">Cognome</label>
             </div>
-            <div class="input-field col s4">
+            <div class="input-field col m4 s6 offset-s3">
               <input id="usernameStudente" type="text" class="validate" requiaccent>
               <label class="condensed" for="usernameStudente">Nome utente</label>
             </div>
           </div>
           <div class="row">
-            <div class="input-field col s3">
+            <div class="input-field col m3 s6">
               <input id="passwordStudente" type="password" class="validate" requiaccent>
               <label class="condensed" for="passwordStudente">Password</label>
             </div>
-            <div class="input-field col s3">
+            <div class="input-field col m3 s6">
               <input id="ripeti_passwordStudente" type="password" class="validate" requiaccent>
               <label class="condensed" for="ripeti_passwordStudente">Ripeti password</label>
             </div>
-            <div class="input-field col s3">
+            <div class="input-field col s6 m3">
               <select id="selezionaClasseStudente">
                 <option value="" disabled selected>Scegli</option>
                 <option value="1">1</option>
@@ -136,7 +166,7 @@ else{
               </select>
               <label>Classe</label>
             </div>
-            <div class="input-field col s3">
+            <div class="input-field col m3 s6">
               <select id="selezionaSezioneStudente">
                 <option value="" disabled selected>Classe mancante</option>
               </select>
@@ -144,22 +174,54 @@ else{
             </div>
           </form>
         </div>
-        <div class="row">
-          <div class="col s4 center offset-s4">
+          <div class="center">
             <button type="submit" class="waves-effect condensed waves-light btn-large accent">
               <i class="material-icons left">person_add</i>
               Aggiungi
             </button>
-          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="container" style="width:90%">
+  <div class="container" style="width:95%">
     <ul class="collection with-header z-depth-1" id="dettagliStudenti">
-
+      <li class="collection-header primary-text center"><h4 class="condensed light">ELENCO STUDENTI</h4></li>
+      <li class="collection-item center">
+        <form id="filtraStudenti">
+          <div class="row">
+            <div class="col l2 hide-on-med-and-down" style="font-size:120%; margin-top:0.5em">
+              <p class="condensed accent-text">
+                <i class="material-icons left">search</i>Cerca
+              </p>
+            </div>
+            <div class="input-field col s6 l4">
+              <input id="filtro"type="text" class="validate" value="<?php echo $filtro;?>">
+              <label for="filtro" class="condensed">Parola chiave</label>
+            </div>
+            <div class="col hide-on-med-and-down offset-l1 l2" style="margin-top:0.6em;">
+              <p class="condensed right-align">
+                Risultati per pagina:
+              </p>
+            </div>
+            <div class="input-field col s6 l1">
+              <input id="quanti" type="text" class="validate" value="20" required>
+              <label for="quanti" class="hide-on-large-only">N° risultati</label>
+            </div>
+            <div class="col s12 l1 offset-l1 center">
+              <button type="submit" class="hide-on-med-and-down btn-floating btn-large waves-effect waves-light accent condensed white-text">
+                <i class="material-icons">search</i>
+              </button>
+              <button type="submit" class="hide-on-large-only btn waves-effect waves-light accent condensed white-text">
+                <i class="material-icons left">search</i> CERCA
+              </button>
+            </div>
+          </div>
+        </form>
+      </li>
     </ul>
+    <ul class="collapsible hide-on-large-only" id="dettagliStudentiMobile">
+    </div>
   </div>
 
   <div id="modal-orario" class="modal bottom-sheet" style="marign-top:5em;">
