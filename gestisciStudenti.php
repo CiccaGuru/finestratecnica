@@ -11,6 +11,27 @@ else{
   if($user_level == 1)
   header('Location: docente.php');
 }
+
+$numero_giorni = getProp("numero_giorni");
+$ore_per_giorno = getProp("ore_per_giorno");
+$giorniElenco = unserialize(getProp("giorni"));
+
+$giorni = '<option disabled selected>Scegli giorno</option>';
+$ore_elenco = '<option disabled selected>Scegli ora</option>';
+$numGiorno = (int) ($lezione['ora'] / $ore_per_giorno) + 1;
+$numOra = $lezione['ora'] % $ore_per_giorno;
+
+if ($numOra == 0) {
+  $numOra = 6;
+  --$numGiorno;
+}
+foreach ($giorniElenco as $num => $nome) {
+    $giorni .= '<option value="'.$num.'" >'.$nome.'</option>';
+}
+
+for ($j = 1;$j <= $ore_per_giorno;++$j) {
+    $ore_elenco .= '<option value="'.$j.'">'.$j.'^a ora</option>';
+}
 ?>
 
 <!DOCTYPE html>
@@ -96,21 +117,21 @@ else{
       <div class="card-content"  style="padding-left:5%; padding-right:5%; padding-bottom:5%">
         <span class="card-title primary-text center condensed">Cerca studente</span>
         <div class="row">
-          <div class="input-field col s3">
+          <div class="input-field col s6 m3">
             <input id="nomeStudenteCerca" type="text" class="validate" requiaccent>
             <label for="nomeStudenteCerca" class="condensed">Nome</label>
           </div>
-          <div class="input-field col s3">
+          <div class="input-field col s6 m3">
             <input id="cognomeStudenteCerca" type="text" class="validate" requiaccent>
             <label for="cognomeStudenteCerca" class="condensed">Cognome</label>
           </div>
-          <div class="input-field col s3">
+          <div class="input-field col s6 m3">
             <select id="selezionaGiornoCerca">
               <?php echo $giorni;?>
             </select>
             <label>Giorno</label>
           </div>
-          <div class="col s3">
+          <div class="col s6 m3">
             <div class="input-field">
               <select id="selezionaOraCerca">
                 <?php echo $ore_elenco;?>
@@ -133,15 +154,15 @@ else{
         <div class="card-content"  style="padding-left:2em; padding-right:2em; padding-bottom:2em;">
           <span class="card-title primary-text center condensed">Aggiungi un nuovo studente</span>
           <div class="row">
-            <div class="input-field col m4 s6">
+            <div class="input-field col m4 s12">
               <input id="nomeStudente" type="text" class="validate" requiaccent>
               <label class="condensed" for="nomeStudente">Nome</label>
             </div>
-            <div class="input-field col m4 s6">
+            <div class="input-field col m4 s12">
               <input id="cognomeStudente" type="text" class="validate" requiaccent>
               <label class="condensed" for="cognomeStudente">Cognome</label>
             </div>
-            <div class="input-field col m4 s6 offset-s3">
+            <div class="input-field col m4 s12">
               <input id="usernameStudente" type="text" class="validate" requiaccent>
               <label class="condensed" for="usernameStudente">Nome utente</label>
             </div>
@@ -224,7 +245,7 @@ else{
     </div>
   </div>
 
-  <div id="modal-orario" class="modal bottom-sheet" style="marign-top:5em;">
+  <div id="modal-orario" class="modal bottom-sheet">
     <div class="modal-content">
       <h1 class="primary-text thin center" style="margin-bottom:0.3em;">Orario</h1>
     </div>

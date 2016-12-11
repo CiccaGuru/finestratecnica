@@ -275,7 +275,7 @@ th,td{
 }
 
 .modal.bottom-sheet{
-  max-height: 80%;
+  max-height: 95%;
 }
 .fake-button{
   width:95%;

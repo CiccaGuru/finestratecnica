@@ -116,7 +116,7 @@ function aggiornaDettagliUtenti(level, pagina) {
                     <i class="material-icons waves-effect waves-accent waves-circle" style="border-radius:50%;" onclick="eliminaUtente('+utente["id"]+', 0)">close</i>\
                   </div>\
                   <div class="col s1 bold">\
-                    ID:'+utente["id"]+'\
+                    ID: '+utente["id"]+'\
                   </div>\
                   <div class="input-field col s2 valign">\
                     <input id="nome'+utente["id"]+'Studente" type="text" class="validate valign" value="'+utente["nome"]+'" requiaccent>\
@@ -155,7 +155,7 @@ function aggiornaDettagliUtenti(level, pagina) {
                 <div class="collapsible-header">\
                   <div class="row">\
                   <div class="col s2 bold">\
-                    ID:'+utente["id"]+'\
+                    ID: '+utente["id"]+'\
                   </div>\
                   <div class="col s3 valign">\
                     '+utente["nome"]+'\
@@ -299,11 +299,13 @@ function passwordReset(user_id) {
 }
 
 function mostraOrarioStudente(idUtente) {
+    console.log(idUtente);
     var posting = $.post(
         './include/generaOrario.php', {
             "id": idUtente
         });
     posting.done(function(data) {
+      console.log(data);
         $("#modal-orario .modal-content").html("<div class='container'>" + data + "</div>");
         $("#modal-orario").modal("open");
     });

@@ -20,6 +20,7 @@ else{
   $giorni = unserialize(getProp("giorni"));
   $soglia_minima = getProp("soglia_minima");
   $chiusura_iscrizioni = getProp("chiusura_iscrizioni");
+  $admin = isset($_POST["admin"]);
   ?>
 
   <h4 class="light condensed letter-spacing-1 primary-text center" id="titoloOrario">IL TUO ORARIO</h3>
@@ -32,7 +33,7 @@ else{
     }
 
     ?>
-    <table id="orario" class="centered">
+    <table id="orario<?if($admin) echo '-admin';?>" class="centered">
       <thead>
         <th></th>
         <?php

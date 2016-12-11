@@ -328,6 +328,15 @@ h5{
   }
 }
 
+@media only screen and (max-width: 993px) {
+  #dettagliStudenti {
+    margin-bottom:0px;
+  }
+  #dettagliStudentiMobile {
+    margin-top:0px;
+  }
+}
+
 .lista-studenti-item{
   display:flex;
   flex-direction:row;
